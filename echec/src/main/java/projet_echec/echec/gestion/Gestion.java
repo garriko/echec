@@ -13,7 +13,7 @@ import java.util.Vector;
  * 
  * @author Kevin
  * @version 0.1
- * @see GestionCatalogueCharger , GestionCatalogueRevoir
+ * @see GestionCatalogueCharger, GestionCatalogueRevoir
  */
 
 public abstract class Gestion {
