@@ -1,0 +1,97 @@
+package interfaceGraphique;
+
+import interfaceGraphique.InterfaceMenu.Ecouteur;
+
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+/**
+ * 
+ * @author Anne-Sophie
+ * 
+ * Fenêtre de configuration de la variante de jeu
+ *
+ */
+
+public class InterfaceConfigVariante {
+
+	JFrame fenetre=new JFrame("Popup");
+	Container tmp = fenetre.getContentPane();
+	
+	Image bouton1 = new ImageIcon("images/boutonCommencer.png").getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT);
+	JButton Bouton1 = new JButton(new ImageIcon(bouton1));
+	Image bouton2 = new ImageIcon("images/boutonReprendre.png").getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT);
+	JButton Bouton2 = new JButton(new ImageIcon(bouton2));
+	Image bouton3 = new ImageIcon("images/boutonRevoir.png").getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT);
+	JButton Bouton3 = new JButton(new ImageIcon(bouton3));
+
+	
+	JList listeVariantes = new JList();
+	
+	
+	/**
+	 * Constructeur de la classe
+	 */
+	public InterfaceConfigVariante() {
+		
+		/*Bouton1.setBounds(260, 180, 500, 52); //position x, position y, largeur, hauteur
+		Bouton2.setBounds(260, 290, 500, 52); 
+		Bouton3.setBounds(260, 390, 500, 52);
+		Bouton4.setBounds(260, 490, 500, 52);
+		Bouton5.setBounds(260, 580, 500, 52);
+		*/
+		
+		//bouton1.setBounds(400, 800, 100, 100);
+		/*
+		Ecouteur listen=new Ecouteur();
+		Bouton1.addActionListener(listen);
+		Bouton2.addActionListener(listen);
+		Bouton3.addActionListener(listen);
+		Bouton4.addActionListener(listen);
+		Bouton5.addActionListener(listen);
+	*/
+		JPanel boutonsChoix = new TestImagePanel(new ImageIcon("images/configVariantes.png").getImage().getScaledInstance(1000, 700, Image.SCALE_DEFAULT));
+		boutonsChoix.setLayout(null);	
+		//boutonsChoix.add(bouton1);   
+		/*
+		boutonsChoix.add(Bouton2);
+		boutonsChoix.add(Bouton3);   
+		boutonsChoix.add(Bouton4);
+		boutonsChoix.add(Bouton5);   
+		*/
+		boutonsChoix.add(listeVariantes);
+		
+		JScrollPane scroll = new JScrollPane(listeVariantes);
+		scroll.setPreferredSize(new Dimension(100, 120));
+		boutonsChoix.add(scroll);
+		scroll.setBounds(100, 200, 500, 250);
+		boutonsChoix.setOpaque(false);
+		tmp.add(boutonsChoix);
+    
+		fenetre.setSize(1000,720); // taille de l'image de fond
+		fenetre.setResizable(false);
+		fenetre.setVisible(true);
+	}
+	
+		
+	public class Ecouteur implements ActionListener{		
+		public void actionPerformed(ActionEvent e){
+		}
+	}
+	
+	public static void main(String[] args){
+		new InterfaceConfigVariante();
+	}
+
+	
+}

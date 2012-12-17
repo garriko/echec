@@ -44,7 +44,7 @@ public class InterfaceJeu {
 	JMenuItem boutonAide = new JMenuItem("Aide");
 	JMenuItem boutonAProposDe = new JMenuItem("A propos de");
 	
-	//Case CaseSelectionnee = new Case();
+	Case CaseSelectionnee = new Case(null);
 	
 	
 	public InterfaceJeu() {
@@ -69,37 +69,72 @@ public class InterfaceJeu {
 		barreMenu.add(boutonQuestion);
 		
 		
+	
 		
-		
-		
-		//création du plateau de jeu 
+		// Initialisation de l'échiquier sans pièce
 		for (int i=0; i<8; i++){
 			for (int j=0; j<8; j++){
-			
-				if (j%2==0){
 				
+				if (j%2==0){
+					
 					if (i%2==0){
-						tab_cases.add(new JButton((new ImageIcon("images/casegrise.png"))));
+						tab_cases.add(new JButton(new ImageIcon("images/casegrise.png")));
 					}
 					else {
-						tab_cases.add(new JButton((new ImageIcon("images/caseblanche.png"))));
+						tab_cases.add(new JButton(new ImageIcon("images/caseblanche.png")));
 					}
 				}
 				else {
 					if (i%2==1){
-						tab_cases.add(new JButton((new ImageIcon("images/casegrise.png"))));
+						tab_cases.add(new JButton(new ImageIcon("images/casegrise.png")));
 					}
 					else {
-						tab_cases.add(new JButton((new ImageIcon("images/caseblanche.png"))));
-					}
+						tab_cases.add(new JButton(new ImageIcon("images/caseblanche.png")));
+					}			
 				}
-				
-				((Vector<JButton>) tab_cases).get(i).setPreferredSize(new Dimension(56,56));	
+				((Vector<JButton>) tab_cases).get(i).setPreferredSize(new Dimension(56,56));
+			}
+		}
+			
+		// 2ème ligne : pions
+		for (int i=8; i<16; i++){			
+			if (i%2==0){
+				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/pions/1.png"));	
+			}
+			else {
+				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/pions/2.png"));	
 			}
 		}
 		
+		// 7ème ligne : pions
+		for (int i=48; i<56; i++){			
+			if (i%2==0){
+				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/pions/3.png"));	
+			}
+			else {
+				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/pions/4.png"));	
+			}
+		}
 		
-	
+		// 1ère ligne
+		for (int i=0; i<8; i++){			
+			if (i%2==0){
+				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/"+String.valueOf(i+1)+".png"));	
+			}
+			else {
+				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/"+String.valueOf(i+1)+".png"));		
+			}
+		}
+		
+		// 8ème ligne
+		for (int i=56; i<64; i++){			
+			if (i%2==0){
+				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/"+String.valueOf(i+1)+".png"));		
+			}
+			else {
+				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/"+String.valueOf(i+1)+".png"));		
+			}
+		}
 		
 		JPanel plateau = new JPanel();
 		plateau.setLayout(new GridLayout(8,8));
