@@ -18,7 +18,6 @@ public class Fou extends Piece {
 
 	public Fou(String camp) {
 		super(camp);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

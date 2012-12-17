@@ -19,7 +19,6 @@ public class Tour extends Piece{
 
 	public Tour(String camp) {
 		super(camp);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
