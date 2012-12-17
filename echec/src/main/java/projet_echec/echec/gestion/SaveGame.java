@@ -36,7 +36,7 @@ public class SaveGame {
 	         out.writeObject(w);
 	         out.close();
 	         fileOut.close();
-	      }catch(IOException i)
+	      }catch(IOException i) //Si le fichier n'est pas trouvé
 	      {
 	         throw i;
 	      }
@@ -47,24 +47,27 @@ public class SaveGame {
 	 * @param nomFichier
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
+	 * @return un Wrapper contenant une Partie et un Echiquier
 	 */
-	public static void charger(String nomFichier) throws IOException, ClassNotFoundException
+	public static Wrapper charger(String nomFichier) throws IOException, ClassNotFoundException
 	{
+		Wrapper w;
 		 try
          {
             FileInputStream fileIn = new FileInputStream(new String(nomFichier+".gech"));
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            Wrapper w = (Wrapper) in.readObject();
+            w = (Wrapper) in.readObject();
             in.close();
             fileIn.close();
         }
-		 catch(IOException i)
+		 catch(IOException i) //Si le fichier n'est pas trouvé
         {
             throw i;
         }
-		 catch(ClassNotFoundException c)
+		 catch(ClassNotFoundException c) //Si le contenu du fichier est incorrect
         {
             throw c;
         }
+		 return w;
 	}
 }
