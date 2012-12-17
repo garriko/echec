@@ -21,6 +21,9 @@ public class Reine extends Piece{
 	}
 
 	@Override
+	/**
+	 * renvoi la liste des positions possibles
+	 */
 	public ArrayList<Case> getDeplacementPossible(Case pos) {
 		ArrayList<Case> lp = new ArrayList<Case>();
 		Case hg = new Case(new Position(pos.getPosition().getHauteur(),pos.getPosition().getLargeur()));

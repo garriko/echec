@@ -25,6 +25,9 @@ public class Roi extends Piece{
 	}
 
 	@Override
+	/**
+	 * renvoi la liste des positions possibles
+	 */
 	public ArrayList<Case> getDeplacementPossible(Case pos) {
 		ArrayList<Case> lp = new ArrayList<Case>();
 		//On teste chacune des cases possibles
