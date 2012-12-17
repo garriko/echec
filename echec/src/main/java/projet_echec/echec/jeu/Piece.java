@@ -41,5 +41,5 @@ public abstract class Piece {
 	
 	public abstract ArrayList<Case> getDeplacementPossible(Case caseActuelle);
 	
-	
+	public String getCamp() {return camp;}
 }

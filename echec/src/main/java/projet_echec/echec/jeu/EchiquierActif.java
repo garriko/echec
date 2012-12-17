@@ -1,5 +1,6 @@
 package projet_echec.echec.jeu;
 
+import java.util.ArrayList;
 import java.util.Timer;
 
 /**
@@ -94,6 +95,35 @@ public class EchiquierActif extends Echiquier {
 	 */
 	public void deplacer(Case caseDepart, Case caseArrivee){
 		//TODO : deplacer
+	}
+	
+
+
+	public ArrayList<Case>[] presenceAdversaireDiagonale(Case caseActuelle){
+		ArrayList<Case> res=new ArrayList<Case>();
+		if(caseActuelle.getPiece().getCamp()=="blanc"){
+			Case c0 = chercherCase(new Position(caseActuelle.getPosition().getHauteur()+1,caseActuelle.getPosition().getLargeur()-1));
+			if(!c0.estVide())
+				if(c0.getPiece().getCamp()!="blanc")
+					res.add(c0);
+			Case c1 = chercherCase(new Position(caseActuelle.getPosition().getHauteur()+1,caseActuelle.getPosition().getLargeur()+1));
+			if(!c1.estVide())
+				if(c1.getPiece().getCamp()!="blanc")
+					res.add(c1);
+		}
+		else
+		{
+			Case c0 = chercherCase(new Position(caseActuelle.getPosition().getHauteur()+1,caseActuelle.getPosition().getLargeur()-1));
+			if(!c0.estVide())
+				if(c0.getPiece().getCamp()=="blanc")
+					res.add(c0);
+			Case c1 = chercherCase(new Position(caseActuelle.getPosition().getHauteur()+1,caseActuelle.getPosition().getLargeur()+1));
+			if(!c1.estVide())
+				if(c1.getPiece().getCamp()=="blanc")
+					res.add(c1);
+			
+		}
+		return null;
 	}
 	
 	/**

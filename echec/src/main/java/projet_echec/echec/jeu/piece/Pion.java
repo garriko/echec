@@ -23,12 +23,6 @@ public class Pion extends Piece {
 		dejaBouge=false;
 	}
 	
-	public Case[] presenceAdversaire(Case caseActuelle){
-		if()
-		
-		return null;
-		
-	}
 	
 	@Override
 	public ArrayList<Case> getDeplacementPossible(Case caseActuelle) {
