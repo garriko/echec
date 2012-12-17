@@ -1,5 +1,7 @@
 package projet_echec.echec.jeu;
 
+import projet_echec.echec.jeu.piece.Pion;
+
 /**
  * 
  * @author Adrien
@@ -36,20 +38,35 @@ public class Case {
 	 * @return true si la case est vide
 	 */
 	public boolean estVide(){
-		//TODO: faire test estVide()
-		boolean a;
-		a= true;
+		boolean a= false;
+		if (this.getPiece()==null);
+			a=true;
 		return a;		
 	}
 	/**
 	 * permet de savoir si un pion à atteint le bout du plateau pour le changer en une autre pièce
-	 * @return true si le pion est au bout du plateau
+	 * @return la case contenant le pion si le pion est au bout du plateau
 	 */
-	public boolean pionBoutEchiquier(){
-		//TODO: savoir si un pion est au bout de l'échiquier
-		boolean a;
-		a= true;
-		return a;
+	public Case pionBoutEchiquier(){
+		
+		Case IlYAUnPion = null;
+		for (int i=1;i<9;i++)
+		{
+			Position phaut= new Position(1,i);
+			Case haut= new Case(phaut);//crée une case qui parcourt le haut de l'échiquier
+			Position pbas= new Position(8,i);
+			Case bas= new Case(pbas);//crée une case qui parcourt le bas de l'échiquier
+			Piece piontestn= new Pion("noir");//piece pion noir qui test l'égalité
+			Piece piontestb= new Pion("blanc");//piece pion blanc qui test l'égalité
+			if (haut.getPiece()==piontestn||haut.getPiece()==piontestb){
+				IlYAUnPion=haut;
+				//si l'égalité est vérifié (il y a un pion en haut de l'échiquier) alors on renvoit la case de se pion
+			}
+			if(bas.getPiece()==piontestn||bas.getPiece()==piontestb){
+				IlYAUnPion=bas;//si l'égalité est vérifié (il y a un pion en bas de l'échiquier) alors on renvoit la case de se pion
+			}
+		}
+		return IlYAUnPion;//on retourne la case du pion.(=null si pas de pion)
 	}
 	
 	
