@@ -21,7 +21,7 @@ public class Cavalier extends Piece{
 	
 	public Cavalier(String camp) {
 		super(camp);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
