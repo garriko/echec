@@ -20,10 +20,12 @@ public class Pion extends Piece {
 
 	public Pion(String camp) {
 		super(camp);
-		// TODO Auto-generated constructor stub
+		dejaBouge=false;
 	}
 	
 	public Case[] presenceAdversaire(Case caseActuelle){
+		if()
+		
 		return null;
 		
 	}
