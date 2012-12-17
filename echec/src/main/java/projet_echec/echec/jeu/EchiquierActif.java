@@ -127,6 +127,19 @@ public class EchiquierActif extends Echiquier {
 	}
 	
 	/**
+	 * Filtre la liste selon la présence d'une pièce du même camp
+	 * @param camp camp de la pièce de la case de départ
+	 * @param casePossible Liste des cases possibles, à filtrer
+	 * @return Liste filtrée
+	 */
+	private ArrayList<Case> filtrerDeplacementPossible(String camp,ArrayList<Case> casePossible)
+	{
+		//TODO : implémenter la méthode
+		return null;
+	}
+	
+	
+	/**
 	 * getter/setter
 	 */
 	public Timer getTempsRestant() {
