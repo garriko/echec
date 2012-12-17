@@ -15,7 +15,7 @@ public class Joueur {
 	
 	/**
 	 * @param nom nom du joueur
-	 * @param modeAide mode aide activé ou non
+	 * @param modeAide mode aide active ou non
 	 */
 	public Joueur(String nom, boolean modeAide) {
 		this.setNom(nom);

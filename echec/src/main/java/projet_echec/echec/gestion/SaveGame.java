@@ -12,7 +12,7 @@ import projet_echec.echec.jeu.Echiquier;
 
 
 /**
- * Permet d'enregistrer ou de charger une partie et un échiquier
+ * Permet d'enregistrer ou de charger une partie et un echiquier
  * @author Kevin
  * @see Partie, Echiquier, Wrapper
  *
