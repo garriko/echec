@@ -1,7 +1,7 @@
 package projet_echec.echec.jeu;
 
 import junit.framework.TestCase;
-import projet_echec.echec.jeu.*;
+
 import projet_echec.echec.jeu.piece.Cavalier;
 import projet_echec.echec.jeu.piece.Fou;
 import projet_echec.echec.jeu.piece.Pion;
