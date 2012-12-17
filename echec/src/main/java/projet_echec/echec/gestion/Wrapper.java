@@ -1,13 +1,10 @@
 package projet_echec.echec.gestion;
 
 import projet_echec.echec.jeu.Echiquier;
-
-
 /**
- * Permet d'enregistrer ou de charger une partie et un échiquier
+ * Rassemble la partie et l'échiquier pour permettre l'enregistrement grâce à la classe SaveGame
  * @author Kevin
- * @see Partie, Echiquier
- *
+ * @see SaveGame,Partie,Echiquier
  */
 public class Wrapper implements java.io.Serializable {
 	private Partie p;
@@ -18,26 +15,18 @@ public class Wrapper implements java.io.Serializable {
 		this.e= null;
 	}
 	
-	
+
 	public Wrapper(Partie p, Echiquier e){
 		this.p=p;
 		this.e=e;
 	}
-	/**
-	 * Enregistre p et e (si non null)
-	 * @param nomFichier Enregistre dans nomFichier.gech
-	 */
-	public void sauvegarder(String nomFichier)
-	{
-		
+	public Partie getP() {
+		return p;
 	}
-	
-	/**
-	 * Charge le contenu de nomFichier.gech
-	 * @param nomFichier
-	 */
-	public static void charger(String nomFichier)
-	{
-		
+
+
+	public Echiquier getE() {
+		return e;
 	}
+
 }

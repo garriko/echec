@@ -33,6 +33,8 @@ public class Pion extends Piece {
 		ArrayList<Case> lp = new ArrayList<Case>();
 		if(dejaBouge == false)
 		{
+			if(pos.getPiece().getCamp()=="blanc")
+			{
 			Case c0 = new Case(new Position(pos.getPosition().getHauteur()+1,pos.getPosition().getLargeur()+0));
 			if(isDeplacementOk(c0))
 				lp.add(c0);
@@ -40,13 +42,33 @@ public class Pion extends Piece {
 			Case c1 = new Case(new Position(pos.getPosition().getHauteur()+2,pos.getPosition().getLargeur()+0));
 			if(isDeplacementOk(c1))
 				lp.add(c1);
+			}
+			else
+			{
+				Case c0 = new Case(new Position(pos.getPosition().getHauteur()-1,pos.getPosition().getLargeur()+0));
+				if(isDeplacementOk(c0))
+					lp.add(c0);
+				
+				Case c1 = new Case(new Position(pos.getPosition().getHauteur()-2,pos.getPosition().getLargeur()+0));
+				if(isDeplacementOk(c1))
+					lp.add(c1);
+			}
 			dejaBouge = true;
 		}
 		else
 		{
+			if(pos.getPiece().getCamp()=="blanc")
+			{
 			Case c0 = new Case(new Position(pos.getPosition().getHauteur()+1,pos.getPosition().getLargeur()+0));
 			if(isDeplacementOk(c0))
 				lp.add(c0);
+			}
+			else
+			{
+			Case c0 = new Case(new Position(pos.getPosition().getHauteur()-1,pos.getPosition().getLargeur()+0));
+			if(isDeplacementOk(c0))
+				lp.add(c0);
+			}
 		}
 		lp.addAll(caseDiagonale);
 		return lp;
