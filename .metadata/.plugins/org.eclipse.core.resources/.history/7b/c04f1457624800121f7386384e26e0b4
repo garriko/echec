@@ -25,7 +25,7 @@ import projet_echec.echec.jeu.Case;
 
 public class InterfaceJeu {
 	
-	JFrame fenetre=new JFrame("Jeu d'échecs");
+	JFrame fenetre=new JFrame("InterfaceDeJeu");
 	Container tmp = fenetre.getContentPane();
 	Collection<JButton> tab_cases = new Vector<JButton>();
 	
@@ -52,6 +52,7 @@ public class InterfaceJeu {
 		
 		// fond d'écran
 		JPanel imageFond = new TestImagePanel(new ImageIcon("images/interface_jeu.png").getImage());
+		
 		
 		// Création de la JMenuBar
 		boutonPartie.add(boutonNouvellePartie);
@@ -114,12 +115,11 @@ public class InterfaceJeu {
 		}
 		
 		imageFond.add(plateau);
-		
-		tmp.add(imageFond);
-		fenetre.setSize(1030,700); 
-		fenetre.setResizable(false);
-		fenetre.setJMenuBar(barreMenu);
+		imageFond.add(barreMenu);
 		barreMenu.setVisible(true);
+		tmp.add(imageFond);
+		fenetre.setSize(1030,677); 
+		fenetre.setResizable(false);
 		fenetre.setVisible(true);
 	
 				

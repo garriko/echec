@@ -53,6 +53,7 @@ public class InterfaceJeu {
 		// fond d'écran
 		JPanel imageFond = new TestImagePanel(new ImageIcon("images/interface_jeu.png").getImage());
 		
+		
 		// Création de la JMenuBar
 		boutonPartie.add(boutonNouvellePartie);
 		boutonPartie.add(boutonSauvegarder);
@@ -114,11 +115,10 @@ public class InterfaceJeu {
 		}
 		
 		imageFond.add(plateau);
-		
+		imageFond.add(barreMenu);
 		tmp.add(imageFond);
-		fenetre.setSize(1030,700); 
+		fenetre.setSize(1030,677); 
 		fenetre.setResizable(false);
-		fenetre.setJMenuBar(barreMenu);
 		barreMenu.setVisible(true);
 		fenetre.setVisible(true);
 	

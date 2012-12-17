@@ -25,24 +25,24 @@ import projet_echec.echec.jeu.Case;
 
 public class InterfaceJeu {
 	
-	JFrame fenetre=new JFrame("Jeu d'échecs");
+	JFrame fenetre=new JFrame("InterfaceDeJeu");
 	Container tmp = fenetre.getContentPane();
 	Collection<JButton> tab_cases = new Vector<JButton>();
 	
 	JMenuBar barreMenu = new JMenuBar();
 	
-	JMenu boutonPartie = new JMenu("Partie");
-	JMenuItem boutonNouvellePartie = new JMenuItem("Nouvelle partie");
-	JMenuItem boutonSauvegarder = new JMenuItem("Sauvegarder la partie");
-	JMenuItem boutonChargerPartie = new JMenuItem("Charger une partie");
-	JMenuItem boutonOptions = new JMenuItem("Options");
-	JMenuItem boutonAffichage = new JMenuItem("Affichage");
-	JMenuItem boutonRevenirMenu = new JMenuItem("Revenir au menu principal");
-	JMenuItem boutonQuitter = new JMenuItem("Quitter");
+	JMenu boutonPartie = new JMenu();
+	JMenuItem boutonNouvellepartie = new JMenuItem();
+	JMenuItem boutonSauvegarder = new JMenuItem();
+	JMenuItem boutonChargerPartie = new JMenuItem();
+	JMenuItem boutonOptions = new JMenuItem();
+	JMenuItem boutonAffichage = new JMenuItem();
+	JMenuItem boutonRevenirMenu = new JMenuItem();
+	JMenuItem boutonQuitter = new JMenuItem();
 	
-	JMenu boutonQuestion = new JMenu("?");
-	JMenuItem boutonAide = new JMenuItem("Aide");
-	JMenuItem boutonAProposDe = new JMenuItem("A propos de");
+	JMenu boutonQuestion = new JMenu();
+	JMenuItem boutonAide = new JMenuItem();
+	JMenuItem boutonAProposDe = new JMenuItem();
 	
 	//Case CaseSelectionnee = new Case();
 	
@@ -50,29 +50,19 @@ public class InterfaceJeu {
 	public InterfaceJeu() {
 		
 		
-		// fond d'écran
+	
 		JPanel imageFond = new TestImagePanel(new ImageIcon("images/interface_jeu.png").getImage());
+	/*	
+		for (int i=0; i<64; i=i+2){
+			tab_cases.add(new JButton((new ImageIcon("images/casegrise.png"))));
+		}
 		
-		// Création de la JMenuBar
-		boutonPartie.add(boutonNouvellePartie);
-		boutonPartie.add(boutonSauvegarder);
-		boutonPartie.add(boutonChargerPartie);
-		boutonPartie.add(boutonOptions);
-		boutonPartie.add(boutonAffichage);
-		boutonPartie.add(boutonRevenirMenu);
-		boutonPartie.add(boutonQuitter);
+		for (int i=1; i<64; i=i+2){
+			tab_cases.add(new JButton((new ImageIcon("images/caseblanche.png"))));
+		}
 		
-		boutonQuestion.add(boutonAide);
-		boutonQuestion.add(boutonAProposDe);
+	*/
 		
-		barreMenu.add(boutonPartie);
-		barreMenu.add(boutonQuestion);
-		
-		
-		
-		
-		
-		//création du plateau de jeu 
 		for (int i=0; i<8; i++){
 			for (int j=0; j<8; j++){
 			
@@ -114,12 +104,9 @@ public class InterfaceJeu {
 		}
 		
 		imageFond.add(plateau);
-		
 		tmp.add(imageFond);
-		fenetre.setSize(1030,700); 
+		fenetre.setSize(1030,677); 
 		fenetre.setResizable(false);
-		fenetre.setJMenuBar(barreMenu);
-		barreMenu.setVisible(true);
 		fenetre.setVisible(true);
 	
 				
