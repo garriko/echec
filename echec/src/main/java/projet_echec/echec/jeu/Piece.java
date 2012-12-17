@@ -32,7 +32,7 @@ public abstract class Piece {
 	{
 		if(c.getPosition().getHauteur() < 1 || c.getPosition().getHauteur() > 8 || c.getPosition().getLargeur() <1 || c.getPosition().getLargeur() > 8)
 			return false;
-		if(c.estVide()&&(c.getPiece().camp!=this.camp))
+		if(c.estVide()||(c.getPiece().camp!=this.camp))
 			return true;
 		else
 			return false;
