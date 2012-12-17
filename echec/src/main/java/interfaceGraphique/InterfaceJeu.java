@@ -20,9 +20,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
-
 import projet_echec.echec.jeu.Case;
+
 
 public class InterfaceJeu {
 	
@@ -45,25 +44,48 @@ public class InterfaceJeu {
 	JMenuItem boutonAide = new JMenuItem();
 	JMenuItem boutonAProposDe = new JMenuItem();
 	
-	Case CaseSelectionnee = new Case();
+	//Case CaseSelectionnee = new Case();
 	
 	
 	public InterfaceJeu() {
 		
 		
 	
-		JPanel imageFond = new TestImagePanel(new ImageIcon("interface_jeu.png").getImage());
-		
+		JPanel imageFond = new TestImagePanel(new ImageIcon("images/interface_jeu.png").getImage());
+	/*	
 		for (int i=0; i<64; i=i+2){
-			tab_cases.add(new JButton((new ImageIcon("casegrise.png"))));
+			tab_cases.add(new JButton((new ImageIcon("images/casegrise.png"))));
 		}
 		
 		for (int i=1; i<64; i=i+2){
-			tab_cases.add(new JButton((new ImageIcon("caseblanche.png"))));
+			tab_cases.add(new JButton((new ImageIcon("images/caseblanche.png"))));
 		}
 		
-		for (int i=0; i<64; i++){
-			((Vector<JButton>) tab_cases).get(i).setPreferredSize(new Dimension(56,56));		
+	*/
+		
+		for (int i=0; i<8; i++){
+			for (int j=0; j<8; j++){
+			
+				if (j%2==0){
+				
+					if (i%2==0){
+						tab_cases.add(new JButton((new ImageIcon("images/casegrise.png"))));
+					}
+					else {
+						tab_cases.add(new JButton((new ImageIcon("images/caseblanche.png"))));
+					}
+				}
+				else {
+					if (i%2==1){
+						tab_cases.add(new JButton((new ImageIcon("images/casegrise.png"))));
+					}
+					else {
+						tab_cases.add(new JButton((new ImageIcon("images/caseblanche.png"))));
+					}
+				}
+				
+				((Vector<JButton>) tab_cases).get(i).setPreferredSize(new Dimension(56,56));	
+			}
 		}
 		
 		
@@ -83,14 +105,11 @@ public class InterfaceJeu {
 		
 		imageFond.add(plateau);
 		tmp.add(imageFond);
-		fenetre.setSize(1000,700); 
+		fenetre.setSize(1030,677); 
 		fenetre.setResizable(false);
 		fenetre.setVisible(true);
 	
-			
-		
-		
-		
+				
 		
 	}
 	
@@ -101,10 +120,6 @@ public class InterfaceJeu {
 	}
 	
 
-	
-	
-	
-	
 	
 	public static void main(String[] args){
 		new InterfaceJeu();
