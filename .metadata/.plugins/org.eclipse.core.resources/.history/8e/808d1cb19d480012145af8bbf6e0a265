@@ -1,0 +1,77 @@
+package interfaceGraphique;
+
+import interfaceGraphique.InterfacePopupSuppression.Ecouteur;
+
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+/**
+ * 
+ * @author Anne-Sophie
+ *
+ * Fenêtre de la popup de réglage des options (aide)
+ *
+ */
+
+public class InterfacePopupOptions {
+
+	JFrame fenetre=new JFrame("Options");
+	Container tmp = fenetre.getContentPane();
+	JButton Bouton1 = new JButton(new ImageIcon("images/boutonAppliquer.png"));
+	JButton Bouton2 = new JButton(new ImageIcon("images/boutonAnnulerOptions.png"));
+	JComboBox aideJ1 = new JComboBox();
+	JCheckBox aideJ2 = new JCheckBox();
+	
+	
+	
+	/**
+	 * Constructeur de la classe
+	 */
+	public InterfacePopupOptions() {
+		
+		Bouton1.setBounds(112, 282, 158, 72); //position x, position y, largeur, hauteur
+		Bouton2.setBounds(292, 282, 158, 72); 
+		aideJ1.setBounds(252,123, 30, 30);
+		aideJ2.setBounds(252,187, 30, 30);
+		aideJ1.setOpaque(false);
+		aideJ2.setOpaque(false);
+		aideJ1.setVisible(true);
+		aideJ2.setVisible(true);
+		
+		Ecouteur listen=new Ecouteur();
+		Bouton1.addActionListener(listen);
+		Bouton2.addActionListener(listen);
+				
+	
+		JPanel boutonsChoix = new TestImagePanel(new ImageIcon("images/popupOptions.png").getImage());
+		boutonsChoix.setLayout(null);	 
+		boutonsChoix.add(Bouton1);   
+		boutonsChoix.add(Bouton2);
+		boutonsChoix.add(aideJ1);   
+		boutonsChoix.add(aideJ2);
+		boutonsChoix.setOpaque(false);
+		tmp.add(boutonsChoix);
+    
+		fenetre.setSize(505,433); // taille de l'image de fond
+		fenetre.setResizable(false);
+		fenetre.setVisible(true);
+	}
+	
+		
+	public class Ecouteur implements ActionListener{		
+		public void actionPerformed(ActionEvent e){
+		}
+	}
+	
+	public static void main(String[] args){
+		new InterfacePopupOptions();
+	}
+}

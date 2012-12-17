@@ -1,0 +1,106 @@
+package interfaceGraphique;
+
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+/**
+ * 
+ * @author Anne-Sophie
+ *
+ * Fenêtre de configuration d'une nouvelle partie
+ *
+ */
+
+public class InterfaceConfigPartie {
+
+	JFrame fenetre=new JFrame("Jeu d'échecs");
+	Container tmp = fenetre.getContentPane();
+	
+	Image bouton1 = new ImageIcon("images/boutonModifier.png").getImage().getScaledInstance(156, 40, Image.SCALE_DEFAULT);
+	JButton Bouton1 = new JButton(new ImageIcon(bouton1));
+	Image bouton2 = new ImageIcon("images/boutonValider.png").getImage().getScaledInstance(125, 45, Image.SCALE_DEFAULT);
+	JButton Bouton2 = new JButton(new ImageIcon(bouton2));
+	Image bouton3 = new ImageIcon("images/boutonAnnuler.png").getImage().getScaledInstance(125, 45, Image.SCALE_DEFAULT);
+	JButton Bouton3 = new JButton(new ImageIcon(bouton3));
+
+	JTextField nomJ1 = new JTextField("Joueur 1");
+	JTextField nomJ2 = new JTextField("Joueur 2");
+	
+	//SpinBox dureeJ1 = new SpinBox(0, 0, 10);
+	//SpinBox dureeJ2 = new SpinBox(0, 0, 10);
+	
+	JCheckBox aideJ1 = new JCheckBox();
+	JCheckBox aideJ2 = new JCheckBox();
+	JCheckBox rotation = new JCheckBox();
+	
+	JLabel mode = new JLabel();
+	
+	
+	/**
+	 * Constructeur de la classe
+	 */
+	public InterfaceConfigPartie() {
+		
+		Bouton1.setBounds(487, 516, 156, 40); //position x, position y, largeur, hauteur
+		Bouton2.setBounds(598, 606, 125, 45); 
+		Bouton3.setBounds(728, 606, 125, 45);
+		nomJ1.setBounds(300,185, 110, 34);
+		nomJ2.setBounds(300,325, 110, 34);
+		aideJ1.setBounds(777,190, 30, 30);
+		aideJ2.setBounds(777,330, 30, 30);
+		aideJ1.setVisible(true);
+		aideJ2.setVisible(true);
+		
+		Ecouteur listen=new Ecouteur();
+		Bouton1.addActionListener(listen);
+		Bouton2.addActionListener(listen);
+		Bouton3.addActionListener(listen);
+	
+		JPanel boutonsChoix = new TestImagePanel(new ImageIcon("images/configPartie.png").getImage().getScaledInstance(1000, 700, Image.SCALE_DEFAULT));
+		boutonsChoix.setLayout(null);
+		
+		boutonsChoix.add(Bouton1);   		
+		boutonsChoix.add(Bouton2);
+		boutonsChoix.add(Bouton3);
+		
+		
+		boutonsChoix.add(nomJ1);	
+		boutonsChoix.add(nomJ2);
+		
+		boutonsChoix.add(aideJ1);
+		boutonsChoix.add(aideJ2);
+		boutonsChoix.add(rotation);
+		boutonsChoix.add(mode);
+		
+		
+		boutonsChoix.setOpaque(false);
+		tmp.add(boutonsChoix);
+    
+		fenetre.setSize(1000,720); // taille de l'image de fond
+		fenetre.setResizable(false);
+		fenetre.setVisible(true);
+	}
+	
+		
+	public class Ecouteur implements ActionListener{		
+		public void actionPerformed(ActionEvent e){
+		}
+	}
+	
+	public static void main(String[] args){
+		new InterfaceConfigPartie();
+	}
+
+	
+}
+

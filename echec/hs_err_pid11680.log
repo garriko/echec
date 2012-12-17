@@ -1,0 +1,169 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_UNCAUGHT_CXX_EXCEPTION (0xe06d7363) at pc=0x7556969b, pid=11680, tid=3820
+#
+# JRE version: 7.0-b147
+# Java VM: Java HotSpot(TM) Client VM (21.0-b17 mixed mode windows-x86 )
+# Problematic frame:
+# C  [KERNELBASE.dll+0x969b]
+#
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.sun.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x038f2000):  JavaThread "Image Fetcher 0" daemon [_thread_in_vm, id=3820, stack(0x03930000,0x03980000)]
+
+siginfo: ExceptionCode=0xe06d7363, ExceptionInformation=0x19930520 0x0397f518 0x6c8fbdd8 
+
+Registers:
+EAX=0x0397f480, EBX=0x00000000, ECX=0x00000003, EDX=0x00000000
+ESP=0x0397f480, EBP=0x0397f4d0, ESI=0x6c8fbd3c, EDI=0x6c997580
+EIP=0x7556969b, EFLAGS=0x00000212
+
+Top of Stack: (sp=0x0397f480)
+0x0397f480:   e06d7363 00000001 00000000 7556969b
+0x0397f490:   00000003 19930520 0397f518 6c8fbdd8
+0x0397f4a0:   00000004 00000000 6c997580 00000000
+0x0397f4b0:   6c8fbd3c 0397f4c0 6c8f0c7c 6c994508
+0x0397f4c0:   0397f500 6c8f2263 00000008 6c8faa39
+0x0397f4d0:   0397f508 6c907819 e06d7363 00000001
+0x0397f4e0:   00000003 0397f4fc e06d7363 00000001
+0x0397f4f0:   00000000 00000000 00000003 19930520 
+
+Instructions: (pc=0x7556969b)
+0x7556967b:   89 45 c0 c1 e0 02 50 ff 75 14 8d 45 c4 50 e8 9d
+0x7556968b:   d1 ff ff 83 c4 0c 8d 45 b0 50 ff 15 5c 11 56 75
+0x7556969b:   c9 c2 10 00 89 45 c0 eb ed 90 90 90 90 90 8b ff
+0x755696ab:   55 8b ec 83 ec 1c 6a 00 6a 1c 8d 45 e4 50 6a 00 
+
+
+Register to memory mapping:
+
+EAX=0x0397f480 is pointing into the stack for thread: 0x038f2000
+EBX=0x00000000 is an unknown value
+ECX=0x00000003 is an unknown value
+EDX=0x00000000 is an unknown value
+ESP=0x0397f480 is pointing into the stack for thread: 0x038f2000
+EBP=0x0397f4d0 is pointing into the stack for thread: 0x038f2000
+ESI=0x6c8fbd3c is an unknown value
+EDI=0x6c997580 is an unknown value
+
+
+Stack: [0x03930000,0x03980000],  sp=0x0397f480,  free space=317k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+
+[error occurred during error reporting (printing native stack), id 0xc0000005]
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  java.lang.Object.wait(J)V+0
+j  sun.awt.image.ImageFetcher.nextImage()Lsun/awt/image/ImageFetchable;+69
+j  sun.awt.image.ImageFetcher.fetchloop()V+23
+j  sun.awt.image.ImageFetcher.run()V+5
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+=>0x038f2000 JavaThread "Image Fetcher 0" daemon [_thread_in_vm, id=3820, stack(0x03930000,0x03980000)]
+  0x03855800 JavaThread "AWT-Windows" daemon [_thread_in_native, id=8588, stack(0x03c20000,0x03c70000)]
+  0x03855400 JavaThread "AWT-Shutdown" [_thread_blocked, id=6344, stack(0x03b70000,0x03bc0000)]
+  0x03852c00 JavaThread "Java2D Disposer" daemon [_thread_blocked, id=5000, stack(0x03aa0000,0x03af0000)]
+  0x03796c00 JavaThread "Service Thread" daemon [_thread_blocked, id=9136, stack(0x03b00000,0x03b50000)]
+  0x0377b400 JavaThread "C1 CompilerThread0" daemon [_thread_blocked, id=9340, stack(0x01500000,0x01550000)]
+  0x03776400 JavaThread "Attach Listener" daemon [_thread_blocked, id=12116, stack(0x03990000,0x039e0000)]
+  0x03773000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=10248, stack(0x03620000,0x03670000)]
+  0x014ed000 JavaThread "Finalizer" daemon [_thread_blocked, id=11492, stack(0x01560000,0x015b0000)]
+  0x014e8400 JavaThread "Reference Handler" daemon [_thread_blocked, id=11992, stack(0x01370000,0x013c0000)]
+  0x013ea000 JavaThread "main" [_thread_blocked, id=6368, stack(0x01320000,0x01370000)]
+
+Other Threads:
+  0x014e1c00 VMThread [stack: 0x036d0000,0x03720000] [id=5332]
+  0x037a9c00 WatcherThread [stack: 0x039f0000,0x03a40000] [id=11444]
+
+VM state:synchronizing (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x013e8548] Threads_lock - owner thread: 0x014e1c00
+
+Heap
+ def new generation   total 4928K, used 1277K [0x235d0000, 0x23b20000, 0x28b20000)
+  eden space 4416K,  28% used [0x235d0000, 0x2370f758, 0x23a20000)
+  from space 512K,   0% used [0x23a20000, 0x23a20000, 0x23aa0000)
+  to   space 512K,   0% used [0x23aa0000, 0x23aa0000, 0x23b20000)
+ tenured generation   total 10944K, used 0K [0x28b20000, 0x295d0000, 0x335d0000)
+   the space 10944K,   0% used [0x28b20000, 0x28b20000, 0x28b20200, 0x295d0000)
+ compacting perm gen  total 12288K, used 3897K [0x335d0000, 0x341d0000, 0x375d0000)
+   the space 12288K,  31% used [0x335d0000, 0x3399e5c8, 0x3399e600, 0x341d0000)
+No shared spaces configured.
+
+Code Cache  [0x01610000, 0x01690000, 0x03610000)
+ total_blobs=197 nmethods=18 adapters=112 free_code_cache=32278Kb largest_free_block=33053056
+
+Dynamic libraries:
+0x00200000 - 0x0022f000 	C:\Program Files\Java\jre7\bin\javaw.exe
+0x77b40000 - 0x77c7c000 	C:\windows\SYSTEM32\ntdll.dll
+0x757a0000 - 0x75874000 	C:\windows\system32\kernel32.dll
+0x75560000 - 0x755ab000 	C:\windows\system32\KERNELBASE.dll
+0x75e90000 - 0x75f30000 	C:\windows\system32\ADVAPI32.dll
+0x761f0000 - 0x7629c000 	C:\windows\system32\msvcrt.dll
+0x76390000 - 0x763a9000 	C:\windows\SYSTEM32\sechost.dll
+0x75c70000 - 0x75d11000 	C:\windows\system32\RPCRT4.dll
+0x764d0000 - 0x76599000 	C:\windows\system32\USER32.dll
+0x75e40000 - 0x75e8e000 	C:\windows\system32\GDI32.dll
+0x75790000 - 0x7579a000 	C:\windows\system32\LPK.dll
+0x75a30000 - 0x75acd000 	C:\windows\system32\USP10.dll
+0x741e0000 - 0x7437e000 	C:\windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd\COMCTL32.dll
+0x75ad0000 - 0x75b27000 	C:\windows\system32\SHLWAPI.dll
+0x75b30000 - 0x75b4f000 	C:\windows\system32\IMM32.DLL
+0x76400000 - 0x764cc000 	C:\windows\system32\MSCTF.dll
+0x6c8e0000 - 0x6c99e000 	C:\Program Files\Java\jre7\bin\msvcr100.dll
+0x62b70000 - 0x62e91000 	C:\Program Files\Java\jre7\bin\client\jvm.dll
+0x71180000 - 0x71187000 	C:\windows\system32\WSOCK32.dll
+0x760f0000 - 0x76125000 	C:\windows\system32\WS2_32.dll
+0x75a20000 - 0x75a26000 	C:\windows\system32\NSI.dll
+0x737a0000 - 0x737d2000 	C:\windows\system32\WINMM.dll
+0x77c90000 - 0x77c95000 	C:\windows\system32\PSAPI.DLL
+0x74680000 - 0x7468c000 	C:\Program Files\Java\jre7\bin\verify.dll
+0x73b40000 - 0x73b60000 	C:\Program Files\Java\jre7\bin\java.dll
+0x6c8b0000 - 0x6c8c3000 	C:\Program Files\Java\jre7\bin\zip.dll
+0x62a20000 - 0x62b62000 	C:\Program Files\Java\jre7\bin\awt.dll
+0x76300000 - 0x7638f000 	C:\windows\system32\OLEAUT32.dll
+0x755b0000 - 0x7570c000 	C:\windows\system32\ole32.dll
+0x73f00000 - 0x73f13000 	C:\windows\system32\DWMAPI.DLL
+0x73fb0000 - 0x73ff0000 	C:\windows\system32\uxtheme.dll
+0x75230000 - 0x7523c000 	C:\windows\system32\CRYPTBASE.dll
+0x765a0000 - 0x771e9000 	C:\windows\system32\SHELL32.dll
+
+VM Arguments:
+jvm_args: -Dfile.encoding=UTF-8 
+java_command: interfaceGraphique.InterfacePopupOptions
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.7.0
+CLASSPATH=.;C:\Program Files\QuickTime\QTSystem\QTJava.zip
+PATH=C:/Program Files/Java/jre7/bin/client;C:/Program Files/Java/jre7/bin;C:/Program Files/Java/jre7/lib/i386;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\QuickTime\QTSystem\;C:\Program Files\Microsoft SQL Server\100\Tools\Binn\;C:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files\MATLAB\R2011a\runtime\win32;C:\Program Files\MATLAB\R2011a\bin;C:\Users\Anne-Sophie\Downloads\apache-maven-3.0.4-bin\apache-maven-3.0.4\bin;C:\Users\Anne-Sophie\Desktop\echec\echec;
+USERNAME=Anne-Sophie
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=x86 Family 6 Model 23 Stepping 10, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 7 Build 7600 
+
+CPU:total 2 (2 cores per cpu, 1 threads per core) family 6 model 23 stepping 10, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3
+
+Memory: 4k page, physical 3076720k(669932k free), swap 7266128k(4956k free)
+
+vm_info: Java HotSpot(TM) Client VM (21.0-b17) for windows-x86 JRE (1.7.0-b147), built on Jun 27 2011 02:25:52 by "java_re" with unknown MS VC++:1600
+
+time: Tue Dec 18 00:00:15 2012
+elapsed time: 3 seconds
+
