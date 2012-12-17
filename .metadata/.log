@@ -1,0 +1,39 @@
+!SESSION 2012-12-17 15:44:04.017 -----------------------------------------------
+eclipse.buildId=I20120608-1400
+java.version=1.7.0
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.java.product C:\Users\Anne-Sophie\Desktop\echec\echec\.project
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.package.java.product C:\Users\Anne-Sophie\Desktop\echec\echec\.project
+
+!ENTRY org.eclipse.osgi 2 1 2012-12-17 15:46:07.920
+!MESSAGE NLS unused message: LifecycleMappingPropertyPage_this_message in: org.eclipse.m2e.core.ui.internal.messages
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2012-12-17 15:47:00.554
+!MESSAGE CatalogItem org.eclipse.m2e.discovery.lifecyclemapping.m2e-egit does not contain lifecycle mapping metadata
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2012-12-17 15:47:00.554
+!MESSAGE CatalogItem org.eclipse.m2e.discovery.lifecyclemapping.m2e-subversive does not contain lifecycle mapping metadata
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2012-12-17 15:47:00.554
+!MESSAGE CatalogItem org.eclipse.m2e.discovery.lifecyclemapping.m2e-subclipse does not contain lifecycle mapping metadata
+
+!ENTRY org.eclipse.core.jobs 4 2 2012-12-17 15:47:09.462
+!MESSAGE An internal error occurred during: "Importing Maven projects".
+!STACK 0
+java.lang.IllegalArgumentException: Unsupported IClasspathEntry kind=4
+	at org.eclipse.m2e.jdt.internal.ClasspathEntryDescriptor.toClasspathEntry(ClasspathEntryDescriptor.java:131)
+	at org.eclipse.m2e.jdt.internal.ClasspathDescriptor.getEntries(ClasspathDescriptor.java:134)
+	at org.eclipse.m2e.jdt.internal.AbstractJavaProjectConfigurator.configure(AbstractJavaProjectConfigurator.java:141)
+	at org.eclipse.m2e.core.project.configurator.AbstractLifecycleMapping.configure(AbstractLifecycleMapping.java:109)
+	at org.eclipse.m2e.core.internal.project.ProjectConfigurationManager.updateProjectConfiguration(ProjectConfigurationManager.java:414)
+	at org.eclipse.m2e.core.internal.project.ProjectConfigurationManager.configureNewMavenProject(ProjectConfigurationManager.java:240)
+	at org.eclipse.m2e.core.internal.project.ProjectConfigurationManager.importProjects(ProjectConfigurationManager.java:156)
+	at org.eclipse.m2e.core.ui.internal.wizards.MavenImportWizard$1.doCreateMavenProjects(MavenImportWizard.java:164)
+	at org.eclipse.m2e.core.ui.internal.wizards.AbstractCreateMavenProjectsOperation.run(AbstractCreateMavenProjectsOperation.java:73)
+	at org.eclipse.m2e.core.ui.internal.wizards.MavenImportWizard$3.runInWorkspace(MavenImportWizard.java:249)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:38)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2012-12-17 15:50:45.961
+!MESSAGE Failed to open search index.
