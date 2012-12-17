@@ -8,7 +8,7 @@ import java.util.Timer;
  * @author Adrien
  * @version 0.0.1
  * @see Case, Echiquier
- * Cette classe permet de définir ce qu’il se passe sur l’échiquier lors d’une partie en cours.
+ * Cette classe permet de definir ce qu’il se passe sur l’echiquier lors d’une partie en cours.
  */
 public class EchiquierActif extends Echiquier {
 	/**
@@ -16,11 +16,11 @@ public class EchiquierActif extends Echiquier {
 	 */
 	private Timer tempsRestant;
 	/**
-	 * Temps total du jeux depuis le début de la partie
+	 * Temps total du jeu depuis le debut de la partie
 	 */
 	private Timer tempsTotal;
 	/**
-	 * Case séléctionné par le joueur ( via l'interface graphique)
+	 * Case selectionnee par le joueur ( via l'interface graphique)
 	 */
 	private Case caseSelectionne;
 	/**
@@ -42,6 +42,7 @@ public class EchiquierActif extends Echiquier {
 	
 	/**
 	 * constructeur de la classe
+	 * @param V variante choisie
 	 */
 	public EchiquierActif(Variantes V){
 		super(V);
@@ -49,7 +50,7 @@ public class EchiquierActif extends Echiquier {
 	
 	
 	/**
-	 * Test si on est en position d'échec
+	 * Test si on est en position d'echec
 	 * @return true si l'un des joueurs est en echec
 	 */
 	public boolean echec(){
@@ -60,7 +61,7 @@ public class EchiquierActif extends Echiquier {
 	}
 	
 	/**
-	 * Test si on est en position d'échec et mat
+	 * Test si on est en position d'echec et mat
 	 * @return true si l'un des joueurs est en echec et mat
 	 */
 	public boolean echecEtMat(){
@@ -81,7 +82,7 @@ public class EchiquierActif extends Echiquier {
 		//TODO : pat
 	}
 	/**
-	 * recupère la case selectionné envoyé par l'interface graphique
+	 * recupere la case selectionne envoye par l'interface graphique
 	 * @param caseSelectionne
 	 */
 	public void selectionnerCase(Case caseSelectionne){
@@ -89,15 +90,20 @@ public class EchiquierActif extends Echiquier {
 		
 	}
 	/**
-	 * Permet le déplacement des pièces
-	 * @param caseDepart : le joueur a selectionné une pièce sur le plateau
-	 * @param caseArrivee: le joueur a selectionné une case d'arrivée sur le plateau
+	 * Permet le deplacement des pieces
+	 * @param caseDepart : le joueur a selectionne une piece sur le plateau
+	 * @param caseArrivee: le joueur a selectionne une case d'arrivee sur le plateau
 	 */
 	public void deplacer(Case caseDepart, Case caseArrivee){
 		//TODO : deplacer
 	}
 	
-
+	/**
+	 * Methode utile pour la classe Pion. Renvoie 0,1 ou 2 cases selon la presence d'une piece adverse en diagonale par rapport a la
+	 * direction d'avancee du pion
+	 * @param caseActuelle case du pion
+	 * @return 0,1 ou 2 cases
+	 */
 
 	public ArrayList<Case>[] presenceAdversaireDiagonale(Case caseActuelle){
 		ArrayList<Case> res=new ArrayList<Case>();
@@ -127,10 +133,10 @@ public class EchiquierActif extends Echiquier {
 	}
 	
 	/**
-	 * Filtre la liste selon la présence d'une pièce du même camp
-	 * @param camp camp de la pièce de la case de départ
-	 * @param casePossible Liste des cases possibles, à filtrer
-	 * @return Liste filtrée
+	 * Filtre la liste selon la presence d'une pièce du meme camp
+	 * @param camp camp de la piece de la case de depart
+	 * @param casePossible Liste des cases possibles, a filtrer
+	 * @return Liste filtree
 	 */
 	private ArrayList<Case> filtrerDeplacementPossible(String camp,ArrayList<Case> casePossible)
 	{

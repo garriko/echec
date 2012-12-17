@@ -1,18 +1,20 @@
 package projet_echec.echec.jeu;
+
+
 /**
+ * Cette classe permet de definir ce qu’il se passe sur l’echiquier lorsque l'on veut revoir une partie.
  * 
  * @author Adrien
  * @version 0.0.1
- * @see Case, Echiquier
- * Cette classe permet de définir ce qu’il se passe sur l’échiquier lorsque l'on veut revoir une partie.
+ * @see Case, Echiquier 
  */
 public class EchiquierPassif extends Echiquier {
 	/**
-	 * définit le mode de lecture d'une partie ("auto" ou "manuel")
+	 * definit le mode de lecture d'une partie ("auto" ou "manuel")
 	 */
 	String modeLecture;
 	/**
-	 * lorsque le mode "auto" est activé, cette variable défini le temps de chaque tour.
+	 * lorsque le mode "auto" est active, cette variable defini le temps de chaque tour.
 	 */
 	public int cadence;
 	
