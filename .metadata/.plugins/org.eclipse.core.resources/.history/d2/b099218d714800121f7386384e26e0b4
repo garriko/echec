@@ -21,7 +21,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import projet_echec.echec.jeu.Case;
-import projet_echec.echec.jeu.Variantes;
 
 
 public class InterfaceJeu {
@@ -48,9 +47,6 @@ public class InterfaceJeu {
 	Case CaseSelectionnee = new Case(null);
 	
 	
-	/**
-	 * Constructeur sans parametre
-	 */
 	public InterfaceJeu() {
 		
 		
@@ -160,86 +156,9 @@ public class InterfaceJeu {
 		fenetre.setJMenuBar(barreMenu);
 		barreMenu.setVisible(true);
 		fenetre.setVisible(true);
-		
-	}
-	
-	/**
-	 * Constructeur avec paramètre
-	 * @param v la variante de jeu choisie par l'utilisateur
-	 */
-	public InterfaceJeu(Variantes v) {
-		
-		
-		// fond d'écran
-		JPanel imageFond = new TestImagePanel(new ImageIcon("images/interface_jeu.png").getImage());
-		
-		// Création de la JMenuBar
-		boutonPartie.add(boutonNouvellePartie);
-		boutonPartie.add(boutonSauvegarder);
-		boutonPartie.add(boutonChargerPartie);
-		boutonPartie.add(boutonOptions);
-		boutonPartie.add(boutonAffichage);
-		boutonPartie.add(boutonRevenirMenu);
-		boutonPartie.add(boutonQuitter);
-		
-		boutonQuestion.add(boutonAide);
-		boutonQuestion.add(boutonAProposDe);
-		
-		barreMenu.add(boutonPartie);
-		barreMenu.add(boutonQuestion);
-		
-		
-	
-		
-		// Initialisation de l'échiquier sans pièce
-		for (int i=0; i<8; i++){
-			for (int j=0; j<8; j++){
-				
-				if (j%2==0){
-					
-					if (i%2==0){
-						tab_cases.add(new JButton(new ImageIcon("images/casegrise.png")));
-					}
-					else {
-						tab_cases.add(new JButton(new ImageIcon("images/caseblanche.png")));
-					}
-				}
-				else {
-					if (i%2==1){
-						tab_cases.add(new JButton(new ImageIcon("images/casegrise.png")));
-					}
-					else {
-						tab_cases.add(new JButton(new ImageIcon("images/caseblanche.png")));
-					}			
-				}
-				((Vector<JButton>) tab_cases).get(i).setPreferredSize(new Dimension(56,56));
-			}
-		}
-			
-		
-		
-		JPanel plateau = new JPanel();
-		plateau.setLayout(new GridLayout(8,8));
-		
-		imageFond.setLayout(null);
-		plateau.setBounds(465,110,448,448);		
-		
-		
-		for (int i=0; i<64 ; i++){
-			plateau.add(((Vector<JButton>) tab_cases).get(i));	
-				
-		}
-		
-		imageFond.add(plateau);
-		
-		tmp.add(imageFond);
-		fenetre.setSize(1030,700); 
-		fenetre.setResizable(false);
-		fenetre.setJMenuBar(barreMenu);
-		barreMenu.setVisible(true);
-		fenetre.setVisible(true);
 	
 				
+		
 	}
 	
 		
@@ -249,9 +168,6 @@ public class InterfaceJeu {
 	}
 	
 
-	
-	
-	
 	
 	public static void main(String[] args){
 		new InterfaceJeu();

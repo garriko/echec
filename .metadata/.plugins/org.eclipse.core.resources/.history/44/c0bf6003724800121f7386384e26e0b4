@@ -48,9 +48,6 @@ public class InterfaceJeu {
 	Case CaseSelectionnee = new Case(null);
 	
 	
-	/**
-	 * Constructeur sans parametre
-	 */
 	public InterfaceJeu() {
 		
 		
@@ -163,10 +160,7 @@ public class InterfaceJeu {
 		
 	}
 	
-	/**
-	 * Constructeur avec paramètre
-	 * @param v la variante de jeu choisie par l'utilisateur
-	 */
+	
 	public InterfaceJeu(Variantes v) {
 		
 		
@@ -240,6 +234,7 @@ public class InterfaceJeu {
 		fenetre.setVisible(true);
 	
 				
+		
 	}
 	
 		
@@ -249,9 +244,6 @@ public class InterfaceJeu {
 	}
 	
 
-	
-	
-	
 	
 	public static void main(String[] args){
 		new InterfaceJeu();
