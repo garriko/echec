@@ -1,5 +1,7 @@
 package projet_echec.echec.gestion;
 
+import java.io.File;
+
 /**
  * 
  * GestionCatalogueCharger gere les sauvegardes des parties non terminees.
@@ -17,24 +19,39 @@ public class GestionCatalogueCharger extends Gestion {
 	
 	
 	/**
-	 * 
+	 * Constructeur par defaut
 	 */
 	public GestionCatalogueCharger() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
+	
 	/**
 	 * Charge la liste des parties non terminees
 	 */
 	@Override
 	public void chargerListe() {
-		// TODO Auto-generated method stub
+	
+		File repertoire = new File("partie en cours/");
+
+		String [] listefichiers; 
+
+		int i; 
+		listefichiers=repertoire.list(); 
+		for(i=0;i<listefichiers.length;i++){ 
+			if(listefichiers[i].endsWith(".gech")==true){ 
+				listePartie.add(listefichiers[i].replaceFirst(".gech",""));
+				 
+			}
+		}
 		
 	}
-	@Override
-	public void supprimerPartie(String nomPartie) {
-		// TODO Auto-generated method stub
-		
+	
+	public static void main(String[] args) {
+		Gestion g = new GestionCatalogueCharger();
+		g.chargerListe();
+		System.out.println(g.getListePartie());
 	}
+
 
 }
