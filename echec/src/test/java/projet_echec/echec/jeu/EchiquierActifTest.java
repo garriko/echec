@@ -19,9 +19,17 @@ public class EchiquierActifTest extends TestCase{
 	 * test si lors d'une situation d'echec, la fonction testEchec() renvoit true
 	 */
 	public void testEchec(){
-		
-		assertTrue( true );
-		//TODO : test echec
+		EchiquierActif E=null;
+		try {
+			E= new EchiquierActif();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		assertTrue( E.echec());
 		
 	}
 	
@@ -52,6 +60,28 @@ public class EchiquierActifTest extends TestCase{
 		//TODO : test selectionner case
 	}
 	
+	public void  testestMenace(){
+		EchiquierActif E=null;
+		try {
+			E = new EchiquierActif();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		Position p= new Position(1,1);
+		Piece c= new Tour("noir",null);
+		Case c1= new Case(p);
+		c1.setPiece(c);
+		
+		Position q= new Position(1,3);
+		Case q1= new Case(q);
+		
+		assertTrue(E.estMenace("blanc",q1));
+		
+	}
 	/**
 	 * test lorsque l'on sélectionne deux cases l'un aprés l'autre, qu el'on déplace la pièce de la première à la deuxième case
 	 */
