@@ -36,7 +36,8 @@ public class Partie {
 	 * @param dep deplacement effectué ce tour
 	 */
 	public void ajoutDeplacement(String dep){
-		
+		String newDepl = this.deplacement.concat(dep);
+		this.deplacement=newDepl;
 	}
 	
 	

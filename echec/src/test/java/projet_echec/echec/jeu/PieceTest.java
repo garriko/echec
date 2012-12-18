@@ -7,7 +7,7 @@ public class PieceTest extends TestCase {
 	
 	public void testGetDeplacementPossible()
 	{
-		//TODO : Tester getDeplacementPossible
-		assertTrue(true);
+	//TODO: test getdeplacementpossible	
+		
 	}
 }

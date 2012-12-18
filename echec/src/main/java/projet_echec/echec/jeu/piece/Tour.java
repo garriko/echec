@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import projet_echec.echec.jeu.Case;
 import projet_echec.echec.jeu.Piece;
+import projet_echec.echec.jeu.Position;
 
 /**
  * 
@@ -18,13 +19,40 @@ public class Tour extends Piece{
 
 	public Tour(String camp) {
 		super(camp);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public ArrayList<Case> getDeplacementPossible(Case caseActuelle) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * renvoi la liste des positions possibles
+	 */
+	public ArrayList<Case> getDeplacementPossible(Case pos) {
+			ArrayList<Case> lp = new ArrayList<Case>();
+			Case h = new Case(new Position(pos.getPosition().getHauteur(),pos.getPosition().getLargeur()));
+			Case d = new Case(new Position(pos.getPosition().getHauteur(),pos.getPosition().getLargeur()));
+			Case b = new Case(new Position(pos.getPosition().getHauteur(),pos.getPosition().getLargeur()));
+			Case g = new Case(new Position(pos.getPosition().getHauteur(),pos.getPosition().getLargeur()));
+			
+			for (int i=0;i<8;i++)
+			{
+				h.setPosition(new Position(h.getPosition().getHauteur()+1,h.getPosition().getLargeur()));
+				d.setPosition(new Position(d.getPosition().getHauteur(),d.getPosition().getLargeur()+1));
+				b.setPosition(new Position(b.getPosition().getHauteur()-1,b.getPosition().getLargeur()));
+				g.setPosition(new Position(g.getPosition().getHauteur(),g.getPosition().getLargeur()-1));
+				
+				if(isDeplacementOk(h)){
+					lp.add(h);}
+					
+				if(isDeplacementOk(d)){
+					lp.add(d);}
+				
+				if(isDeplacementOk(b)){
+					lp.add(b);}
+				
+				if(isDeplacementOk(g)){
+					lp.add(g);}
+			}
+			return lp;
+			}
 	}
 
-}
+

@@ -21,10 +21,13 @@ public class Cavalier extends Piece{
 	
 	public Cavalier(String camp) {
 		super(camp);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
+	/**
+	 * renvoi la liste des positions possibles
+	 */
 	public ArrayList<Case> getDeplacementPossible(Case pos) {
 		ArrayList<Case> lp = new ArrayList<Case>();
 		//On teste chacune des cases possibles

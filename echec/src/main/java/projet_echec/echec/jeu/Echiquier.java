@@ -46,7 +46,16 @@ public abstract class Echiquier {
 		this.listePiecePrises=new Vector<Piece>();
 	}
 	
-	
-	
-	
+	/**
+	 * Recherche la case se trouvant à la position p
+	 * @param p
+	 * @return
+	 */
+	public Case chercherCase(Position p){
+		Case res=null;
+		for(int i=0;i<plateau.size();i++)
+			if(plateau.get(i).getPosition().equals(p))
+				res = plateau.get(i);
+		return res;
+	}
 }

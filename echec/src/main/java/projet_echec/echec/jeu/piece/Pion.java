@@ -3,6 +3,7 @@ package projet_echec.echec.jeu.piece;
 import java.util.ArrayList;
 import projet_echec.echec.jeu.Case;
 import projet_echec.echec.jeu.Piece;
+import projet_echec.echec.jeu.Position;
 
 
 /**
@@ -20,18 +21,57 @@ public class Pion extends Piece {
 
 	public Pion(String camp) {
 		super(camp);
-		// TODO Auto-generated constructor stub
+		dejaBouge=false;
 	}
 	
-	public Case[] presenceAdversaire(Case caseActuelle){
-		return null;
-		
-	}
 	
 	@Override
-	public ArrayList<Case> getDeplacementPossible(Case caseActuelle) {
+	public ArrayList<Case> getDeplacementPossible(Case pos){return null;}
+	
+	public ArrayList<Case> getDeplacementPossible(Case pos, ArrayList<Case> caseDiagonale) {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Case> lp = new ArrayList<Case>();
+		if(dejaBouge == false)
+		{
+			if(pos.getPiece().getCamp()=="blanc")
+			{
+			Case c0 = new Case(new Position(pos.getPosition().getHauteur()+1,pos.getPosition().getLargeur()+0));
+			if(isDeplacementOk(c0))
+				lp.add(c0);
+			
+			Case c1 = new Case(new Position(pos.getPosition().getHauteur()+2,pos.getPosition().getLargeur()+0));
+			if(isDeplacementOk(c1))
+				lp.add(c1);
+			}
+			else
+			{
+				Case c0 = new Case(new Position(pos.getPosition().getHauteur()-1,pos.getPosition().getLargeur()+0));
+				if(isDeplacementOk(c0))
+					lp.add(c0);
+				
+				Case c1 = new Case(new Position(pos.getPosition().getHauteur()-2,pos.getPosition().getLargeur()+0));
+				if(isDeplacementOk(c1))
+					lp.add(c1);
+			}
+			dejaBouge = true;
+		}
+		else
+		{
+			if(pos.getPiece().getCamp()=="blanc")
+			{
+			Case c0 = new Case(new Position(pos.getPosition().getHauteur()+1,pos.getPosition().getLargeur()+0));
+			if(isDeplacementOk(c0))
+				lp.add(c0);
+			}
+			else
+			{
+			Case c0 = new Case(new Position(pos.getPosition().getHauteur()-1,pos.getPosition().getLargeur()+0));
+			if(isDeplacementOk(c0))
+				lp.add(c0);
+			}
+		}
+		lp.addAll(caseDiagonale);
+		return lp;
 	}
 
 	/**
