@@ -12,8 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Vector;
@@ -160,7 +158,7 @@ public class InterfaceJeu {
 		
 		for (int i=0; i<64 ; i++){
 			plateau.add(((Vector<JButton>) tab_cases).get(i));
-			((Vector<JButton>) tab_cases).get(i).setBorder(BorderFactory.createLineBorder(Color.gray));
+			//((Vector<JButton>) tab_cases).get(i).setBorderPainted(false);
 		}
 		
 		imageFond.add(plateau);
@@ -174,7 +172,6 @@ public class InterfaceJeu {
 		for (int i=0; i<64 ; i++){
 			((Vector<JButton>) tab_cases).get(i).addFocusListener(listenFocus);					
 		}
-		
 		
 		tmp.add(imageFond);
 		fenetre.setSize(1030,700); 
@@ -263,7 +260,7 @@ public class InterfaceJeu {
 		
 		for (int i=0; i<64 ; i++){
 			plateau.add(((Vector<JButton>) tab_cases).get(i));	
-			((Vector<JButton>) tab_cases).get(i).setBorder(BorderFactory.createLineBorder(Color.gray));
+			((Vector<JButton>) tab_cases).get(i).setBorderPainted(false);
 				
 		}
 		
@@ -312,7 +309,7 @@ public class InterfaceJeu {
 		public void focusGained(FocusEvent e){
 			if (tab_cases.contains(e.getSource())){
 				//((JButton) e.getSource()).setIcon(new ImageIcon("images/caserouge.png"));
-				((JButton) e.getSource()).setBorderPainted(true);
+				//((JButton) e.getSource()).setBorderPainted(true);
 				((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(Color.red));
 			}
 		}
@@ -322,7 +319,6 @@ public class InterfaceJeu {
 		}
 	}
 	
-
 	
 	
 	public static void main(String[] args){

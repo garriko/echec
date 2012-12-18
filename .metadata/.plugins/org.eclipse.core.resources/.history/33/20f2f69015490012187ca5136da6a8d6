@@ -160,7 +160,7 @@ public class InterfaceJeu {
 		
 		for (int i=0; i<64 ; i++){
 			plateau.add(((Vector<JButton>) tab_cases).get(i));
-			((Vector<JButton>) tab_cases).get(i).setBorder(BorderFactory.createLineBorder(Color.gray));
+			//((Vector<JButton>) tab_cases).get(i).setBorderPainted(false);
 		}
 		
 		imageFond.add(plateau);
@@ -263,7 +263,7 @@ public class InterfaceJeu {
 		
 		for (int i=0; i<64 ; i++){
 			plateau.add(((Vector<JButton>) tab_cases).get(i));	
-			((Vector<JButton>) tab_cases).get(i).setBorder(BorderFactory.createLineBorder(Color.gray));
+			//((Vector<JButton>) tab_cases).get(i).setBorderPainted(false);
 				
 		}
 		
@@ -312,7 +312,7 @@ public class InterfaceJeu {
 		public void focusGained(FocusEvent e){
 			if (tab_cases.contains(e.getSource())){
 				//((JButton) e.getSource()).setIcon(new ImageIcon("images/caserouge.png"));
-				((JButton) e.getSource()).setBorderPainted(true);
+				//((JButton) e.getSource()).setBorderPainted(true);
 				((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(Color.red));
 			}
 		}

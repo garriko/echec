@@ -160,7 +160,7 @@ public class InterfaceJeu {
 		
 		for (int i=0; i<64 ; i++){
 			plateau.add(((Vector<JButton>) tab_cases).get(i));
-			((Vector<JButton>) tab_cases).get(i).setBorder(BorderFactory.createLineBorder(Color.gray));
+			//((Vector<JButton>) tab_cases).get(i).setBorderPainted(false);
 		}
 		
 		imageFond.add(plateau);
@@ -175,6 +175,10 @@ public class InterfaceJeu {
 			((Vector<JButton>) tab_cases).get(i).addFocusListener(listenFocus);					
 		}
 		
+		EcouteurMouse listenMouse = new EcouteurMouse();
+		for (int i=0; i<64 ; i++){
+			((Vector<JButton>) tab_cases).get(i).addMouseListener(listenMouse);					
+		}
 		
 		tmp.add(imageFond);
 		fenetre.setSize(1030,700); 
@@ -263,7 +267,7 @@ public class InterfaceJeu {
 		
 		for (int i=0; i<64 ; i++){
 			plateau.add(((Vector<JButton>) tab_cases).get(i));	
-			((Vector<JButton>) tab_cases).get(i).setBorder(BorderFactory.createLineBorder(Color.gray));
+			//((Vector<JButton>) tab_cases).get(i).setBorderPainted(false);
 				
 		}
 		
@@ -312,7 +316,7 @@ public class InterfaceJeu {
 		public void focusGained(FocusEvent e){
 			if (tab_cases.contains(e.getSource())){
 				//((JButton) e.getSource()).setIcon(new ImageIcon("images/caserouge.png"));
-				((JButton) e.getSource()).setBorderPainted(true);
+				//((JButton) e.getSource()).setBorderPainted(true);
 				((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(Color.red));
 			}
 		}
@@ -322,7 +326,33 @@ public class InterfaceJeu {
 		}
 	}
 	
+	
+	public class EcouteurMouse implements MouseListener{
+		public void mouseExited(MouseEvent e)
+        {
+            
+        }
 
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mouseEntered(MouseEvent arg0) {
+			((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(Color.black));
+			
+		}
+
+		public void mousePressed(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mouseReleased(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+	}
 	
 	
 	public static void main(String[] args){

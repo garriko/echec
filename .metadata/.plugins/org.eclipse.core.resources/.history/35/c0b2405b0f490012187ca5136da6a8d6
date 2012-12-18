@@ -12,8 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Vector;
@@ -56,7 +54,6 @@ public class InterfaceJeu {
 	JMenuItem boutonAProposDe = new JMenuItem("A propos de");
 	
 	Case CaseSelectionnee = new Case(null);
-	
 	
 	
 	/**
@@ -159,8 +156,7 @@ public class InterfaceJeu {
 		
 		
 		for (int i=0; i<64 ; i++){
-			plateau.add(((Vector<JButton>) tab_cases).get(i));
-			((Vector<JButton>) tab_cases).get(i).setBorder(BorderFactory.createLineBorder(Color.gray));
+			plateau.add(((Vector<JButton>) tab_cases).get(i));					
 		}
 		
 		imageFond.add(plateau);
@@ -169,12 +165,6 @@ public class InterfaceJeu {
 		for (int i=0; i<64 ; i++){
 			((Vector<JButton>) tab_cases).get(i).addActionListener(listenAction);					
 		}
-		
-		EcouteurFocus listenFocus = new EcouteurFocus();
-		for (int i=0; i<64 ; i++){
-			((Vector<JButton>) tab_cases).get(i).addFocusListener(listenFocus);					
-		}
-		
 		
 		tmp.add(imageFond);
 		fenetre.setSize(1030,700); 
@@ -263,7 +253,6 @@ public class InterfaceJeu {
 		
 		for (int i=0; i<64 ; i++){
 			plateau.add(((Vector<JButton>) tab_cases).get(i));	
-			((Vector<JButton>) tab_cases).get(i).setBorder(BorderFactory.createLineBorder(Color.gray));
 				
 		}
 		
@@ -311,18 +300,15 @@ public class InterfaceJeu {
 	public class EcouteurFocus implements FocusListener{		
 		public void focusGained(FocusEvent e){
 			if (tab_cases.contains(e.getSource())){
-				//((JButton) e.getSource()).setIcon(new ImageIcon("images/caserouge.png"));
 				((JButton) e.getSource()).setBorderPainted(true);
-				((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(Color.red));
+				((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(Color.blue));
 			}
 		}
 		public void focusLost(FocusEvent e){
-			//((JButton) e.getSource()).setBorderPainted(false);
-			((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(Color.gray));
+			
 		}
 	}
 	
-
 	
 	
 	public static void main(String[] args){
