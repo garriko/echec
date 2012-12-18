@@ -11,7 +11,7 @@ import projet_echec.echec.jeu.Position;
  * @author Kevin
  * @version 0.0.1
  * @see Piece
- * Cette classe sert à définir les attributs de la pièce Pion.
+ * Cette classe sert à définir les attributs de la piece Pion.
  * 
  */
 

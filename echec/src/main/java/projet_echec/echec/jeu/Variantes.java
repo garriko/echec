@@ -15,7 +15,7 @@ import java.util.Vector;
 public class Variantes {
 
 	private Vector<Case> plateau;
-	private Vector<Piece> listePieces;
+	private Vector<Case> listePieces;
 	
 	/**
 	 * Constructeur par défaut de la classe Variantes
@@ -84,7 +84,7 @@ public class Variantes {
 	 * 
 	 * @return Renvoie la liste des pièces utilisées dans la variante
 	 */
-	public Vector<Piece> getListePieces() {
+	public Vector<Case> getListePieces() {
 		return listePieces;
 	}
 }

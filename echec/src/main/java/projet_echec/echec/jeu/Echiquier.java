@@ -19,7 +19,7 @@ public abstract class Echiquier {
 	/**
 	 * Liste des pièces toujours sur le plateau
 	 */
-	protected Vector<Piece> listePieceEnJeu;
+	protected Vector<Case> listePieceEnJeu;
 	/**
 	 * Liste des pièces prises
 	 */
@@ -32,7 +32,7 @@ public abstract class Echiquier {
 	public Echiquier(){
 		Variantes v = new Variantes("classique");
 		this.plateau = new Vector<Case>(v.getPlateau());
-		this.listePieceEnJeu = new Vector<Piece>(v.getListePieces());
+		this.listePieceEnJeu = new Vector<Case>(v.getListePieces());
 		this.listePiecePrises=new Vector<Piece>();
 	}
 	/**
@@ -42,7 +42,7 @@ public abstract class Echiquier {
 	public Echiquier(Variantes v)
 	{
 		this.plateau = new Vector<Case>(v.getPlateau());
-		this.listePieceEnJeu = new Vector<Piece>(v.getListePieces());
+		this.listePieceEnJeu = new Vector<Case>(v.getListePieces());
 		this.listePiecePrises=new Vector<Piece>();
 	}
 	
@@ -57,5 +57,18 @@ public abstract class Echiquier {
 			if(plateau.get(i).getPosition().equals(p))
 				res = plateau.get(i);
 		return res;
+	}
+	
+	/**
+	 * ajouter une piece au vector<case>
+	 */
+	public void ajouterPieceEnJeu(Case e){
+		this.listePieceEnJeu.add(e);
+	}
+	/**
+	 * supprimer une piece a listePieceEnJeu
+	 */
+	public void supprimerPieceEnJeu(Case e){
+		this.listePieceEnJeu.remove(e);
 	}
 }
