@@ -3,16 +3,16 @@ package projet_echec.echec.jeu;
 import java.util.ArrayList;
 
 /**
- * 
+ * Classe abstraite. Gere les proprietes des differents types de piece
  * @author Kevin
- * @see Case, Echiquier
- * Cette classe permet de définir ce qu’il se passe sur l’échiquier lorsque l’on veut revoir une partie
+ * @see Case, Pion,Fou,Cavalier,Tour,Roi,Reine
+ * 
  */
 
 
 public abstract class Piece {
 	/**
-	 * Camp de la pièce.
+	 * Camp de la piece.
 	 * Valeurs possibles : "blanc" ou "noir"
 	 */
 	protected String camp;
@@ -24,9 +24,9 @@ public abstract class Piece {
 		this.camp=camp;
 	}
 	/**
-	 * Test si le déplacement vers la case c est possible
-	 * @param c case à tester
-	 * @return vrai si le déplacement est possible, faux sinon
+	 * Test si le deplacement vers la case c est possible
+	 * @param c case a tester
+	 * @return vrai si le deplacement est possible, faux sinon
 	 */
 	protected boolean isDeplacementOk(Case c)
 	{

@@ -21,7 +21,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import projet_echec.echec.jeu.Case;
+import projet_echec.echec.jeu.EchiquierActif;
 import projet_echec.echec.jeu.Piece;
+import projet_echec.echec.jeu.Position;
 import projet_echec.echec.jeu.Variantes;
 
 
@@ -124,20 +126,20 @@ public class InterfaceJeu {
 		// 1ère ligne
 		for (int i=0; i<8; i++){			
 			if (i%2==0){
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/"+String.valueOf(i+1)+".png"));	
+				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/auto/"+String.valueOf(i+1)+".png"));	
 			}
 			else {
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/"+String.valueOf(i+1)+".png"));		
+				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/auto/"+String.valueOf(i+1)+".png"));		
 			}
 		}
 		
 		// 8ème ligne
 		for (int i=56; i<64; i++){			
 			if (i%2==0){
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/"+String.valueOf(i+1)+".png"));		
+				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/auto/"+String.valueOf(i+1)+".png"));		
 			}
 			else {
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/"+String.valueOf(i+1)+".png"));		
+				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/auto/"+String.valueOf(i+1)+".png"));		
 			}
 		}
 		
@@ -226,15 +228,8 @@ public class InterfaceJeu {
 		//Récupération des données depuis la variante v
 		Vector<Case> plateauVariante = v.getPlateau();
 		for (int i=0; i<64; i++){
-			int numCase = plateauVariante.get(i).getPosition().getLargeur() + 8*(plateauVariante.get(i).getPosition().getHauteur()-1);
-			Piece pieceCase = plateauVariante.get(i).getPiece();
-			
-			if (pieceCase.getClass()==Pion){
-				if (pieceCase.getCamp()=="noir")
-				numCase
-			}
-			
-			((Vector<JButton>) tab_cases).get(numCase).setIcon(new ImageIcon("images/Pieces/pions/"+String.valueOf(numPiece)+".png"));
+			int numCase = plateauVariante.get(i).getPosition().getLargeur() + 8*(plateauVariante.get(i).getPosition().getHauteur()-1);			
+			((Vector<JButton>) tab_cases).get(numCase).setIcon(new ImageIcon(plateauVariante.get(i).getImg()));
 		}
 		
 		
@@ -267,11 +262,24 @@ public class InterfaceJeu {
 		
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
+			if (tab_cases.contains(e.getSource())){
+				int numCase = ((Vector<JButton>) tab_cases).indexOf(e.getSource());
+				int largeur = numCase%8;
+				int hauteur = numCase/8;
+				//Case eCase = EchiquierActif.chercherCase(new Position(hauteur, largeur));
+				//EchiquierActif.selectionnerCase(eCase);
+				actualiserImage(CaseSelectionnee);
+				//actualiserImage(eCase);
+				//CaseSelectionnee =  eCase;
+			}
 		}
 	}
 	
 
-	
+	public void actualiserImage(Case NewCase){
+		int numCase = NewCase.getPosition().getLargeur() + 8*(NewCase.getPosition().getHauteur()-1);			
+		((Vector<JButton>) tab_cases).get(numCase).setIcon(new ImageIcon(NewCase.getImg()));
+	}
 	
 	
 	

@@ -3,9 +3,9 @@ package projet_echec.echec.gestion;
 import java.util.ArrayList;
 
 /**
- * GestionJeu gère le nombre de parties en cours.
+ * GestionJeu gere le nombre de parties en cours.
  * <p>
- * Permet d'instancier une partie si le nombre de parties déjà existantes le permet.
+ * Permet d'instancier une partie si le nombre de parties deja existantes le permet.
  * Supprime les objets parties.
  *
  * @author Kevin
@@ -28,7 +28,7 @@ public class GestionJeu {
 		nbPartie=0;
 	}
 	/**
-	 * Crée une nouvelle partie si possible avec les paramètres fournis
+	 * Cree une nouvelle partie si possible avec les parametres fournis
 	 * @param j1 Infos du joueur blanc
 	 * @param j2 infos du joueur noir
 	 * @param nomV nom de la variante
@@ -40,7 +40,7 @@ public class GestionJeu {
 	}
 	/**
 	 * Supprime la partie choisie
-	 * @param p partie à supprimer
+	 * @param p partie a supprimer
 	 */
 	public void finPartie(Partie p){
 		

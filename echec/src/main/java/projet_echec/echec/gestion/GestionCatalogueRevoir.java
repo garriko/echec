@@ -2,14 +2,14 @@ package projet_echec.echec.gestion;
 
 /**
  * 
- * GestionCatalogueRevoir gère les sauvegardes des parties terminées.
+ * GestionCatalogueRevoir gere les sauvegardes des parties terminees.
  * <p>
- * GestionCatalogueRevoir hérite de {@link Gestion}.
+ * GestionCatalogueRevoir herite de {@link Gestion}.
  * 
  * 
  * @author Kevin
  * @see Gestion
- * @version 0.0.1
+ * @version 0.1
  */
 public class GestionCatalogueRevoir extends Gestion {
 
@@ -19,7 +19,7 @@ public class GestionCatalogueRevoir extends Gestion {
 	}
 	
 	/**
-	 * Charge la liste des parties terminées
+	 * Charge la liste des parties terminees
 	 */
 	@Override
 	public void chargerListe() {

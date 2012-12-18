@@ -3,12 +3,11 @@ package projet_echec.echec.jeu;
 import java.util.Vector;
 
 /**
- * 
+ * Cette classe gere les placements initiaux des pieces.
  * @author Kevin
  * @version 0.0.1
  * @see Case
- * Cette classe gère les placements initiaux personnalisés des pièces. 
- * 
+ *  
  */
 
 
@@ -18,9 +17,9 @@ public class Variantes {
 	private Vector<Piece> listePieces;
 	
 	/**
-	 * Constructeur par défaut de la classe Variantes
-	 * Initialise le plateau et la liste des pièces.
-	 * A utiliser pour créer une variante.
+	 * Constructeur par defaut de la classe Variantes
+	 * Initialise le plateau et la liste des pieces.
+	 * A utiliser pour creer une variante.
 	 * 
 	 */
 	public Variantes() {
@@ -29,7 +28,7 @@ public class Variantes {
 	
 	/**
 	 * Constructeur de la classe Variantes
-	 * Initialise le plateau et la liste des pièces selon la variante choisie
+	 * Initialise le plateau et la liste des pieces selon la variante choisie
 	 * 
 	 * @param nomVariante nom de la variante choisie
 	 */
@@ -46,7 +45,7 @@ public class Variantes {
 	}
 	
 	/**
-	 * Charge la variante située dans le fichier nomVariante.vech
+	 * Charge la variante situee dans le fichier nomVariante.vech
 	 * @param nomVariante
 	 */
 	public void chargerVariante(String nomVariante){
@@ -54,7 +53,7 @@ public class Variantes {
 	}
 	
 	/**
-	 * Place la pièce p dans la case c du plateau
+	 * Place la piece p dans la case c du plateau
 	 * 
 	 * @param c case du plateau
 	 * @param p pièce à ajouter
@@ -64,7 +63,7 @@ public class Variantes {
 	}
 	
 	/**
-	 * Retire la pièce contenue dans la case c du plateau
+	 * Retire la piece contenue dans la case c du plateau
 	 * 
 	 * @param c case du plateau
 	 */
@@ -82,7 +81,7 @@ public class Variantes {
 	}
 	/**
 	 * 
-	 * @return Renvoie la liste des pièces utilisées dans la variante
+	 * @return Renvoie la liste des pieces utilisees dans la variante
 	 */
 	public Vector<Piece> getListePieces() {
 		return listePieces;

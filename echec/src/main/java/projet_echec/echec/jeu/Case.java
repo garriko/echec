@@ -6,36 +6,36 @@ import projet_echec.echec.jeu.piece.Pion;
  * 
  * @author Adrien
  * @version 0.0.1
- * @see Position, Pièce, Variante, EchiquierActif, EchiquierPassif
+ * @see Position, Piece, Variante, EchiquierActif, EchiquierPassif
  *
- * Cette classe permet de définir ce qu’il se passe dans une case: elle peut contenir n'importe qu'elle pièce
+ * Cette classe permet de definir ce qu’il se passe dans une case: elle peut contenir n'importe quelle piece
  */
 
 public class Case {
 	/**
-	 * permet de mettre une piece sur la case
+	 * Piece contenue dans la case
 	 */
 	private Piece piece;
 	/**
-	 * permet de donner la position de la case
+	 * Position de la case
 	 */
 	private Position position;
 	/**
-	 * permet d'envoyer le nom de l'image à mettre pour l'interface graphique
+	 * permet d'envoyer le nom de l'image a mettre pour l'interface graphique
 	 */
 	private  String img;
 	
 	/**
 	 * constructeur
-	 * @param position
+	 * @param pos
 	 */
 	public Case(Position pos){
 		this.position=pos;
 	}
 	
 	/**
-	 * permet de savoir si il y a une pièce sur la case ou non
-	 * @return true si la case est vide
+	 * permet de savoir si il y a une piece sur la case ou non
+	 * @return true si la case est vide, false sinon
 	 */
 	public boolean estVide(){
 		boolean a= false;
@@ -44,7 +44,7 @@ public class Case {
 		return a;		
 	}
 	/**
-	 * permet de savoir si un pion à atteint le bout du plateau pour le changer en une autre pièce
+	 * permet de savoir si un pion a atteint le bout du plateau pour le changer en une autre piece
 	 * @return la case contenant le pion si le pion est au bout du plateau
 	 */
 	public Case pionBoutEchiquier(){

@@ -6,12 +6,12 @@ import projet_echec.echec.jeu.Piece;
 import projet_echec.echec.jeu.Position;
 
 /**
+ * Cette classe definit les attributs de la piece Reine
  * 
  * @author Kevin
  * @version 0.0.1
  * @see Piece
- * Cette classe sert à définir les attributs de la pièce Reine.
- * 
+ *  
  */
 
 public class Reine extends Piece{

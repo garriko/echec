@@ -2,14 +2,14 @@ package projet_echec.echec.gestion;
 
 /**
  * 
- * GestionCatalogueCharger gère les sauvegardes des parties non terminées.
+ * GestionCatalogueCharger gere les sauvegardes des parties non terminees.
  * <p>
- * GestionCatalogueCharger hérite de {@link Gestion}.
+ * GestionCatalogueCharger herite de {@link Gestion}.
  * 
  * 
  * @author Kevin
- *@see Gestion
- *@version 0.0.1
+ * @see Gestion
+ * @version 0.1
  */
 
 public class GestionCatalogueCharger extends Gestion {
@@ -24,7 +24,7 @@ public class GestionCatalogueCharger extends Gestion {
 		// TODO Auto-generated constructor stub
 	}
 	/**
-	 * Charge la liste des parties non terminées
+	 * Charge la liste des parties non terminees
 	 */
 	@Override
 	public void chargerListe() {

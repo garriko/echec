@@ -3,12 +3,12 @@ package projet_echec.echec.jeu;
 import java.util.Vector;
 
 /**
- * 
+ * Cette classe abstraite permet de definir ce qu’il se passe sur l’echiquier avec comme classes filles : echiquierPassif et echiquierActif.
  * @author Kevin
  * @version 0.0.1
- * @see 
+ * @see echiquierPassif,echiquierActif
  *
- * Cette classe abstraite permet de définir ce qu’il se passe sur l’échiquier avec comme classes filles : échiquier passif et échiquier actif (cf. Echiquier actif et Echiquier passif).
+ * 
  */
 
 public abstract class Echiquier {
@@ -17,11 +17,11 @@ public abstract class Echiquier {
 	 */
 	protected Vector<Case> plateau;
 	/**
-	 * Liste des pièces toujours sur le plateau
+	 * Liste des pieces toujours sur le plateau
 	 */
 	protected Vector<Piece> listePieceEnJeu;
 	/**
-	 * Liste des pièces prises
+	 * Liste des pieces prises
 	 */
 	protected Vector<Piece> listePiecePrises;
 	
@@ -37,7 +37,7 @@ public abstract class Echiquier {
 	}
 	/**
 	 * Initialise l'echiquier selon la variante v
-	 * @param v variante utilisée pour la partie
+	 * @param v variante utilisee pour la partie
 	 */
 	public Echiquier(Variantes v)
 	{
@@ -47,7 +47,7 @@ public abstract class Echiquier {
 	}
 	
 	/**
-	 * Recherche la case se trouvant à la position p
+	 * Recherche la case se trouvant a la position p
 	 * @param p
 	 * @return
 	 */
