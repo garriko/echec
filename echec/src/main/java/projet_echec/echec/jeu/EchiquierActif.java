@@ -55,7 +55,10 @@ public class EchiquierActif extends Echiquier {
 	}
 	
 	/**
-	 * regarde si la case e est menace par le camp adverse.(on a le camp en parametre)
+	 * regarde si la case e est menace par le camp c
+	 * @param c
+	 * @param e
+	 * @return 
 	 */
 	public boolean estMenace(String c, Case e){
 		boolean estmenace= false;
@@ -75,7 +78,7 @@ public class EchiquierActif extends Echiquier {
 		for(int i=0;i<listePieceAdverse.size();i++){//pour toutes les pieces adverses
 			
 			for (int j=0;j<listePieceAdverse.get(i).getPiece().getDeplacementPossible(listePieceAdverse.get(i)).size();i++){//pour tous les deplacements de chaque piece
-			if (listePieceAdverse.get(i).getPiece().getDeplacementPossible(listePieceAdverse.get(i)).get(j).equals(e)){//la case est égale a la case que l'on veut tester
+			if (listePieceAdverse.get(i).getPiece().getDeplacementPossible(listePieceAdverse.get(i)).get(j).equals(e)){//la case e est égale a la case que l'on veut tester
 				estmenace=true;
 			}
 		}
@@ -111,16 +114,45 @@ public class EchiquierActif extends Echiquier {
 	
 	/**
 	 * Test si on est en position d'echec et mat
-	 * @return true si l'un des joueurs est en echec et mat
+	 * @param camp camp du joueuru a tester
+	 * @return true si le camp camp est en echec et mat
 	 */
 	public boolean echecEtMat(String camp){
-		boolean a=false;
+		int compteurCaseMenacee=0;
 		//test si le roi peut se deplacer
+		if(camp=="noir"){
+			ArrayList<Case> casePossible = filtrerDeplacementPossible(camp,caseRoiNoir.getPiece().getDeplacementPossible(caseRoiNoir));
+			for (int i=0;i<casePossible.size()+1;i++)
+			{
+				if(estMenace("blanc",casePossible.get(i))){
+					compteurCaseMenacee++;
+				}
+				
+			}
+			if(compteurCaseMenacee==casePossible.size()){
+				//TODO :test si des pieces peuvent se mettre sur la trajectoire du roi
+			}
+		}
+		else{
+			ArrayList<Case> casePossible = filtrerDeplacementPossible(camp,caseRoiBlanc.getPiece().getDeplacementPossible(caseRoiBlanc));
+			for (int i=0;i<casePossible.size()+1;i++)
+			{
+				if(estMenace("noir",casePossible.get(i))){
+					compteurCaseMenacee++;
+				}
+				
+			}
+			if(compteurCaseMenacee==casePossible.size()){
+				//TODO : test si des pieces peuvent se mettre sur la trajectoire du roi
+			}
+		}
 		
-		//test si des pieces peuvent se mettre sur la trajectoire du roi
 		
 		
-		return a;
+		
+		
+		
+		return true;
 		
 		
 	}
@@ -149,6 +181,7 @@ public class EchiquierActif extends Echiquier {
 	 * @throws DeplacementException 
 	 */
 	public void deplacer(Case caseDepart, Case caseArrivee) throws DeplacementException{
+		//TODO : modifier deplacement pour roi en echec
 		ArrayList<Case> plop = new ArrayList<Case>();
 		plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
 		plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
