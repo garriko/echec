@@ -64,7 +64,8 @@ public class GestionJeu {
 	 * Charge si possible le contenu de fichierCharge.pech
 	 * @param fichierCharge 
 	 */
-	public void chargerPartie(String fichierCharge){
+	public void chargerPartie(String fichierCharge)
+	{
 		
 	}
 }
