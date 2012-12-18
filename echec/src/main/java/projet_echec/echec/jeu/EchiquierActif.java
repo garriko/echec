@@ -143,9 +143,9 @@ public class EchiquierActif extends Echiquier {
 				this.listePiecePrises.add(caseArrivee.getPiece());//on ajoute la piece dans la liste des pieces prises
 				
 				for(int j=0; j< listePieceEnJeu.size();j++)//pour toutes les pieces en jeu
-					if(listePieceEnJeu.get(j).equals(caseArrivee))//si il y a une case égale a la case d'arrivee
+					if(listePieceEnJeu.get(j).equals(caseArrivee))//si il y a une case egale a la case d'arrivee
 						listePieceEnJeu.remove(j);//on la supprime
-				this.plateau.s
+				changerCase(caseDepart,caseArrivee);
 			}
 			
 		}
