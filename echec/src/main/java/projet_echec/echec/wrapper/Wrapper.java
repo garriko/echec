@@ -1,10 +1,14 @@
-package projet_echec.echec.gestion;
+package projet_echec.echec.wrapper;
 
+import projet_echec.echec.gestion.Partie;
+import projet_echec.echec.gestion.SaveGame;
 import projet_echec.echec.jeu.Echiquier;
+import projet_echec.echec.jeu.EchiquierActif;
+import projet_echec.echec.jeu.EchiquierPassif;
 /**
  * Rassemble la partie et l'echiquier pour permettre l'enregistrement grace a la classe SaveGame
  * @author Kevin
- * @see SaveGame,Partie,Echiquier
+ * @see SaveGame , {@link Partie}, {@link Echiquier}, {@link EchiquierActif}, {@link EchiquierPassif} 
  */
 public class Wrapper implements java.io.Serializable {
 	/**

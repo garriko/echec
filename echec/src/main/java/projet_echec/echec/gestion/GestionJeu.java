@@ -7,6 +7,7 @@ import projet_echec.echec.exception.GameException;
 import projet_echec.echec.jeu.Echiquier;
 import projet_echec.echec.jeu.EchiquierActif;
 import projet_echec.echec.jeu.Variantes;
+import projet_echec.echec.wrapper.Wrapper;
 
 
 /**
