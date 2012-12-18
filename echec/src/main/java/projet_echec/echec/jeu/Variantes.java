@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 import java.util.Vector;
 
 import projet_echec.echec.exception.CaseErrorException;
+import projet_echec.echec.exception.EmptyCaseException;
 import projet_echec.echec.exception.FullCaseException;
 import projet_echec.echec.wrapper.VariantWrapper;
 
@@ -115,7 +116,7 @@ public class Variantes {
 			Case currentCase = plateau.get(i);
 			if(currentCase.equals(c))
 				if(currentCase.estVide())
-					plateau.get(i).setPiece(p);
+					currentCase.setPiece(p);
 				else
 					throw new FullCaseException();
 			else
@@ -127,9 +128,21 @@ public class Variantes {
 	 * Retire la piece contenue dans la case c du plateau
 	 * 
 	 * @param c case du plateau
+	 * @throws EmptyCaseException 
+	 * @throws CaseErrorException 
 	 */
-	public void retirerPiece(Case c){
+	public void retirerPiece(Case c) throws EmptyCaseException, CaseErrorException{
 		//TODO : Throws exception si la case ne contient pas une pièce
+		for(int i=0;i<plateau.size();i++){
+			Case currentCase = plateau.get(i);
+			if(currentCase.equals(c))
+				if(currentCase.estVide())
+					throw new EmptyCaseException();
+				else
+					currentCase.setPiece(null);
+			else
+				throw new CaseErrorException();
+		}
 	}
 	
 	
