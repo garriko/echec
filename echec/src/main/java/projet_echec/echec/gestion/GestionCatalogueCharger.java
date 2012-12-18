@@ -40,18 +40,14 @@ public class GestionCatalogueCharger extends Gestion {
 		listefichiers=repertoire.list(); 
 		for(i=0;i<listefichiers.length;i++){ 
 			if(listefichiers[i].endsWith(".gech")==true){ 
-				listePartie.add(listefichiers[i].replaceFirst(".gech",""));
+				listePartie.add(listefichiers[i].replaceFirst(".gech",""));   //On remplace .gech par rien
 				 
 			}
 		}
 		
 	}
 	
-	public static void main(String[] args) {
-		Gestion g = new GestionCatalogueCharger();
-		g.chargerListe();
-		System.out.println(g.getListePartie());
-	}
+
 
 
 }

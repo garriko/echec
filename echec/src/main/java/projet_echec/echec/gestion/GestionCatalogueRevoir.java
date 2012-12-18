@@ -1,5 +1,7 @@
 package projet_echec.echec.gestion;
 
+import java.io.File;
+
 /**
  * 
  * GestionCatalogueRevoir gere les sauvegardes des parties terminees.
@@ -15,7 +17,7 @@ public class GestionCatalogueRevoir extends Gestion {
 
 	public GestionCatalogueRevoir() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	/**
@@ -23,14 +25,20 @@ public class GestionCatalogueRevoir extends Gestion {
 	 */
 	@Override
 	public void chargerListe() {
-		// TODO Auto-generated method stub
+		File repertoire = new File("parties terminees/");
+
+		String [] listefichiers; 
+
+		int i; 
+		listefichiers=repertoire.list(); 
+		for(i=0;i<listefichiers.length;i++){ 
+			if(listefichiers[i].endsWith(".gech")==true){ 
+				listePartie.add(listefichiers[i].replaceFirst(".gech",""));  //On remplace .gech par rien
+				 
+			}
+		}
 		
 	}
 
-	@Override
-	public void supprimerPartie(String nomPartie) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
