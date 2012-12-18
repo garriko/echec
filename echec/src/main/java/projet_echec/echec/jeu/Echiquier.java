@@ -19,7 +19,7 @@ public abstract class Echiquier {
 	/**
 	 * Liste des pieces toujours sur le plateau
 	 */
-	protected Vector<Piece> listePieceEnJeu;
+	protected Vector<Case> listePieceEnJeu;
 	/**
 	 * Liste des pieces prises
 	 */
@@ -32,7 +32,7 @@ public abstract class Echiquier {
 	public Echiquier(){
 		Variantes v = new Variantes("classique");
 		this.plateau = new Vector<Case>(v.getPlateau());
-		this.listePieceEnJeu = new Vector<Piece>(v.getListePieces());
+		this.listePieceEnJeu = new Vector<Case>(v.getListePieces());
 		this.listePiecePrises=new Vector<Piece>();
 	}
 	/**
@@ -42,7 +42,7 @@ public abstract class Echiquier {
 	public Echiquier(Variantes v)
 	{
 		this.plateau = new Vector<Case>(v.getPlateau());
-		this.listePieceEnJeu = new Vector<Piece>(v.getListePieces());
+		this.listePieceEnJeu = new Vector<Case>(v.getListePieces());
 		this.listePiecePrises=new Vector<Piece>();
 	}
 	
@@ -57,5 +57,35 @@ public abstract class Echiquier {
 			if(plateau.get(i).getPosition().equals(p))
 				res = plateau.get(i);
 		return res;
+	}
+	/**
+	 * ajoute une case a listePieceEnJeu
+	 * @param e
+	 */
+	public void ajouterPieceEnJeu(Case e){
+		this.listePieceEnJeu.add(e);
+	}
+	/**
+	 * Supprime une piece de listePieceEnJeu
+	 * attention: la case doit appartenir a l'echiquier sinon la fonction ne fait rien
+	 * @param e
+	 */
+	public void supprimerPieceEnJeu(Case e){
+		this.listePieceEnJeu.remove(e);	
+	}
+	/**
+	 * ajoute une case a listePiecePrises
+	 * @param e
+	 */
+	public void ajouterPiecePrise(Piece e){
+		this.listePiecePrises.add(e);
+	}
+	/**
+	 * Supprime une piece de listePiecePrises
+	 * attention: la case doit appartenir a l'echiquier sinon la fonction ne fait rien
+	 * @param e
+	 */
+	public void supprimerPieceprises(Piece e){
+		this.listePiecePrises.remove(e);	
 	}
 }
