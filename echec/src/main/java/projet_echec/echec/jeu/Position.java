@@ -7,7 +7,7 @@
  * @see Case
  * 
  */
-public class Position {
+public class Position implements java.io.Serializable {
 	/**
 	 * donne la position en hauteur de la case sur le plateau
 	 */

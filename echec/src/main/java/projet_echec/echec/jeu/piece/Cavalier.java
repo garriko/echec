@@ -14,7 +14,7 @@ import projet_echec.echec.jeu.Position;
  * 
  */
 
-public class Cavalier extends Piece{
+public class Cavalier extends Piece implements java.io.Serializable{
 
 	
 	

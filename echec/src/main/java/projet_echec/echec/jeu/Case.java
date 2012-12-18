@@ -13,7 +13,7 @@ import projet_echec.echec.jeu.piece.Pion;
  * Cette classe permet de definir ce qu’il se passe dans une case: elle peut contenir n'importe quelle piece
  */
 
-public class Case {
+public class Case implements java.io.Serializable {
 	/**
 	 * Piece contenue dans la case
 	 */

@@ -10,7 +10,7 @@ import projet_echec.echec.jeu.Variantes;
  * @author Kevin
  * @see Variantes , {@link Vector} , {@link Piece}
  */
-public class VariantWrapper {
+public class VariantWrapper implements java.io.Serializable{
 	/**
 	 * plateau de jeu a sauvegarder
 	 */

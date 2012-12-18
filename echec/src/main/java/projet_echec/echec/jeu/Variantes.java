@@ -10,6 +10,12 @@ import java.util.Vector;
 import projet_echec.echec.exception.CaseErrorException;
 import projet_echec.echec.exception.EmptyCaseException;
 import projet_echec.echec.exception.FullCaseException;
+import projet_echec.echec.jeu.piece.Cavalier;
+import projet_echec.echec.jeu.piece.Fou;
+import projet_echec.echec.jeu.piece.Pion;
+import projet_echec.echec.jeu.piece.Reine;
+import projet_echec.echec.jeu.piece.Roi;
+import projet_echec.echec.jeu.piece.Tour;
 import projet_echec.echec.wrapper.VariantWrapper;
 
 
@@ -34,6 +40,7 @@ public class Variantes {
 	 * 
 	 */
 	public Variantes() {
+		plateau = new Vector<Case>();
 		for(int h=1;h<=8;h++)
 			for(int l=1;l<=8;l++)
 				plateau.add(new Case(new Position(h,l)));
@@ -64,7 +71,7 @@ public class Variantes {
 		VariantWrapper w = new VariantWrapper(plateau,listePieces);
 	      try
 	      {
-	         FileOutputStream fileOut = new FileOutputStream(new String("variantes/"+nomVariante+".gech"));
+	         FileOutputStream fileOut = new FileOutputStream(new String("variantes/"+nomVariante+".vech"));
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(w);
 	         out.close();
@@ -85,7 +92,7 @@ public class Variantes {
 		VariantWrapper w;
 		 try
         {
-           FileInputStream fileIn = new FileInputStream(new String("variantes/"+nomVariante+".gech"));
+           FileInputStream fileIn = new FileInputStream(new String("variantes/"+nomVariante+".vech"));
            ObjectInputStream in = new ObjectInputStream(fileIn);
            w = (VariantWrapper) in.readObject();
            in.close();
@@ -160,4 +167,340 @@ public class Variantes {
 	public Vector<Case> getListePieces() {
 		return listePieces;
 	}
+/*
+	public static void main(String[] args) {
+		Variantes v =new Variantes();
+		try {
+			v.ajouterPiece(new Case(new Position(1,1)), new Tour("blanc",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(1,2)), new Cavalier("blanc",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(1,3)), new Fou("blanc",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(1,4)), new Reine("blanc",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(1,5)), new Roi("blanc",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(1,6)), new Fou("blanc",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(1,7)), new Cavalier("blanc",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(1,8)), new Tour("blanc",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(2,1)), new Pion("blanc",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(2,2)), new Pion("blanc",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(2,3)), new Pion("blanc",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(2,4)), new Pion("blanc",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(2,5)), new Pion("blanc",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(2,6)), new Pion("blanc",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+
+		
+		try {
+			v.ajouterPiece(new Case(new Position(2,7)), new Pion("blanc",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(2,8)), new Pion("blanc",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(8,1)), new Tour("noir",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(8,2)), new Cavalier("noir",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(8,3)), new Fou("noir",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(8,4)), new Reine("noir",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(8,5)), new Roi("noir",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(8,6)), new Fou("noir",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(8,7)), new Cavalier("noir",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(8,8)), new Tour("noir",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(7,1)), new Pion("noir",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(7,2)), new Pion("noir",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(7,3)), new Pion("noir",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(7,4)), new Pion("noir",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(7,5)), new Pion("noir",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(7,6)), new Pion("noir",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+
+		
+		try {
+			v.ajouterPiece(new Case(new Position(7,7)), new Pion("noir",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.ajouterPiece(new Case(new Position(7,8)), new Pion("noir",null));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} catch (CaseErrorException e) {
+			
+			e.toString();
+		}
+		
+		try {
+			v.saveVariante("classique");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	*/
 }
