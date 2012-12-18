@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 
 
-public abstract class Piece {
+public abstract class Piece implements java.io.Serializable{
 	/**
 	 * Camp de la piece.
 	 * Valeurs possibles : "blanc" ou "noir"
@@ -27,9 +27,8 @@ public abstract class Piece {
 	 * @param camp
 	 */
 	
-	public Piece(String camp,String img){
+	public Piece(String camp){
 		this.camp=camp;
-		this.img=img;
 	}
 	/**
 	 * Test si le deplacement vers la case c est possible

@@ -16,8 +16,8 @@ import projet_echec.echec.jeu.Position;
 
 public class Reine extends Piece implements java.io.Serializable{
 
-	public Reine(String camp, String img) {
-		super(camp,img);
+	public Reine(String camp) {
+		super(camp);
 	}
 
 	@Override

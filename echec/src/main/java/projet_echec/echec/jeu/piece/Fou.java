@@ -13,10 +13,10 @@ import projet_echec.echec.jeu.Position;
  *  
  */
 
-public class Fou extends Piece implements java.io.Serializable {
+public class Fou extends Piece{
 
-	public Fou(String camp, String img) {
-		super(camp,img);
+	public Fou(String camp) {
+		super(camp);
 	}
 
 	@Override

@@ -20,8 +20,8 @@ import projet_echec.echec.jeu.Position;
 
 public class Roi extends Piece implements java.io.Serializable{
 
-	public Roi(String camp, String img) {
-		super(camp,img);
+	public Roi(String camp) {
+		super(camp);
 	}
 	@Override
 	/**

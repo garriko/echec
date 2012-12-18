@@ -14,12 +14,12 @@ import projet_echec.echec.jeu.Position;
  * 
  */
 
-public class Cavalier extends Piece implements java.io.Serializable{
+public class Cavalier extends Piece{
 
 	
 	
-	public Cavalier(String camp, String img) {
-		super(camp,img);
+	public Cavalier(String camp) {
+		super(camp);		
 	}
 
 	@Override

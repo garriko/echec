@@ -69,6 +69,7 @@ public class Variantes {
 	public void saveVariante(String nomVariante) throws IOException
 	{
 		VariantWrapper w = new VariantWrapper(plateau,listePieces);
+		System.out.println(w.getPlateau().get(61).getPiece().getCamp());
 	      try
 	      {
 	         FileOutputStream fileOut = new FileOutputStream(new String("variantes/"+nomVariante+".vech"));
@@ -116,20 +117,19 @@ public class Variantes {
 	 * @param c case du plateau
 	 * @param p pièce à ajouter
 	 * @throws FullCaseException 
-	 * @throws CaseErrorException 
 	 */
-	public void ajouterPiece(Case c, Piece p) throws FullCaseException, CaseErrorException{
-		for(int i=0;i<plateau.size();i++){
-			Case currentCase = plateau.get(i);
-			if(currentCase.equals(c))
+	public void ajouterPiece(Case c, Piece p) throws FullCaseException {
+			Case currentCase = plateau.get((c.getPosition().getHauteur()-1)*8+c.getPosition().getLargeur() -1 );
 				if(currentCase.estVide())
+				{
 					currentCase.setPiece(p);
+					listePieces.add(currentCase);
+				}
 				else
 					throw new FullCaseException();
-			else
-				throw new CaseErrorException();
-		}
+		
 	}
+	
 	
 	/**
 	 * Retire la piece contenue dans la case c du plateau
@@ -139,17 +139,19 @@ public class Variantes {
 	 * @throws CaseErrorException 
 	 */
 	public void retirerPiece(Case c) throws EmptyCaseException, CaseErrorException{
-		//TODO : Throws exception si la case ne contient pas une pièce
-		for(int i=0;i<plateau.size();i++){
-			Case currentCase = plateau.get(i);
-			if(currentCase.equals(c))
+		
+		
+			Case currentCase = plateau.get((c.getPosition().getHauteur()-1)*8+c.getPosition().getLargeur() -1 );
+			
 				if(currentCase.estVide())
 					throw new EmptyCaseException();
 				else
+				{
 					currentCase.setPiece(null);
-			else
-				throw new CaseErrorException();
-		}
+					for(int j=0;j<listePieces.size();j++)
+						if(listePieces.get(j).equals(currentCase))
+							listePieces.remove(j);
+				}
 	}
 	
 	
@@ -167,145 +169,120 @@ public class Variantes {
 	public Vector<Case> getListePieces() {
 		return listePieces;
 	}
-/*
+	
+	
+	/*
 	public static void main(String[] args) {
+		
 		Variantes v =new Variantes();
+		VariantWrapper w = null;
 		try {
-			v.ajouterPiece(new Case(new Position(1,1)), new Tour("blanc",null));
+			w = v.chargerVariante("classique");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(w.getPlateau().get(62).getPiece().getCamp());
+		
+		try {
+			Piece p = new Tour(new String("blanc"));
+			v.ajouterPiece(new Case(new Position(1,1)), p);
 		} catch (FullCaseException e) {
 			
 			e.toString();
-		} catch (CaseErrorException e) {
+
+		}
+		try {
+			Piece p1 = new Cavalier(new String("blanc"));
+			v.ajouterPiece(new Case(new Position(1,2)), p1);
+		} catch (FullCaseException e) {
 			
 			e.toString();
 		}
 		
 		try {
-			v.ajouterPiece(new Case(new Position(1,2)), new Cavalier("blanc",null));
+			v.ajouterPiece(new Case(new Position(1,3)), new Fou("blanc"));
 		} catch (FullCaseException e) {
-			
-			e.toString();
-		} catch (CaseErrorException e) {
 			
 			e.toString();
 		}
 		
 		try {
-			v.ajouterPiece(new Case(new Position(1,3)), new Fou("blanc",null));
+			v.ajouterPiece(new Case(new Position(1,4)), new Reine("blanc"));
 		} catch (FullCaseException e) {
 			
 			e.toString();
-		} catch (CaseErrorException e) {
+		}
+		try {
+			v.ajouterPiece(new Case(new Position(1,5)), new Roi("blanc"));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+
+		}
+		try {
+			v.ajouterPiece(new Case(new Position(1,6)), new Fou("blanc"));
+		} catch (FullCaseException e) {
 			
 			e.toString();
 		}
 		
 		try {
-			v.ajouterPiece(new Case(new Position(1,4)), new Reine("blanc",null));
+			v.ajouterPiece(new Case(new Position(1,7)), new Cavalier("blanc"));
 		} catch (FullCaseException e) {
-			
-			e.toString();
-		} catch (CaseErrorException e) {
 			
 			e.toString();
 		}
 		
 		try {
-			v.ajouterPiece(new Case(new Position(1,5)), new Roi("blanc",null));
+			v.ajouterPiece(new Case(new Position(1,8)), new Tour("blanc"));
 		} catch (FullCaseException e) {
 			
 			e.toString();
-		} catch (CaseErrorException e) {
+		} 
+		
+		try {
+			v.ajouterPiece(new Case(new Position(2,1)), new Pion("blanc"));
+		} catch (FullCaseException e) {
 			
 			e.toString();
 		}
 		
 		try {
-			v.ajouterPiece(new Case(new Position(1,6)), new Fou("blanc",null));
+			v.ajouterPiece(new Case(new Position(2,2)), new Pion("blanc"));
 		} catch (FullCaseException e) {
 			
 			e.toString();
-		} catch (CaseErrorException e) {
+		} 
+		
+		try {
+			v.ajouterPiece(new Case(new Position(2,3)), new Pion("blanc"));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} 
+		
+		try {
+			v.ajouterPiece(new Case(new Position(2,4)), new Pion("blanc"));
+		} catch (FullCaseException e) {
 			
 			e.toString();
 		}
 		
 		try {
-			v.ajouterPiece(new Case(new Position(1,7)), new Cavalier("blanc",null));
+			v.ajouterPiece(new Case(new Position(2,5)), new Pion("blanc"));
 		} catch (FullCaseException e) {
 			
 			e.toString();
-		} catch (CaseErrorException e) {
-			
-			e.toString();
-		}
+		} 
 		
 		try {
-			v.ajouterPiece(new Case(new Position(1,8)), new Tour("blanc",null));
+			v.ajouterPiece(new Case(new Position(2,6)), new Pion("blanc"));
 		} catch (FullCaseException e) {
-			
-			e.toString();
-		} catch (CaseErrorException e) {
-			
-			e.toString();
-		}
-		
-		try {
-			v.ajouterPiece(new Case(new Position(2,1)), new Pion("blanc",null));
-		} catch (FullCaseException e) {
-			
-			e.toString();
-		} catch (CaseErrorException e) {
-			
-			e.toString();
-		}
-		
-		try {
-			v.ajouterPiece(new Case(new Position(2,2)), new Pion("blanc",null));
-		} catch (FullCaseException e) {
-			
-			e.toString();
-		} catch (CaseErrorException e) {
-			
-			e.toString();
-		}
-		
-		try {
-			v.ajouterPiece(new Case(new Position(2,3)), new Pion("blanc",null));
-		} catch (FullCaseException e) {
-			
-			e.toString();
-		} catch (CaseErrorException e) {
-			
-			e.toString();
-		}
-		
-		try {
-			v.ajouterPiece(new Case(new Position(2,4)), new Pion("blanc",null));
-		} catch (FullCaseException e) {
-			
-			e.toString();
-		} catch (CaseErrorException e) {
-			
-			e.toString();
-		}
-		
-		try {
-			v.ajouterPiece(new Case(new Position(2,5)), new Pion("blanc",null));
-		} catch (FullCaseException e) {
-			
-			e.toString();
-		} catch (CaseErrorException e) {
-			
-			e.toString();
-		}
-		
-		try {
-			v.ajouterPiece(new Case(new Position(2,6)), new Pion("blanc",null));
-		} catch (FullCaseException e) {
-			
-			e.toString();
-		} catch (CaseErrorException e) {
 			
 			e.toString();
 		}
@@ -313,161 +290,113 @@ public class Variantes {
 
 		
 		try {
-			v.ajouterPiece(new Case(new Position(2,7)), new Pion("blanc",null));
+			v.ajouterPiece(new Case(new Position(2,7)), new Pion("blanc"));
 		} catch (FullCaseException e) {
 			
 			e.toString();
-		} catch (CaseErrorException e) {
+		} 
+		
+		try {
+			v.ajouterPiece(new Case(new Position(2,8)), new Pion("blanc"));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} 
+		
+		try {
+			v.ajouterPiece(new Case(new Position(8,1)), new Tour("noir"));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} 
+		
+		try {
+			v.ajouterPiece(new Case(new Position(8,2)), new Cavalier("noir"));
+		} catch (FullCaseException e) {
 			
 			e.toString();
 		}
 		
 		try {
-			v.ajouterPiece(new Case(new Position(2,8)), new Pion("blanc",null));
+			v.ajouterPiece(new Case(new Position(8,3)), new Fou("noir"));
 		} catch (FullCaseException e) {
-			
-			e.toString();
-		} catch (CaseErrorException e) {
 			
 			e.toString();
 		}
 		
 		try {
-			v.ajouterPiece(new Case(new Position(8,1)), new Tour("noir",null));
+			v.ajouterPiece(new Case(new Position(8,4)), new Reine("noir"));
 		} catch (FullCaseException e) {
 			
 			e.toString();
-		} catch (CaseErrorException e) {
+		} 
+		
+		try {
+			v.ajouterPiece(new Case(new Position(8,5)), new Roi("noir"));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} 
+		
+		try {
+			v.ajouterPiece(new Case(new Position(8,6)), new Fou("noir"));
+		} catch (FullCaseException e) {
 			
 			e.toString();
 		}
 		
 		try {
-			v.ajouterPiece(new Case(new Position(8,2)), new Cavalier("noir",null));
+			v.ajouterPiece(new Case(new Position(8,7)), new Cavalier("noir"));
 		} catch (FullCaseException e) {
 			
 			e.toString();
-		} catch (CaseErrorException e) {
+		} 
+		
+		try {
+			v.ajouterPiece(new Case(new Position(8,8)), new Tour("noir"));
+		} catch (FullCaseException e) {
+			
+			e.toString();
+		} 
+		
+		try {
+			v.ajouterPiece(new Case(new Position(7,1)), new Pion("noir"));
+		} catch (FullCaseException e) {
 			
 			e.toString();
 		}
 		
 		try {
-			v.ajouterPiece(new Case(new Position(8,3)), new Fou("noir",null));
+			v.ajouterPiece(new Case(new Position(7,2)), new Pion("noir"));
 		} catch (FullCaseException e) {
 			
 			e.toString();
-		} catch (CaseErrorException e) {
-			
-			e.toString();
-		}
+		} 
 		
 		try {
-			v.ajouterPiece(new Case(new Position(8,4)), new Reine("noir",null));
+			v.ajouterPiece(new Case(new Position(7,3)), new Pion("noir"));
 		} catch (FullCaseException e) {
 			
 			e.toString();
-		} catch (CaseErrorException e) {
-			
-			e.toString();
-		}
+		} 
 		
 		try {
-			v.ajouterPiece(new Case(new Position(8,5)), new Roi("noir",null));
+			v.ajouterPiece(new Case(new Position(7,4)), new Pion("noir"));
 		} catch (FullCaseException e) {
 			
 			e.toString();
-		} catch (CaseErrorException e) {
-			
-			e.toString();
-		}
+		} 
 		
 		try {
-			v.ajouterPiece(new Case(new Position(8,6)), new Fou("noir",null));
+			v.ajouterPiece(new Case(new Position(7,5)), new Pion("noir"));
 		} catch (FullCaseException e) {
 			
 			e.toString();
-		} catch (CaseErrorException e) {
-			
-			e.toString();
-		}
+		} 
 		
 		try {
-			v.ajouterPiece(new Case(new Position(8,7)), new Cavalier("noir",null));
+			v.ajouterPiece(new Case(new Position(7,6)), new Pion("noir"));
 		} catch (FullCaseException e) {
-			
-			e.toString();
-		} catch (CaseErrorException e) {
-			
-			e.toString();
-		}
-		
-		try {
-			v.ajouterPiece(new Case(new Position(8,8)), new Tour("noir",null));
-		} catch (FullCaseException e) {
-			
-			e.toString();
-		} catch (CaseErrorException e) {
-			
-			e.toString();
-		}
-		
-		try {
-			v.ajouterPiece(new Case(new Position(7,1)), new Pion("noir",null));
-		} catch (FullCaseException e) {
-			
-			e.toString();
-		} catch (CaseErrorException e) {
-			
-			e.toString();
-		}
-		
-		try {
-			v.ajouterPiece(new Case(new Position(7,2)), new Pion("noir",null));
-		} catch (FullCaseException e) {
-			
-			e.toString();
-		} catch (CaseErrorException e) {
-			
-			e.toString();
-		}
-		
-		try {
-			v.ajouterPiece(new Case(new Position(7,3)), new Pion("noir",null));
-		} catch (FullCaseException e) {
-			
-			e.toString();
-		} catch (CaseErrorException e) {
-			
-			e.toString();
-		}
-		
-		try {
-			v.ajouterPiece(new Case(new Position(7,4)), new Pion("noir",null));
-		} catch (FullCaseException e) {
-			
-			e.toString();
-		} catch (CaseErrorException e) {
-			
-			e.toString();
-		}
-		
-		try {
-			v.ajouterPiece(new Case(new Position(7,5)), new Pion("noir",null));
-		} catch (FullCaseException e) {
-			
-			e.toString();
-		} catch (CaseErrorException e) {
-			
-			e.toString();
-		}
-		
-		try {
-			v.ajouterPiece(new Case(new Position(7,6)), new Pion("noir",null));
-		} catch (FullCaseException e) {
-			
-			e.toString();
-		} catch (CaseErrorException e) {
 			
 			e.toString();
 		}
@@ -475,24 +404,18 @@ public class Variantes {
 
 		
 		try {
-			v.ajouterPiece(new Case(new Position(7,7)), new Pion("noir",null));
+			v.ajouterPiece(new Case(new Position(7,7)), new Pion("noir"));
 		} catch (FullCaseException e) {
 			
 			e.toString();
-		} catch (CaseErrorException e) {
-			
-			e.toString();
-		}
+		} 
 		
 		try {
-			v.ajouterPiece(new Case(new Position(7,8)), new Pion("noir",null));
+			v.ajouterPiece(new Case(new Position(7,8)), new Pion("noir"));
 		} catch (FullCaseException e) {
 			
 			e.toString();
-		} catch (CaseErrorException e) {
-			
-			e.toString();
-		}
+		} 
 		
 		try {
 			v.saveVariante("classique");
@@ -500,7 +423,11 @@ public class Variantes {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		System.out.println(v.getPlateau().get(59).getPiece().getCamp());
+		/*
+		
+	
 	}
 	*/
+	
 }
