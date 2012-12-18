@@ -1,5 +1,7 @@
 package projet_echec.echec.jeu;
 
+import com.sun.org.apache.xpath.internal.operations.Equals;
+
 import projet_echec.echec.jeu.piece.Pion;
 
 /**
@@ -67,6 +69,16 @@ public class Case {
 			}
 		}
 		return IlYAUnPion;//on retourne la case du pion.(=null si pas de pion)
+	}
+	
+	public boolean equals(Case c) {
+		
+		if (c.getPosition().equals(this.getPosition())){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 	
 	
