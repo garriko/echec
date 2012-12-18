@@ -2,6 +2,9 @@ package projet_echec.echec.gestion;
 
 import java.util.ArrayList;
 
+import projet_echec.echec.exception.GameException;
+
+
 /**
  * GestionJeu gere le nombre de parties en cours.
  * <p>
@@ -21,11 +24,11 @@ public class GestionJeu {
 	/**
 	 * Nombre de parties en cours
 	 */
-	private int nbPartie;
+	private static int nbPartie=0;
 	
 	public GestionJeu(){
 		games = new ArrayList<Partie>();
-		nbPartie=0;
+		
 	}
 	/**
 	 * Cree une nouvelle partie si possible avec les parametres fournis
@@ -34,16 +37,28 @@ public class GestionJeu {
 	 * @param nomV nom de la variante
 	 * @param optionsChoisies Options de la parties
 	 * @return
+	 * @throws GameException 
 	 */
-	public Partie creerNewGame(Joueur j1, Joueur j2, String nomV,Options optionsChoisies){
-		return null;
+	public Partie creerNewGame(Joueur j1, Joueur j2, String nomV,Options optionsChoisies) throws GameException{
+		Partie p;
+		if(nbPartie==4)
+			throw new GameException();
+		else
+		{
+			p = new Partie(j1,j2,nomV,optionsChoisies);
+			games.add(p);
+			nbPartie++;
+		}
+		
+		return p;
 	}
 	/**
 	 * Supprime la partie choisie
 	 * @param p partie a supprimer
 	 */
 	public void finPartie(Partie p){
-		
+		games.remove(p);
+		nbPartie--;
 	}
 	/**
 	 * Charge si possible le contenu de fichierCharge.pech
