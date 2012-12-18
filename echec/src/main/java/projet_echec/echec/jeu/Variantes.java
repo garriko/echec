@@ -23,7 +23,10 @@ public class Variantes {
 	 * 
 	 */
 	public Variantes() {
-		
+		for(int h=1;h<=8;h++)
+			for(int l=1;l<=8;l++)
+				plateau.add(new Case(new Position(h,l)));
+		listePieces=new Vector<Case>();
 	}
 	
 	/**

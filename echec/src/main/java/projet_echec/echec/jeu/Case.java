@@ -25,7 +25,7 @@ public class Case {
 	/**
 	 * permet d'envoyer le nom de l'image a mettre pour l'interface graphique
 	 */
-	private  String img;
+	
 	
 	/**
 	 * constructeur
@@ -33,6 +33,8 @@ public class Case {
 	 */
 	public Case(Position pos){
 		this.position=pos;
+		piece =null;
+		
 	}
 	
 	/**
@@ -101,12 +103,6 @@ public class Case {
 		this.position = position;
 	}
 
-	public String getImg() {
-		return img;
-	}
 
-	public void setImg(String img) {
-		this.img = img;
-	}
 	
 }
