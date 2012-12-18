@@ -10,16 +10,23 @@ import java.util.ArrayList;
  */
 
 
-public abstract class Piece {
+public abstract class Piece implements java.io.Serializable{
 	/**
 	 * Camp de la piece.
 	 * Valeurs possibles : "blanc" ou "noir"
 	 */
 	protected String camp;
 	/**
+	 * Image correspondant à la pièce et au camp (chemin d'accès
+	 */
+	private  String img;
+	
+	
+	/**
 	 * constructeur
 	 * @param camp
 	 */
+	
 	public Piece(String camp){
 		this.camp=camp;
 	}
@@ -41,4 +48,17 @@ public abstract class Piece {
 	public abstract ArrayList<Case> getDeplacementPossible(Case caseActuelle);
 	
 	public String getCamp() {return camp;}
+	/**
+	 * @return the img
+	 */
+	public String getImg() {
+		return img;
+	}
+	/**
+	 * @param img the img to set
+	 */
+	public void setImg(String img) {
+		this.img = img;
+	}
+	
 }

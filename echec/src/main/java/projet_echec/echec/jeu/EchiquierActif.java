@@ -1,7 +1,11 @@
 package projet_echec.echec.jeu;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
+import java.util.Vector;
+
+import projet_echec.echec.exception.DeplacementException;
 
 /**
  * 
@@ -35,8 +39,10 @@ public class EchiquierActif extends Echiquier {
 	
 	/**
 	 * constructeur de la classe
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	public EchiquierActif(){
+	public EchiquierActif() throws ClassNotFoundException, IOException{
 		super();
 	}
 	
@@ -48,27 +54,74 @@ public class EchiquierActif extends Echiquier {
 		super(V);
 	}
 	
-	
+	/**
+	 * regarde si la case e est menace par le camp adverse.(on a le camp en parametre)
+	 */
+	public boolean estMenace(String c, Case e){
+		boolean estmenace= false;
+		Vector<Case> listePieceAdverse= new Vector<Case>();
+		if (c=="noir")
+		{
+			listePieceAdverse= listerPiecesNoires(this.listePieceEnJeu);
+			
+		}
+		else if(c=="blanc")
+		{
+			listePieceAdverse= listerPiecesBlanches(this.listePieceEnJeu);
+		}
+		else 
+		{//TODO: creer une exeption
+		}
+		for(int i=0;i<listePieceAdverse.size();i++){//pour toutes les pieces adverses
+			
+			for (int j=0;j<listePieceAdverse.get(i).getPiece().getDeplacementPossible(listePieceAdverse.get(i)).size();i++){//pour tous les deplacements de chaque piece
+			if (listePieceAdverse.get(i).getPiece().getDeplacementPossible(listePieceAdverse.get(i)).get(j).equals(e)){//la case est égale a la case que l'on veut tester
+				estmenace=true;
+			}
+		}
+	}
+		return estmenace;
+	}
 	/**
 	 * Test si on est en position d'echec
-	 * @return true si l'un des joueurs est en echec
+	 * @return 0 si pas d'echec, 1 si echec, 2 si echec et mat. puis 1 si noir et 2 si blanc
+	 * donc echec au roi noir: 11
+	 * 		echec et mat au roi blanc: 22
+	 * 		pas echec=0
 	 */
-	public boolean echec(){
-		boolean a;
-		a=true;
-		return a;
-		//TODO : test echec
+	public int echec(){
+		int a= 0;
+		if(estMenace("noir",caseRoiNoir)) {
+			a=11;
+			}
+		if(estMenace("blanc",caseRoiBlanc)){
+			a=12;
+		}
+		if(a==11 && echecEtMat("noir")){a=21;}
+		
+		if(a==12 && echecEtMat("blanc")){a=22;}
+		
+		return a;	
 	}
+	/**
+	 * renvoi la liste des pieces blanches
+	 * @param liste
+	 * @return
+	 */
 	
 	/**
 	 * Test si on est en position d'echec et mat
 	 * @return true si l'un des joueurs est en echec et mat
 	 */
-	public boolean echecEtMat(){
-		boolean a;
-		a=true;
+	public boolean echecEtMat(String camp){
+		boolean a=false;
+		//test si le roi peut se deplacer
+		
+		//test si des pieces peuvent se mettre sur la trajectoire du roi
+		
+		
 		return a;
-		//TODO :test echec et mat
+		
 		
 	}
 	/**
@@ -93,9 +146,26 @@ public class EchiquierActif extends Echiquier {
 	 * Permet le deplacement des pieces
 	 * @param caseDepart : le joueur a selectionne une piece sur le plateau
 	 * @param caseArrivee: le joueur a selectionne une case d'arrivee sur le plateau
+	 * @throws DeplacementException 
 	 */
-	public void deplacer(Case caseDepart, Case caseArrivee){
-		//TODO : deplacer
+	public void deplacer(Case caseDepart, Case caseArrivee) throws DeplacementException{
+		ArrayList<Case> plop = new ArrayList<Case>();
+		plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
+		plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
+		if(plop.contains(caseArrivee)){
+			if(!caseArrivee.estVide())//si il y a une case a l'arrivee
+			{
+				this.listePiecePrises.add(caseArrivee.getPiece());//on ajoute la piece dans la liste des pieces prises
+				
+				for(int j=0; j< listePieceEnJeu.size();j++)//pour toutes les pieces en jeu
+					if(listePieceEnJeu.get(j).equals(caseArrivee))//si il y a une case egale a la case d'arrivee
+						listePieceEnJeu.remove(j);//on la supprime
+				changerCase(caseDepart,caseArrivee);
+			}
+			
+		}
+		else
+			throw new DeplacementException();
 	}
 	
 	/**
@@ -144,6 +214,30 @@ public class EchiquierActif extends Echiquier {
 		return null;
 	}
 	
+public Vector<Case> listerPiecesBlanches(Vector<Case> liste){
+		
+		Vector<Case> listepiece= new Vector<Case>();
+		for(int i=0;i<liste.size();i++){// Pour toutes les pieces en jeu
+			if (liste.get(i).getPiece().getCamp()=="blanc"){//si dans la liste la piece est blanche
+				listepiece.add(liste.get(i));//ajoute dans la liste des pieces adverses les pieces noires
+			}
+		}
+			return listepiece;		
+	}
+	/**
+	 * renvoi la liste des pieces noir
+	 */
+public static Vector<Case> listerPiecesNoires(Vector<Case> liste){
+		
+		Vector<Case> listepiece= new Vector<Case>();
+		for(int i=0;i<liste.size();i++){// Pour toutes les pieces en jeu
+			if (liste.get(i).getPiece().getCamp()=="noir"){//si dans la liste la piece est noires
+				listepiece.add(liste.get(i));//ajoute dans la liste des pieces adverses les pieces noires
+			}
+		}
+			return listepiece;		
+	}
+	
 	
 	/**
 	 * getter/setter
@@ -188,5 +282,23 @@ public class EchiquierActif extends Echiquier {
 		this.caseRoiNoir = caseRoiNoir;
 	}
 	
-	
+
+	public static void main(String[] args) {
+		EchiquierActif E=null;
+		System.out.println("test");
+		try {
+			E = new EchiquierActif();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		
+		}
+		finally{
+			
+			System.out.println(E.echec());
+		}
+	}
 }

@@ -19,8 +19,7 @@ public class Cavalier extends Piece{
 	
 	
 	public Cavalier(String camp) {
-		super(camp);
-		
+		super(camp);		
 	}
 
 	@Override

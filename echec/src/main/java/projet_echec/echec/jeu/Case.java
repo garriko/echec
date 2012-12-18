@@ -1,7 +1,5 @@
 package projet_echec.echec.jeu;
 
-import projet_echec.echec.jeu.piece.Pion;
-
 /**
  * 
  * @author Adrien
@@ -11,7 +9,11 @@ import projet_echec.echec.jeu.piece.Pion;
  * Cette classe permet de definir ce qu’il se passe dans une case: elle peut contenir n'importe quelle piece
  */
 
-public class Case {
+public class Case implements java.io.Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Piece contenue dans la case
 	 */
@@ -23,7 +25,7 @@ public class Case {
 	/**
 	 * permet d'envoyer le nom de l'image a mettre pour l'interface graphique
 	 */
-	private  String img;
+	private String img;
 	
 	/**
 	 * constructeur
@@ -31,6 +33,8 @@ public class Case {
 	 */
 	public Case(Position pos){
 		this.position=pos;
+		piece =null;
+		
 	}
 	
 	/**
@@ -47,7 +51,8 @@ public class Case {
 	 * permet de savoir si un pion a atteint le bout du plateau pour le changer en une autre piece
 	 * @return la case contenant le pion si le pion est au bout du plateau
 	 */
-	public Case pionBoutEchiquier(){
+	//TODO : y repenser
+	/*public Case pionBoutEchiquier(){
 		
 		Case IlYAUnPion = null;
 		for (int i=1;i<9;i++)
@@ -67,6 +72,16 @@ public class Case {
 			}
 		}
 		return IlYAUnPion;//on retourne la case du pion.(=null si pas de pion)
+	}*/
+	
+	public boolean equals(Case c) {
+		
+		if (c.getPosition().equals(this.getPosition())){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 	
 	
@@ -78,7 +93,80 @@ public class Case {
 	}
 
 	public void setPiece(Piece piece) {
+		//TODO Case noire
 		this.piece = piece;
+		if(piece.getClass().getName()=="Pion")
+			if(piece.getCamp()=="blanc")
+				if(position.getHauteur()+position.getLargeur() % 2 == 0)
+					setImg("images/Pieces/pasAuto/121.png");
+				else
+					setImg("images/Pieces/pasAuto/111.png");
+			else
+				if(position.getHauteur()+position.getLargeur() % 2 == 0)
+					setImg("images/Pieces/pasAuto/221.png");
+				else
+					setImg("images/Pieces/pasAuto/211.png");
+		
+		if(piece.getClass().getName()=="Tour")
+			if(piece.getCamp()=="blanc")
+				if(position.getHauteur()+position.getLargeur() % 2 == 0)
+					setImg("images/Pieces/pasAuto/122.png");
+				else
+					setImg("images/Pieces/pasAuto/112.png");
+			else
+				if(position.getHauteur()+position.getLargeur() % 2 == 0)
+					setImg("images/Pieces/pasAuto/222.png");
+				else
+					setImg("images/Pieces/pasAuto/212.png");
+		
+		if(piece.getClass().getName()=="Fou")
+			if(piece.getCamp()=="blanc")
+				if(position.getHauteur()+position.getLargeur() % 2 == 0)
+					setImg("images/Pieces/pasAuto/124.png");
+				else
+					setImg("images/Pieces/pasAuto/114.png");
+			else
+				if(position.getHauteur()+position.getLargeur() % 2 == 0)
+					setImg("images/Pieces/pasAuto/224.png");
+				else
+					setImg("images/Pieces/pasAuto/214.png");
+		
+		if(piece.getClass().getName()=="Cavalier")
+			if(piece.getCamp()=="blanc")
+				if(position.getHauteur()+position.getLargeur() % 2 == 0)
+					setImg("images/Pieces/pasAuto/123.png");
+				else
+					setImg("images/Pieces/pasAuto/113.png");
+			else
+				if(position.getHauteur()+position.getLargeur() % 2 == 0)
+					setImg("images/Pieces/pasAuto/223.png");
+				else
+					setImg("images/Pieces/pasAuto/213.png");
+		
+		if(piece.getClass().getName()=="Reine")
+			if(piece.getCamp()=="blanc")
+				if(position.getHauteur()+position.getLargeur() % 2 == 0)
+					setImg("images/Pieces/pasAuto/126.png");
+				else
+					setImg("images/Pieces/pasAuto/116.png");
+			else
+				if(position.getHauteur()+position.getLargeur() % 2 == 0)
+					setImg("images/Pieces/pasAuto/226.png");
+				else
+					setImg("images/Pieces/pasAuto/216.png");
+		
+		if(piece.getClass().getName()=="Roi")
+			if(piece.getCamp()=="blanc")
+				if(position.getHauteur()+position.getLargeur() % 2 == 0)
+					setImg("images/Pieces/pasAuto/125.png");
+				else
+					setImg("images/Pieces/pasAuto/115.png");
+			else
+				if(position.getHauteur()+position.getLargeur() % 2 == 0)
+					setImg("images/Pieces/pasAuto/225.png");
+				else
+					setImg("images/Pieces/pasAuto/215.png");
+		
 	}
 
 	public Position getPosition() {
@@ -89,12 +177,20 @@ public class Case {
 		this.position = position;
 	}
 
+	/**
+	 * @return the img
+	 */
 	public String getImg() {
 		return img;
 	}
 
+	/**
+	 * @param img the img to set
+	 */
 	public void setImg(String img) {
 		this.img = img;
 	}
+
+
 	
 }

@@ -1,5 +1,7 @@
 package projet_echec.echec.jeu;
 
+import java.io.IOException;
+
 
 /**
  * Cette classe permet de definir ce qu’il se passe sur l’echiquier lorsque l'on veut revoir une partie.
@@ -21,8 +23,10 @@ public class EchiquierPassif extends Echiquier {
 	/**
 	 * constructeur
 	 * @param fichierCharger
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	public EchiquierPassif(String fichierCharger){
+	public EchiquierPassif(String fichierCharger) throws ClassNotFoundException, IOException{
 		super();
 	}
 	

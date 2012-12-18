@@ -1,13 +1,16 @@
 package projet_echec.echec.jeu;
 
+import java.io.IOException;
+import java.util.Vector;
+
 import junit.framework.TestCase;
 
-import projet_echec.echec.jeu.piece.Cavalier;
 import projet_echec.echec.jeu.piece.Fou;
-import projet_echec.echec.jeu.piece.Pion;
 import projet_echec.echec.jeu.piece.Reine;
 import projet_echec.echec.jeu.piece.Roi;
 import projet_echec.echec.jeu.piece.Tour;
+import projet_echec.echec.jeu.EchiquierActif;
+import projet_echec.echec.jeu.Case;
 
 public class EchiquierActifTest extends TestCase{
 	
@@ -15,10 +18,17 @@ public class EchiquierActifTest extends TestCase{
 	 * test si lors d'une situation d'echec, la fonction testEchec() renvoit true
 	 */
 	public void testEchec(){
-		
-		assertTrue( true );
-		//TODO : test echec
-		
+		EchiquierActif E=null;
+		try {
+			E = new EchiquierActif();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		assertTrue( E.echec());
 	}
 	
 	/**
@@ -48,88 +58,54 @@ public class EchiquierActifTest extends TestCase{
 		//TODO : test selectionner case
 	}
 	
-	/**
-	 * test lorsque l'on sélectionne deux cases l'un aprés l'autre, qu el'on déplace la pièce de la première à la deuxième case
-	 */
-	public void testdeplacerTour(){
-		/**
-		 * met les pieces sur des cases
-		 */
-		
-		EchiquierActif E= new EchiquierActif();
-		
+	public void  testestMenace(){
+		EchiquierActif E=null;
+		try {
+			E = new EchiquierActif();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Position p= new Position(1,1);
-		Piece t= new Tour("noir");
-		Case t1= new Case(p);
-		t1.setPiece(t);
-		Position ar= new Position(3,1);
-		Case t2= new Case(ar);
-		E.deplacer(t1,t2);
-		assertEquals(t,t2.getPiece());
-	}
-		
-	public void testdeplacerCavalier(){
-		EchiquierActif E= new EchiquierActif();
-		Position p= new Position(1,1);
-		Piece c= new Cavalier("noir");
+		Piece c= new Tour("noir",null);
 		Case c1= new Case(p);
 		c1.setPiece(c);
-		Position ar= new Position(3,2);
-		Case t2= new Case(ar);
-		E.deplacer(c1,t2);
-		assertEquals(c,t2.getPiece());
-	}
 		
-	public void testdeplacerFou(){
-		EchiquierActif E= new EchiquierActif();
-		Position p= new Position(1,1);
-		Piece c= new Fou("noir");
-		Case c1= new Case(p);
-		c1.setPiece(c);
-		Position ar= new Position(3,3);
-		Case t2= new Case(ar);
-		E.deplacer(c1,t2);
-		assertEquals(c,t2.getPiece());
-	}
+		Position q= new Position(1,3);
+		Case q1= new Case(q);
+		
+		assertTrue(E.estMenace("blanc",q1));
+		
+	}		
 	
-	
-	public void testdeplacerRoi(){
-		EchiquierActif E= new EchiquierActif();
-		Position p= new Position(1,1);
-		Piece c= new Roi("noir");
-		Case c1= new Case(p);
-		c1.setPiece(c);
-		Position ar= new Position(2,2);
-		Case t2= new Case(ar);
-		E.deplacer(c1,t2);
-		assertEquals(c,t2.getPiece());
-	}
+	public void testlisterPiecesNoires(){
 		
-	public void testdeplacerReine(){
-		EchiquierActif E= new EchiquierActif();
+		Vector<Case> listepiece= new Vector<Case>();
 		Position p= new Position(1,1);
-		Piece c= new Reine("noir");
+		Piece c= new Fou("noir",null);
 		Case c1= new Case(p);
 		c1.setPiece(c);
-		Position ar= new Position(4,4);
-		Case t2= new Case(ar);
-		E.deplacer(c1,t2);
-		assertEquals(c,t2.getPiece());
-	}
+		listepiece.add(c1);
+		Position p1= new Position(1,2);
+		Piece c2= new Roi("blanc",null);
+		Case c3= new Case(p1);
+		c3.setPiece(c2);
+		listepiece.add(c3);
+		Position q= new Position(1,3);
+		Piece f= new Reine("blanc",null);
+		Case f1= new Case(q);
+		f1.setPiece(f);
+		listepiece.add(f1);
 		
-	public void testdeplacerPion(){
-		EchiquierActif E= new EchiquierActif();
-		Position p= new Position(1,1);
-		Piece c= new Pion("noir");
-		Case c1= new Case(p);
-		c1.setPiece(c);
-		Position ar= new Position(3,1);
-		Case t2= new Case(ar);
-		E.deplacer(c1,t2);
-		Position ar1= new Position(4,1);
-		Case t3= new Case(ar1);
-		E.deplacer(t2,t3);
-		assertEquals(c,t3.getPiece());
+		listepiece= EchiquierActif.listerPiecesNoires(listepiece);
+		Vector<Case> listepiecetest= new Vector<Case>();
+		listepiecetest.add(c1);
+		
+		assertEquals(listepiecetest,listepiece);
+		
 	}
 		
 	}

@@ -15,7 +15,7 @@ import projet_echec.echec.jeu.Position;
  * 
  */
 
-public class Pion extends Piece {
+public class Pion extends Piece implements java.io.Serializable {
 
 	private boolean dejaBouge;
 

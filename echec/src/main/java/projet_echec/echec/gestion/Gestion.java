@@ -27,7 +27,8 @@ public abstract class Gestion {
 	protected String partieSelect;
 	
 	public Gestion(){
-		
+		partieSelect= null;
+		listePartie = new Vector<String>();
 	}
 	/**
 	 * Charge la liste de toutes les parties disponibles
@@ -36,8 +37,12 @@ public abstract class Gestion {
 	
 	/**
 	 * Supprime de la liste (et du disque dur) la partie correspondant a nomPartie
-	 * @param nomPartie Nom de la partie a supprimer
+	 * @param nomPartie Nom de la partie a supprimer (doit forcément faire partie de listePartie
 	 */
-	public abstract void supprimerPartie(String nomPartie);
+	public void supprimerPartie(String nomPartie){
+		listePartie.remove(nomPartie);
+	}
+	
+	public Vector<String> getListePartie(){return listePartie;}
 	
 }

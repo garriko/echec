@@ -9,7 +9,7 @@ import projet_echec.echec.jeu.Position;
 /**
  * Cette classe definit les attributs de la piece Tour
  * 
- * @author Kevin
+ * @author Adrien
  * @version 0.0.1
  * @see Piece
  * 
@@ -20,7 +20,6 @@ public class Tour extends Piece{
 	public Tour(String camp) {
 		super(camp);
 	}
-
 	@Override
 	/**
 	 * renvoi la liste des positions possibles
