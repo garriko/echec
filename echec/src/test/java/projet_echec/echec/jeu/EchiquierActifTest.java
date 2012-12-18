@@ -4,12 +4,6 @@ import java.io.IOException;
 
 import junit.framework.TestCase;
 
-import projet_echec.echec.exception.DeplacementException;
-import projet_echec.echec.jeu.piece.Cavalier;
-import projet_echec.echec.jeu.piece.Fou;
-import projet_echec.echec.jeu.piece.Pion;
-import projet_echec.echec.jeu.piece.Reine;
-import projet_echec.echec.jeu.piece.Roi;
 import projet_echec.echec.jeu.piece.Tour;
 import projet_echec.echec.jeu.EchiquierActif;
 
@@ -19,7 +13,16 @@ public class EchiquierActifTest extends TestCase{
 	 * test si lors d'une situation d'echec, la fonction testEchec() renvoit true
 	 */
 	public void testEchec(){
-		EchiquierActif E= new EchiquierActif(null);
+		EchiquierActif E=null;
+		try {
+			E = new EchiquierActif();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		assertTrue( E.echec());
 	}
 	

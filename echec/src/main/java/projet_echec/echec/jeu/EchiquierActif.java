@@ -246,5 +246,23 @@ public class EchiquierActif extends Echiquier {
 		this.caseRoiNoir = caseRoiNoir;
 	}
 	
-	
+
+	public static void main(String[] args) {
+		EchiquierActif E=null;
+		System.out.println("test");
+		try {
+			E = new EchiquierActif();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		
+		}
+		finally{
+			
+			System.out.println(E.echec());
+		}
+	}
 }
