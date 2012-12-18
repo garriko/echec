@@ -1,11 +1,16 @@
 package projet_echec.echec.jeu;
 
 import java.io.IOException;
+import java.util.Vector;
 
 import junit.framework.TestCase;
 
+import projet_echec.echec.jeu.piece.Fou;
+import projet_echec.echec.jeu.piece.Reine;
+import projet_echec.echec.jeu.piece.Roi;
 import projet_echec.echec.jeu.piece.Tour;
 import projet_echec.echec.jeu.EchiquierActif;
+import projet_echec.echec.jeu.Case;
 
 public class EchiquierActifTest extends TestCase{
 	
@@ -75,6 +80,33 @@ public class EchiquierActifTest extends TestCase{
 		assertTrue(E.estMenace("blanc",q1));
 		
 	}		
+	
+	public void testlisterPiecesNoires(){
+		
+		Vector<Case> listepiece= new Vector<Case>();
+		Position p= new Position(1,1);
+		Piece c= new Fou("noir",null);
+		Case c1= new Case(p);
+		c1.setPiece(c);
+		listepiece.add(c1);
+		Position p1= new Position(1,2);
+		Piece c2= new Roi("blanc",null);
+		Case c3= new Case(p1);
+		c3.setPiece(c2);
+		listepiece.add(c3);
+		Position q= new Position(1,3);
+		Piece f= new Reine("blanc",null);
+		Case f1= new Case(q);
+		f1.setPiece(f);
+		listepiece.add(f1);
+		
+		listepiece= EchiquierActif.listerPiecesNoires(listepiece);
+		Vector<Case> listepiecetest= new Vector<Case>();
+		listepiecetest.add(c1);
+		
+		assertEquals(listepiecetest,listepiece);
+		
+	}
 		
 	}
 	

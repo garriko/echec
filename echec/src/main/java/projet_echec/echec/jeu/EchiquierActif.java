@@ -62,20 +62,12 @@ public class EchiquierActif extends Echiquier {
 		Vector<Case> listePieceAdverse= new Vector<Case>();
 		if (c=="noir")
 		{
-			for(int i=0;i<this.listePieceEnJeu.size();i++){// Pour toutes les pieces en jeu
-				if (this.listePieceEnJeu.get(i).getPiece().getCamp()=="blanc"){//si dans la liste la piece est blanche
-					listePieceAdverse.add(this.listePieceEnJeu.get(i));//ajoute dans la liste des pieces adverses les pieces noires
-				}
-			}
+			listePieceAdverse= listerPiecesNoires(this.listePieceEnJeu);
 			
 		}
 		else if(c=="blanc")
 		{
-			for(int i=0;i<this.listePieceEnJeu.size();i++){
-				if (this.listePieceEnJeu.get(i).getPiece().getCamp()=="noir"){
-					listePieceAdverse.add(this.listePieceEnJeu.get(i));
-				}
-			}
+			listePieceAdverse= listerPiecesBlanches(this.listePieceEnJeu);
 		}
 		else 
 		{//TODO: creer une exeption
@@ -92,24 +84,44 @@ public class EchiquierActif extends Echiquier {
 	}
 	/**
 	 * Test si on est en position d'echec
-	 * @return true si l'un des joueurs est en echec
+	 * @return 0 si pas d'echec, 1 si echec, 2 si echec et mat. puis 1 si noir et 2 si blanc
+	 * donc echec au roi noir: 11
+	 * 		echec et mat au roi blanc: 22
+	 * 		pas echec=0
 	 */
-	public boolean echec(){
-		boolean a;
-		a=true;
-		return a;
-		//TODO : test echec
+	public int echec(){
+		int a= 0;
+		if(estMenace("noir",caseRoiNoir)) {
+			a=11;
+			}
+		if(estMenace("blanc",caseRoiBlanc)){
+			a=12;
+		}
+		if(a==11 && echecEtMat("noir")){a=21;}
+		
+		if(a==12 && echecEtMat("blanc")){a=22;}
+		
+		return a;	
 	}
+	/**
+	 * renvoi la liste des pieces blanches
+	 * @param liste
+	 * @return
+	 */
 	
 	/**
 	 * Test si on est en position d'echec et mat
 	 * @return true si l'un des joueurs est en echec et mat
 	 */
-	public boolean echecEtMat(){
-		boolean a;
-		a=true;
+	public boolean echecEtMat(String camp){
+		boolean a=false;
+		//test si le roi peut se deplacer
+		
+		//test si des pieces peuvent se mettre sur la trajectoire du roi
+		
+		
 		return a;
-		//TODO :test echec et mat
+		
 		
 	}
 	/**
@@ -200,6 +212,30 @@ public class EchiquierActif extends Echiquier {
 	{
 		//TODO : implémenter la méthode
 		return null;
+	}
+	
+public Vector<Case> listerPiecesBlanches(Vector<Case> liste){
+		
+		Vector<Case> listepiece= new Vector<Case>();
+		for(int i=0;i<liste.size();i++){// Pour toutes les pieces en jeu
+			if (liste.get(i).getPiece().getCamp()=="blanc"){//si dans la liste la piece est blanche
+				listepiece.add(liste.get(i));//ajoute dans la liste des pieces adverses les pieces noires
+			}
+		}
+			return listepiece;		
+	}
+	/**
+	 * renvoi la liste des pieces noir
+	 */
+public static Vector<Case> listerPiecesNoires(Vector<Case> liste){
+		
+		Vector<Case> listepiece= new Vector<Case>();
+		for(int i=0;i<liste.size();i++){// Pour toutes les pieces en jeu
+			if (liste.get(i).getPiece().getCamp()=="noir"){//si dans la liste la piece est noires
+				listepiece.add(liste.get(i));//ajoute dans la liste des pieces adverses les pieces noires
+			}
+		}
+			return listepiece;		
 	}
 	
 	
