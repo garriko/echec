@@ -43,8 +43,10 @@ public class GestionJeu {
 	 * @param optionsChoisies Options de la parties
 	 * @return 
 	 * @throws GameException 
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	public Wrapper creerNewGame(Joueur j1, Joueur j2, String nomV,Options optionsChoisies) throws GameException{
+	public Wrapper creerNewGame(Joueur j1, Joueur j2, String nomV,Options optionsChoisies) throws GameException, ClassNotFoundException, IOException{
 		Wrapper w;
 		if(nbPartie==4)
 			throw new GameException();
