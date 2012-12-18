@@ -25,6 +25,14 @@ public class Position {
 		this.hauteur = hauteur;
 		this.largeur = largeur;
 	}
+	
+	public boolean equals(Position p) {
+		if(this.hauteur==p.hauteur && this.largeur==p.largeur)
+			return true;
+		else
+			return false;
+	}
+	
 	/**
 	 * getters/setters
 	 */
