@@ -1,5 +1,6 @@
 package projet_echec.echec.jeu;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.Vector;
@@ -38,8 +39,10 @@ public class EchiquierActif extends Echiquier {
 	
 	/**
 	 * constructeur de la classe
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	public EchiquierActif(){
+	public EchiquierActif() throws ClassNotFoundException, IOException{
 		super();
 	}
 	

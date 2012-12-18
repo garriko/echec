@@ -1,5 +1,7 @@
 package projet_echec.echec.jeu;
 
+import java.io.IOException;
+
 import junit.framework.TestCase;
 
 import projet_echec.echec.exception.DeplacementException;
@@ -58,7 +60,16 @@ public class EchiquierActifTest extends TestCase{
 		 * met les pieces sur des cases
 		 */
 		
-		EchiquierActif E= new EchiquierActif();
+		EchiquierActif E=null;
+		try {
+			E = new EchiquierActif();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		Position p= new Position(1,1);
 		Piece t= new Tour("noir",null);
@@ -73,10 +84,20 @@ public class EchiquierActifTest extends TestCase{
 			e.printStackTrace();
 		}
 		assertEquals(t,t2.getPiece());
+		
 	}
 		
 	public void testdeplacerCavalier(){
-		EchiquierActif E= new EchiquierActif();
+		EchiquierActif E=null;
+		try {
+			E = new EchiquierActif();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Position p= new Position(1,1);
 		Piece c= new Cavalier("noir",null);
 		Case c1= new Case(p);
@@ -93,7 +114,16 @@ public class EchiquierActifTest extends TestCase{
 	}
 		
 	public void testdeplacerFou(){
-		EchiquierActif E= new EchiquierActif();
+		EchiquierActif E=null;
+		try {
+			E = new EchiquierActif();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Position p= new Position(1,1);
 		Piece c= new Fou("noir",null);
 		Case c1= new Case(p);
@@ -111,7 +141,16 @@ public class EchiquierActifTest extends TestCase{
 	
 	
 	public void testdeplacerRoi(){
-		EchiquierActif E= new EchiquierActif();
+		EchiquierActif E=null;
+		try {
+			E = new EchiquierActif();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Position p= new Position(1,1);
 		Piece c= new Roi("noir",null);
 		Case c1= new Case(p);
@@ -128,7 +167,16 @@ public class EchiquierActifTest extends TestCase{
 	}
 		
 	public void testdeplacerReine(){
-		EchiquierActif E= new EchiquierActif();
+		EchiquierActif E=null;
+		try {
+			E = new EchiquierActif();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Position p= new Position(1,1);
 		Piece c= new Reine("noir",null);
 		Case c1= new Case(p);
@@ -145,7 +193,16 @@ public class EchiquierActifTest extends TestCase{
 	}
 		
 	public void testdeplacerPion(){
-		EchiquierActif E= new EchiquierActif();
+		EchiquierActif E=null;
+		try {
+			E = new EchiquierActif();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Position p= new Position(1,1);
 		Piece c= new Pion("noir",null);
 		Case c1= new Case(p);

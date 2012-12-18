@@ -1,5 +1,6 @@
 package projet_echec.echec.jeu;
 
+import java.io.IOException;
 import java.util.Vector;
 
 /**
@@ -28,8 +29,10 @@ public abstract class Echiquier {
 	
 	/**
 	 * Initialise l'echiquier de façon classique
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	public Echiquier(){
+	public Echiquier() throws ClassNotFoundException, IOException{
 		Variantes v = new Variantes("classique");
 		this.plateau = new Vector<Case>(v.getPlateau());
 		this.listePieceEnJeu = new Vector<Case>(v.getListePieces());
