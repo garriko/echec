@@ -15,6 +15,9 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerListModel;
 
+import projet_echec.echec.gestion.Joueur;
+import projet_echec.echec.gestion.Options;
+
 
 /**
  * 
@@ -108,6 +111,18 @@ public class InterfaceConfigPartie {
 		
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
+			if (e.getSource()==Bouton1){ //modifier
+				
+			}
+			if (e.getSource()==Bouton2){ //valider
+				Joueur J1 = new Joueur(nomJ1.getText(), aideJ1.isSelected());
+				Joueur J2 = new Joueur(nomJ2.getText(), aideJ2.isSelected());
+				Options optionsPartie = new Options((Integer) dureeJ1.getValue(), (Integer) dureeJ2.getValue(), aideJ2.isSelected(),
+						aideJ1.isSelected(), rotation.isSelected());
+			}
+			if (e.getSource()==Bouton3){ //annuler
+				
+			}
 		}
 	}
 	
