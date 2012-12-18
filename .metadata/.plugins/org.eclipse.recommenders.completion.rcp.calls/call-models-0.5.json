@@ -3,5 +3,10 @@
     "coordinate": "jre:jre:zip:call:1.0.0",
     "location": "C:\\Program Files\\Java\\jre7\\lib\\rt.jar",
     "status": "RESOLVED"
+  },
+  "C:\\Users\\Anne-Sophie\\Desktop\\echec\\echec\\src\\main\\java": {
+    "location": "C:\\Users\\Anne-Sophie\\Desktop\\echec\\echec\\src\\main\\java",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027C:\\Users\\Anne-Sophie\\Desktop\\echec\\echec\\src\\main\\java\u0027. Skipped."
   }
 }

@@ -25,21 +25,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import projet_echec.echec.jeu.Case;
-import projet_echec.echec.jeu.EchiquierActif;
 import projet_echec.echec.jeu.Piece;
-import projet_echec.echec.jeu.Position;
 import projet_echec.echec.jeu.Variantes;
-import projet_echec.echec.jeu.piece.Cavalier;
-import projet_echec.echec.jeu.piece.Fou;
-import projet_echec.echec.jeu.piece.Pion;
-import projet_echec.echec.jeu.piece.Reine;
-import projet_echec.echec.jeu.piece.Roi;
-import projet_echec.echec.jeu.piece.Tour;
 
 public class InterfacePersoEchiquier {
 
-	Variantes nouvelleVariante = new Variantes();
-	
 	JFrame fenetre=new JFrame("Jeu d'échecs");
 	Container tmp = fenetre.getContentPane();
 	Collection<JButton> tab_cases = new Vector<JButton>();
@@ -65,9 +55,9 @@ public class InterfacePersoEchiquier {
 	
 	
 	Case CaseSelectionnee = new Case(null);
-	Piece PieceSelectionnee = new Pion("blanc");
-	boolean selectionPiece = false;
-	boolean selectionCase = false;
+	Piece PieceSelectionnee = new Pion();
+	boolean selectionPiece;
+	boolean selectionCase;
 	
 	
 	
@@ -190,84 +180,7 @@ public class InterfacePersoEchiquier {
 	
 	public class EcouteurAction implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
-			if (e.getSource()==boutonOK){
-				nouvelleVariante.saveVariante("maVariante");
-			}
-			else if (e.getSource()==boutonAnnuler){
-				
-			}
-			else if (tab_cases.contains(e.getSource())){
-				int numCase = ((Vector<JButton>) tab_cases).indexOf(e.getSource());
-				int largeur = numCase%8;
-				int hauteur = numCase/8;
-				Case eCase = new Case(new Position(hauteur, largeur));
-				
-				if ((eCase.estVide()==false) && (selectionPiece==false)){ // si case occupée et pas de pièce retenue
-					CaseSelectionnee = eCase ; // la case est retenue
-					selectionCase = true ;
-				}
-				else if ((eCase.estVide()==false) && (selectionPiece==true)){ // si case occupée et pièce retenue
-					nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee) ;
-					// on change la pièce
-					actualiserImage(eCase);
-					selectionPiece = false;
-				}
-				else if ((eCase.estVide()==true) && (selectionPiece==true)){ // si case vide et pièce retenue
-					nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee);
-					// on place la pièce
-					actualiserImage(eCase);
-					selectionPiece = false;
-				}
-				else if (selectionCase == true){ // si case retenue
-					nouvelleVariante.ajouterPiece(eCase, CaseSelectionnee.getPiece()) ;
-					// on change la pièce
-					nouvelleVariante.retirerPiece(CaseSelectionnee) ;
-					// On la retire la la première case
-					actualiserImage(CaseSelectionnee) ;
-					actualiserImage(eCase) ;
-					selectionCase = false ;
-				}
-			}
-			else{
-				if (e.getSource()==PionBlanc){
-					PieceSelectionnee = new Pion("blanc");
-				}
-				if (e.getSource()==TourBlanc){
-					PieceSelectionnee = new Tour("blanc");
-				}
-				if (e.getSource()==CavalierBlanc){
-					PieceSelectionnee = new Cavalier("blanc");
-				}
-				if (e.getSource()==FouBlanc){
-					PieceSelectionnee = new Fou("blanc");
-				}
-				if (e.getSource()==RoiBlanc){
-					PieceSelectionnee = new Roi("blanc");
-				}
-				if (e.getSource()==ReineBlanc){
-					PieceSelectionnee = new Reine("blanc");
-				}
-				if (e.getSource()==PionNoir){
-					PieceSelectionnee = new Pion("noir");
-				}
-				if (e.getSource()==TourNoir){
-					PieceSelectionnee = new Tour("noirblanc");
-				}
-				if (e.getSource()==CavalierNoir){
-					PieceSelectionnee = new Cavalier("noir");
-				}
-				if (e.getSource()==FouNoir){
-					PieceSelectionnee = new Fou("noir");
-				}
-				if (e.getSource()==RoiNoir){
-					PieceSelectionnee = new Roi("noir");
-				}
-				if (e.getSource()==ReineNoir){
-					PieceSelectionnee = new Reine("noir");
-				}
-				selectionPiece = true ;
-				selectionCase=false ;
-			}
+			
 		}
 	}
 	

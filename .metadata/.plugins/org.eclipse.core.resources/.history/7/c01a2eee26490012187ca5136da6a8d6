@@ -200,26 +200,26 @@ public class InterfacePersoEchiquier {
 				int numCase = ((Vector<JButton>) tab_cases).indexOf(e.getSource());
 				int largeur = numCase%8;
 				int hauteur = numCase/8;
-				Case eCase = new Case(new Position(hauteur, largeur));
+				Case eCase = EchiquierActif.chercherCase(new Position(hauteur, largeur));
 				
 				if ((eCase.estVide()==false) && (selectionPiece==false)){ // si case occupée et pas de pièce retenue
 					CaseSelectionnee = eCase ; // la case est retenue
 					selectionCase = true ;
 				}
-				else if ((eCase.estVide()==false) && (selectionPiece==true)){ // si case occupée et pièce retenue
-					nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee) ;
+				else if ((e.estVide()==false) && (selectionPiece==true){ // si case occupée et pièce retenue
+					nouvelleVariante.ajouterPiece(e, PieceSelectionnee) ;
 					// on change la pièce
 					actualiserImage(eCase);
 					selectionPiece = false;
 				}
-				else if ((eCase.estVide()==true) && (selectionPiece==true)){ // si case vide et pièce retenue
+				else if ((e.estVide()==true) && (selectionPiece==true)){ // si case vide et pièce retenue
 					nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee);
 					// on place la pièce
 					actualiserImage(eCase);
 					selectionPiece = false;
 				}
-				else if (selectionCase == true){ // si case retenue
-					nouvelleVariante.ajouterPiece(eCase, CaseSelectionnee.getPiece()) ;
+				else if (caseSelectionne == true){ // si case retenue
+					nouvelleVariante.ajouterPiece(e, CaseSelectionnee.getPiece()) ;
 					// on change la pièce
 					nouvelleVariante.retirerPiece(CaseSelectionnee) ;
 					// On la retire la la première case

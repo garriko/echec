@@ -1422,3 +1422,79 @@ java.io.FileNotFoundException: C:\Users\Anne-Sophie\.m2\repository\.cache\m2e\1.
 2012-12-18 15:41:57,160 [Worker-139] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
 2012-12-18 15:41:57,160 [Worker-139] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2012-12-18 15:41:57,160 [Worker-139] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
+2012-12-18 15:44:55,515 [Worker-139] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:44:55,515 [Worker-139] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
+2012-12-18 15:44:55,515 [Worker-139] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:44:55,515 [Worker-139] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
+2012-12-18 15:45:28,120 [Worker-146] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:45:28,120 [Worker-146] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
+2012-12-18 15:45:28,120 [Worker-146] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:45:28,120 [Worker-146] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
+2012-12-18 15:45:39,476 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:45:39,476 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
+2012-12-18 15:45:39,476 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:45:39,476 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
+2012-12-18 15:46:10,878 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:46:10,878 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
+2012-12-18 15:46:10,894 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:46:10,894 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
+2012-12-18 15:46:15,746 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:46:15,746 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
+2012-12-18 15:46:15,746 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:46:15,746 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
+2012-12-18 15:46:47,975 [Worker-147] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:46:47,975 [Worker-147] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
+2012-12-18 15:46:47,991 [Worker-147] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:46:47,991 [Worker-147] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
+2012-12-18 15:47:04,652 [Worker-147] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:47:04,652 [Worker-147] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
+2012-12-18 15:47:04,652 [Worker-147] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:47:04,652 [Worker-147] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
+2012-12-18 15:47:12,545 [Worker-144] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:47:12,545 [Worker-144] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
+2012-12-18 15:47:12,545 [Worker-144] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:47:12,545 [Worker-144] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
+2012-12-18 15:50:13,864 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:50:13,880 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
+2012-12-18 15:50:13,880 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:50:13,880 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
+2012-12-18 15:50:39,308 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:50:39,308 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
+2012-12-18 15:50:39,308 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:50:39,308 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
+2012-12-18 15:51:19,837 [Worker-149] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:51:19,837 [Worker-149] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
+2012-12-18 15:51:19,837 [Worker-149] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:51:19,837 [Worker-149] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
+2012-12-18 15:51:43,845 [Worker-144] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:51:43,845 [Worker-144] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
+2012-12-18 15:51:43,861 [Worker-144] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 15:51:43,861 [Worker-144] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
+2012-12-18 16:07:14,052 [Worker-152] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 16:07:14,052 [Worker-152] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
+2012-12-18 16:07:14,052 [Worker-152] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 16:07:14,052 [Worker-152] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
+2012-12-18 16:14:13,474 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 16:14:13,474 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
+2012-12-18 16:14:13,474 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 16:14:13,474 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
+2012-12-18 16:22:03,955 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 16:22:03,955 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
+2012-12-18 16:22:03,955 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 16:22:03,955 [Worker-145] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
+2012-12-18 16:22:32,940 [Worker-158] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 16:22:32,940 [Worker-158] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
+2012-12-18 16:22:32,940 [Worker-158] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 16:22:32,940 [Worker-158] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
+2012-12-18 16:23:53,421 [Worker-158] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 16:23:53,421 [Worker-158] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
+2012-12-18 16:23:53,436 [Worker-158] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 16:23:53,436 [Worker-158] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
+2012-12-18 16:23:59,988 [Worker-157] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 16:23:59,988 [Worker-157] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
+2012-12-18 16:23:59,988 [Worker-157] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 16:23:59,988 [Worker-157] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
+2012-12-18 16:28:51,647 [Worker-158] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 16:28:51,647 [Worker-158] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
+2012-12-18 16:28:51,662 [Worker-158] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-18 16:28:51,662 [Worker-158] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources

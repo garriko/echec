@@ -200,13 +200,13 @@ public class InterfacePersoEchiquier {
 				int numCase = ((Vector<JButton>) tab_cases).indexOf(e.getSource());
 				int largeur = numCase%8;
 				int hauteur = numCase/8;
-				Case eCase = new Case(new Position(hauteur, largeur));
+				Case eCase = EchiquierActif.chercherCase(new Position(hauteur, largeur));
 				
 				if ((eCase.estVide()==false) && (selectionPiece==false)){ // si case occupée et pas de pièce retenue
 					CaseSelectionnee = eCase ; // la case est retenue
 					selectionCase = true ;
 				}
-				else if ((eCase.estVide()==false) && (selectionPiece==true)){ // si case occupée et pièce retenue
+				else if ((eCase.estVide()==false) && (selectionPiece==true){ // si case occupée et pièce retenue
 					nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee) ;
 					// on change la pièce
 					actualiserImage(eCase);

@@ -8,4 +8,23 @@
 <fullyQualifiedTypeName name="javax.swing.JCheckBox"/>
 <fullyQualifiedTypeName name="javax.swing.JLabel"/>
 <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
+<fullyQualifiedTypeName name="javax.swing.JSpinner"/>
+<fullyQualifiedTypeName name="javax.swing.SpinnerListModel"/>
+<fullyQualifiedTypeName name="java.awt.event.FocusListener"/>
+<fullyQualifiedTypeName name="java.awt.event.FocusEvent"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="javax.swing.BorderFactory"/>
+<fullyQualifiedTypeName name="java.awt.event.MouseListener"/>
+<fullyQualifiedTypeName name="java.awt.event.MouseEvent"/>
+<fullyQualifiedTypeName name="projet_echec.echec.gestion.Joueur"/>
+<fullyQualifiedTypeName name="projet_echec.echec.gestion.Options"/>
+<fullyQualifiedTypeName name="projet_echec.echec.jeu.Piece"/>
+<fullyQualifiedTypeName name="projet_echec.echec.jeu.piece.Pion"/>
+<fullyQualifiedTypeName name="projet_echec.echec.jeu.piece.Roi"/>
+<fullyQualifiedTypeName name="projet_echec.echec.jeu.piece.Tour"/>
+<fullyQualifiedTypeName name="projet_echec.echec.jeu.piece.Cavalier"/>
+<fullyQualifiedTypeName name="projet_echec.echec.jeu.piece.Fou"/>
+<fullyQualifiedTypeName name="projet_echec.echec.jeu.piece.Reine"/>
+<fullyQualifiedTypeName name="projet_echec.echec.jeu.Position"/>
+<fullyQualifiedTypeName name="projet_echec.echec.jeu.EchiquierActif"/>
 </qualifiedTypeNameHistroy>
