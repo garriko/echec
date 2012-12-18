@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.Vector;
 
+import projet_echec.echec.exception.DeplacementException;
+
 /**
  * 
  * @author Adrien
@@ -129,9 +131,25 @@ public class EchiquierActif extends Echiquier {
 	 * Permet le deplacement des pieces
 	 * @param caseDepart : le joueur a selectionne une piece sur le plateau
 	 * @param caseArrivee: le joueur a selectionne une case d'arrivee sur le plateau
+	 * @throws DeplacementException 
 	 */
-	public void deplacer(Case caseDepart, Case caseArrivee){
-		//TODO : deplacer
+	public void deplacer(Case caseDepart, Case caseArrivee) throws DeplacementException{
+		ArrayList<Case> plop = new ArrayList<Case>();
+		plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);
+		plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);
+		if(plop.contains(caseArrivee)){
+			if(!caseArrivee.estVide())
+			{
+				this.listePiecePrises.add(caseArrivee.getPiece());
+				for(int j=0; j< listePieceEnJeu.size();j++)
+					if(listePieceEnJeu.get(j).equals(caseArrivee))
+						listePieceEnJeu.remove(j);
+				//TODO: finir
+			}
+			
+		}
+		else
+			throw new DeplacementException();
 	}
 	
 	/**
