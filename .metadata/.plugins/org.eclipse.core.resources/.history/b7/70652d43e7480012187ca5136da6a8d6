@@ -74,7 +74,7 @@ public class InterfaceConfigVariante {
 		JScrollPane scroll = new JScrollPane(listeVariantes);
 		scroll.setPreferredSize(new Dimension(100, 120));
 		boutonsChoix.add(scroll);
-		scroll.setBounds(120, 250, 465, 260);
+		scroll.setBounds(110, 250, 465, 250);
 		boutonsChoix.setOpaque(false);
 		tmp.add(boutonsChoix);
     

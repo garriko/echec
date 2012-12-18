@@ -229,11 +229,11 @@ public class InterfaceJeu {
 			int numCase = plateauVariante.get(i).getPosition().getLargeur() + 8*(plateauVariante.get(i).getPosition().getHauteur()-1);
 			Piece pieceCase = plateauVariante.get(i).getPiece();
 			
-			if (pieceCase.getClass()==Pion){
-				if (pieceCase.getCamp()=="noir")
+			/*if (pieceCase.getClass()==Pion){
+				if pieceCase.get
 				numCase
 			}
-			
+			*/
 			((Vector<JButton>) tab_cases).get(numCase).setIcon(new ImageIcon("images/Pieces/pions/"+String.valueOf(numPiece)+".png"));
 		}
 		

@@ -21,7 +21,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import projet_echec.echec.jeu.Case;
-import projet_echec.echec.jeu.Piece;
 import projet_echec.echec.jeu.Variantes;
 
 
@@ -227,13 +226,6 @@ public class InterfaceJeu {
 		Vector<Case> plateauVariante = v.getPlateau();
 		for (int i=0; i<64; i++){
 			int numCase = plateauVariante.get(i).getPosition().getLargeur() + 8*(plateauVariante.get(i).getPosition().getHauteur()-1);
-			Piece pieceCase = plateauVariante.get(i).getPiece();
-			
-			if (pieceCase.getClass()==Pion){
-				if (pieceCase.getCamp()=="noir")
-				numCase
-			}
-			
 			((Vector<JButton>) tab_cases).get(numCase).setIcon(new ImageIcon("images/Pieces/pions/"+String.valueOf(numPiece)+".png"));
 		}
 		

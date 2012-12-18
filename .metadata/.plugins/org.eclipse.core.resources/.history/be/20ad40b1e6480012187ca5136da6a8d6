@@ -68,8 +68,8 @@ public class InterfaceConfigPartie {
 		aideJ1.setVisible(true);
 		aideJ2.setVisible(true);
 		rotation.setVisible(true);
-		dureeJ1.setBounds(538, 183, 69, 41);
-		dureeJ2.setBounds(537, 323, 70, 41);
+		dureeJ1.setBounds(550, 190, 50, 30);
+		dureeJ2.setBounds(550, 325, 50, 30);
 		dureeJ1.setVisible(true);
 		dureeJ2.setVisible(true);
 		

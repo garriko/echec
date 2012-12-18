@@ -11,10 +11,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import javax.swing.SpinnerListModel;
-
 
 /**
  * 
@@ -39,8 +36,8 @@ public class InterfaceConfigPartie {
 	JTextField nomJ1 = new JTextField("Joueur 1");
 	JTextField nomJ2 = new JTextField("Joueur 2");
 	
-	JSpinner dureeJ1 = new JSpinner(new SpinnerListModel());
-	JSpinner dureeJ2 = new JSpinner(new SpinnerListModel());
+	//SpinBox dureeJ1 = new SpinBox(0, 0, 10);
+	//SpinBox dureeJ2 = new SpinBox(0, 0, 10);
 	
 	JCheckBox aideJ1 = new JCheckBox();
 	JCheckBox aideJ2 = new JCheckBox();
@@ -68,10 +65,6 @@ public class InterfaceConfigPartie {
 		aideJ1.setVisible(true);
 		aideJ2.setVisible(true);
 		rotation.setVisible(true);
-		dureeJ1.setBounds(538, 183, 69, 41);
-		dureeJ2.setBounds(537, 323, 70, 41);
-		dureeJ1.setVisible(true);
-		dureeJ2.setVisible(true);
 		
 		Ecouteur listen=new Ecouteur();
 		Bouton1.addActionListener(listen);
@@ -93,8 +86,6 @@ public class InterfaceConfigPartie {
 		boutonsChoix.add(aideJ2);
 		boutonsChoix.add(rotation);
 		boutonsChoix.add(mode);
-		boutonsChoix.add(dureeJ1);
-		boutonsChoix.add(dureeJ2);
 		
 		
 		boutonsChoix.setOpaque(false);
