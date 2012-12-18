@@ -123,7 +123,10 @@ public class Variantes {
 			Case currentCase = plateau.get(i);
 			if(currentCase.equals(c))
 				if(currentCase.estVide())
+				{
 					currentCase.setPiece(p);
+					listePieces.add(currentCase);
+				}
 				else
 					throw new FullCaseException();
 			else
@@ -146,7 +149,12 @@ public class Variantes {
 				if(currentCase.estVide())
 					throw new EmptyCaseException();
 				else
+				{
 					currentCase.setPiece(null);
+					for(int j=0;j<listePieces.size();j++)
+						if(listePieces.get(j).equals(currentCase))
+							listePieces.remove(j);
+				}
 			else
 				throw new CaseErrorException();
 		}
@@ -167,11 +175,23 @@ public class Variantes {
 	public Vector<Case> getListePieces() {
 		return listePieces;
 	}
-/*
+
 	public static void main(String[] args) {
+		
 		Variantes v =new Variantes();
+		/*
 		try {
-			v.ajouterPiece(new Case(new Position(1,1)), new Tour("blanc",null));
+			v.chargerVariante("classique");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+		try {
+			v.ajouterPiece(new Case(new Position(1,1)), new Tour(new String("blanc"),new String("")));
 		} catch (FullCaseException e) {
 			
 			e.toString();
@@ -500,7 +520,7 @@ public class Variantes {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+	
 	}
-	*/
+	
 }
