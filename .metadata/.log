@@ -47,3 +47,13 @@ Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.
 
 !ENTRY org.eclipse.m2e.logback.appender 4 0 2012-12-17 19:20:01.914
 !MESSAGE Unable to update index for central|http://repo.maven.apache.org/maven2
+!SESSION 2012-12-18 08:23:46.703 -----------------------------------------------
+eclipse.buildId=I20120608-1400
+java.version=1.7.0
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.java.product C:\Users\Anne-Sophie\Desktop\echec\echec\.project
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.package.java.product C:\Users\Anne-Sophie\Desktop\echec\echec\.project
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2012-12-18 08:25:17.255
+!MESSAGE Unable to update index for central|http://repo.maven.apache.org/maven2: C:\Users\Anne-Sophie\.m2\repository\.cache\m2e\1.1.0\26522e0d83a422eed93329ece7565cfc\nexus-maven-repository-index.zip (Le fichier spécifié est introuvable)
