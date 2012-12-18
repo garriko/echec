@@ -73,6 +73,24 @@ public abstract class Echiquier {
 	public void supprimerPieceEnJeu(Case e){
 		this.listePieceEnJeu.remove(e);	
 	}
+	public Vector<Case> getPlateau() {
+		return plateau;
+	}
+	public void setPlateau(Vector<Case> plateau) {
+		this.plateau = plateau;
+	}
+	public Vector<Case> getListePieceEnJeu() {
+		return listePieceEnJeu;
+	}
+	public void setListePieceEnJeu(Vector<Case> listePieceEnJeu) {
+		this.listePieceEnJeu = listePieceEnJeu;
+	}
+	public Vector<Piece> getListePiecePrises() {
+		return listePiecePrises;
+	}
+	public void setListePiecePrises(Vector<Piece> listePiecePrises) {
+		this.listePiecePrises = listePiecePrises;
+	}
 	/**
 	 * ajoute une case a listePiecePrises
 	 * @param e

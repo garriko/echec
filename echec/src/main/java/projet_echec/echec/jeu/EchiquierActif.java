@@ -2,6 +2,7 @@ package projet_echec.echec.jeu;
 
 import java.util.ArrayList;
 import java.util.Timer;
+import java.util.Vector;
 
 /**
  * 
@@ -48,7 +49,42 @@ public class EchiquierActif extends Echiquier {
 		super(V);
 	}
 	
-	
+	/**
+	 * regarde si la case e est menace par le camp adverse.(on a le camp en parametre)
+	 */
+	public boolean estMenace(String c, Case e){
+		boolean estmenace= false;
+		Vector<Case> listePieceAdverse= new Vector<Case>();
+		if (c=="noir")
+		{
+			for(int i=0;i<this.listePieceEnJeu.size();i++){// Pour toutes les pieces en jeu
+				if (this.listePieceEnJeu.get(i).getPiece().getCamp()=="blanc"){//si dans la liste la piece est blanche
+					listePieceAdverse.add(this.listePieceEnJeu.get(i));//ajoute dans la liste des pieces adverses les pieces noires
+				}
+			}
+			
+		}
+		else if(c=="blanc")
+		{
+			for(int i=0;i<this.listePieceEnJeu.size();i++){
+				if (this.listePieceEnJeu.get(i).getPiece().getCamp()=="noir"){
+					listePieceAdverse.add(this.listePieceEnJeu.get(i));
+				}
+			}
+		}
+		else 
+		{//TODO: creer une exeption
+		}
+		for(int i=0;i<listePieceAdverse.size();i++){//pour toutes les pieces adverses
+			
+			for (int j=0;j<listePieceAdverse.get(i).getPiece().getDeplacementPossible(listePieceAdverse.get(i)).size();i++){//pour tous les deplacements de chaque piece
+			if (listePieceAdverse.get(i).getPiece().getDeplacementPossible(listePieceAdverse.get(i)).get(j).equals(e)){//la case est égale a la case que l'on veut tester
+				estmenace=true;
+			}
+		}
+	}
+		return estmenace;
+	}
 	/**
 	 * Test si on est en position d'echec
 	 * @return true si l'un des joueurs est en echec
