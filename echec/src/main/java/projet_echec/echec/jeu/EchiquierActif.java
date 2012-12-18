@@ -135,16 +135,17 @@ public class EchiquierActif extends Echiquier {
 	 */
 	public void deplacer(Case caseDepart, Case caseArrivee) throws DeplacementException{
 		ArrayList<Case> plop = new ArrayList<Case>();
-		plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);
-		plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);
+		plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
+		plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
 		if(plop.contains(caseArrivee)){
-			if(!caseArrivee.estVide())
+			if(!caseArrivee.estVide())//si il y a une case a l'arrivee
 			{
-				this.listePiecePrises.add(caseArrivee.getPiece());
-				for(int j=0; j< listePieceEnJeu.size();j++)
-					if(listePieceEnJeu.get(j).equals(caseArrivee))
-						listePieceEnJeu.remove(j);
-				//TODO: finir
+				this.listePiecePrises.add(caseArrivee.getPiece());//on ajoute la piece dans la liste des pieces prises
+				
+				for(int j=0; j< listePieceEnJeu.size();j++)//pour toutes les pieces en jeu
+					if(listePieceEnJeu.get(j).equals(caseArrivee))//si il y a une case égale a la case d'arrivee
+						listePieceEnJeu.remove(j);//on la supprime
+				this.plateau.s
 			}
 			
 		}

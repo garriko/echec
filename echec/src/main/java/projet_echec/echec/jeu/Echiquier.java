@@ -73,6 +73,11 @@ public abstract class Echiquier {
 	public void supprimerPieceEnJeu(Case e){
 		this.listePieceEnJeu.remove(e);	
 	}
+	public void ChangerCase(Vector<Case> plateau){
+		
+		
+		return plateau;
+	}
 	public Vector<Case> getPlateau() {
 		return plateau;
 	}
