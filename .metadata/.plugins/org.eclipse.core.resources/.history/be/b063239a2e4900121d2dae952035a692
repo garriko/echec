@@ -1,6 +1,8 @@
 package interfaceGraphique;
 
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -8,10 +10,15 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Vector;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,6 +28,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import projet_echec.echec.jeu.Case;
+import projet_echec.echec.jeu.EchiquierActif;
+import projet_echec.echec.jeu.Piece;
+import projet_echec.echec.jeu.Position;
 import projet_echec.echec.jeu.Variantes;
 
 
@@ -46,6 +56,7 @@ public class InterfaceJeu {
 	JMenuItem boutonAProposDe = new JMenuItem("A propos de");
 	
 	Case CaseSelectionnee = new Case(null);
+	
 	
 	
 	/**
@@ -123,20 +134,20 @@ public class InterfaceJeu {
 		// 1ère ligne
 		for (int i=0; i<8; i++){			
 			if (i%2==0){
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/"+String.valueOf(i+1)+".png"));	
+				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/auto/"+String.valueOf(i+1)+".png"));	
 			}
 			else {
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/"+String.valueOf(i+1)+".png"));		
+				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/auto/"+String.valueOf(i+1)+".png"));		
 			}
 		}
 		
 		// 8ème ligne
 		for (int i=56; i<64; i++){			
 			if (i%2==0){
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/"+String.valueOf(i+1)+".png"));		
+				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/auto/"+String.valueOf(i+1)+".png"));		
 			}
 			else {
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/"+String.valueOf(i+1)+".png"));		
+				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/auto/"+String.valueOf(i+1)+".png"));		
 			}
 		}
 		
@@ -148,11 +159,22 @@ public class InterfaceJeu {
 		
 		
 		for (int i=0; i<64 ; i++){
-			plateau.add(((Vector<JButton>) tab_cases).get(i));	
-				
+			plateau.add(((Vector<JButton>) tab_cases).get(i));
+			((Vector<JButton>) tab_cases).get(i).setBorder(BorderFactory.createLineBorder(Color.gray));
 		}
 		
 		imageFond.add(plateau);
+		
+		EcouteurAction listenAction=new EcouteurAction();
+		for (int i=0; i<64 ; i++){
+			((Vector<JButton>) tab_cases).get(i).addActionListener(listenAction);					
+		}
+		
+		EcouteurFocus listenFocus = new EcouteurFocus();
+		for (int i=0; i<64 ; i++){
+			((Vector<JButton>) tab_cases).get(i).addFocusListener(listenFocus);					
+		}
+		
 		
 		tmp.add(imageFond);
 		fenetre.setSize(1030,700); 
@@ -225,9 +247,8 @@ public class InterfaceJeu {
 		//Récupération des données depuis la variante v
 		Vector<Case> plateauVariante = v.getPlateau();
 		for (int i=0; i<64; i++){
-			int numCase = plateauVariante.get(i).getPosition().getLargeur() + 8*(plateauVariante.get(i).getPosition().getHauteur()-1);
-			Piece pieceCase = plateauVariante.get(i).getPiece();
-			((Vector<JButton>) tab_cases).get(numCase).setIcon(new ImageIcon("images/Pieces/pions/"+String.valueOf(numPiece)+".png"));
+			int numCase = plateauVariante.get(i).getPosition().getLargeur() + 8*(plateauVariante.get(i).getPosition().getHauteur()-1);			
+			((Vector<JButton>) tab_cases).get(numCase).setIcon(new ImageIcon(plateauVariante.get(i).getImg()));
 		}
 		
 		
@@ -242,6 +263,7 @@ public class InterfaceJeu {
 		
 		for (int i=0; i<64 ; i++){
 			plateau.add(((Vector<JButton>) tab_cases).get(i));	
+			((Vector<JButton>) tab_cases).get(i).setBorder(BorderFactory.createLineBorder(Color.gray));
 				
 		}
 		
@@ -257,15 +279,50 @@ public class InterfaceJeu {
 				
 	}
 	
+	
+	
+	
+	
+	public void actualiserImage(Case NewCase){
+		int numCase = NewCase.getPosition().getLargeur() + 8*(NewCase.getPosition().getHauteur()-1);			
+		((Vector<JButton>) tab_cases).get(numCase).setIcon(new ImageIcon(NewCase.getImg()));
+	}
 		
-	public class Ecouteur implements ActionListener{		
+	
+	
+	
+	
+	public class EcouteurAction implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
+			if (tab_cases.contains(e.getSource())){
+				int numCase = ((Vector<JButton>) tab_cases).indexOf(e.getSource());
+				int largeur = numCase%8;
+				int hauteur = numCase/8;
+				//Case eCase = EchiquierActif.chercherCase(new Position(hauteur, largeur));
+				//EchiquierActif.selectionnerCase(eCase);
+				actualiserImage(CaseSelectionnee);
+				//actualiserImage(eCase);
+				//CaseSelectionnee =  eCase;
+			}
 		}
 	}
 	
 
+	public class EcouteurFocus implements FocusListener{		
+		public void focusGained(FocusEvent e){
+			if (tab_cases.contains(e.getSource())){
+				//((JButton) e.getSource()).setIcon(new ImageIcon("images/caserouge.png"));
+				((JButton) e.getSource()).setBorderPainted(true);
+				((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(Color.red));
+			}
+		}
+		public void focusLost(FocusEvent e){
+			//((JButton) e.getSource()).setBorderPainted(false);
+			((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(Color.gray));
+		}
+	}
 	
-	
+
 	
 	
 	public static void main(String[] args){

@@ -284,7 +284,7 @@ public class InterfaceJeu {
 	
 	
 	public void actualiserImage(Case NewCase){
-		int numCase = NewCase.getPosition().getLargeur() + 8*(NewCase.getPosition().getHauteur()-1);			
+		int numCase = 64-(NewCase.getPosition().getLargeur() + 8*(NewCase.getPosition().getHauteur()-1)-1);			
 		((Vector<JButton>) tab_cases).get(numCase).setIcon(new ImageIcon(NewCase.getImg()));
 	}
 		

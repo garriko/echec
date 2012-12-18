@@ -197,7 +197,7 @@ public class InterfacePersoEchiquier {
 				
 			}
 			else if (tab_cases.contains(e.getSource())){
-				int numCase = 64-(((Vector<JButton>) tab_cases).indexOf(e.getSource())-1);
+				int numCase = ((Vector<JButton>) tab_cases).indexOf(e.getSource())-1;
 				int largeur = numCase%8;
 				int hauteur = numCase/8;
 				Case eCase = new Case(new Position(hauteur, largeur));
