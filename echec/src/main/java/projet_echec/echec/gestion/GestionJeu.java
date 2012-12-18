@@ -35,12 +35,12 @@ public class GestionJeu {
 		
 	}
 	/**
-	 * Cree une nouvelle partie si possible avec les parametres fournis
+	 * Cree une nouvelle partie et un echiquier si possible avec les parametres fournis
 	 * @param j1 Infos du joueur blanc
 	 * @param j2 infos du joueur noir
 	 * @param nomV nom de la variante
 	 * @param optionsChoisies Options de la parties
-	 * @return
+	 * @return 
 	 * @throws GameException 
 	 */
 	public Wrapper creerNewGame(Joueur j1, Joueur j2, String nomV,Options optionsChoisies) throws GameException{
