@@ -42,10 +42,10 @@ import projet_echec.echec.jeu.piece.Tour;
 
 public class InterfacePersoEchiquier {
 
-	Variantes nouvelleVariante = new Variantes();
+	Variantes nouvelleVariante;
 	
-	JFrame fenetre=new JFrame("Jeu d'échecs");
-	Container tmp = fenetre.getContentPane();
+	JFrame fenetre;
+	Container tmp;
 	Collection<JButton> tab_cases = new Vector<JButton>();
 	
 	Image ok = new ImageIcon("images/partiepersoBoutonOK.png").getImage();
@@ -80,8 +80,9 @@ public class InterfacePersoEchiquier {
 	 * Constructeur sans parametre
 	 */
 	public InterfacePersoEchiquier() {
-		
-		
+		nouvelleVariante = new Variantes();
+		fenetre = new JFrame("Jeu d'échecs");
+		tmp = fenetre.getContentPane();
 		// fond d'écran
 		JPanel imageFond = new TestImagePanel(new ImageIcon("images/partieperso.png").getImage());
 		
@@ -150,6 +151,20 @@ public class InterfacePersoEchiquier {
 		for (int i=0; i<64 ; i++){
 			((Vector<JButton>) tab_cases).get(i).addActionListener(listenAction);					
 		}
+		boutonOK.addActionListener(listenAction);
+		boutonAnnuler.addActionListener(listenAction);
+		PionBlanc.addActionListener(listenAction);
+		TourBlanc.addActionListener(listenAction);
+		FouBlanc.addActionListener(listenAction);
+		CavalierBlanc.addActionListener(listenAction);
+		RoiBlanc.addActionListener(listenAction);
+		ReineBlanc.addActionListener(listenAction);
+		PionNoir.addActionListener(listenAction);
+		TourNoir.addActionListener(listenAction);
+		CavalierNoir.addActionListener(listenAction);
+		FouNoir.addActionListener(listenAction);
+		RoiNoir.addActionListener(listenAction);
+		ReineNoir.addActionListener(listenAction);
 		
 		
 		
@@ -184,7 +199,7 @@ public class InterfacePersoEchiquier {
 	
 	
 	public void actualiserImage(Case NewCase){
-		int numCase = NewCase.getPosition().getLargeur() + 8*(NewCase.getPosition().getHauteur()-1);			
+		int numCase = 64-(NewCase.getPosition().getLargeur() + 8*(NewCase.getPosition().getHauteur()-1)-1);			
 		((Vector<JButton>) tab_cases).get(numCase).setIcon(new ImageIcon(NewCase.getImg()));
 	}
 		
@@ -206,9 +221,9 @@ public class InterfacePersoEchiquier {
 				
 			}
 			else if (tab_cases.contains(e.getSource())){
-				int numCase = 64-(((Vector<JButton>) tab_cases).indexOf(e.getSource())-1);
-				int largeur = numCase%8;
-				int hauteur = numCase/8;
+				int numCase = (((Vector<JButton>) tab_cases).indexOf(e.getSource())-1);
+				int largeur = numCase%8 +1;
+				int hauteur = numCase/8 +1;
 				Case eCase = new Case(new Position(hauteur, largeur));
 				
 				if ((eCase.estVide()==false) && (selectionPiece==false)){ // si case occupée et pas de pièce retenue

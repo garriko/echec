@@ -69,7 +69,7 @@ public class Variantes {
 	public void saveVariante(String nomVariante) throws IOException
 	{
 		VariantWrapper w = new VariantWrapper(plateau,listePieces);
-		System.out.println(w.getPlateau().get(61).getPiece().getCamp());
+		
 	      try
 	      {
 	         FileOutputStream fileOut = new FileOutputStream(new String("variantes/"+nomVariante+".vech"));
