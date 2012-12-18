@@ -20,10 +20,9 @@ import projet_echec.echec.jeu.Position;
 
 public class Roi extends Piece{
 
-	public Roi(String camp) {
-		super(camp);
+	public Roi(String camp, String img) {
+		super(camp,img);
 	}
-
 	@Override
 	/**
 	 * renvoi la liste des positions possibles

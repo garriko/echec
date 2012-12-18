@@ -17,10 +17,9 @@ import projet_echec.echec.jeu.Position;
 
 public class Tour extends Piece{
 
-	public Tour(String camp) {
-		super(camp);
+	public Tour(String camp, String img) {
+		super(camp,img);
 	}
-
 	@Override
 	/**
 	 * renvoi la liste des positions possibles

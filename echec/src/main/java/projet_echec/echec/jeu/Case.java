@@ -51,7 +51,8 @@ public class Case {
 	 * permet de savoir si un pion a atteint le bout du plateau pour le changer en une autre piece
 	 * @return la case contenant le pion si le pion est au bout du plateau
 	 */
-	public Case pionBoutEchiquier(){
+	//TODO : y repenser
+	/*public Case pionBoutEchiquier(){
 		
 		Case IlYAUnPion = null;
 		for (int i=1;i<9;i++)
@@ -71,7 +72,7 @@ public class Case {
 			}
 		}
 		return IlYAUnPion;//on retourne la case du pion.(=null si pas de pion)
-	}
+	}*/
 	
 	public boolean equals(Case c) {
 		

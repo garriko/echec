@@ -19,8 +19,8 @@ public class Pion extends Piece {
 
 	private boolean dejaBouge;
 
-	public Pion(String camp) {
-		super(camp);
+	public Pion(String camp, String img) {
+		super(camp,img);
 		dejaBouge=false;
 	}
 	

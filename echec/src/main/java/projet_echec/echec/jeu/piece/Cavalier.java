@@ -18,9 +18,8 @@ public class Cavalier extends Piece{
 
 	
 	
-	public Cavalier(String camp) {
-		super(camp);
-		
+	public Cavalier(String camp, String img) {
+		super(camp,img);
 	}
 
 	@Override
