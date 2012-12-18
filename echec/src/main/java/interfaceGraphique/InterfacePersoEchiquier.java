@@ -46,32 +46,32 @@ public class InterfacePersoEchiquier {
 	
 	JFrame fenetre;
 	Container tmp;
-	Collection<JButton> tab_cases = new Vector<JButton>();
+	Collection<JButton> tab_cases;
 	
-	Image ok = new ImageIcon("images/partiepersoBoutonOK.png").getImage();
-	JButton boutonOK = new JButton(new ImageIcon(ok));
-	Image annuler = new ImageIcon("images/partiepersoBoutonAnnuler.png").getImage();
-	JButton boutonAnnuler = new JButton(new ImageIcon(annuler));
+	Image ok;
+	JButton boutonOK;
+	Image annuler;
+	JButton boutonAnnuler;
 	
-	JButton PionBlanc = new JButton(new ImageIcon("images/Pieces/pasAuto/121.png"));
-	JButton TourBlanc = new JButton(new ImageIcon("images/Pieces/pasAuto/122.png"));
-	JButton CavalierBlanc = new JButton(new ImageIcon("images/Pieces/pasAuto/123.png"));
-	JButton FouBlanc = new JButton(new ImageIcon("images/Pieces/pasAuto/124.png"));
-	JButton RoiBlanc = new JButton(new ImageIcon("images/Pieces/pasAuto/125.png"));
-	JButton ReineBlanc = new JButton(new ImageIcon("images/Pieces/pasAuto/126.png"));
+	JButton PionBlanc;
+	JButton TourBlanc;
+	JButton CavalierBlanc;
+	JButton FouBlanc;
+	JButton RoiBlanc;
+	JButton ReineBlanc;
 	
-	JButton PionNoir = new JButton(new ImageIcon("images/Pieces/pasAuto/221.png"));
-	JButton TourNoir = new JButton(new ImageIcon("images/Pieces/pasAuto/222.png"));
-	JButton CavalierNoir = new JButton(new ImageIcon("images/Pieces/pasAuto/223.png"));
-	JButton FouNoir = new JButton(new ImageIcon("images/Pieces/pasAuto/224.png"));
-	JButton RoiNoir = new JButton(new ImageIcon("images/Pieces/pasAuto/225.png"));
-	JButton ReineNoir = new JButton(new ImageIcon("images/Pieces/pasAuto/226.png"));
+	JButton PionNoir ;
+	JButton TourNoir;
+	JButton CavalierNoir;
+	JButton FouNoir;
+	JButton RoiNoir;
+	JButton ReineNoir;
 	
 	
-	Case CaseSelectionnee = new Case(null);
-	Piece PieceSelectionnee = new Pion("blanc");
-	boolean selectionPiece = false;
-	boolean selectionCase = false;
+	Case CaseSelectionnee;
+	Piece PieceSelectionnee;
+	boolean selectionPiece;
+	boolean selectionCase;
 	
 	
 	
@@ -80,11 +80,39 @@ public class InterfacePersoEchiquier {
 	 * Constructeur sans parametre
 	 */
 	public InterfacePersoEchiquier() {
+		selectionPiece = false;
+		selectionCase = false;
+		PieceSelectionnee = new Pion("blanc");
+		CaseSelectionnee = new Case(null);
+		
 		nouvelleVariante = new Variantes();
 		fenetre = new JFrame("Jeu d'échecs");
 		tmp = fenetre.getContentPane();
+		
+		tab_cases = new Vector<JButton>();
+		
+		ok = new ImageIcon("images/partiepersoBoutonOK.png").getImage();
+		boutonOK =new JButton(new ImageIcon(ok));
+		
+		annuler  = new ImageIcon("images/partiepersoBoutonAnnuler.png").getImage();
+		boutonAnnuler  = new JButton(new ImageIcon(annuler));
+		
+		PionBlanc  = new JButton(new ImageIcon("images/Pieces/pasAuto/121.png"));
+		TourBlanc = new JButton(new ImageIcon("images/Pieces/pasAuto/122.png"));
+		CavalierBlanc = new JButton(new ImageIcon("images/Pieces/pasAuto/123.png"));
+		FouBlanc  = new JButton(new ImageIcon("images/Pieces/pasAuto/124.png"));
+		RoiBlanc  = new JButton(new ImageIcon("images/Pieces/pasAuto/125.png"));
+		ReineBlanc = new JButton(new ImageIcon("images/Pieces/pasAuto/126.png"));
+		
+		PionNoir= new JButton(new ImageIcon("images/Pieces/pasAuto/221.png"));
+		TourNoir = new JButton(new ImageIcon("images/Pieces/pasAuto/222.png"));
+		FouNoir = new JButton(new ImageIcon("images/Pieces/pasAuto/224.png"));
+		CavalierNoir = new JButton(new ImageIcon("images/Pieces/pasAuto/223.png"));
+		RoiNoir = new JButton(new ImageIcon("images/Pieces/pasAuto/225.png"));
+		ReineNoir = new JButton(new ImageIcon("images/Pieces/pasAuto/226.png"));
 		// fond d'écran
 		JPanel imageFond = new TestImagePanel(new ImageIcon("images/partieperso.png").getImage());
+	
 		
 		boutonOK.setBounds(675, 550, 124, 65);
 		boutonAnnuler.setBounds(800, 550, 149, 65);
