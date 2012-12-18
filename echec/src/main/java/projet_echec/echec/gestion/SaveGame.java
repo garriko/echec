@@ -32,7 +32,7 @@ public class SaveGame {
 		Wrapper w = new Wrapper(p,e);
 	      try
 	      {
-	         FileOutputStream fileOut = new FileOutputStream(new String(nomFichier+".gech"));
+	         FileOutputStream fileOut = new FileOutputStream(new String("partie en cours/"+nomFichier+".gech"));
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(w);
 	         out.close();
@@ -55,7 +55,7 @@ public class SaveGame {
 		Wrapper w;
 		 try
          {
-            FileInputStream fileIn = new FileInputStream(new String(nomFichier+".gech"));
+            FileInputStream fileIn = new FileInputStream(new String("partie en cours/"+nomFichier+".gech"));
             ObjectInputStream in = new ObjectInputStream(fileIn);
             w = (Wrapper) in.readObject();
             in.close();

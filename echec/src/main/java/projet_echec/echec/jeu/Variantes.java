@@ -7,8 +7,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Vector;
 
+import projet_echec.echec.exception.CaseErrorException;
+import projet_echec.echec.exception.FullCaseException;
 import projet_echec.echec.wrapper.VariantWrapper;
-import projet_echec.echec.wrapper.Wrapper;
+
 
 /**
  * Cette classe gere les placements initiaux des pieces.
@@ -61,7 +63,7 @@ public class Variantes {
 		VariantWrapper w = new VariantWrapper(plateau,listePieces);
 	      try
 	      {
-	         FileOutputStream fileOut = new FileOutputStream(new String(nomVariante+".vech"));
+	         FileOutputStream fileOut = new FileOutputStream(new String("variantes/"+nomVariante+".gech"));
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(w);
 	         out.close();
@@ -82,7 +84,7 @@ public class Variantes {
 		VariantWrapper w;
 		 try
         {
-           FileInputStream fileIn = new FileInputStream(new String(nomVariante+".gech"));
+           FileInputStream fileIn = new FileInputStream(new String("variantes/"+nomVariante+".gech"));
            ObjectInputStream in = new ObjectInputStream(fileIn);
            w = (VariantWrapper) in.readObject();
            in.close();
@@ -105,9 +107,20 @@ public class Variantes {
 	 * 
 	 * @param c case du plateau
 	 * @param p pièce à ajouter
+	 * @throws FullCaseException 
+	 * @throws CaseErrorException 
 	 */
-	public void ajouterPiece(Case c, Piece p){
-		//TODO : Throws exception si la case n'existe pas ou contient déjà une pièce
+	public void ajouterPiece(Case c, Piece p) throws FullCaseException, CaseErrorException{
+		for(int i=0;i<plateau.size();i++){
+			Case currentCase = plateau.get(i);
+			if(currentCase.equals(c))
+				if(currentCase.estVide())
+					plateau.get(i).setPiece(p);
+				else
+					throw new FullCaseException();
+			else
+				throw new CaseErrorException();
+		}
 	}
 	
 	/**

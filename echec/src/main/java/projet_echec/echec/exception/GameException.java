@@ -15,12 +15,12 @@ public class GameException extends Exception {
 	 */
 	public GameException() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
+	
 		return new String("Le nombre de parties simultanees est deja atteint");
 	}
 	
