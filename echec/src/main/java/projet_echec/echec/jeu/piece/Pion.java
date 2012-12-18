@@ -19,8 +19,8 @@ public class Pion extends Piece implements java.io.Serializable {
 
 	private boolean dejaBouge;
 
-	public Pion(String camp, String img) {
-		super(camp,img);
+	public Pion(String camp) {
+		super(camp);
 		dejaBouge=false;
 	}
 	

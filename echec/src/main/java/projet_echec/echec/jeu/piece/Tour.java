@@ -15,10 +15,10 @@ import projet_echec.echec.jeu.Position;
  * 
  */
 
-public class Tour extends Piece implements java.io.Serializable{
+public class Tour extends Piece{
 
-	public Tour(String camp, String img) {
-		super(camp,img);
+	public Tour(String camp) {
+		super(camp);
 	}
 	@Override
 	/**
