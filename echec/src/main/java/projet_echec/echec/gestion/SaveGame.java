@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import projet_echec.echec.jeu.Echiquier;
+import projet_echec.echec.wrapper.Wrapper;
 
 
 
