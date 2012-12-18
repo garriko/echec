@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Vector;
 
@@ -24,6 +25,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import projet_echec.echec.exception.CaseErrorException;
+import projet_echec.echec.exception.EmptyCaseException;
+import projet_echec.echec.exception.FullCaseException;
 import projet_echec.echec.jeu.Case;
 import projet_echec.echec.jeu.EchiquierActif;
 import projet_echec.echec.jeu.Piece;
@@ -191,7 +195,12 @@ public class InterfacePersoEchiquier {
 	public class EcouteurAction implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
 			if (e.getSource()==boutonOK){
-				nouvelleVariante.saveVariante("maVariante");
+				try {
+					nouvelleVariante.saveVariante("maVariante");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			else if (e.getSource()==boutonAnnuler){
 				
@@ -207,21 +216,44 @@ public class InterfacePersoEchiquier {
 					selectionCase = true ;
 				}
 				else if ((eCase.estVide()==false) && (selectionPiece==true)){ // si case occupée et pièce retenue
-					nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee) ;
+					try {
+						nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee) ;
+					} catch (FullCaseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					// on change la pièce
 					actualiserImage(eCase);
 					selectionPiece = false;
 				}
 				else if ((eCase.estVide()==true) && (selectionPiece==true)){ // si case vide et pièce retenue
-					nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee);
+					try {
+						nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee);
+					} catch (FullCaseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					// on place la pièce
 					actualiserImage(eCase);
 					selectionPiece = false;
 				}
 				else if (selectionCase == true){ // si case retenue
-					nouvelleVariante.ajouterPiece(eCase, CaseSelectionnee.getPiece()) ;
+					try {
+						nouvelleVariante.ajouterPiece(eCase, CaseSelectionnee.getPiece()) ;
+					} catch (FullCaseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					// on change la pièce
-					nouvelleVariante.retirerPiece(CaseSelectionnee) ;
+					try {
+						nouvelleVariante.retirerPiece(CaseSelectionnee) ;
+					} catch (EmptyCaseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (CaseErrorException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					// On la retire la la première case
 					actualiserImage(CaseSelectionnee) ;
 					actualiserImage(eCase) ;
