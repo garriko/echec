@@ -22,12 +22,14 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import projet_echec.echec.exception.DeplacementException;
 import projet_echec.echec.gestion.Partie;
 import projet_echec.echec.jeu.Case;
 import projet_echec.echec.jeu.Echiquier;
@@ -50,6 +52,8 @@ public class InterfaceJeu {
 	Container tmp;
 	Collection<JButton> tab_cases;
 	
+	JPanel imageFond;
+	
 	JMenuBar barreMenu;
 	
 	JMenu boutonPartie;
@@ -65,6 +69,7 @@ public class InterfaceJeu {
 	JMenuItem boutonAProposDe;
 	
 	Case CaseSelectionnee;
+	boolean selectionCase;
 	
 	Partie game;
 	EchiquierActif plateauJeu;
@@ -72,6 +77,8 @@ public class InterfaceJeu {
 	
 	Timer chrono;
 	
+	Vector<String> casesPrisesJ1;
+	Vector<String> casesPrisesJ2;
 	
 	
 	/*
@@ -233,7 +240,10 @@ public class InterfaceJeu {
 		boutonAProposDe = new JMenuItem("A propos de");
 		
 		CaseSelectionnee = new Case(new Position(5,2));
+		selectionCase = false;
 
+		casesPrisesJ1 = new Vector<String>();
+		casesPrisesJ2 = new Vector<String>();
 		
 		game = partie;
 		plateauJeu = (EchiquierActif) echiquier;
@@ -243,7 +253,7 @@ public class InterfaceJeu {
 		//chrono.start();
 		
 		// fond d'écran
-		JPanel imageFond = new TestImagePanel(new ImageIcon("images/interface_jeu.png").getImage());
+		imageFond = new TestImagePanel(new ImageIcon("images/interface_jeu.png").getImage());
 		
 		// Création de la JMenuBar
 		boutonPartie.add(boutonNouvellePartie);
@@ -344,14 +354,86 @@ public class InterfaceJeu {
 	
 	
 	
-	
+	/**
+	 * Methode permettant de mettre a jour l'image d'une case
+	 * 
+	 * @param NewCase la case dont l'image doit etre rechargee
+	 */
 	
 	public void actualiserImage(Case NewCase){
 		NewCase.setPosition(new Position(8-NewCase.getPosition().getHauteur()+1, NewCase.getPosition().getLargeur()));
 		int numCase = NewCase.getPosition().getLargeur() + 8*(NewCase.getPosition().getHauteur()-1)-1;			
 		((Vector<JButton>) tab_cases).get(numCase).setIcon(new ImageIcon(NewCase.getImg()));
+		System.out.println(NewCase.getPosition().getLargeur());
+		System.out.println(numCase%8 +1);
+		System.out.println(NewCase.getPosition().getLargeur());
+		System.out.println(numCase/8 +1);
 	}
 	
+	
+	/**
+	 * Methode permettant d'actualiser l'affichage des pieces prises
+	 * 
+	 * @param J le joueur concerne : 1 pour joueur blanc, et 2 pour joueur noir
+	 */
+	
+	public void actualiserPiecesPrises(int J){
+		String img;		
+		if (J==1){
+			for (int i=0; i<casesPrisesJ1.size(); i++){
+				String piece = casesPrisesJ1.get(i);
+				if (piece=="Pion"){
+					img = "images/Pieces/perso/PionB.png";
+				}
+				else if (piece=="Tour"){
+					img = "images/Pieces/perso/TourB.png";
+				}
+				else if (piece=="Cavalier"){
+					img = "images/Pieces/perso/CavalierB.png";
+				}
+				else if (piece=="Fou"){
+					img = "images/Pieces/perso/FouB.png";
+				}
+				else if (piece=="Roi"){
+					img = "images/Pieces/perso/RoiB.png";
+				}
+				else {
+					img = "images/Pieces/perso/ReineB.png";
+				}
+				JLabel labelPiecePrise = new JLabel(new ImageIcon(img));
+				//labelPiecePrise.setBounds());
+				labelPiecePrise.setVisible(true);
+				imageFond.add(labelPiecePrise);				
+			}
+		}
+		else if (J==2){
+			for (int i=0; i<casesPrisesJ2.size(); i++){
+				String piece = casesPrisesJ2.get(i);
+				if (piece=="Pion"){
+					img = "images/Pieces/perso/PionN.png";
+				}
+				else if (piece=="Tour"){
+					img = "images/Pieces/perso/TourN.png";
+				}
+				else if (piece=="Cavalier"){
+					img = "images/Pieces/perso/CavalierN.png";
+				}
+				else if (piece=="Fou"){
+					img = "images/Pieces/perso/FouN.png";
+				}
+				else if (piece=="Roi"){
+					img = "images/Pieces/perso/RoiN.png";
+				}
+				else {
+					img = "images/Pieces/perso/ReineN.png";
+				}
+				JLabel labelPiecePrise = new JLabel(new ImageIcon(img));
+				//labelPiecePrise.setBounds());
+				labelPiecePrise.setVisible(true);
+				imageFond.add(labelPiecePrise);				
+			}
+		}
+	}
 	
 	
 	
@@ -364,10 +446,41 @@ public class InterfaceJeu {
 				//Case eCase = plateauJeu.chercherCase(new Position(hauteur, largeur));
 				Case eCase = plateauJeu.getPlateau().get(numCase);
 				eCase.setPosition(new Position(8-eCase.getPosition().getHauteur()+1, eCase.getPosition().getLargeur()));
-				plateauJeu.selectionnerCase(eCase);
-				actualiserImage(CaseSelectionnee);
-				actualiserImage(eCase);
-				CaseSelectionnee =  eCase;
+				//System.out.println(eCase.getPosition().getLargeur());
+				//System.out.println(eCase.getPosition().getHauteur());
+				
+				if ((eCase.estVide()==true) && (selectionCase==true)){
+					CaseSelectionnee = eCase;
+					selectionCase = true;
+				}
+				else if ((eCase.estVide()==true) && (selectionCase==true)){
+					try {
+						plateauJeu.selectionnerCase(eCase);
+					} catch (DeplacementException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					actualiserImage(CaseSelectionnee);
+					actualiserImage(eCase);
+					selectionCase = false;
+				}
+				else if ((eCase.estVide()==false) && (selectionCase==true)){
+					if (eCase.getPiece().getCamp()==CaseSelectionnee.getPiece().getCamp()){
+						CaseSelectionnee = eCase;
+					}
+					else {
+						casesPrisesJ1.add(eCase.getPiece().getClass().getSimpleName());
+						// ou casesPrisesJ2.add(eCase.getPiece().getClass().getSimpleName());
+						// prendre la pièce
+						actualiserImage(CaseSelectionnee);
+						actualiserImage(eCase);
+						selectionCase = false;
+						actualiserPiecesPrises(1);
+						// ou actualiserPiecesPrises(2);
+					}
+				}
+				
+				
 			}
 			if (e.getSource()==boutonSauvegarder){
 				new InterfacePopupSauvegarder(game, plateauJeu);

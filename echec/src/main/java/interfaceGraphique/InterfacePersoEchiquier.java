@@ -500,7 +500,11 @@ public class InterfacePersoEchiquier {
 	
 	
 	
-	
+	/**
+	 * Methode permettant de mettre a jour l'image d'une case
+	 * 
+	 * @param NewCase la case dont l'image doit etre rechargee
+	 */
 	
 	public void actualiserImage(Case NewCase){
 		NewCase.setPosition(new Position(8-NewCase.getPosition().getHauteur()+1, NewCase.getPosition().getLargeur()));
