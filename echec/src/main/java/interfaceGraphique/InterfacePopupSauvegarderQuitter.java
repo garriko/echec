@@ -32,7 +32,7 @@ public class InterfacePopupSauvegarderQuitter {
 	Container tmp;
 	JButton boutonOUI;
 	JButton boutonNON;
-	JTextField texte;
+	JTextField nomSauvegarde;
 	String choix;
 	Partie p;
 	EchiquierActif plateau;
@@ -50,11 +50,11 @@ public class InterfacePopupSauvegarderQuitter {
 		tmp = fenetre.getContentPane();
 		boutonOUI = new JButton(new ImageIcon("images/oui.png"));
 		boutonNON = new JButton(new ImageIcon("images/non.png"));
-		texte = new JTextField("sauvegarde");
+		nomSauvegarde = new JTextField("sauvegarde");
 		
 		boutonOUI.setBounds(105, 257, 105, 52); //position x, position y, largeur, hauteur
 		boutonNON.setBounds(275, 257, 105, 52); 
-		texte.setBounds(22, 145, 375, 40);
+		nomSauvegarde.setBounds(22, 145, 375, 40);
 		
 		choix = menuOuQuitter;
 		
@@ -66,7 +66,7 @@ public class InterfacePopupSauvegarderQuitter {
 		boutonsChoix.setLayout(null);	 
 		boutonsChoix.add(boutonOUI);   
 		boutonsChoix.add(boutonNON);
-		boutonsChoix.add(texte);
+		boutonsChoix.add(nomSauvegarde);
 		boutonsChoix.setOpaque(false);
 		tmp.add(boutonsChoix);
     
@@ -98,6 +98,6 @@ public class InterfacePopupSauvegarderQuitter {
 	}
 	
 	public static void main(String[] args){
-		new InterfacePopupSauvegarderQuitter("Menu");
+		//new InterfacePopupSauvegarderQuitter("Menu");
 	}
 }

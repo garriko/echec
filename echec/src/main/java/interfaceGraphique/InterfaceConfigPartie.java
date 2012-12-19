@@ -165,6 +165,7 @@ public class InterfaceConfigPartie {
 				Partie partie = w.getP();
 				Echiquier echiquier = w.getE();
 				
+				fenetre.setVisible(false);
 				new InterfaceJeu(partie, echiquier);
 				
 			}

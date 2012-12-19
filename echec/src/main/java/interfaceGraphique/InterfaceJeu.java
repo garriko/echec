@@ -26,6 +26,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import projet_echec.echec.gestion.Partie;
 import projet_echec.echec.jeu.Case;
@@ -67,6 +68,9 @@ public class InterfaceJeu {
 	
 	Partie game;
 	EchiquierActif plateauJeu;
+	
+	
+	Timer chrono;
 	
 	
 	
@@ -234,6 +238,10 @@ public class InterfaceJeu {
 		game = partie;
 		plateauJeu = (EchiquierActif) echiquier;
 		
+		//chrono = new Timer(speed, this);
+		//chrono.setInitialDelay(pause);
+		//chrono.start();
+		
 		// fond d'écran
 		JPanel imageFond = new TestImagePanel(new ImageIcon("images/interface_jeu.png").getImage());
 		
@@ -343,7 +351,6 @@ public class InterfaceJeu {
 		int numCase = NewCase.getPosition().getLargeur() + 8*(NewCase.getPosition().getHauteur()-1)-1;			
 		((Vector<JButton>) tab_cases).get(numCase).setIcon(new ImageIcon(NewCase.getImg()));
 	}
-		
 	
 	
 	
@@ -352,9 +359,10 @@ public class InterfaceJeu {
 		public void actionPerformed(ActionEvent e){
 			if (tab_cases.contains(e.getSource())){
 				int numCase = ((Vector<JButton>) tab_cases).indexOf(e.getSource());
-				int largeur = numCase%8 ;
-				int hauteur = numCase/8 +1;
-				Case eCase = plateauJeu.chercherCase(new Position(hauteur, largeur));
+				//int largeur = numCase%8 +1;
+				//int hauteur = numCase/8 +1;
+				//Case eCase = plateauJeu.chercherCase(new Position(hauteur, largeur));
+				Case eCase = plateauJeu.getPlateau().get(numCase);
 				eCase.setPosition(new Position(8-eCase.getPosition().getHauteur()+1, eCase.getPosition().getLargeur()));
 				plateauJeu.selectionnerCase(eCase);
 				actualiserImage(CaseSelectionnee);
