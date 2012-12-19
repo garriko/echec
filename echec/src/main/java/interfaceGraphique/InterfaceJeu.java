@@ -303,6 +303,25 @@ public class InterfaceJeu {
 				
 		}
 		
+		EcouteurAction listenAction=new EcouteurAction();
+		for (int i=0; i<64 ; i++){
+			((Vector<JButton>) tab_cases).get(i).addActionListener(listenAction);					
+		}
+		
+		boutonNouvellePartie.addActionListener(listenAction);
+		boutonSauvegarder.addActionListener(listenAction);
+		boutonChargerPartie.addActionListener(listenAction);
+		boutonOptions.addActionListener(listenAction);
+		boutonRevenirMenu.addActionListener(listenAction);
+		boutonQuitter.addActionListener(listenAction);
+		boutonAide.addActionListener(listenAction);
+		boutonAProposDe.addActionListener(listenAction);
+		
+		EcouteurFocus listenFocus = new EcouteurFocus();
+		for (int i=0; i<64 ; i++){
+			((Vector<JButton>) tab_cases).get(i).addFocusListener(listenFocus);					
+		}
+		
 		imageFond.add(plateau);
 		
 		tmp.add(imageFond);
@@ -346,22 +365,25 @@ public class InterfaceJeu {
 				new InterfacePopupSauvegarder();
 			}
 			if (e.getSource()==boutonOptions){
-				new InterfacePopupOptions();
+				new InterfacePopupOptions(game.getListeOptions());
 			}
 			if (e.getSource()==boutonNouvellePartie){
-				new InterfacePopupSauvegarder();
+				//new InterfaceConfigPartie();
 			}
 			if (e.getSource()==boutonChargerPartie){
-				new InterfacePopupSauvegarder();
+				//new InterfaceCatalogue("reprendre");
+			}
+			if (e.getSource()==boutonRevenirMenu){
+				new InterfacePopupSauvegarderQuitter();
 			}
 			if (e.getSource()==boutonQuitter){
 				new InterfacePopupSauvegarderQuitter();
 			}
 			if (e.getSource()==boutonAide){
-				new InterfacePopupSauvegarder();
+				//new InterfaceAide();
 			}
 			if (e.getSource()==boutonAProposDe){
-				new InterfacePopupSauvegarderQuitter();
+				//new InterfacePopupAProposDe();
 			}
 		}
 	}

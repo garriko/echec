@@ -50,6 +50,9 @@ public class InterfacePopupErreur4 {
 		
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
+			if (e.getSource()==boutonOK){
+				fenetre.setVisible(false);
+			}
 		}
 	}
 	

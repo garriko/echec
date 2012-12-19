@@ -12,6 +12,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import projet_echec.echec.gestion.Options;
+
 /**
  * 
  * @author Anne-Sophie
@@ -28,13 +30,14 @@ public class InterfacePopupOptions {
 	JButton boutonAnnuler;
 	JCheckBox aideJ1;
 	JCheckBox aideJ2;
+	Options OptionsJeu;
 	
 	
 	
 	/**
 	 * Constructeur de la classe
 	 */
-	public InterfacePopupOptions() {
+	public InterfacePopupOptions(Options lesOptions) {
 		fenetre=new JFrame("Options");
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
@@ -43,6 +46,8 @@ public class InterfacePopupOptions {
 		boutonAnnuler = new JButton(new ImageIcon("images/boutonAnnulerOptions.png"));
 		aideJ1 = new JCheckBox();
 		aideJ2 = new JCheckBox();
+		
+		OptionsJeu = lesOptions;
 		
 		boutonAppliquer.setBounds(112, 282, 158, 72); //position x, position y, largeur, hauteur
 		boutonAnnuler.setBounds(292, 282, 158, 72); 
@@ -75,10 +80,17 @@ public class InterfacePopupOptions {
 		
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
+			if (e.getSource()==boutonAppliquer){
+				OptionsJeu.setAideJ1(aideJ1.isSelected());
+				OptionsJeu.setAideJ1(aideJ2.isSelected());				
+			}
+			if (e.getSource()==boutonAnnuler){
+				fenetre.setVisible(false);
+			}
 		}
 	}
 	
 	public static void main(String[] args){
-		new InterfacePopupOptions();
+		
 	}
 }
