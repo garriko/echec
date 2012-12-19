@@ -45,4 +45,19 @@ public abstract class Gestion {
 	
 	public Vector<String> getListePartie(){return listePartie;}
 	
+	/**
+	 * @return the partieSelect
+	 */
+	public String getPartieSelect() {
+		return partieSelect;
+	}
+	/**
+	 * @param partieSelect the partieSelect to set
+	 */
+	public void setPartieSelect(String partieSelect) {
+		this.partieSelect = partieSelect;
+	}
+	
+	
+	
 }
