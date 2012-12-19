@@ -284,7 +284,7 @@ public class InterfaceJeu {
 	
 	
 	public void actualiserImage(Case NewCase){
-		int numCase = 64-(NewCase.getPosition().getLargeur() + 8*(NewCase.getPosition().getHauteur()-1)-1);			
+		int numCase = 63-(NewCase.getPosition().getLargeur() + 8*(NewCase.getPosition().getHauteur()-1)-1);			
 		((Vector<JButton>) tab_cases).get(numCase).setIcon(new ImageIcon(NewCase.getImg()));
 	}
 		
@@ -295,11 +295,11 @@ public class InterfaceJeu {
 	public class EcouteurAction implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
 			if (tab_cases.contains(e.getSource())){
-				int numCase = ((Vector<JButton>) tab_cases).indexOf(e.getSource());
-				int largeur = numCase%8;
-				int hauteur = numCase/8;
-				//Case eCase = EchiquierActif.chercherCase(new Position(hauteur, largeur));
-				//EchiquierActif.selectionnerCase(eCase);
+				int numCase = 63-((Vector<JButton>) tab_cases).indexOf(e.getSource());
+				int largeur = numCase%8 +1;
+				int hauteur = numCase/8 +1;
+				//Case eCase = echiquierActif.chercherCase(new Position(hauteur, largeur));
+				//echiquierActif.selectionnerCase(eCase);
 				actualiserImage(CaseSelectionnee);
 				//actualiserImage(eCase);
 				//CaseSelectionnee =  eCase;
