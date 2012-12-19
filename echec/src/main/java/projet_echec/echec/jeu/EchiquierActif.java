@@ -221,9 +221,10 @@ public class EchiquierActif extends Echiquier {
 	/**
 	 * recupere la case selectionne envoye par l'interface graphique
 	 * @param caseSelectionne
+	 * @return "rien" si il n'y a pas eu de deplacement, le deplacement en notation algebrique sinon
 	 * @throws DeplacementException 
 	 */
-	public void selectionnerCase(Case caseSelectionne) throws DeplacementException{
+	public String selectionnerCase(Case caseSelectionne) throws DeplacementException{
 		if(this.caseSelectionne==null)
 		{
 			if(!caseSelectionne.estVide())
@@ -231,24 +232,34 @@ public class EchiquierActif extends Echiquier {
 				if(caseSelectionne.getPiece().getCamp()==campActif)
 				{
 					this.caseSelectionne=caseSelectionne;
+					return "rien";
 				}
+				else
+					return "rien";
 			}
+			else
+				return "rien";
 							
 
 		}
 		else
 		{
-			if(!caseSelectionne.estVide())
-			{				
-				if(this.caseSelectionne.equals(caseSelectionne))
-					this.caseSelectionne=null;
-				else
-				{
-					deplacer(this.caseSelectionne,caseSelectionne);
-					this.caseSelectionne=null;
-				}
+
+			if(this.caseSelectionne.equals(caseSelectionne))
+			{
+				this.caseSelectionne=null;
+				return "rien";
 			}
+			else
+			{
+				String dep;
+				dep = deplacer(this.caseSelectionne,caseSelectionne);
+				this.caseSelectionne=null;
+				return dep;
+			}
+
 		}
+		
 				
 	}
 	/**
@@ -257,7 +268,7 @@ public class EchiquierActif extends Echiquier {
 	 * @param caseArrivee: le joueur a selectionne une case d'arrivee sur le plateau
 	 * @throws DeplacementException 
 	 */
-	public void deplacer(Case caseDepart, Case caseArrivee) throws DeplacementException
+	public String deplacer(Case caseDepart, Case caseArrivee) throws DeplacementException
 	{
 		switch(echec()){
 		case 21:break;
@@ -286,6 +297,7 @@ public class EchiquierActif extends Echiquier {
 			deplacersanscondition(caseDepart,caseArrivee);
 			break;
 			}
+		return "rien"; //TODO : renvoyer le deplacement en notation algebrique ou "rien"
 	}
 	/**
 	 * fait un deplacement sans test d'echec
