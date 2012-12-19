@@ -1,5 +1,7 @@
 package projet_echec.echec.jeu;
 
+import projet_echec.echec.jeu.piece.Tour;
+
 /**
  * 
  * @author Adrien
@@ -93,9 +95,9 @@ public class Case implements java.io.Serializable {
 	}
 
 	public void setPiece(Piece piece) {
-		//TODO Case noire
 		this.piece = piece;
-		if(piece.getClass().getName()=="Pion")
+		if(piece.getClass().getSimpleName().equals(new String("Pion")))
+		{
 			if(piece.getCamp()=="blanc")
 				if(position.getHauteur()+position.getLargeur() % 2 == 0)
 					setImg("images/Pieces/pasAuto/121.png");
@@ -106,8 +108,11 @@ public class Case implements java.io.Serializable {
 					setImg("images/Pieces/pasAuto/221.png");
 				else
 					setImg("images/Pieces/pasAuto/211.png");
+		}
 		
-		if(piece.getClass().getName()=="Tour")
+		if (piece.getClass().getSimpleName().equals(new String("Tour")))
+		{
+			
 			if(piece.getCamp()=="blanc")
 				if(position.getHauteur()+position.getLargeur() % 2 == 0)
 					setImg("images/Pieces/pasAuto/122.png");
@@ -118,8 +123,10 @@ public class Case implements java.io.Serializable {
 					setImg("images/Pieces/pasAuto/222.png");
 				else
 					setImg("images/Pieces/pasAuto/212.png");
+		}
 		
-		if(piece.getClass().getName()=="Fou")
+		if(piece.getClass().getSimpleName().equals(new String("Fou")))
+		{
 			if(piece.getCamp()=="blanc")
 				if(position.getHauteur()+position.getLargeur() % 2 == 0)
 					setImg("images/Pieces/pasAuto/124.png");
@@ -130,8 +137,10 @@ public class Case implements java.io.Serializable {
 					setImg("images/Pieces/pasAuto/224.png");
 				else
 					setImg("images/Pieces/pasAuto/214.png");
+		}
 		
-		if(piece.getClass().getName()=="Cavalier")
+		if(piece.getClass().getSimpleName().equals(new String("Cavalier")))
+		{
 			if(piece.getCamp()=="blanc")
 				if(position.getHauteur()+position.getLargeur() % 2 == 0)
 					setImg("images/Pieces/pasAuto/123.png");
@@ -142,8 +151,10 @@ public class Case implements java.io.Serializable {
 					setImg("images/Pieces/pasAuto/223.png");
 				else
 					setImg("images/Pieces/pasAuto/213.png");
-		
-		if(piece.getClass().getName()=="Reine")
+		}
+			
+		if(piece.getClass().getSimpleName().equals(new String("Reine")))
+		{
 			if(piece.getCamp()=="blanc")
 				if(position.getHauteur()+position.getLargeur() % 2 == 0)
 					setImg("images/Pieces/pasAuto/126.png");
@@ -154,8 +165,10 @@ public class Case implements java.io.Serializable {
 					setImg("images/Pieces/pasAuto/226.png");
 				else
 					setImg("images/Pieces/pasAuto/216.png");
+		}
 		
-		if(piece.getClass().getName()=="Roi")
+		if(piece.getClass().getSimpleName().equals(new String("Roi")))
+		{
 			if(piece.getCamp()=="blanc")
 				if(position.getHauteur()+position.getLargeur() % 2 == 0)
 					setImg("images/Pieces/pasAuto/125.png");
@@ -166,6 +179,7 @@ public class Case implements java.io.Serializable {
 					setImg("images/Pieces/pasAuto/225.png");
 				else
 					setImg("images/Pieces/pasAuto/215.png");
+		}
 		
 	}
 
@@ -190,7 +204,15 @@ public class Case implements java.io.Serializable {
 	public void setImg(String img) {
 		this.img = img;
 	}
-
+/*
+	public static void main(String[] args) {
 
 	
+		Case c = new Case(new Position(5,3));
+		c.setPiece(new Tour("noir"));
+		//c.setImg("images/Pieces/pasAuto/222.png");
+		System.out.println(c.getImg());
+		
+	}	
+	*/
 }
