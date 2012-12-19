@@ -1987,3 +1987,7 @@ org.apache.lucene.index.IndexNotFoundException: no segments* file found in org.a
 2012-12-19 08:56:16,311 [Worker-14] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
 2012-12-19 08:56:16,314 [Worker-14] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2012-12-19 08:56:16,314 [Worker-14] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
+2012-12-19 09:17:29,294 [Worker-16] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-19 09:17:29,294 [Worker-16] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\main\resources
+2012-12-19 09:17:29,294 [Worker-16] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2012-12-19 09:17:29,294 [Worker-16] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Anne-Sophie\Desktop\echec\echec\src\test\resources
