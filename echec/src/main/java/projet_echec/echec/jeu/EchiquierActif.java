@@ -172,7 +172,7 @@ public class EchiquierActif extends Echiquier {
 				listePieceDefendent= listerPiecesNoires(this.listePieceEnJeu);;//on a ici la liste de cases qui peuvent potentiellement defendre le Roi
 			}
 			for (int i=0;i<listePieceMenacante.size()+1;i++){//pour toutes les cases de pieces qui menacent
-					listeCaseDeplacementMenacant=listePieceMenacante.get(i).getPiece().getDeplacementPossible(listePieceMenacante.get(i));
+					
 					listeCaseDeplacementMenacant.add(listePieceMenacante.get(i));
 				}
 			for (int j=0;j<listePieceDefendent.size()+1;j++){//pour toutes les cases de pieces qui defendent
@@ -243,10 +243,24 @@ public class EchiquierActif extends Echiquier {
 		case 21:break;
 		case 22:break;
 		case 11:
-			
+			Case sauvegardecasearrive = caseArrivee;
+			deplacersanscondition(caseDepart,caseArrivee);
+			if(echec()!=11 && echec()!=21){
+			}
+			else{
+				deplacersanscondition(caseArrivee,caseDepart);	
+				caseArrivee=sauvegardecasearrive;
+			}
 			break;
 		case 12:
-			
+			Case sauvegardecasearrive1 = caseArrivee;
+			deplacersanscondition(caseDepart,caseArrivee);
+			if(echec()!=12 && echec()!=22){
+			}
+			else{
+				deplacersanscondition(caseArrivee,caseDepart);	
+				caseArrivee=sauvegardecasearrive1;
+			}
 			break;
 		default:
 			deplacersanscondition(caseDepart,caseArrivee);
@@ -329,7 +343,7 @@ public class EchiquierActif extends Echiquier {
 		return null;
 	}
 	
-public Vector<Case> listerPiecesBlanches(Vector<Case> liste){
+public static Vector<Case> listerPiecesBlanches(Vector<Case> liste){
 		
 		Vector<Case> listepiece= new Vector<Case>();
 		for(int i=0;i<liste.size();i++){// Pour toutes les pieces en jeu
@@ -342,7 +356,7 @@ public Vector<Case> listerPiecesBlanches(Vector<Case> liste){
 	/**
 	 * renvoi la liste des pieces noir
 	 */
-public Vector<Case> listerPiecesNoires(Vector<Case> liste){
+public static Vector<Case> listerPiecesNoires(Vector<Case> liste){
 		
 		Vector<Case> listepiece= new Vector<Case>();
 		for(int i=0;i<liste.size();i++){// Pour toutes les pieces en jeu

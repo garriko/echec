@@ -44,6 +44,7 @@ public class ReineTest extends TestCase {
 			Position ar= new Position(4,4);
 			Case t2= new Case(ar);
 			try {
+				
 				E.deplacer(c1,t2);
 			} catch (DeplacementException e) {
 				// TODO Auto-generated catch block
