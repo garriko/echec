@@ -113,8 +113,7 @@ public class InterfaceConfigVariante {
 		
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
-			try {
-				
+			try {				
 				infos.setText(Variantes.recupererDescription((String) listeVariantes.getSelectedValue()));
 			} catch (ClassNotFoundException e1) {
 				// TODO Auto-generated catch block
@@ -126,11 +125,10 @@ public class InterfaceConfigVariante {
 				
 				
 			if (e.getSource()==boutonCreer){
-				Variantes v = new Variantes();
-				new InterfacePersoEchiquier(v);
+				new InterfacePersoEchiquier();
 			}
 			if (e.getSource()==boutonModifier){
-							
+				new InterfacePersoEchiquier((String) listeVariantes.getSelectedValue());			
 			}
 			if (e.getSource()==boutonAppliquer){
 				

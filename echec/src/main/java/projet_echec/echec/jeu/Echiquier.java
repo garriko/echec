@@ -45,16 +45,16 @@ public abstract class Echiquier {
 	 */
 	public Echiquier(Variantes v)
 	{
-		for(int h=1;h<=8;h++)
+		/*for(int h=1;h<=8;h++)
 			for(int l=1;l<=8;l++)
 				plateau.add(new Case(new Position(h,l)));
 		listePieceEnJeu=new Vector<Case>();
 		listePiecePrises=new Vector<Piece>();
-		/*
+		*/
 		this.plateau = new Vector<Case>(v.getPlateau());
 		this.listePieceEnJeu = new Vector<Case>(v.getListePieces());
 		this.listePiecePrises=new Vector<Piece>();
-		*/
+	
 	}
 	
 	/**

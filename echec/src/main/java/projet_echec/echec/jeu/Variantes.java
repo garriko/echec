@@ -139,7 +139,7 @@ public class Variantes {
 	 */
 	public void ajouterPiece(Case c, Piece p) throws FullCaseException, PresenceKingException {
 		String nomPiece = p.getClass().getSimpleName();
-		System.out.println(p.getCamp());
+		
 		if(nomPiece.equals(new String("Roi")) && p.getCamp()=="blanc")
 			if(!presenceRoiBlanc)
 			{

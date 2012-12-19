@@ -36,6 +36,10 @@ public class Case implements java.io.Serializable {
 	public Case(Position pos){
 		this.position=pos;
 		piece =null;
+		if((position.getHauteur()+position.getLargeur()) % 2 == 0)
+			setImg("images/casegrise.png");
+		else
+			setImg("images/caseblanche.png");
 		
 	}
 	

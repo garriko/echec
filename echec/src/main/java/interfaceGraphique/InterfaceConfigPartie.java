@@ -58,7 +58,7 @@ public class InterfaceConfigPartie {
 	JCheckBox aideJ2 = new JCheckBox();
 	JCheckBox rotation = new JCheckBox();
 	
-	JLabel variante = new JLabel("Classique");
+	JLabel variante = new JLabel("classique");
 	
 	GestionJeu cerveley;
 	

@@ -63,7 +63,7 @@ public class InterfaceJeu {
 	JMenuItem boutonAide = new JMenuItem("Aide");
 	JMenuItem boutonAProposDe = new JMenuItem("A propos de");
 	
-	Case CaseSelectionnee = new Case(null);
+	Case CaseSelectionnee = new Case(new Position(5,2));
 	
 	Partie game;
 	EchiquierActif plateauJeu;
@@ -263,7 +263,7 @@ public class InterfaceJeu {
 		//Récupération des données depuis la variante v
 		Vector<Case> plateauCases = plateauJeu.getPlateau();
 		for (int i=0; i<64; i++){
-			int numCase = plateauCases.get(i).getPosition().getLargeur() + 8*(plateauCases.get(i).getPosition().getHauteur()-1);			
+			int numCase = plateauCases.get(i).getPosition().getLargeur() + 8*(plateauCases.get(i).getPosition().getHauteur()-1)-1;			
 			((Vector<JButton>) tab_cases).get(numCase).setIcon(new ImageIcon(plateauCases.get(i).getImg()));
 		}
 		
