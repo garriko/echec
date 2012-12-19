@@ -16,15 +16,7 @@ import projet_echec.echec.jeu.piece.Roi;
  * Cette classe permet de definir ce qu’il se passe sur l’echiquier lors d’une partie en cours.
  */
 public class EchiquierActif extends Echiquier {
-	/**
-	 * Temps restant au joueur avant la fin de son tour 
-	 */
-	private Timer tempsRestant;
-	/**
-	 * Temps total du jeu depuis le debut de la partie
-	 */
-	private Timer tempsTotal;
-	/**
+	 /**
 	 * Case selectionnee par le joueur ( via l'interface graphique)
 	 */
 	private Case caseSelectionne;
@@ -37,6 +29,8 @@ public class EchiquierActif extends Echiquier {
 	 */
 	private Case caseRoiNoir;
 	
+	private String campActif;
+	
 	
 	/**
 	 * constructeur de la classe
@@ -45,6 +39,7 @@ public class EchiquierActif extends Echiquier {
 	 */
 	public EchiquierActif() throws ClassNotFoundException, IOException{
 		super();
+		campActif = new String("blanc");
 	}
 	
 	/**
@@ -226,10 +221,46 @@ public class EchiquierActif extends Echiquier {
 	/**
 	 * recupere la case selectionne envoye par l'interface graphique
 	 * @param caseSelectionne
+	 * @return "rien" si il n'y a pas eu de deplacement, le deplacement en notation algebrique sinon
+	 * @throws DeplacementException 
 	 */
-	public void selectionnerCase(Case caseSelectionne){
-		//TODO : selectionner case
+	public String selectionnerCase(Case caseSelectionne) throws DeplacementException{
+		if(this.caseSelectionne==null)
+		{
+			if(!caseSelectionne.estVide())
+			{				
+				if(caseSelectionne.getPiece().getCamp()==campActif)
+				{
+					this.caseSelectionne=caseSelectionne;
+					return "rien";
+				}
+				else
+					return "rien";
+			}
+			else
+				return "rien";
+							
+
+		}
+		else
+		{
+
+			if(this.caseSelectionne.equals(caseSelectionne))
+			{
+				this.caseSelectionne=null;
+				return "rien";
+			}
+			else
+			{
+				String dep;
+				dep = deplacer(this.caseSelectionne,caseSelectionne);
+				this.caseSelectionne=null;
+				return dep;
+			}
+
+		}
 		
+				
 	}
 	/**
 	 * Permet le deplacement des pieces
@@ -237,7 +268,7 @@ public class EchiquierActif extends Echiquier {
 	 * @param caseArrivee: le joueur a selectionne une case d'arrivee sur le plateau
 	 * @throws DeplacementException 
 	 */
-	public void deplacer(Case caseDepart, Case caseArrivee) throws DeplacementException
+	public String deplacer(Case caseDepart, Case caseArrivee) throws DeplacementException
 	{
 		switch(echec()){
 		case 21:break;
@@ -266,6 +297,7 @@ public class EchiquierActif extends Echiquier {
 			deplacersanscondition(caseDepart,caseArrivee);
 			break;
 			}
+		return "rien"; //TODO : renvoyer le deplacement en notation algebrique ou "rien"
 	}
 	/**
 	 * fait un deplacement sans test d'echec
@@ -392,29 +424,12 @@ public static Vector<Case> listerPiecesNoires(Vector<Case> liste){
 	/**
 	 * getter/setter
 	 */
-	public Timer getTempsRestant() {
-		return tempsRestant;
-	}
-
-	public void setTempsRestant(Timer tempsRestant) {
-		this.tempsRestant = tempsRestant;
-	}
-
-	public Timer getTempsTotal() {
-		return tempsTotal;
-	}
-
-	public void setTempsTotal(Timer tempsTotal) {
-		this.tempsTotal = tempsTotal;
-	}
+	
 
 	public Case getCaseSelectionne() {
 		return caseSelectionne;
 	}
 
-	public void setCaseSelectionne(Case caseSelectionne) {
-		this.caseSelectionne = caseSelectionne;
-	}
 
 	public Case getCaseRoiBlanc() {
 		return caseRoiBlanc;
@@ -433,22 +448,5 @@ public static Vector<Case> listerPiecesNoires(Vector<Case> liste){
 	}
 	
 
-	public static void main(String[] args) {
-		EchiquierActif E=null;
-		System.out.println("test");
-		try {
-			E = new EchiquierActif();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		
-		}
-		finally{
-			
-			System.out.println(E.echec());
-		}
-	}
+
 }
