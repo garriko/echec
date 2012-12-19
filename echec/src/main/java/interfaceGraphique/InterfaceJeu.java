@@ -362,7 +362,7 @@ public class InterfaceJeu {
 				CaseSelectionnee =  eCase;
 			}
 			if (e.getSource()==boutonSauvegarder){
-				new InterfacePopupSauvegarder();
+				new InterfacePopupSauvegarder(game, plateauJeu);
 			}
 			if (e.getSource()==boutonOptions){
 				new InterfacePopupOptions(game.getListeOptions());
@@ -374,10 +374,10 @@ public class InterfaceJeu {
 				//new InterfaceCatalogue("reprendre");
 			}
 			if (e.getSource()==boutonRevenirMenu){
-				new InterfacePopupSauvegarderQuitter();
+				new InterfacePopupSauvegarderQuitter("Menu", game, plateauJeu);
 			}
 			if (e.getSource()==boutonQuitter){
-				new InterfacePopupSauvegarderQuitter();
+				new InterfacePopupSauvegarderQuitter("Quitter", game, plateauJeu);
 			}
 			if (e.getSource()==boutonAide){
 				//new InterfaceAide();
