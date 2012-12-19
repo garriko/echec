@@ -45,6 +45,16 @@ public abstract class Piece implements java.io.Serializable{
 		
 	}
 	
+	public boolean equals(Piece p) {
+		
+		if (this.camp==p.camp && this.getClass().getSimpleName().equals(p.getClass().getSimpleName()))
+		{
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 	public abstract ArrayList<Case> getDeplacementPossible(Case caseActuelle);
 	
 	public String getCamp() {return camp;}

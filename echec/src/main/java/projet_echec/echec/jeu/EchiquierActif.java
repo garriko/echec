@@ -267,33 +267,47 @@ public class EchiquierActif extends Echiquier {
 			break;
 			}
 	}
-	public void deplacersanscondition(Case caseDepart, Case caseArrivee) throws DeplacementException{
+	public void deplacersanscondition(Case caseDepart, Case caseArrivee){
 			ArrayList<Case> plop = new ArrayList<Case>();
+	
 			plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
+			
 			plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
-			if(plop.contains(caseArrivee)){
-				if(!caseArrivee.estVide())//si il y a une case a l'arrivee
-				{
-					this.listePiecePrises.add(caseArrivee.getPiece());//on ajoute la piece dans la liste des pieces prises
-					
-					for(int j=0; j< listePieceEnJeu.size();j++)//pour toutes les pieces en jeu
-						if(listePieceEnJeu.get(j).equals(caseArrivee))//si il y a une case egale a la case d'arrivee
-							listePieceEnJeu.remove(j);//on la supprime
-					changerCase(caseDepart,caseArrivee);
-				}
-				Piece n= new Roi("noir");
-				Piece b= new Roi("blanc");
-				if(caseDepart.getPiece()==n)
-				{
-					this.caseRoiNoir.setPosition(caseArrivee.getPosition());
-				}
-				if(caseDepart.getPiece()==b)
-				{
-					this.caseRoiBlanc.setPosition(caseArrivee.getPosition());
-				}
+			/*
+			for(int j=0; j< plop.size();j++){
+				System.out.println("position de la piece :"+plop.get(j).getPosition().getHauteur()+","+plop.get(j).getPosition().getLargeur());
 			}
-			else
-				throw new DeplacementException();
+			System.out.println("on doit trouver");
+			System.out.println(caseArrivee.getPosition().getHauteur()+","+caseArrivee.getPosition().getLargeur());
+			System.out.println("suite");
+			*/
+
+			for(int i=0; i< plop.size();i++){
+				
+				if(plop.get(i).getPosition().equals(caseArrivee.getPosition())){
+					System.out.println("rentre dans le premier si");
+					if(!caseArrivee.estVide())//si il y a une case a l'arrivee
+					{
+						System.out.println("rentre dans le deuxième si");
+						this.listePiecePrises.add(caseArrivee.getPiece());//on ajoute la piece dans la liste des pieces prises
+						
+						for(int j=0; j< listePieceEnJeu.size();j++)//pour toutes les pieces en jeu
+							if(listePieceEnJeu.get(j).equals(caseArrivee))//si il y a une case egale a la case d'arrivee
+								listePieceEnJeu.remove(j);//on la supprime
+						changerCase(caseDepart,caseArrivee);
+					}
+					Piece n= new Roi("noir");
+					Piece b= new Roi("blanc");
+					if(caseDepart.getPiece()==n)
+					{
+						this.caseRoiNoir.setPosition(caseArrivee.getPosition());
+					}
+					if(caseDepart.getPiece()==b)
+					{
+						this.caseRoiBlanc.setPosition(caseArrivee.getPosition());
+					}
+			}
+			}
 		}
 	
 	
@@ -339,8 +353,12 @@ public class EchiquierActif extends Echiquier {
 	 */
 	private ArrayList<Case> filtrerDeplacementPossible(String camp,ArrayList<Case> casePossible)
 	{
-		//TODO : implémenter la méthode
-		return null;
+		for(int i=0;i<(casePossible.size()-1);i++){
+			if((casePossible.get(i).getPiece()!=null) && (casePossible.get(i).getPiece().getCamp()==camp)){
+				casePossible.remove(casePossible.get(i));
+			}	
+		}
+		return casePossible;
 	}
 	
 public static Vector<Case> listerPiecesBlanches(Vector<Case> liste){
