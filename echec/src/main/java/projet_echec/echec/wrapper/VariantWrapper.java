@@ -27,13 +27,50 @@ public class VariantWrapper implements java.io.Serializable{
 	 * Description de la variante a enregistrer
 	 */
 	private String description;
-	public VariantWrapper(Vector<Case> plateau, Vector<Case> listePieces, String desc) {
+	private boolean presenceRoiBlanc;
+	private boolean presenceRoiNoir;
+	
+	public VariantWrapper(Vector<Case> plateau, Vector<Case> listePieces, String desc,boolean presenceRoiBlanc,boolean presenceRoiNoir) {
 		this.plateau = plateau;
 		this.listePieces = listePieces;
 		this.description= desc;
+		this.presenceRoiBlanc=presenceRoiBlanc;
+		this.presenceRoiNoir=presenceRoiNoir;
 	}
 	
 	
+	/**
+	 * @return the presenceRoiBlanc
+	 */
+	public boolean isPresenceRoiBlanc() {
+		return presenceRoiBlanc;
+	}
+
+
+	/**
+	 * @param presenceRoiBlanc the presenceRoiBlanc to set
+	 */
+	public void setPresenceRoiBlanc(boolean presenceRoiBlanc) {
+		this.presenceRoiBlanc = presenceRoiBlanc;
+	}
+
+
+	/**
+	 * @return the presenceRoiNoir
+	 */
+	public boolean isPresenceRoiNoir() {
+		return presenceRoiNoir;
+	}
+
+
+	/**
+	 * @param presenceRoiNoir the presenceRoiNoir to set
+	 */
+	public void setPresenceRoiNoir(boolean presenceRoiNoir) {
+		this.presenceRoiNoir = presenceRoiNoir;
+	}
+
+
 	/**
 	 * @return the description
 	 */
