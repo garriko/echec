@@ -34,6 +34,7 @@ public abstract class Echiquier {
 	 */
 	public Echiquier() throws ClassNotFoundException, IOException{
 		Variantes v = new Variantes("classique");
+		//System.out.println(v.getDescription());
 		this.plateau = new Vector<Case>(v.getPlateau());
 		this.listePieceEnJeu = new Vector<Case>(v.getListePieces());
 		this.listePiecePrises=new Vector<Piece>();

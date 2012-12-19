@@ -67,7 +67,8 @@ public class Variantes {
 		VariantWrapper w = chargerVariante(nomVariante);
 		plateau = w.getPlateau();
 		listePieces=w.getListePieces();
-		description=new String(w.getDescription());
+		description=new String("classique");
+		//TODO : modifier
 		presenceRoiBlanc=w.isPresenceRoiBlanc();
 		presenceRoiNoir=w.isPresenceRoiNoir();
 	}
@@ -112,6 +113,7 @@ public class Variantes {
            FileInputStream fileIn = new FileInputStream(new String("variantes/"+nomVariante+".vech"));
            ObjectInputStream in = new ObjectInputStream(fileIn);
            w = (VariantWrapper) in.readObject();
+           System.out.println(w.isPresenceRoiBlanc());
            in.close();
            fileIn.close();
        }

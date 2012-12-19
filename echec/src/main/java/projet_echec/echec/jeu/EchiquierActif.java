@@ -291,7 +291,7 @@ public class EchiquierActif extends Echiquier {
 				
 				if(plop.get(i).getPosition().equals(caseArrivee.getPosition())){
 					System.out.println("rentre dans le premier si");
-					if(!caseArrivee.estVide())//si il y a une case a l'arrivee
+					if(caseArrivee.estVide())//si il y a une case a l'arrivee
 					{
 						System.out.println("rentre dans le deuxième si");
 						this.listePiecePrises.add(caseArrivee.getPiece());//on ajoute la piece dans la liste des pieces prises

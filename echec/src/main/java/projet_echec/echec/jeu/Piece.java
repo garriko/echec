@@ -12,6 +12,10 @@ import java.util.ArrayList;
 
 public abstract class Piece implements java.io.Serializable{
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5342020547736910208L;
+	/**
 	 * Camp de la piece.
 	 * Valeurs possibles : "blanc" ou "noir"
 	 */

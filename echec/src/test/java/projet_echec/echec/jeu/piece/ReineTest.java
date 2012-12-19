@@ -11,6 +11,7 @@ import projet_echec.echec.jeu.Case;
 import projet_echec.echec.jeu.EchiquierActif;
 import projet_echec.echec.jeu.Piece;
 import projet_echec.echec.jeu.Position;
+import projet_echec.echec.jeu.Variantes;
 import junit.framework.TestCase;
 
 /**
@@ -42,16 +43,20 @@ public class ReineTest extends TestCase {
 			Piece c= new Reine("noir");
 			Case c1= new Case(p);
 			c1.setPiece(c);						
-			Position ar= new Position(3,3);
+			Position ar= new Position(7,1);
 			Case t2= new Case(ar);
-			E.deplacersanscondition(c1,t2);
+			try {
+				E.deplacer(c1,t2);
+			} catch (DeplacementException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			System.out.println("doit renvoyer null");
 			System.out.println(c1.getPiece());	
 			System.out.println("si les deux valeurs suivante sont egale c'est gagne");
 			System.out.println(c);
 			System.out.println(t2.getPiece());
-			//assertTrue(c.equals(t2.getPiece()));
-			assertTrue(true);
+			assertTrue(c.equals(t2.getPiece()));
 		}
 }
