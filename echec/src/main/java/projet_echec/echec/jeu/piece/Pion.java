@@ -29,19 +29,19 @@ public class Pion extends Piece implements java.io.Serializable {
 	public ArrayList<Case> getDeplacementPossible(Case pos){return null;}
 	
 	public ArrayList<Case> getDeplacementPossible(Case pos, ArrayList<Case> caseDiagonale) {
-		// TODO Auto-generated method stub
+		
 		ArrayList<Case> lp = new ArrayList<Case>();
-		if(dejaBouge == false)
+		if(this.dejaBouge == false)
 		{
 			if(pos.getPiece().getCamp()=="blanc")
 			{
-			Case c0 = new Case(new Position(pos.getPosition().getHauteur()+1,pos.getPosition().getLargeur()+0));
-			if(isDeplacementOk(c0))
-				lp.add(c0);
-			
-			Case c1 = new Case(new Position(pos.getPosition().getHauteur()+2,pos.getPosition().getLargeur()+0));
-			if(isDeplacementOk(c1))
-				lp.add(c1);
+				Case c0 = new Case(new Position(pos.getPosition().getHauteur()+1,pos.getPosition().getLargeur()+0));
+				if(isDeplacementOk(c0))
+					lp.add(c0);
+				
+				Case c1 = new Case(new Position(pos.getPosition().getHauteur()+2,pos.getPosition().getLargeur()+0));
+				if(isDeplacementOk(c1))
+					lp.add(c1);
 			}
 			else
 			{
@@ -53,7 +53,7 @@ public class Pion extends Piece implements java.io.Serializable {
 				if(isDeplacementOk(c1))
 					lp.add(c1);
 			}
-			dejaBouge = true;
+			this.dejaBouge = true;
 		}
 		else
 		{
