@@ -10,6 +10,8 @@ import java.util.Vector;
 import projet_echec.echec.exception.CaseErrorException;
 import projet_echec.echec.exception.EmptyCaseException;
 import projet_echec.echec.exception.FullCaseException;
+import projet_echec.echec.exception.PresenceKingException;
+import projet_echec.echec.exception.RoiManquantException;
 import projet_echec.echec.jeu.piece.Cavalier;
 import projet_echec.echec.jeu.piece.Fou;
 import projet_echec.echec.jeu.piece.Pion;
@@ -32,6 +34,9 @@ public class Variantes {
 
 	private Vector<Case> plateau;
 	private Vector<Case> listePieces;
+	String description;
+	boolean presenceRoiBlanc;
+	boolean presenceRoiNoir;
 	
 	/**
 	 * Constructeur par defaut de la classe Variantes
@@ -45,6 +50,9 @@ public class Variantes {
 			for(int l=1;l<=8;l++)
 				plateau.add(new Case(new Position(h,l)));
 		listePieces=new Vector<Case>();
+		presenceRoiBlanc=false;
+		presenceRoiNoir=false;
+		
 	}
 	
 	/**
@@ -59,28 +67,36 @@ public class Variantes {
 		VariantWrapper w = chargerVariante(nomVariante);
 		plateau = w.getPlateau();
 		listePieces=w.getListePieces();
+		description=new String(w.getDescription());
+		presenceRoiBlanc=w.isPresenceRoiBlanc();
+		presenceRoiNoir=w.isPresenceRoiNoir();
 	}
 	
 	/**
 	 * Enregistre la variante dans un fichier nomVariante.vech
 	 * @param nomVariante
 	 * @throws IOException 
+	 * @throws RoiManquantException 
 	 */
-	public void saveVariante(String nomVariante) throws IOException
+	public void saveVariante(String nomVariante) throws IOException, RoiManquantException
 	{
-		VariantWrapper w = new VariantWrapper(plateau,listePieces);
-		
-	      try
-	      {
-	         FileOutputStream fileOut = new FileOutputStream(new String("variantes/"+nomVariante+".vech"));
-	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
-	         out.writeObject(w);
-	         out.close();
-	         fileOut.close();
-	      }catch(IOException i) //Si le fichier n'est pas trouvé
-	      {
-	         throw i;
-	      }
+		VariantWrapper w = new VariantWrapper(plateau,listePieces,description,presenceRoiBlanc,presenceRoiNoir);
+		if(presenceRoiBlanc && presenceRoiNoir)
+		{
+			try
+			{
+				FileOutputStream fileOut = new FileOutputStream(new String("variantes/"+nomVariante+".vech"));
+				ObjectOutputStream out = new ObjectOutputStream(fileOut);
+				out.writeObject(w);
+				out.close();
+				fileOut.close();
+			}catch(IOException i) //Si le fichier n'est pas trouvé
+			{
+				throw i;
+			}
+		}
+		else
+			throw new RoiManquantException();
 	}
 	
 	/**
@@ -117,18 +133,60 @@ public class Variantes {
 	 * @param c case du plateau
 	 * @param p pièce à ajouter
 	 * @throws FullCaseException 
+	 * @throws PresenceKingException 
 	 */
-	public void ajouterPiece(Case c, Piece p) throws FullCaseException {
-			Case currentCase = plateau.get((c.getPosition().getHauteur()-1)*8+c.getPosition().getLargeur() -1 );
+	public void ajouterPiece(Case c, Piece p) throws FullCaseException, PresenceKingException {
+		String nomPiece = p.getClass().getSimpleName();
+		if(nomPiece.equals(new String("Roi")) && p.getCamp()=="blanc")
+			if(!presenceRoiBlanc)
+			{
+				Case currentCase = plateau.get((c.getPosition().getHauteur()-1)*8+c.getPosition().getLargeur() -1 );
 				if(currentCase.estVide())
 				{
 					currentCase.setPiece(p);
 					listePieces.add(currentCase);
 					c.setPiece(p);
+					presenceRoiBlanc=true;
 				}
 				else
 					throw new FullCaseException();
-		
+			}
+			else
+			{
+				throw new PresenceKingException();
+			}
+		else if(nomPiece.equals(new String("Roi")) && p.getCamp()=="noir")
+		{
+			if(!presenceRoiNoir)
+			{
+				Case currentCase = plateau.get((c.getPosition().getHauteur()-1)*8+c.getPosition().getLargeur() -1 );
+				if(currentCase.estVide())
+				{
+					currentCase.setPiece(p);
+					listePieces.add(currentCase);
+					c.setPiece(p);
+					presenceRoiNoir=true;
+				}
+				else
+					throw new FullCaseException();
+			}
+			else
+			{
+				throw new PresenceKingException();
+			}
+		}
+		else
+		{
+			Case currentCase = plateau.get((c.getPosition().getHauteur()-1)*8+c.getPosition().getLargeur() -1 );
+			if(currentCase.estVide())
+			{
+				currentCase.setPiece(p);
+				listePieces.add(currentCase);
+				c.setPiece(p);
+			}
+			else
+				throw new FullCaseException();
+		}
 	}
 	
 	
@@ -148,6 +206,14 @@ public class Variantes {
 					throw new EmptyCaseException();
 				else
 				{
+					if(currentCase.getPiece().getClass().getSimpleName().equals(new String("Roi")) && currentCase.getPiece().getCamp()=="blanc")
+					{
+						presenceRoiBlanc=false;
+					}
+					else if(currentCase.getPiece().getClass().getSimpleName().equals(new String("Roi")) && currentCase.getPiece().getCamp()=="noir")
+					{
+						presenceRoiNoir=false;
+					}
 					currentCase.setPiece(null);
 					for(int j=0;j<listePieces.size();j++)
 						if(listePieces.get(j).equals(currentCase))
@@ -169,6 +235,20 @@ public class Variantes {
 	 */
 	public Vector<Case> getListePieces() {
 		return listePieces;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	
