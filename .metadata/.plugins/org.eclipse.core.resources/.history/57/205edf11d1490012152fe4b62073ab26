@@ -1,0 +1,16 @@
+package projet_echec.echec;
+
+import javax.swing.JFrame;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+       JFrame fenetre = new JFrame("Jeu d'echec");
+       
+    }
+}

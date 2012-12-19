@@ -13,6 +13,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import projet_echec.echec.gestion.GestionJeu;
+
 /**
  * 
  * @author Anne-Sophie
@@ -22,24 +24,37 @@ import javax.swing.JPanel;
  */
 
 public class InterfaceMenu {
-	
-	JFrame fenetre=new JFrame("Popup");
-	Container tmp = fenetre.getContentPane();
-	Image bouton1 = new ImageIcon("images/boutonCommencer.png").getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT);
-	JButton Bouton1 = new JButton(new ImageIcon(bouton1));
-	Image bouton2 = new ImageIcon("images/boutonReprendre.png").getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT);
-	JButton Bouton2 = new JButton(new ImageIcon(bouton2));
-	Image bouton3 = new ImageIcon("images/boutonRevoir.png").getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT);
-	JButton Bouton3 = new JButton(new ImageIcon(bouton3));
-	Image bouton4 = new ImageIcon("images/boutonOptions.png").getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT);
-	JButton Bouton4 = new JButton(new ImageIcon(bouton4));
-	Image bouton5 = new ImageIcon("images/boutonQuitter.png").getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT);
-	JButton Bouton5 = new JButton(new ImageIcon(bouton5));
+	GestionJeu cerveley;
+	JFrame fenetre;
+	Container tmp;
+	Image bouton1;
+	JButton Bouton1;
+	Image bouton2;
+	JButton Bouton2;
+	Image bouton3;
+	JButton Bouton3;
+	Image bouton4;
+	JButton Bouton4;
+	Image bouton5;
+	JButton Bouton5;
 	
 	/**
 	 * Constructeur de la classe
 	 */
-	public InterfaceMenu() {
+	public InterfaceMenu(GestionJeu cerveau) {
+		fenetre= new JFrame();
+		tmp = fenetre.getContentPane();
+		cerveley=cerveau;
+		bouton1 = new ImageIcon("images/boutonCommencer.png").getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT);
+		Bouton1 = new JButton(new ImageIcon(bouton1));
+		bouton2 = new ImageIcon("images/boutonReprendre.png").getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT);
+		Bouton2 = new JButton(new ImageIcon(bouton2));
+		bouton3 = new ImageIcon("images/boutonRevoir.png").getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT);
+		Bouton3 = new JButton(new ImageIcon(bouton3));
+		bouton4 = new ImageIcon("images/boutonOptions.png").getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT);
+		Bouton4 = new JButton(new ImageIcon(bouton4));
+		bouton5 = new ImageIcon("images/boutonQuitter.png").getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT);
+		Bouton5 = new JButton(new ImageIcon(bouton5));
 		
 		Bouton1.setBounds(260, 180, 500, 52); //position x, position y, largeur, hauteur
 		Bouton2.setBounds(260, 290, 500, 52); 
@@ -66,7 +81,7 @@ public class InterfaceMenu {
 		boutonsChoix.add(Bouton5);   
 		boutonsChoix.setOpaque(false);
 		tmp.add(boutonsChoix);
-    
+		fenetre.setContentPane(tmp);
 		fenetre.setSize(1000,720); // taille de l'image de fond
 		fenetre.setResizable(false);
 		fenetre.setVisible(true);
@@ -75,11 +90,27 @@ public class InterfaceMenu {
 		
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
+			if (e.getSource()==Bouton1){ // Commencer partie
+				fenetre.setVisible(false);
+				new InterfaceConfigPartie(cerveley);
+				
+			}
+			if (e.getSource()==Bouton2){ // Continuer partie
+				fenetre.setVisible(false);
+				new InterfaceCatalogue("reprendre", cerveley);	
+			}
+			if (e.getSource()==Bouton3){ // Revoir partie
+				fenetre.setVisible(false);
+				new InterfaceCatalogue("revoir", cerveley);
+			}
+			if (e.getSource()==Bouton4){ // Options partie
+				
+			}
+			if (e.getSource()==Bouton5){ // Quitter partie
+				System.exit(0);
+			}
 		}
 	}
 	
-	public static void main(String[] args){
-		new InterfaceMenu();
-	}
 
 }

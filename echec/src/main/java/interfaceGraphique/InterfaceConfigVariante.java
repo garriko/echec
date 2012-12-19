@@ -17,6 +17,9 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import projet_echec.echec.gestion.GestionCatalogueVariante;
+import projet_echec.echec.jeu.Variantes;
+
 /**
  * 
  * @author Anne-Sophie
@@ -28,54 +31,61 @@ import javax.swing.JScrollPane;
 public class InterfaceConfigVariante {
 
 	JFrame fenetre=new JFrame("Popup");
+	
 	Container tmp = fenetre.getContentPane();
 	
-	Image bouton1 = new ImageIcon("images/boutonCommencer.png").getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT);
-	JButton Bouton1 = new JButton(new ImageIcon(bouton1));
-	Image bouton2 = new ImageIcon("images/boutonReprendre.png").getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT);
-	JButton Bouton2 = new JButton(new ImageIcon(bouton2));
-	Image bouton3 = new ImageIcon("images/boutonRevoir.png").getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT);
-	JButton Bouton3 = new JButton(new ImageIcon(bouton3));
+	JButton boutonCreer;
+	JButton boutonModifier;
+	JButton boutonAppliquer;
+	JButton boutonRetour;
 
 	
 	JList listeVariantes = new JList();
+	
+	GestionCatalogueVariante catalogue; 
+	
 	
 	
 	/**
 	 * Constructeur de la classe
 	 */
-	public InterfaceConfigVariante(Vector<String> liste) {
+	public InterfaceConfigVariante() {
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		catalogue = new GestionCatalogueVariante();
+		catalogue.chargerListe();
+		Vector<String> liste = catalogue.getListePartie();
 		
-		/*Bouton1.setBounds(260, 180, 500, 52); //position x, position y, largeur, hauteur
-		Bouton2.setBounds(260, 290, 500, 52); 
-		Bouton3.setBounds(260, 390, 500, 52);
-		Bouton4.setBounds(260, 490, 500, 52);
-		Bouton5.setBounds(260, 580, 500, 52);
-		*/
+		boutonCreer = new JButton("créer");
+		boutonModifier = new JButton("modifier");
+		boutonAppliquer = new JButton("appliquer");
+		boutonRetour = new JButton("retour");
 		
-		//bouton1.setBounds(400, 800, 100, 100);
-		/*
+		boutonCreer.setBounds(100, 600, 200, 52); //position x, position y, largeur, hauteur
+		boutonModifier.setBounds(350, 600, 200, 52); 
+		boutonAppliquer.setBounds(600, 600, 200, 52);
+		boutonRetour.setBounds(850, 600, 200, 52);
+		
+		
 		Ecouteur listen=new Ecouteur();
-		Bouton1.addActionListener(listen);
-		Bouton2.addActionListener(listen);
-		Bouton3.addActionListener(listen);
-		Bouton4.addActionListener(listen);
-		Bouton5.addActionListener(listen);
-	*/
-		JPanel boutonsChoix = new TestImagePanel(new ImageIcon("images/configVariantes.png").getImage().getScaledInstance(1000, 700, Image.SCALE_DEFAULT));
-		boutonsChoix.setLayout(null);	
-		//boutonsChoix.add(bouton1);   
-		/*
-		boutonsChoix.add(Bouton2);
-		boutonsChoix.add(Bouton3);   
-		boutonsChoix.add(Bouton4);
-		boutonsChoix.add(Bouton5);   
-		*/
-		boutonsChoix.add(listeVariantes);
+		boutonCreer.addActionListener(listen);
+		boutonModifier.addActionListener(listen);
+		boutonAppliquer.addActionListener(listen);
+		boutonRetour.addActionListener(listen);
+		
+	
+		JPanel imageFond = new TestImagePanel(new ImageIcon("images/configVariantes.png").getImage().getScaledInstance(1000, 700, Image.SCALE_DEFAULT));
+		imageFond.setLayout(null);
+		
+		imageFond.add(boutonCreer);   
+		imageFond.add(boutonModifier);
+		imageFond.add(boutonAppliquer);   
+		imageFond.add(boutonRetour);  
+		
+		imageFond.add(listeVariantes);
 		
 		JScrollPane scroll = new JScrollPane(listeVariantes);
 		scroll.setPreferredSize(new Dimension(100, 120));
-		boutonsChoix.add(scroll);
+		imageFond.add(scroll);
 		scroll.setBounds(120, 250, 465, 260);
 		
 		for (int i=0; i<liste.size(); i++){
@@ -84,8 +94,8 @@ public class InterfaceConfigVariante {
 		
 		
 		
-		boutonsChoix.setOpaque(false);
-		tmp.add(boutonsChoix);
+		imageFond.setOpaque(false);
+		tmp.add(imageFond);
     
 		fenetre.setSize(1000,720); // taille de l'image de fond
 		fenetre.setResizable(false);
@@ -95,16 +105,24 @@ public class InterfaceConfigVariante {
 		
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
+			if (e.getSource()==boutonCreer){
+				Variantes v = new Variantes();
+				new InterfacePersoEchiquier(v);
+			}
+			if (e.getSource()==boutonModifier){
+							
+			}
+			if (e.getSource()==boutonAppliquer){
+				
+			}
+			if (e.getSource()==boutonRetour){
+				
+			}
 		}
 	}
 	
-	public static void main(String[] args){
-		Vector<String> liste = new Vector<String>();
-		for (int i=0; i<20; i++){
-			liste.add("Variante"+String.valueOf(i));
-		}
-		
-		new InterfaceConfigVariante(liste);
+	public static void main(String[] args){		
+		new InterfaceConfigVariante();
 	}
 
 	
