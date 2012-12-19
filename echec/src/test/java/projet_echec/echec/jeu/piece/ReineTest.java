@@ -44,7 +44,10 @@ public class ReineTest extends TestCase {
 			Case c1= new Case(p);
 			c1.setPiece(c);						
 			Position ar= new Position(7,1);
+			Piece pie= new Tour("blanc");
 			Case t2= new Case(ar);
+			t2.setPiece(pie);
+			System.out.println(E.getListePieceEnJeu().size());
 			try {
 				E.deplacer(c1,t2);
 			} catch (DeplacementException e) {
@@ -57,6 +60,9 @@ public class ReineTest extends TestCase {
 			System.out.println("si les deux valeurs suivante sont egale c'est gagne");
 			System.out.println(c);
 			System.out.println(t2.getPiece());
+			
+			System.out.println(E.getListePiecePrises());
+			System.out.println(E.getListePieceEnJeu().size());
 			assertTrue(c.equals(t2.getPiece()));
 		}
 }
