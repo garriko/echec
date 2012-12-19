@@ -19,7 +19,7 @@ import junit.framework.TestCase;
 public class RoiTest extends TestCase {
 	public void testPresenceRoi(){
 		Position p= new Position(1,1);
-		Piece c= new Roi("noir",null);
+		Piece c= new Roi("noir");
 		Case c1= new Case(p);
 		c1.setPiece(c);
 		assertEquals(c1.getPiece(),c);	
@@ -36,7 +36,7 @@ public class RoiTest extends TestCase {
 			e1.printStackTrace();
 		}
 		Position p= new Position(1,1);
-		Piece c= new Roi("noir",null);
+		Piece c= new Roi("noir");
 		Case c1= new Case(p);
 		c1.setPiece(c);
 		Position ar= new Position(2,2);

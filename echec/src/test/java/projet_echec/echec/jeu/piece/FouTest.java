@@ -18,7 +18,7 @@ public class FouTest extends TestCase {
 	
 	public void testPresenceFou(){
 		Position p= new Position(1,1);
-		Piece c= new Fou("noir",null);
+		Piece c= new Fou("noir");
 		Case c1= new Case(p);
 		c1.setPiece(c);
 		assertEquals(c1.getPiece(),c);	
@@ -27,7 +27,7 @@ public class FouTest extends TestCase {
 	public void testdeplacerFou(){
 		EchiquierActif E= new EchiquierActif(null);
 		Position p= new Position(1,1);
-		Piece c= new Fou("noir",null);
+		Piece c= new Fou("noir");
 		Case c1= new Case(p);
 		c1.setPiece(c);
 		Position ar= new Position(3,3);

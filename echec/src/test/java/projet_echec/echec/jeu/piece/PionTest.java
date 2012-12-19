@@ -20,7 +20,7 @@ public class PionTest extends TestCase {
 	
 	public void testPresencePion(){
 		Position p= new Position(1,1);
-		Piece c= new Pion("noir",null);
+		Piece c= new Pion("noir");
 		Case c1= new Case(p);
 		c1.setPiece(c);
 		assertEquals(c1.getPiece(),c);	
@@ -38,7 +38,7 @@ public class PionTest extends TestCase {
 			e1.printStackTrace();
 		}
 		Position p= new Position(1,1);
-		Piece c= new Pion("noir",null);
+		Piece c= new Pion("noir");
 		Case c1= new Case(p);
 		c1.setPiece(c);
 		Position ar= new Position(3,1);
