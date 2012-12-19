@@ -96,91 +96,99 @@ public class Case implements java.io.Serializable {
 
 	public void setPiece(Piece piece) {
 		this.piece = piece;
-		if(piece.getClass().getSimpleName().equals(new String("Pion")))
-		{
-			if(piece.getCamp()=="blanc")
-				if(position.getHauteur()+position.getLargeur() % 2 == 0)
-					setImg("images/Pieces/pasAuto/121.png");
-				else
-					setImg("images/Pieces/pasAuto/111.png");
+		if(piece==null){
+			if(position.getHauteur()+position.getLargeur() % 2 == 0)
+				setImg("images/casegrise.png");
 			else
-				if(position.getHauteur()+position.getLargeur() % 2 == 0)
-					setImg("images/Pieces/pasAuto/221.png");
-				else
-					setImg("images/Pieces/pasAuto/211.png");
+				setImg("images/caseblanche.png");
 		}
-		
-		if (piece.getClass().getSimpleName().equals(new String("Tour")))
+		else
 		{
-			
-			if(piece.getCamp()=="blanc")
-				if(position.getHauteur()+position.getLargeur() % 2 == 0)
-					setImg("images/Pieces/pasAuto/122.png");
+			if(piece.getClass().getSimpleName().equals(new String("Pion")))
+			{
+				if(piece.getCamp()=="blanc")
+					if(position.getHauteur()+position.getLargeur() % 2 == 0)
+						setImg("images/Pieces/pasAuto/121.png");
+					else
+						setImg("images/Pieces/pasAuto/111.png");
 				else
-					setImg("images/Pieces/pasAuto/112.png");
-			else
-				if(position.getHauteur()+position.getLargeur() % 2 == 0)
-					setImg("images/Pieces/pasAuto/222.png");
+					if(position.getHauteur()+position.getLargeur() % 2 == 0)
+						setImg("images/Pieces/pasAuto/221.png");
+					else
+						setImg("images/Pieces/pasAuto/211.png");
+			}
+
+			if (piece.getClass().getSimpleName().equals(new String("Tour")))
+			{
+
+				if(piece.getCamp()=="blanc")
+					if(position.getHauteur()+position.getLargeur() % 2 == 0)
+						setImg("images/Pieces/pasAuto/122.png");
+					else
+						setImg("images/Pieces/pasAuto/112.png");
 				else
-					setImg("images/Pieces/pasAuto/212.png");
+					if(position.getHauteur()+position.getLargeur() % 2 == 0)
+						setImg("images/Pieces/pasAuto/222.png");
+					else
+						setImg("images/Pieces/pasAuto/212.png");
+			}
+
+			if(piece.getClass().getSimpleName().equals(new String("Fou")))
+			{
+				if(piece.getCamp()=="blanc")
+					if(position.getHauteur()+position.getLargeur() % 2 == 0)
+						setImg("images/Pieces/pasAuto/124.png");
+					else
+						setImg("images/Pieces/pasAuto/114.png");
+				else
+					if(position.getHauteur()+position.getLargeur() % 2 == 0)
+						setImg("images/Pieces/pasAuto/224.png");
+					else
+						setImg("images/Pieces/pasAuto/214.png");
+			}
+
+			if(piece.getClass().getSimpleName().equals(new String("Cavalier")))
+			{
+				if(piece.getCamp()=="blanc")
+					if(position.getHauteur()+position.getLargeur() % 2 == 0)
+						setImg("images/Pieces/pasAuto/123.png");
+					else
+						setImg("images/Pieces/pasAuto/113.png");
+				else
+					if(position.getHauteur()+position.getLargeur() % 2 == 0)
+						setImg("images/Pieces/pasAuto/223.png");
+					else
+						setImg("images/Pieces/pasAuto/213.png");
+			}
+
+			if(piece.getClass().getSimpleName().equals(new String("Reine")))
+			{
+				if(piece.getCamp()=="blanc")
+					if(position.getHauteur()+position.getLargeur() % 2 == 0)
+						setImg("images/Pieces/pasAuto/126.png");
+					else
+						setImg("images/Pieces/pasAuto/116.png");
+				else
+					if(position.getHauteur()+position.getLargeur() % 2 == 0)
+						setImg("images/Pieces/pasAuto/226.png");
+					else
+						setImg("images/Pieces/pasAuto/216.png");
+			}
+
+			if(piece.getClass().getSimpleName().equals(new String("Roi")))
+			{
+				if(piece.getCamp()=="blanc")
+					if(position.getHauteur()+position.getLargeur() % 2 == 0)
+						setImg("images/Pieces/pasAuto/125.png");
+					else
+						setImg("images/Pieces/pasAuto/115.png");
+				else
+					if(position.getHauteur()+position.getLargeur() % 2 == 0)
+						setImg("images/Pieces/pasAuto/225.png");
+					else
+						setImg("images/Pieces/pasAuto/215.png");
+			}
 		}
-		
-		if(piece.getClass().getSimpleName().equals(new String("Fou")))
-		{
-			if(piece.getCamp()=="blanc")
-				if(position.getHauteur()+position.getLargeur() % 2 == 0)
-					setImg("images/Pieces/pasAuto/124.png");
-				else
-					setImg("images/Pieces/pasAuto/114.png");
-			else
-				if(position.getHauteur()+position.getLargeur() % 2 == 0)
-					setImg("images/Pieces/pasAuto/224.png");
-				else
-					setImg("images/Pieces/pasAuto/214.png");
-		}
-		
-		if(piece.getClass().getSimpleName().equals(new String("Cavalier")))
-		{
-			if(piece.getCamp()=="blanc")
-				if(position.getHauteur()+position.getLargeur() % 2 == 0)
-					setImg("images/Pieces/pasAuto/123.png");
-				else
-					setImg("images/Pieces/pasAuto/113.png");
-			else
-				if(position.getHauteur()+position.getLargeur() % 2 == 0)
-					setImg("images/Pieces/pasAuto/223.png");
-				else
-					setImg("images/Pieces/pasAuto/213.png");
-		}
-			
-		if(piece.getClass().getSimpleName().equals(new String("Reine")))
-		{
-			if(piece.getCamp()=="blanc")
-				if(position.getHauteur()+position.getLargeur() % 2 == 0)
-					setImg("images/Pieces/pasAuto/126.png");
-				else
-					setImg("images/Pieces/pasAuto/116.png");
-			else
-				if(position.getHauteur()+position.getLargeur() % 2 == 0)
-					setImg("images/Pieces/pasAuto/226.png");
-				else
-					setImg("images/Pieces/pasAuto/216.png");
-		}
-		
-		if(piece.getClass().getSimpleName().equals(new String("Roi")))
-		{
-			if(piece.getCamp()=="blanc")
-				if(position.getHauteur()+position.getLargeur() % 2 == 0)
-					setImg("images/Pieces/pasAuto/125.png");
-				else
-					setImg("images/Pieces/pasAuto/115.png");
-			else
-				if(position.getHauteur()+position.getLargeur() % 2 == 0)
-					setImg("images/Pieces/pasAuto/225.png");
-				else
-					setImg("images/Pieces/pasAuto/215.png");
-		}
-		
 	}
 
 	public Position getPosition() {
@@ -204,15 +212,15 @@ public class Case implements java.io.Serializable {
 	public void setImg(String img) {
 		this.img = img;
 	}
-/*
+
 	public static void main(String[] args) {
 
 	
-		Case c = new Case(new Position(5,3));
+		Case c = new Case(new Position(5,4));
 		c.setPiece(new Tour("noir"));
 		//c.setImg("images/Pieces/pasAuto/222.png");
 		System.out.println(c.getImg());
 		
 	}	
-	*/
+	
 }
