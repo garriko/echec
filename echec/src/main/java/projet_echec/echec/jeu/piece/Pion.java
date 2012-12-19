@@ -31,6 +31,7 @@ public class Pion extends Piece implements java.io.Serializable {
 	public ArrayList<Case> getDeplacementPossible(Case pos, ArrayList<Case> caseDiagonale) {
 		
 		ArrayList<Case> lp = new ArrayList<Case>();
+		System.out.println("test");
 		if(this.dejaBouge == false)
 		{
 			if(pos.getPiece().getCamp()=="blanc")
