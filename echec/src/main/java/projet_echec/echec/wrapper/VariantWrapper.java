@@ -23,10 +23,33 @@ public class VariantWrapper implements java.io.Serializable{
 	 * @param plateau plateau a sauver
 	 * @param listePieces liste de cases a sauver
 	 */
-	public VariantWrapper(Vector<Case> plateau, Vector<Case> listePieces) {
+	/**
+	 * Description de la variante a enregistrer
+	 */
+	private String description;
+	public VariantWrapper(Vector<Case> plateau, Vector<Case> listePieces, String desc) {
 		this.plateau = plateau;
 		this.listePieces = listePieces;
+		this.description= desc;
 	}
+	
+	
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
 	/**
 	 * @return the plateau
 	 */

@@ -32,6 +32,7 @@ public class Variantes {
 
 	private Vector<Case> plateau;
 	private Vector<Case> listePieces;
+	String description;
 	
 	/**
 	 * Constructeur par defaut de la classe Variantes
@@ -45,6 +46,7 @@ public class Variantes {
 			for(int l=1;l<=8;l++)
 				plateau.add(new Case(new Position(h,l)));
 		listePieces=new Vector<Case>();
+		
 	}
 	
 	/**
@@ -59,6 +61,7 @@ public class Variantes {
 		VariantWrapper w = chargerVariante(nomVariante);
 		plateau = w.getPlateau();
 		listePieces=w.getListePieces();
+		description=new String(w.getDescription());
 	}
 	
 	/**
@@ -68,7 +71,7 @@ public class Variantes {
 	 */
 	public void saveVariante(String nomVariante) throws IOException
 	{
-		VariantWrapper w = new VariantWrapper(plateau,listePieces);
+		VariantWrapper w = new VariantWrapper(plateau,listePieces,description);
 		
 	      try
 	      {
@@ -169,6 +172,20 @@ public class Variantes {
 	 */
 	public Vector<Case> getListePieces() {
 		return listePieces;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	
