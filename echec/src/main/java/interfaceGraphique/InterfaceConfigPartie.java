@@ -21,6 +21,7 @@ import projet_echec.echec.exception.GameException;
 import projet_echec.echec.gestion.GestionJeu;
 import projet_echec.echec.gestion.Joueur;
 import projet_echec.echec.gestion.Options;
+import projet_echec.echec.jeu.Variantes;
 import projet_echec.echec.wrapper.Wrapper;
 
 
@@ -125,7 +126,7 @@ public class InterfaceConfigPartie {
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
 			if (e.getSource()==Bouton1){ //modifier
-				//new InterfaceConfigVariante();
+				new InterfaceConfigVariante();
 			}
 			if (e.getSource()==Bouton2){ //valider
 				Joueur J1 = new Joueur(nomJ1.getText(), aideJ1.isSelected());

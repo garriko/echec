@@ -1,0 +1,85 @@
+package interfaceGraphique;
+
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+/**
+ * 
+ * @author Vincent
+ *
+ * Fenêtre de l'interface graphique de la popup lorsque un pion arrive au bout de l'échiqier.
+ * On lui propose alors de choisir par quelle pièce remplacer son pion
+ *
+ */
+
+public class InterfacePopupPionBout {
+	
+	JFrame fenetre=new JFrame("Popup");
+	Container tmp = fenetre.getContentPane();
+	JButton BoutonOK = new JButton(new ImageIcon("images/okSauvegarde.png"));
+	JComboBox ChoixPieces = new JComboBox();
+
+	/**
+	 * Constructeur de la classe
+	 */
+	public InterfacePopupPionBout() {
+		
+		BoutonOK.setBounds(190, 225, 100, 48); //position x, position y, largeur, hauteur
+		ChoixPieces.setBounds(170,80,140,41);
+		
+		Ecouteur listen=new Ecouteur();
+		BoutonOK.addActionListener(listen);
+		
+	
+		JPanel boutonsChoix = new TestImagePanel(new ImageIcon("images/InterfacePopupPionBout.png").getImage());
+		boutonsChoix.setLayout(null);	 
+		
+		boutonsChoix.add(BoutonOK);
+		
+		
+		boutonsChoix.add(ChoixPieces);
+		ChoixPieces.addItem("Cavalier");
+		ChoixPieces.addItem("Tour");
+		ChoixPieces.addItem("Fou");
+		ChoixPieces.addItem("Reine");
+		
+	    
+		boutonsChoix.setOpaque(false);
+		tmp.add(boutonsChoix);
+    
+		fenetre.setSize(500,320); // taille de l'image de fond
+		fenetre.setResizable(false);
+		fenetre.setVisible(true);
+	}
+	
+		
+	public class Ecouteur implements ActionListener{		
+		public void actionPerformed(ActionEvent e){
+			
+			if ( (ChoixPieces.getSelectedItem()=="Fou") )
+	    		System.out.println("Fuyez pauvre FOU !");
+			
+			else if  ( (ChoixPieces.getSelectedItem()=="Cavalier") )
+	    		System.out.println("Je Gandalf le Cavalier blanc !");
+		
+	}
+	
+	class ItemAction implements ActionListener{
+	    public void actionPerformed(ActionEvent e) {
+	    		}
+	    	}        
+	  }
+	
+	public static void main(String[] args){
+		new InterfacePopupPionBout();
+	}
+}
