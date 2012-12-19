@@ -93,7 +93,6 @@ public class EchiquierActif extends Echiquier {
 	 * @return liste de piece qui menace la case
 	 */
 	public Vector<Case> estMenacePar(String c, Case e){
-		boolean estmenace= false;
 		Vector<Case> listePieceAdverse= new Vector<Case>();
 		Vector<Case> listePieceMenacante= new Vector<Case>();
 		if (c=="noir")
@@ -238,36 +237,51 @@ public class EchiquierActif extends Echiquier {
 	 * @param caseArrivee: le joueur a selectionne une case d'arrivee sur le plateau
 	 * @throws DeplacementException 
 	 */
-	public void deplacer(Case caseDepart, Case caseArrivee) throws DeplacementException{
-		//TODO : modifier deplacement pour roi en echec
-		ArrayList<Case> plop = new ArrayList<Case>();
-		plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
-		plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
-		if(plop.contains(caseArrivee)){
-			if(!caseArrivee.estVide())//si il y a une case a l'arrivee
-			{
-				this.listePiecePrises.add(caseArrivee.getPiece());//on ajoute la piece dans la liste des pieces prises
-				
-				for(int j=0; j< listePieceEnJeu.size();j++)//pour toutes les pieces en jeu
-					if(listePieceEnJeu.get(j).equals(caseArrivee))//si il y a une case egale a la case d'arrivee
-						listePieceEnJeu.remove(j);//on la supprime
-				changerCase(caseDepart,caseArrivee);
-			}
-			Piece n= new Roi("noir");
-			Piece b= new Roi("blanc");
-			if(caseDepart.getPiece()==n)
-			{
-				this.caseRoiNoir.setPosition(caseArrivee.getPosition());
-			}
-			if(caseDepart.getPiece()==n)
-			{
-				this.caseRoiBlanc.setPosition(caseArrivee.getPosition());
-			}
+	public void deplacer(Case caseDepart, Case caseArrivee) throws DeplacementException
+	{
+		switch(echec()){
+		case 21:break;
+		case 22:break;
+		case 11:
 			
-		}
-		else
-			throw new DeplacementException();
+			break;
+		case 12:
+			
+			break;
+		default:
+			deplacersanscondition(caseDepart,caseArrivee);
+			break;
+			}
 	}
+	public void deplacersanscondition(Case caseDepart, Case caseArrivee) throws DeplacementException{
+			ArrayList<Case> plop = new ArrayList<Case>();
+			plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
+			plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
+			if(plop.contains(caseArrivee)){
+				if(!caseArrivee.estVide())//si il y a une case a l'arrivee
+				{
+					this.listePiecePrises.add(caseArrivee.getPiece());//on ajoute la piece dans la liste des pieces prises
+					
+					for(int j=0; j< listePieceEnJeu.size();j++)//pour toutes les pieces en jeu
+						if(listePieceEnJeu.get(j).equals(caseArrivee))//si il y a une case egale a la case d'arrivee
+							listePieceEnJeu.remove(j);//on la supprime
+					changerCase(caseDepart,caseArrivee);
+				}
+				Piece n= new Roi("noir");
+				Piece b= new Roi("blanc");
+				if(caseDepart.getPiece()==n)
+				{
+					this.caseRoiNoir.setPosition(caseArrivee.getPosition());
+				}
+				if(caseDepart.getPiece()==b)
+				{
+					this.caseRoiBlanc.setPosition(caseArrivee.getPosition());
+				}
+			}
+			else
+				throw new DeplacementException();
+		}
+	
 	
 	/**
 	 * Methode utile pour la classe Pion. Renvoie 0,1 ou 2 cases selon la presence d'une piece adverse en diagonale par rapport a la
