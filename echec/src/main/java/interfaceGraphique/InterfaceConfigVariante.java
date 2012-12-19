@@ -13,6 +13,7 @@ import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -38,12 +39,14 @@ public class InterfaceConfigVariante {
 	JButton boutonModifier;
 	JButton boutonAppliquer;
 	JButton boutonRetour;
+	
+	JLabel infos;
 
 	
 	JList listeVariantes = new JList();
 	
 	GestionCatalogueVariante catalogue; 
-	
+	Vector<String> liste;
 	
 	
 	/**
@@ -53,17 +56,21 @@ public class InterfaceConfigVariante {
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		catalogue = new GestionCatalogueVariante();
 		catalogue.chargerListe();
-		Vector<String> liste = catalogue.getListePartie();
+		liste = catalogue.getListePartie();
 		
-		boutonCreer = new JButton("créer");
-		boutonModifier = new JButton("modifier");
-		boutonAppliquer = new JButton("appliquer");
-		boutonRetour = new JButton("retour");
+		infos = new JLabel();
+		infos.setBounds(900, 486, 209, 152);
+		infos.setVisible(true);
 		
-		boutonCreer.setBounds(100, 600, 200, 52); //position x, position y, largeur, hauteur
-		boutonModifier.setBounds(350, 600, 200, 52); 
-		boutonAppliquer.setBounds(600, 600, 200, 52);
-		boutonRetour.setBounds(850, 600, 200, 52);
+		boutonCreer = new JButton(new ImageIcon("Images/InterfaceConfigVariantesBoutonCreer.png"));
+		boutonModifier = new JButton(new ImageIcon("Images/InterfaceConfigVariantesBoutonModifier.png"));
+		boutonAppliquer = new JButton(new ImageIcon("Images/InterfaceConfigVariantesBoutonAppliquer.png"));
+		boutonRetour = new JButton(new ImageIcon("Images/InterfaceConfigVariantesBoutonRetour.png"));
+		
+		boutonCreer.setBounds(452, 462, 115, 49); //position x, position y, largeur, hauteur
+		boutonModifier.setBounds(318, 462, 134, 49); 
+		boutonAppliquer.setBounds(593, 593, 179, 62);
+		boutonRetour.setBounds(770, 593, 147, 52);
 		
 		
 		Ecouteur listen=new Ecouteur();
@@ -73,7 +80,7 @@ public class InterfaceConfigVariante {
 		boutonRetour.addActionListener(listen);
 		
 	
-		JPanel imageFond = new TestImagePanel(new ImageIcon("images/configVariantes.png").getImage().getScaledInstance(1000, 700, Image.SCALE_DEFAULT));
+		JPanel imageFond = new TestImagePanel(new ImageIcon("images/InterfaceConfigVariantes.png").getImage());
 		imageFond.setLayout(null);
 		
 		imageFond.add(boutonCreer);   
@@ -86,7 +93,7 @@ public class InterfaceConfigVariante {
 		JScrollPane scroll = new JScrollPane(listeVariantes);
 		scroll.setPreferredSize(new Dimension(100, 120));
 		imageFond.add(scroll);
-		scroll.setBounds(120, 250, 465, 260);
+		scroll.setBounds(124, 214, 441, 244);
 		
 		for (int i=0; i<liste.size(); i++){
 			listeVariantes.setListData(liste);
@@ -97,7 +104,7 @@ public class InterfaceConfigVariante {
 		imageFond.setOpaque(false);
 		tmp.add(imageFond);
     
-		fenetre.setSize(1000,720); // taille de l'image de fond
+		fenetre.setSize(1040,700); // taille de l'image de fond
 		fenetre.setResizable(false);
 		fenetre.setVisible(true);
 	}
@@ -105,6 +112,9 @@ public class InterfaceConfigVariante {
 		
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
+			if (liste.contains((String) listeVariantes.getSelectedValue())){
+				//infos.setText(listeVariantes.getSelectedValue());
+			}					
 			if (e.getSource()==boutonCreer){
 				Variantes v = new Variantes();
 				new InterfacePersoEchiquier(v);

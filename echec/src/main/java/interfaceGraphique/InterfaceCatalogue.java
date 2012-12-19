@@ -9,6 +9,7 @@ import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -33,7 +34,6 @@ public class InterfaceCatalogue {
 	JFrame fenetre;
 	Container tmp; 
 
-
 	
 	JList listeVariantes;
 	
@@ -52,6 +52,7 @@ public class InterfaceCatalogue {
 		fenetre=new JFrame("Catalogue");
 		tmp= fenetre.getContentPane();
 		listeVariantes = new JList();
+		
 		
 		/*Bouton1.setBounds(260, 180, 500, 52); //position x, position y, largeur, hauteur
 		Bouton2.setBounds(260, 290, 500, 52); 
