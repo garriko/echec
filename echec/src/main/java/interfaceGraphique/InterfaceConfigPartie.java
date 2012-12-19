@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -15,8 +17,11 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerListModel;
 
+import projet_echec.echec.exception.GameException;
+import projet_echec.echec.gestion.GestionJeu;
 import projet_echec.echec.gestion.Joueur;
 import projet_echec.echec.gestion.Options;
+import projet_echec.echec.wrapper.Wrapper;
 
 
 /**
@@ -29,9 +34,9 @@ import projet_echec.echec.gestion.Options;
 
 public class InterfaceConfigPartie {
 
-	JFrame fenetre=new JFrame("Jeu d'échecs");
-	Container tmp = fenetre.getContentPane();
-	
+	//JFrame fenetre=new JFrame("Jeu d'échecs");
+	Container tmp;
+	JFrame fenetre;
 	Image bouton1 = new ImageIcon("images/boutonModifier.png").getImage().getScaledInstance(156, 40, Image.SCALE_DEFAULT);
 	JButton Bouton1 = new JButton(new ImageIcon(bouton1));
 	Image bouton2 = new ImageIcon("images/boutonValider.png").getImage().getScaledInstance(125, 45, Image.SCALE_DEFAULT);
@@ -49,13 +54,18 @@ public class InterfaceConfigPartie {
 	JCheckBox aideJ2 = new JCheckBox();
 	JCheckBox rotation = new JCheckBox();
 	
-	JLabel mode = new JLabel();
+	JLabel variante = new JLabel("Classique");
+	GestionJeu cerveley;
 	
 	
 	/**
 	 * Constructeur de la classe
 	 */
-	public InterfaceConfigPartie() {
+	public InterfaceConfigPartie(GestionJeu cerveau) {
+		fenetre=new JFrame("Configuration de la partie");
+		tmp = fenetre.getContentPane();
+		
+		cerveley = cerveau;
 		
 		Bouton1.setBounds(487, 516, 156, 40); //position x, position y, largeur, hauteur
 		Bouton2.setBounds(598, 606, 125, 45); 
@@ -76,6 +86,9 @@ public class InterfaceConfigPartie {
 		dureeJ1.setVisible(true);
 		dureeJ2.setVisible(true);
 		
+		variante.setBounds(200, 550, 200, 100);
+		variante.setVisible(true);
+		
 		Ecouteur listen=new Ecouteur();
 		Bouton1.addActionListener(listen);
 		Bouton2.addActionListener(listen);
@@ -95,14 +108,14 @@ public class InterfaceConfigPartie {
 		boutonsChoix.add(aideJ1);
 		boutonsChoix.add(aideJ2);
 		boutonsChoix.add(rotation);
-		boutonsChoix.add(mode);
+		boutonsChoix.add(variante);
 		boutonsChoix.add(dureeJ1);
 		boutonsChoix.add(dureeJ2);
 		
 		
 		boutonsChoix.setOpaque(false);
 		tmp.add(boutonsChoix);
-    
+		
 		fenetre.setSize(1000,720); // taille de l'image de fond
 		fenetre.setResizable(false);
 		fenetre.setVisible(true);
@@ -112,22 +125,38 @@ public class InterfaceConfigPartie {
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
 			if (e.getSource()==Bouton1){ //modifier
-				
+				//new InterfaceConfigVariante();
 			}
 			if (e.getSource()==Bouton2){ //valider
 				Joueur J1 = new Joueur(nomJ1.getText(), aideJ1.isSelected());
 				Joueur J2 = new Joueur(nomJ2.getText(), aideJ2.isSelected());
 				Options optionsPartie = new Options((Integer) dureeJ1.getValue(), (Integer) dureeJ2.getValue(), aideJ2.isSelected(),
 						aideJ1.isSelected(), rotation.isSelected());
+				String varianteChoisie = variante.getText();
+				Wrapper w;
+				try {
+					w = cerveley.creerNewGame(J1, J2, varianteChoisie, optionsPartie);
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (GameException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			if (e.getSource()==Bouton3){ //annuler
-				
+				fenetre.setVisible(false);
+				InterfaceMenu pop = new InterfaceMenu(cerveley);
+				fenetre.dispose();
 			}
 		}
 	}
 	
 	public static void main(String[] args){
-		new InterfaceConfigPartie();
+		new InterfaceConfigPartie(new GestionJeu());
 	}
 
 	
