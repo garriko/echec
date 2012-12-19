@@ -113,20 +113,18 @@ public class InterfaceConfigVariante {
 		
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
-			if (liste.contains((String) listeVariantes.getSelectedValue())){
-				infos.setText("Hello");
-				/*try {
-					
-					//infos.setText(Variantes.recupererDescription((String) listeVariantes.getSelectedValue()));
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				*/
-			}					
+			try {
+				
+				infos.setText(Variantes.recupererDescription((String) listeVariantes.getSelectedValue()));
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+				
+				
 			if (e.getSource()==boutonCreer){
 				Variantes v = new Variantes();
 				new InterfacePersoEchiquier(v);

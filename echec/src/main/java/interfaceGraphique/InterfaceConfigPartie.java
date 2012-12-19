@@ -16,11 +16,14 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerListModel;
+import javax.swing.SpinnerNumberModel;
 
 import projet_echec.echec.exception.GameException;
 import projet_echec.echec.gestion.GestionJeu;
 import projet_echec.echec.gestion.Joueur;
 import projet_echec.echec.gestion.Options;
+import projet_echec.echec.gestion.Partie;
+import projet_echec.echec.jeu.Echiquier;
 import projet_echec.echec.jeu.Variantes;
 import projet_echec.echec.wrapper.Wrapper;
 
@@ -48,14 +51,15 @@ public class InterfaceConfigPartie {
 	JTextField nomJ1 = new JTextField("Joueur 1");
 	JTextField nomJ2 = new JTextField("Joueur 2");
 	
-	JSpinner dureeJ1 = new JSpinner(new SpinnerListModel());
-	JSpinner dureeJ2 = new JSpinner(new SpinnerListModel());
+	JSpinner dureeJ1; 
+	JSpinner dureeJ2;
 	
 	JCheckBox aideJ1 = new JCheckBox();
 	JCheckBox aideJ2 = new JCheckBox();
 	JCheckBox rotation = new JCheckBox();
 	
 	JLabel variante = new JLabel("Classique");
+	
 	GestionJeu cerveley;
 	
 	
@@ -82,7 +86,10 @@ public class InterfaceConfigPartie {
 		aideJ1.setVisible(true);
 		aideJ2.setVisible(true);
 		rotation.setVisible(true);
+		int duree = 20;
+		dureeJ1 = new JSpinner(new SpinnerNumberModel(duree, duree - 5, duree + 100, 5));
 		dureeJ1.setBounds(538, 183, 69, 41);
+		dureeJ2 = new JSpinner(new SpinnerNumberModel(duree, duree - 5, duree + 100, 5));
 		dureeJ2.setBounds(537, 323, 70, 41);
 		dureeJ1.setVisible(true);
 		dureeJ2.setVisible(true);
@@ -134,7 +141,7 @@ public class InterfaceConfigPartie {
 				Options optionsPartie = new Options((Integer) dureeJ1.getValue(), (Integer) dureeJ2.getValue(), aideJ2.isSelected(),
 						aideJ1.isSelected(), rotation.isSelected());
 				String varianteChoisie = variante.getText();
-				Wrapper w;
+				Wrapper w = null;
 				try {
 					w = cerveley.creerNewGame(J1, J2, varianteChoisie, optionsPartie);
 				} catch (ClassNotFoundException e1) {
@@ -147,6 +154,11 @@ public class InterfaceConfigPartie {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				Partie partie = w.getP();
+				Echiquier echiquier = w.getE();
+				
+				new InterfaceJeu(partie, echiquier);
+				
 			}
 			if (e.getSource()==Bouton3){ //annuler
 				fenetre.setVisible(false);
