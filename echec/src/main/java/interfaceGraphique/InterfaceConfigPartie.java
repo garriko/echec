@@ -67,6 +67,7 @@ public class InterfaceConfigPartie {
 	 * Constructeur de la classe
 	 */
 	public InterfaceConfigPartie(GestionJeu cerveau) {
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		fenetre=new JFrame("Configuration de la partie");
 		tmp = fenetre.getContentPane();
 		

@@ -74,7 +74,7 @@ public class InterfaceJeu {
 	
 	
 	public InterfaceJeu(Partie partie, EchiquierActif echiquier) {
-		
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		game = partie;
 		plateauJeu = echiquier;
 		
@@ -209,7 +209,7 @@ public class InterfaceJeu {
 	 * @param echiquier l'Echiquier créé précédemment 
 	 */
 	public InterfaceJeu(Partie partie, Echiquier echiquier) {
-		
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		game = partie;
 		plateauJeu = (EchiquierActif) echiquier;
@@ -353,6 +353,7 @@ public class InterfaceJeu {
 				//((JButton) e.getSource()).setIcon(new ImageIcon("images/caserouge.png"));
 				((JButton) e.getSource()).setBorderPainted(true);
 				((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(Color.red));
+				
 			}
 		}
 		public void focusLost(FocusEvent e){

@@ -30,6 +30,7 @@ public class InterfacePopupSauvegarderQuitter {
 	 * Constructeur de la classe
 	 */
 	public InterfacePopupSauvegarderQuitter() {
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		Bouton1.setBounds(105, 257, 105, 52); //position x, position y, largeur, hauteur
 		Bouton2.setBounds(275, 257, 105, 52); 

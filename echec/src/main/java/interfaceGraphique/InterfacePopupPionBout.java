@@ -32,6 +32,7 @@ public class InterfacePopupPionBout {
 	 * Constructeur de la classe
 	 */
 	public InterfacePopupPionBout() {
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		BoutonOK.setBounds(190, 225, 100, 48); //position x, position y, largeur, hauteur
 		ChoixPieces.setBounds(170,80,140,41);

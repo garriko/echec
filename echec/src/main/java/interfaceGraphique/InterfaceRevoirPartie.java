@@ -50,6 +50,7 @@ public class InterfaceRevoirPartie {
 	 * Constructeur de la classe
 	 */
 	public InterfaceRevoirPartie() {
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JFrame fenetre=new JFrame("Replay");
 		Container tmp = fenetre.getContentPane();

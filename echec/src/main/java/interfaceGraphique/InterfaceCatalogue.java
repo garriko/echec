@@ -46,6 +46,7 @@ public class InterfaceCatalogue {
 	 * 
 	 */
 	public InterfaceCatalogue(String mode, GestionJeu cerveau) {
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		cerveley = cerveau;
 		

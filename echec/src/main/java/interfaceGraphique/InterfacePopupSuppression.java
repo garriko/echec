@@ -28,6 +28,7 @@ public class InterfacePopupSuppression {
 	 * Constructeur de la classe
 	 */
 	public InterfacePopupSuppression() {
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		Bouton1.setBounds(105, 175, 105, 52); //position x, position y, largeur, hauteur
 		Bouton2.setBounds(275, 175, 105, 52); 

@@ -27,6 +27,7 @@ public class InterfacePopupErreur4 {
 	 * Constructeur de la classe
 	 */
 	public InterfacePopupErreur4() {
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		Bouton1.setBounds(150, 215, 160, 76); //position x, position y, largeur, hauteur
 		

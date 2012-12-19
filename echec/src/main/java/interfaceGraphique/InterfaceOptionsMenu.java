@@ -36,6 +36,7 @@ public class InterfaceOptionsMenu {
 	 * Constructeur de la classe
 	 */
 	public InterfaceOptionsMenu() {
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JFrame fenetre=new JFrame("Menu Principale - Option");
 		Container tmp = fenetre.getContentPane();

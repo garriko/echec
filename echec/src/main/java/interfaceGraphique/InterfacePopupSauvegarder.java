@@ -29,6 +29,7 @@ public class InterfacePopupSauvegarder {
 	 * Constructeur de la classe
 	 */
 	public InterfacePopupSauvegarder() {
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		Bouton1.setBounds(105, 195, 103, 50); //position x, position y, largeur, hauteur
 		Bouton2.setBounds(275, 195, 150, 50); 

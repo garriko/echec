@@ -88,6 +88,7 @@ public class InterfacePersoEchiquier {
 	 * Constructeur sans parametre pour créer une nouvelle variante
 	 */
 	public InterfacePersoEchiquier() {
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		nouvelleVariante = new Variantes();
 		
@@ -287,6 +288,7 @@ public class InterfacePersoEchiquier {
 	 * 
 	 */
 	public InterfacePersoEchiquier(String nomV) {
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		try {
 			nouvelleVariante = new Variantes(nomV);

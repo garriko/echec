@@ -42,6 +42,7 @@ public class InterfaceMenu {
 	 * Constructeur de la classe
 	 */
 	public InterfaceMenu(GestionJeu cerveau) {
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		fenetre= new JFrame();
 		tmp = fenetre.getContentPane();
 		cerveley=cerveau;

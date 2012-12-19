@@ -35,6 +35,7 @@ public class InterfacePopupOptions {
 	 * Constructeur de la classe
 	 */
 	public InterfacePopupOptions() {
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		Bouton1.setBounds(112, 282, 158, 72); //position x, position y, largeur, hauteur
 		Bouton2.setBounds(292, 282, 158, 72); 
