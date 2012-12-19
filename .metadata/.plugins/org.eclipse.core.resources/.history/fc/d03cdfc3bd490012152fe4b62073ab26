@@ -120,11 +120,11 @@ public class Variantes {
 	 */
 	public void ajouterPiece(Case c, Piece p) throws FullCaseException {
 			Case currentCase = plateau.get((c.getPosition().getHauteur()-1)*8+c.getPosition().getLargeur() -1 );
+			System.out.println(c.getPosition().getHauteur());
 				if(currentCase.estVide())
 				{
 					currentCase.setPiece(p);
 					listePieces.add(currentCase);
-					c.setPiece(p);
 				}
 				else
 					throw new FullCaseException();

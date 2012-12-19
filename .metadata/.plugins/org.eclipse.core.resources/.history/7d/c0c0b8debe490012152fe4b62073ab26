@@ -244,7 +244,7 @@ public class InterfacePersoEchiquier {
 	
 	
 	public void actualiserImage(Case NewCase){
-		NewCase.setPosition(new Position(8-NewCase.getPosition().getHauteur()+1, NewCase.getPosition().getLargeur()));
+		NewCase.setPosition(new Position(-8+NewCase.getPosition().getHauteur()-1, NewCase.getPosition().getLargeur()));
 		int numCase = NewCase.getPosition().getLargeur() + 8*(NewCase.getPosition().getHauteur()-1)-1;	
 		((Vector<JButton>) tab_cases).get(numCase).setIcon(new ImageIcon(NewCase.getImg()));
 	}

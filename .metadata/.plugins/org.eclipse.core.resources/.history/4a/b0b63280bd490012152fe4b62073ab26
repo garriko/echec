@@ -244,8 +244,7 @@ public class InterfacePersoEchiquier {
 	
 	
 	public void actualiserImage(Case NewCase){
-		NewCase.setPosition(new Position(8-NewCase.getPosition().getHauteur()+1, NewCase.getPosition().getLargeur()));
-		int numCase = NewCase.getPosition().getLargeur() + 8*(NewCase.getPosition().getHauteur()-1)-1;	
+		int numCase = NewCase.getPosition().getLargeur() + 8*(NewCase.getPosition().getHauteur()-1)-1;			
 		((Vector<JButton>) tab_cases).get(numCase).setIcon(new ImageIcon(NewCase.getImg()));
 	}
 		
@@ -270,6 +269,7 @@ public class InterfacePersoEchiquier {
 				int numCase = ((Vector<JButton>) tab_cases).indexOf(e.getSource());
 				//int largeur = numCase%8 +1;
 				//int hauteur = numCase/8 +1;
+				System.out.println(numCase);
 				Case eCase = nouvelleVariante.getPlateau().get(numCase);
 				eCase.setPosition(new Position(8-eCase.getPosition().getHauteur()+1, eCase.getPosition().getLargeur()));
 				System.out.println("h = " + String.valueOf(eCase.getPosition().getHauteur()));
@@ -296,7 +296,6 @@ public class InterfacePersoEchiquier {
 					
 					try {
 						nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee);
-						System.out.println(eCase.getImg());
 					} catch (FullCaseException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
