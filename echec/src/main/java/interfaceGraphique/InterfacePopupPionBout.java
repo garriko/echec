@@ -23,16 +23,21 @@ import javax.swing.JPanel;
 
 public class InterfacePopupPionBout {
 	
-	JFrame fenetre=new JFrame("Popup");
-	Container tmp = fenetre.getContentPane();
-	JButton BoutonOK = new JButton(new ImageIcon("images/okSauvegarde.png"));
-	JComboBox ChoixPieces = new JComboBox();
+	JFrame fenetre;
+	Container tmp;
+	JButton BoutonOK;
+	JComboBox ChoixPieces;
 
 	/**
 	 * Constructeur de la classe
 	 */
 	public InterfacePopupPionBout() {
+		fenetre=new JFrame("Popup");
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		tmp = fenetre.getContentPane();
+		BoutonOK = new JButton(new ImageIcon("images/okSauvegarde.png"));
+		ChoixPieces = new JComboBox();
 		
 		BoutonOK.setBounds(190, 225, 100, 48); //position x, position y, largeur, hauteur
 		ChoixPieces.setBounds(170,80,140,41);

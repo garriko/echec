@@ -88,7 +88,7 @@ public class InterfacePersoEchiquier {
 	 * Constructeur sans parametre pour créer une nouvelle variante
 	 */
 	public InterfacePersoEchiquier() {
-		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
 		
 		nouvelleVariante = new Variantes();
 		
@@ -99,6 +99,7 @@ public class InterfacePersoEchiquier {
 		
 		nouvelleVariante = new Variantes();
 		fenetre = new JFrame("Jeu d'échecs");
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		tmp = fenetre.getContentPane();
 		
 		tab_cases = new Vector<JButton>();
@@ -312,7 +313,7 @@ public class InterfacePersoEchiquier {
 		
 		tab_cases = new Vector<JButton>();
 		
-		nomVariante = new JTextField("maVariante");
+		nomVariante = new JTextField(nomV);
 		nomVariante.setBounds(50, 100, 200, 50);
 		nomVariante.setVisible(true);
 		

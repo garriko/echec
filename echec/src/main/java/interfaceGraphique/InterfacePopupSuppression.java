@@ -19,28 +19,32 @@ import javax.swing.JPanel;
 
 public class InterfacePopupSuppression {
 	
-	JFrame fenetre=new JFrame("Popup");
-	Container tmp = fenetre.getContentPane();
-	JButton Bouton1 = new JButton(new ImageIcon("images/oui.png"));
-	JButton Bouton2 = new JButton(new ImageIcon("images/non.png"));
+	JFrame fenetre;
+	Container tmp;
+	JButton boutonOUI;
+	JButton boutonNON;
 	
 	/**
 	 * Constructeur de la classe
 	 */
 	public InterfacePopupSuppression() {
+		fenetre=new JFrame("Popup");
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		tmp = fenetre.getContentPane();
+		boutonOUI = new JButton(new ImageIcon("images/oui.png"));
+		boutonNON = new JButton(new ImageIcon("images/non.png"));
 		
-		Bouton1.setBounds(105, 175, 105, 52); //position x, position y, largeur, hauteur
-		Bouton2.setBounds(275, 175, 105, 52); 
+		boutonOUI.setBounds(105, 175, 105, 52); //position x, position y, largeur, hauteur
+		boutonNON.setBounds(275, 175, 105, 52); 
 		
 		Ecouteur listen=new Ecouteur();
-		Bouton1.addActionListener(listen);
-		Bouton2.addActionListener(listen);
+		boutonOUI.addActionListener(listen);
+		boutonNON.addActionListener(listen);
 	
 		JPanel boutonsChoix = new TestImagePanel(new ImageIcon("images/suppression.png").getImage());
 		boutonsChoix.setLayout(null);	 
-		boutonsChoix.add(Bouton1);   
-		boutonsChoix.add(Bouton2);
+		boutonsChoix.add(boutonOUI);   
+		boutonsChoix.add(boutonNON);
 		boutonsChoix.setOpaque(false);
 		tmp.add(boutonsChoix);
     

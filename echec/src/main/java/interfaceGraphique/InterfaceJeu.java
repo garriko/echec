@@ -45,25 +45,25 @@ import projet_echec.echec.jeu.Variantes;
 
 public class InterfaceJeu {
 	
-	JFrame fenetre=new JFrame("Jeu d'échecs");
-	Container tmp = fenetre.getContentPane();
-	Collection<JButton> tab_cases = new Vector<JButton>();
+	JFrame fenetre;
+	Container tmp;
+	Collection<JButton> tab_cases;
 	
-	JMenuBar barreMenu = new JMenuBar();
+	JMenuBar barreMenu;
 	
-	JMenu boutonPartie = new JMenu("Partie");
-	JMenuItem boutonNouvellePartie = new JMenuItem("Nouvelle partie");
-	JMenuItem boutonSauvegarder = new JMenuItem("Sauvegarder la partie");
-	JMenuItem boutonChargerPartie = new JMenuItem("Charger une partie");
-	JMenuItem boutonOptions = new JMenuItem("Options");
-	JMenuItem boutonRevenirMenu = new JMenuItem("Revenir au menu principal");
-	JMenuItem boutonQuitter = new JMenuItem("Quitter");
+	JMenu boutonPartie;
+	JMenuItem boutonNouvellePartie;
+	JMenuItem boutonSauvegarder;
+	JMenuItem boutonChargerPartie;
+	JMenuItem boutonOptions;
+	JMenuItem boutonRevenirMenu;
+	JMenuItem boutonQuitter;
 	
-	JMenu boutonQuestion = new JMenu("?");
-	JMenuItem boutonAide = new JMenuItem("Aide");
-	JMenuItem boutonAProposDe = new JMenuItem("A propos de");
+	JMenu boutonQuestion;
+	JMenuItem boutonAide;
+	JMenuItem boutonAProposDe;
 	
-	Case CaseSelectionnee = new Case(new Position(5,2));
+	Case CaseSelectionnee;
 	
 	Partie game;
 	EchiquierActif plateauJeu;
@@ -209,7 +209,27 @@ public class InterfaceJeu {
 	 * @param echiquier l'Echiquier créé précédemment 
 	 */
 	public InterfaceJeu(Partie partie, Echiquier echiquier) {
+		fenetre=new JFrame("Jeu d'échecs");
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		tmp = fenetre.getContentPane();
+		tab_cases = new Vector<JButton>();
+		
+		barreMenu = new JMenuBar();
+		
+		boutonPartie = new JMenu("Partie");
+		boutonNouvellePartie = new JMenuItem("Nouvelle partie");
+		boutonSauvegarder = new JMenuItem("Sauvegarder la partie");
+		boutonChargerPartie = new JMenuItem("Charger une partie");
+		boutonOptions = new JMenuItem("Options");
+		boutonRevenirMenu = new JMenuItem("Revenir au menu principal");
+		boutonQuitter = new JMenuItem("Quitter");
+		
+		boutonQuestion = new JMenu("?");
+		boutonAide = new JMenuItem("Aide");
+		boutonAProposDe = new JMenuItem("A propos de");
+		
+		CaseSelectionnee = new Case(new Position(5,2));
+
 		
 		game = partie;
 		plateauJeu = (EchiquierActif) echiquier;

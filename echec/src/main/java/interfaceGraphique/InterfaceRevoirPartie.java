@@ -32,8 +32,8 @@ import javax.swing.SpinnerNumberModel;
 
 public class InterfaceRevoirPartie {
 
-	JFrame fenetre=new JFrame("Replay");
-	Container tmp = fenetre.getContentPane();
+	JFrame fenetre;
+	Container tmp;
 	Image boutonLect;
 	JButton BoutonLect;
 	Image boutonPause;
@@ -41,7 +41,7 @@ public class InterfaceRevoirPartie {
 	
 	int cad;
 	JSpinner cadence ;
-	JComboBox modelecture;
+	JComboBox modeLecture;
 	
 	JLabel mode;
 	
@@ -50,28 +50,28 @@ public class InterfaceRevoirPartie {
 	 * Constructeur de la classe
 	 */
 	public InterfaceRevoirPartie() {
+		fenetre=new JFrame("Replay");
+		tmp = fenetre.getContentPane();
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		JFrame fenetre=new JFrame("Replay");
-		Container tmp = fenetre.getContentPane();
 		
-		Image boutonLect = new ImageIcon("images/interface_revoirpartieBoutonLecture.png").getImage().getScaledInstance(92, 64, Image.SCALE_DEFAULT);
-		JButton BoutonLect = new JButton(new ImageIcon(boutonLect));
-		Image boutonPause = new ImageIcon("images/interface_revoirpartieBoutonPause.png").getImage().getScaledInstance(92, 65, Image.SCALE_DEFAULT);
-		JButton BoutonPause = new JButton(new ImageIcon(boutonPause));
+		boutonLect = new ImageIcon("images/interface_revoirpartieBoutonLecture.png").getImage().getScaledInstance(92, 64, Image.SCALE_DEFAULT);
+		BoutonLect = new JButton(new ImageIcon(boutonLect));
+		boutonPause = new ImageIcon("images/interface_revoirpartieBoutonPause.png").getImage().getScaledInstance(92, 65, Image.SCALE_DEFAULT);
+		BoutonPause = new JButton(new ImageIcon(boutonPause));
 		
-		int cad = 1;
-		JSpinner cadence = new JSpinner(new SpinnerNumberModel(cad, cad - 0, cad + 50,1));
-		JComboBox modelecture = new JComboBox();
+		cad = 1;
+		cadence = new JSpinner(new SpinnerNumberModel(cad, cad - 0, cad + 50,1));
+		modeLecture = new JComboBox();
 		
-		JLabel mode = new JLabel();
+		mode = new JLabel();
 		
 		BoutonLect.setBounds(85, 590, 92, 64); //position x, position y, largeur, hauteur
 		BoutonPause.setBounds(180, 590, 92, 65); 
-		modelecture.setBounds(430,597,140,41);
+		modeLecture.setBounds(430,597,140,41);
 		cadence.setBounds(760, 597, 69, 41);
 		cadence.setVisible(true);
-		modelecture.setVisible(true);
+		modeLecture.setVisible(true);
 		
 		Ecouteur listen=new Ecouteur();
 		BoutonLect.addActionListener(listen);
@@ -85,10 +85,10 @@ public class InterfaceRevoirPartie {
 		boutonsChoix.add(BoutonPause);
 		boutonsChoix.add(mode);
 		boutonsChoix.add(cadence);
-		boutonsChoix.add(modelecture);
+		boutonsChoix.add(modeLecture);
 		
-		modelecture.addItem("Continue");
-	    modelecture.addItem("Pas à pas");
+		modeLecture.addItem("Continue");
+	    modeLecture.addItem("Pas à pas");
 
 		
 		

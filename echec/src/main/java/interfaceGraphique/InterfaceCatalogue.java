@@ -46,11 +46,11 @@ public class InterfaceCatalogue {
 	 * 
 	 */
 	public InterfaceCatalogue(String mode, GestionJeu cerveau) {
-		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		cerveley = cerveau;
 		
 		fenetre=new JFrame("Catalogue");
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		tmp= fenetre.getContentPane();
 		listeVariantes = new JList();
 		

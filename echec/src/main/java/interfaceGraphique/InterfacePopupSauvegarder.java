@@ -19,30 +19,36 @@ import javax.swing.JTextField;
 
 public class InterfacePopupSauvegarder {
 	
-	JFrame fenetre=new JFrame("Popup");
-	Container tmp = fenetre.getContentPane();
-	JButton Bouton1 = new JButton(new ImageIcon("images/okSauvegarde.png"));
-	JButton Bouton2 = new JButton(new ImageIcon("images/annulerSauvegarde.png"));
-	JTextField texte = new JTextField("sauvegarde");
+	JFrame fenetre;
+	Container tmp;
+	JButton boutonOK;
+	JButton boutonAnnuler;
+	JTextField texte;
 	
 	/**
 	 * Constructeur de la classe
 	 */
 	public InterfacePopupSauvegarder() {
+		fenetre=new JFrame("Popup");
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		Bouton1.setBounds(105, 195, 103, 50); //position x, position y, largeur, hauteur
-		Bouton2.setBounds(275, 195, 150, 50); 
+		tmp = fenetre.getContentPane();
+		boutonOK = new JButton(new ImageIcon("images/okSauvegarde.png"));
+		boutonAnnuler = new JButton(new ImageIcon("images/annulerSauvegarde.png"));
+		texte = new JTextField("sauvegarde");
+		
+		boutonOK.setBounds(105, 195, 103, 50); //position x, position y, largeur, hauteur
+		boutonAnnuler.setBounds(275, 195, 150, 50); 
 		texte.setBounds(22, 78, 375, 40);
 		
 		Ecouteur listen=new Ecouteur();
-		Bouton1.addActionListener(listen);
-		Bouton2.addActionListener(listen);
+		boutonOK.addActionListener(listen);
+		boutonAnnuler.addActionListener(listen);
 	
 		JPanel boutonsChoix = new TestImagePanel(new ImageIcon("images/sauvegarde.png").getImage());
 		boutonsChoix.setLayout(null);	 
-		boutonsChoix.add(Bouton1);   
-		boutonsChoix.add(Bouton2);
+		boutonsChoix.add(boutonOK);   
+		boutonsChoix.add(boutonAnnuler);
 		boutonsChoix.add(texte);
 		boutonsChoix.setOpaque(false);
 		tmp.add(boutonsChoix);
