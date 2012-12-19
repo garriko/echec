@@ -1,5 +1,7 @@
 interfaceGraphique
 projet_echec.echec
+projet_echec.echec.exception
 projet_echec.echec.gestion
 projet_echec.echec.jeu
 projet_echec.echec.jeu.piece
+projet_echec.echec.wrapper

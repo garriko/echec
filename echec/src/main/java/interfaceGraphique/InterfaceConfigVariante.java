@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collection;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -42,7 +44,7 @@ public class InterfaceConfigVariante {
 	/**
 	 * Constructeur de la classe
 	 */
-	public InterfaceConfigVariante() {
+	public InterfaceConfigVariante(Vector<String> liste) {
 		
 		/*Bouton1.setBounds(260, 180, 500, 52); //position x, position y, largeur, hauteur
 		Bouton2.setBounds(260, 290, 500, 52); 
@@ -75,6 +77,13 @@ public class InterfaceConfigVariante {
 		scroll.setPreferredSize(new Dimension(100, 120));
 		boutonsChoix.add(scroll);
 		scroll.setBounds(120, 250, 465, 260);
+		
+		for (int i=0; i<liste.size(); i++){
+			listeVariantes.setListData(liste);
+		}
+		
+		
+		
 		boutonsChoix.setOpaque(false);
 		tmp.add(boutonsChoix);
     
@@ -90,7 +99,12 @@ public class InterfaceConfigVariante {
 	}
 	
 	public static void main(String[] args){
-		new InterfaceConfigVariante();
+		Vector<String> liste = new Vector<String>();
+		for (int i=0; i<20; i++){
+			liste.add("Variante"+String.valueOf(i));
+		}
+		
+		new InterfaceConfigVariante(liste);
 	}
 
 	
