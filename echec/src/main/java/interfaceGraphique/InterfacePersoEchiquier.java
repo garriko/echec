@@ -486,7 +486,7 @@ public class InterfacePersoEchiquier {
 					PieceSelectionnee = new Pion("noir");
 				}
 				if (e.getSource()==TourNoir){
-					PieceSelectionnee = new Tour("noirblanc");
+					PieceSelectionnee = new Tour("noir");
 				}
 				if (e.getSource()==CavalierNoir){
 					PieceSelectionnee = new Cavalier("noir");

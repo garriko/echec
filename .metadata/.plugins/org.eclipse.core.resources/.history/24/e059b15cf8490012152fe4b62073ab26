@@ -1,0 +1,150 @@
+package interfaceGraphique;
+
+import interfaceGraphique.InterfaceMenu.Ecouteur;
+
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Vector;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+import projet_echec.echec.gestion.GestionCatalogueVariante;
+import projet_echec.echec.jeu.Variantes;
+
+/**
+ * 
+ * @author Anne-Sophie
+ * 
+ * Fenêtre de configuration de la variante de jeu
+ *
+ */
+
+public class InterfaceConfigVariante {
+
+	JFrame fenetre=new JFrame("Popup");
+	
+	Container tmp = fenetre.getContentPane();
+	
+	JButton boutonCreer;
+	JButton boutonModifier;
+	JButton boutonAppliquer;
+	JButton boutonRetour;
+	
+	JLabel infos;
+
+	
+	JList listeVariantes = new JList();
+	
+	GestionCatalogueVariante catalogue; 
+	Vector<String> liste;
+	
+	
+	/**
+	 * Constructeur de la classe
+	 */
+	public InterfaceConfigVariante() {
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		catalogue = new GestionCatalogueVariante();
+		catalogue.chargerListe();
+		liste = catalogue.getListePartie();
+		
+		infos = new JLabel();
+		infos.setBounds(800, 300, 209, 152);
+		infos.setVisible(true);
+		
+		boutonCreer = new JButton(new ImageIcon("Images/InterfaceConfigVariantesBoutonCreer.png"));
+		boutonModifier = new JButton(new ImageIcon("Images/InterfaceConfigVariantesBoutonModifier.png"));
+		boutonAppliquer = new JButton(new ImageIcon("Images/InterfaceConfigVariantesBoutonAppliquer.png"));
+		boutonRetour = new JButton(new ImageIcon("Images/InterfaceConfigVariantesBoutonRetour.png"));
+		
+		boutonCreer.setBounds(452, 462, 115, 49); //position x, position y, largeur, hauteur
+		boutonModifier.setBounds(318, 462, 134, 49); 
+		boutonAppliquer.setBounds(593, 593, 179, 62);
+		boutonRetour.setBounds(770, 593, 147, 52);
+		
+		
+		Ecouteur listen=new Ecouteur();
+		boutonCreer.addActionListener(listen);
+		boutonModifier.addActionListener(listen);
+		boutonAppliquer.addActionListener(listen);
+		boutonRetour.addActionListener(listen);
+		
+	
+		JPanel imageFond = new TestImagePanel(new ImageIcon("images/InterfaceConfigVariantes.png").getImage());
+		imageFond.setLayout(null);
+		
+		imageFond.add(boutonCreer);   
+		imageFond.add(boutonModifier);
+		imageFond.add(boutonAppliquer);   
+		imageFond.add(boutonRetour);  
+		imageFond.add(infos);
+		imageFond.add(listeVariantes);
+		
+		JScrollPane scroll = new JScrollPane(listeVariantes);
+		scroll.setPreferredSize(new Dimension(100, 120));
+		imageFond.add(scroll);
+		scroll.setBounds(124, 214, 441, 244);
+		
+		for (int i=0; i<liste.size(); i++){
+			listeVariantes.setListData(liste);
+		}
+		
+		
+		
+		imageFond.setOpaque(false);
+		tmp.add(imageFond);
+    
+		fenetre.setSize(1040,700); // taille de l'image de fond
+		fenetre.setResizable(false);
+		fenetre.setVisible(true);
+	}
+	
+		
+	public class Ecouteur implements ActionListener{		
+		public void actionPerformed(ActionEvent e){
+				infos.setText("Hello");
+				/*try {
+					
+					//infos.setText(Variantes.recupererDescription((String) listeVariantes.getSelectedValue()));
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				*/
+				
+			if (e.getSource()==boutonCreer){
+				Variantes v = new Variantes();
+				new InterfacePersoEchiquier(v);
+			}
+			if (e.getSource()==boutonModifier){
+							
+			}
+			if (e.getSource()==boutonAppliquer){
+				
+			}
+			if (e.getSource()==boutonRetour){
+				
+			}
+		}
+	}
+	
+	public static void main(String[] args){		
+		new InterfaceConfigVariante();
+	}
+
+	
+}

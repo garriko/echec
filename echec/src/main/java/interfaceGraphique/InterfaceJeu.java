@@ -56,7 +56,6 @@ public class InterfaceJeu {
 	JMenuItem boutonSauvegarder = new JMenuItem("Sauvegarder la partie");
 	JMenuItem boutonChargerPartie = new JMenuItem("Charger une partie");
 	JMenuItem boutonOptions = new JMenuItem("Options");
-	JMenuItem boutonAffichage = new JMenuItem("Affichage");
 	JMenuItem boutonRevenirMenu = new JMenuItem("Revenir au menu principal");
 	JMenuItem boutonQuitter = new JMenuItem("Quitter");
 	
@@ -88,7 +87,6 @@ public class InterfaceJeu {
 		boutonPartie.add(boutonSauvegarder);
 		boutonPartie.add(boutonChargerPartie);
 		boutonPartie.add(boutonOptions);
-		boutonPartie.add(boutonAffichage);
 		boutonPartie.add(boutonRevenirMenu);
 		boutonPartie.add(boutonQuitter);
 		
@@ -224,7 +222,6 @@ public class InterfaceJeu {
 		boutonPartie.add(boutonSauvegarder);
 		boutonPartie.add(boutonChargerPartie);
 		boutonPartie.add(boutonOptions);
-		boutonPartie.add(boutonAffichage);
 		boutonPartie.add(boutonRevenirMenu);
 		boutonPartie.add(boutonQuitter);
 		
@@ -324,6 +321,27 @@ public class InterfaceJeu {
 				actualiserImage(CaseSelectionnee);
 				actualiserImage(eCase);
 				CaseSelectionnee =  eCase;
+			}
+			if (e.getSource()==boutonSauvegarder){
+				new InterfacePopupSauvegarder();
+			}
+			if (e.getSource()==boutonOptions){
+				new InterfacePopupOptions();
+			}
+			if (e.getSource()==boutonNouvellePartie){
+				new InterfacePopupSauvegarder();
+			}
+			if (e.getSource()==boutonChargerPartie){
+				new InterfacePopupSauvegarder();
+			}
+			if (e.getSource()==boutonQuitter){
+				new InterfacePopupSauvegarderQuitter();
+			}
+			if (e.getSource()==boutonAide){
+				new InterfacePopupSauvegarder();
+			}
+			if (e.getSource()==boutonAProposDe){
+				new InterfacePopupSauvegarderQuitter();
 			}
 		}
 	}
