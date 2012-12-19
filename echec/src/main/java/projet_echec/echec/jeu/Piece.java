@@ -12,6 +12,10 @@ import java.util.ArrayList;
 
 public abstract class Piece implements java.io.Serializable{
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5342020547736910208L;
+	/**
 	 * Camp de la piece.
 	 * Valeurs possibles : "blanc" ou "noir"
 	 */
@@ -45,6 +49,16 @@ public abstract class Piece implements java.io.Serializable{
 		
 	}
 	
+	public boolean equals(Piece p) {
+		
+		if (this.camp==p.camp && this.getClass().getSimpleName().equals(p.getClass().getSimpleName()))
+		{
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 	public abstract ArrayList<Case> getDeplacementPossible(Case caseActuelle);
 	
 	public String getCamp() {return camp;}

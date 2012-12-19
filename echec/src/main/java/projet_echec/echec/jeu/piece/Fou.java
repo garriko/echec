@@ -25,17 +25,18 @@ public class Fou extends Piece{
 	 */
 	public ArrayList<Case> getDeplacementPossible(Case pos) {
 		ArrayList<Case> lp = new ArrayList<Case>();
-		Case hg = new Case(new Position(pos.getPosition().getHauteur(),pos.getPosition().getLargeur()));
-		Case hd = new Case(new Position(pos.getPosition().getHauteur(),pos.getPosition().getLargeur()));
-		Case bg = new Case(new Position(pos.getPosition().getHauteur(),pos.getPosition().getLargeur()));
-		Case bd = new Case(new Position(pos.getPosition().getHauteur(),pos.getPosition().getLargeur()));
 		
 		for (int i=0;i<8;i++)
 		{
-			hd.setPosition(new Position(hd.getPosition().getHauteur()+1,hd.getPosition().getLargeur()+1));
-			hg.setPosition(new Position(hg.getPosition().getHauteur()+1,hg.getPosition().getLargeur()-1));
-			bd.setPosition(new Position(bd.getPosition().getHauteur()-1,bd.getPosition().getLargeur()+1));
-			bg.setPosition(new Position(bg.getPosition().getHauteur()-1,bg.getPosition().getLargeur()-1));
+			Case hg = new Case(new Position(pos.getPosition().getHauteur(),pos.getPosition().getLargeur()));
+			Case hd = new Case(new Position(pos.getPosition().getHauteur(),pos.getPosition().getLargeur()));
+			Case bg = new Case(new Position(pos.getPosition().getHauteur(),pos.getPosition().getLargeur()));
+			Case bd = new Case(new Position(pos.getPosition().getHauteur(),pos.getPosition().getLargeur()));
+			
+			hd.setPosition(new Position(hd.getPosition().getHauteur()+1+i,hd.getPosition().getLargeur()+1+i));
+			hg.setPosition(new Position(hg.getPosition().getHauteur()+1+i,hg.getPosition().getLargeur()-1-i));
+			bd.setPosition(new Position(bd.getPosition().getHauteur()-1-i,bd.getPosition().getLargeur()+1+i));
+			bg.setPosition(new Position(bg.getPosition().getHauteur()-1-i,bg.getPosition().getLargeur()-1-i));
 			
 			if(isDeplacementOk(hd)){
 				lp.add(hd);}

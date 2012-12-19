@@ -20,7 +20,7 @@ public class TourTest extends TestCase {
 	
 	public void testPresenceTour(){
 		Position p= new Position(1,1);
-		Piece c= new Tour("noir",null);
+		Piece c= new Tour("noir");
 		Case c1= new Case(p);
 		c1.setPiece(c);
 		assertEquals(c1.getPiece(),c);	
@@ -42,7 +42,7 @@ public class TourTest extends TestCase {
 		}
 		
 		Position p= new Position(1,1);
-		Piece t= new Tour("noir",null);
+		Piece t= new Tour("noir");
 		Case t1= new Case(p);
 		t1.setPiece(t);
 		Position ar= new Position(3,1);

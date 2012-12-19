@@ -67,7 +67,8 @@ public class Variantes {
 		VariantWrapper w = chargerVariante(nomVariante);
 		plateau = w.getPlateau();
 		listePieces=w.getListePieces();
-		description=new String(w.getDescription());
+		description=new String("classique");
+		//TODO : modifier
 		presenceRoiBlanc=w.isPresenceRoiBlanc();
 		presenceRoiNoir=w.isPresenceRoiNoir();
 	}
@@ -112,6 +113,7 @@ public class Variantes {
            FileInputStream fileIn = new FileInputStream(new String("variantes/"+nomVariante+".vech"));
            ObjectInputStream in = new ObjectInputStream(fileIn);
            w = (VariantWrapper) in.readObject();
+           System.out.println(w.isPresenceRoiBlanc());
            in.close();
            fileIn.close();
        }
@@ -265,11 +267,12 @@ public class Variantes {
 	}
 	
 	
-	/*
+
 	public static void main(String[] args) {
 		
 		Variantes v =new Variantes();
-		VariantWrapper w = null;
+		
+		/*VariantWrapper w = null;
 		try {
 			w = v.chargerVariante("classique");
 		} catch (ClassNotFoundException e) {
@@ -281,6 +284,8 @@ public class Variantes {
 		}
 		
 		System.out.println(w.getPlateau().get(62).getPiece().getCamp());
+		*/
+		
 		
 		try {
 			Piece p = new Tour(new String("blanc"));
@@ -289,6 +294,9 @@ public class Variantes {
 			
 			e.toString();
 
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		try {
 			Piece p1 = new Cavalier(new String("blanc"));
@@ -296,6 +304,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		try {
@@ -303,6 +314,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		try {
@@ -310,6 +324,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		try {
 			v.ajouterPiece(new Case(new Position(1,5)), new Roi("blanc"));
@@ -317,12 +334,18 @@ public class Variantes {
 			
 			e.toString();
 
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		try {
 			v.ajouterPiece(new Case(new Position(1,6)), new Fou("blanc"));
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		try {
@@ -330,6 +353,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		try {
@@ -337,6 +363,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		
 		try {
@@ -344,6 +373,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		try {
@@ -351,6 +383,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		
 		try {
@@ -358,6 +393,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		
 		try {
@@ -365,6 +403,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		try {
@@ -372,6 +413,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		
 		try {
@@ -379,6 +423,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 
@@ -388,6 +435,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		
 		try {
@@ -395,6 +445,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		
 		try {
@@ -402,6 +455,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		
 		try {
@@ -409,6 +465,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		try {
@@ -416,6 +475,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		try {
@@ -423,6 +485,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		
 		try {
@@ -430,6 +495,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		
 		try {
@@ -437,6 +505,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		try {
@@ -444,6 +515,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		
 		try {
@@ -451,6 +525,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		
 		try {
@@ -458,6 +535,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		try {
@@ -465,6 +545,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		
 		try {
@@ -472,6 +555,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		
 		try {
@@ -479,6 +565,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		
 		try {
@@ -486,6 +575,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		
 		try {
@@ -493,6 +585,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 
@@ -502,6 +597,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		
 		try {
@@ -509,6 +607,9 @@ public class Variantes {
 		} catch (FullCaseException e) {
 			
 			e.toString();
+		} catch (PresenceKingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		
 		try {
@@ -516,12 +617,15 @@ public class Variantes {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (RoiManquantException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		System.out.println(v.getPlateau().get(59).getPiece().getCamp());
-		/*
+		
 		
 	
 	}
-	*/
+	
 	
 }

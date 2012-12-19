@@ -49,7 +49,4 @@ public class Position implements java.io.Serializable {
 		this.largeur = largeur;
 	}
 	
-
-	
-
 }
