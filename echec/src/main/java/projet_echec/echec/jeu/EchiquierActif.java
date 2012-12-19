@@ -267,6 +267,11 @@ public class EchiquierActif extends Echiquier {
 			break;
 			}
 	}
+	/**
+	 * fait un deplacement sans test d'echec
+	 * @param caseDepart
+	 * @param caseArrivee
+	 */
 	public void deplacersanscondition(Case caseDepart, Case caseArrivee){
 			ArrayList<Case> plop = new ArrayList<Case>();
 	
