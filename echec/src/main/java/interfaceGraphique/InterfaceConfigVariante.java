@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Vector;
 
@@ -59,7 +60,7 @@ public class InterfaceConfigVariante {
 		liste = catalogue.getListePartie();
 		
 		infos = new JLabel();
-		infos.setBounds(900, 486, 209, 152);
+		infos.setBounds(800, 300, 209, 152);
 		infos.setVisible(true);
 		
 		boutonCreer = new JButton(new ImageIcon("Images/InterfaceConfigVariantesBoutonCreer.png"));
@@ -87,7 +88,7 @@ public class InterfaceConfigVariante {
 		imageFond.add(boutonModifier);
 		imageFond.add(boutonAppliquer);   
 		imageFond.add(boutonRetour);  
-		
+		imageFond.add(infos);
 		imageFond.add(listeVariantes);
 		
 		JScrollPane scroll = new JScrollPane(listeVariantes);
@@ -113,7 +114,18 @@ public class InterfaceConfigVariante {
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
 			if (liste.contains((String) listeVariantes.getSelectedValue())){
-				//infos.setText(listeVariantes.getSelectedValue());
+				infos.setText("Hello");
+				/*try {
+					
+					//infos.setText(Variantes.recupererDescription((String) listeVariantes.getSelectedValue()));
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				*/
 			}					
 			if (e.getSource()==boutonCreer){
 				Variantes v = new Variantes();

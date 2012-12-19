@@ -29,6 +29,8 @@ import javax.swing.JTextField;
 import projet_echec.echec.exception.CaseErrorException;
 import projet_echec.echec.exception.EmptyCaseException;
 import projet_echec.echec.exception.FullCaseException;
+import projet_echec.echec.exception.PresenceKingException;
+import projet_echec.echec.exception.RoiManquantException;
 import projet_echec.echec.jeu.Case;
 import projet_echec.echec.jeu.EchiquierActif;
 import projet_echec.echec.jeu.Piece;
@@ -293,7 +295,12 @@ public class InterfacePersoEchiquier {
 		public void actionPerformed(ActionEvent e){
 			if (e.getSource()==boutonOK){
 				try {
-					nouvelleVariante.saveVariante("maVariante");
+					try {
+						nouvelleVariante.saveVariante(nomVariante.getText());
+					} catch (RoiManquantException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -348,9 +355,14 @@ public class InterfacePersoEchiquier {
 					selectionCase = true ;
 				}
 				else if ((eCase.estVide()==false) && (selectionPiece==true)){ // si case occupée et pièce retenue
-					try {
+					try {					
 						nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee) ;
-					} catch (FullCaseException e1) {
+					} 
+					catch (PresenceKingException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} 
+					catch (FullCaseException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -362,7 +374,12 @@ public class InterfacePersoEchiquier {
 				else if ((eCase.estVide()==true) && (selectionPiece==true)){ // si case vide et pièce retenue
 					
 					try {
-						nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee);
+						try {
+							nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee);
+						} catch (PresenceKingException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						System.out.println(eCase.getImg());
 					} catch (FullCaseException e1) {
 						// TODO Auto-generated catch block
@@ -382,7 +399,12 @@ public class InterfacePersoEchiquier {
 				
 				else if ((selectionCase == true) && (eCase.estVide() == true)) { // si case retenue
 					try {
-						nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee) ;
+						try {
+							nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee) ;
+						} catch (PresenceKingException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					} catch (FullCaseException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -415,7 +437,11 @@ public class InterfacePersoEchiquier {
 					}
 					try {
 						nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee) ;
-					} catch (FullCaseException e1) {
+					} catch (PresenceKingException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} 
+					catch (FullCaseException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}

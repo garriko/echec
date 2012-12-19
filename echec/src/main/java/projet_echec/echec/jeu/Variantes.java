@@ -251,6 +251,18 @@ public class Variantes {
 		this.description = description;
 	}
 	
+	/**
+	 * recupere la description dans le fichirt nomVariante.vech
+	 * @param nomVariante
+	 * @return
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
+	 */
+	public static String recupererDescription(String nomVariante) throws ClassNotFoundException, IOException{
+		Variantes v = new Variantes(nomVariante);
+		return v.getDescription();
+	}
+	
 	
 	/*
 	public static void main(String[] args) {
