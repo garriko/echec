@@ -3,6 +3,8 @@
  */
 package projet_echec.echec.jeu.piece;
 
+import java.io.IOException;
+
 import projet_echec.echec.exception.DeplacementException;
 import projet_echec.echec.jeu.Case;
 import projet_echec.echec.jeu.EchiquierActif;
@@ -25,13 +27,24 @@ public class FouTest extends TestCase {
 	}
 	
 	public void testdeplacerFou(){
-		EchiquierActif E= new EchiquierActif(null);
+		
+		EchiquierActif E=null;
+		try {
+			E = new EchiquierActif();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Position p= new Position(1,1);
 		Piece c= new Fou("noir");
 		Case c1= new Case(p);
 		c1.setPiece(c);
 		Position ar= new Position(3,3);
 		Case t2= new Case(ar);
+		
 		try {
 			E.deplacer(c1,t2);
 		} catch (DeplacementException e) {

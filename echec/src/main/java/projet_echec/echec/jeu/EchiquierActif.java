@@ -183,7 +183,7 @@ public class EchiquierActif extends Echiquier {
 					estenechecetmat=false;
 				}
 			}
-					
+				
 			}
 		else{
 			ArrayList<Case> casePossible = filtrerDeplacementPossible(camp,this.caseRoiBlanc.getPiece().getDeplacementPossible(this.caseRoiBlanc));
@@ -290,10 +290,8 @@ public class EchiquierActif extends Echiquier {
 			for(int i=0; i< plop.size();i++){
 				
 				if(plop.get(i).getPosition().equals(caseArrivee.getPosition())){
-					System.out.println("rentre dans le premier si");
 					if(caseArrivee.estVide())//si il y a une case a l'arrivee
 					{
-						System.out.println("rentre dans le deuxième si");
 						this.listePiecePrises.add(caseArrivee.getPiece());//on ajoute la piece dans la liste des pieces prises
 						
 						for(int j=0; j< listePieceEnJeu.size();j++)//pour toutes les pieces en jeu
@@ -358,7 +356,7 @@ public class EchiquierActif extends Echiquier {
 	 */
 	private ArrayList<Case> filtrerDeplacementPossible(String camp,ArrayList<Case> casePossible)
 	{
-		for(int i=0;i<(casePossible.size()-1);i++){
+		for(int i=0;i<(casePossible.size());i++){
 			if((casePossible.get(i).getPiece()!=null) && (casePossible.get(i).getPiece().getCamp()==camp)){
 				casePossible.remove(casePossible.get(i));
 			}	
