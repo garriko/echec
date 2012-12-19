@@ -124,6 +124,7 @@ public class Variantes {
 				{
 					currentCase.setPiece(p);
 					listePieces.add(currentCase);
+					c.setPiece(p);
 				}
 				else
 					throw new FullCaseException();

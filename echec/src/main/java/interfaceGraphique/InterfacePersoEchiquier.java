@@ -140,18 +140,18 @@ public class InterfacePersoEchiquier {
 				if (j%2==0){
 					
 					if (i%2==0){
-						tab_cases.add(new JButton(new ImageIcon("images/casegrise.png")));
+						tab_cases.add(new JButton(new ImageIcon("images/caseblanche.png")));
 					}
 					else {
-						tab_cases.add(new JButton(new ImageIcon("images/caseblanche.png")));
+						tab_cases.add(new JButton(new ImageIcon("images/casegrise.png")));
 					}
 				}
 				else {
 					if (i%2==1){
-						tab_cases.add(new JButton(new ImageIcon("images/casegrise.png")));
+						tab_cases.add(new JButton(new ImageIcon("images/caseblanche.png")));
 					}
 					else {
-						tab_cases.add(new JButton(new ImageIcon("images/caseblanche.png")));
+						tab_cases.add(new JButton(new ImageIcon("images/casegrise.png")));
 					}			
 				}
 				((Vector<JButton>) tab_cases).get(i).setPreferredSize(new Dimension(44,44));
@@ -194,6 +194,23 @@ public class InterfacePersoEchiquier {
 		RoiNoir.addActionListener(listenAction);
 		ReineNoir.addActionListener(listenAction);
 		
+		EcouteurFocus listenFocus=new EcouteurFocus();
+		for (int i=0; i<64 ; i++){
+			((Vector<JButton>) tab_cases).get(i).addFocusListener(listenFocus);					
+		}
+		PionBlanc.addFocusListener(listenFocus);
+		TourBlanc.addFocusListener(listenFocus);
+		FouBlanc.addFocusListener(listenFocus);
+		CavalierBlanc.addFocusListener(listenFocus);
+		RoiBlanc.addFocusListener(listenFocus);
+		ReineBlanc.addFocusListener(listenFocus);
+		PionNoir.addFocusListener(listenFocus);
+		TourNoir.addFocusListener(listenFocus);
+		CavalierNoir.addFocusListener(listenFocus);
+		FouNoir.addFocusListener(listenFocus);
+		RoiNoir.addFocusListener(listenFocus);
+		ReineNoir.addFocusListener(listenFocus);
+		
 		
 		
 		imageFond.add(boutonOK);
@@ -227,7 +244,8 @@ public class InterfacePersoEchiquier {
 	
 	
 	public void actualiserImage(Case NewCase){
-		int numCase = 64-(NewCase.getPosition().getLargeur() + 8*(NewCase.getPosition().getHauteur()-1)-1);			
+		NewCase.setPosition(new Position(8-NewCase.getPosition().getHauteur()+1, NewCase.getPosition().getLargeur()));
+		int numCase = NewCase.getPosition().getLargeur() + 8*(NewCase.getPosition().getHauteur()-1)-1;	
 		((Vector<JButton>) tab_cases).get(numCase).setIcon(new ImageIcon(NewCase.getImg()));
 	}
 		
@@ -249,10 +267,14 @@ public class InterfacePersoEchiquier {
 				
 			}
 			else if (tab_cases.contains(e.getSource())){
-				int numCase = (((Vector<JButton>) tab_cases).indexOf(e.getSource())-1);
-				int largeur = numCase%8 +1;
-				int hauteur = numCase/8 +1;
-				Case eCase = new Case(new Position(hauteur, largeur));
+				int numCase = ((Vector<JButton>) tab_cases).indexOf(e.getSource());
+				//int largeur = numCase%8 +1;
+				//int hauteur = numCase/8 +1;
+				Case eCase = nouvelleVariante.getPlateau().get(numCase);
+				eCase.setPosition(new Position(8-eCase.getPosition().getHauteur()+1, eCase.getPosition().getLargeur()));
+				System.out.println("h = " + String.valueOf(eCase.getPosition().getHauteur()));
+				System.out.println("l = " + String.valueOf(eCase.getPosition().getLargeur()));
+				System.out.println(eCase.getPosition().getHauteur()+eCase.getPosition().getLargeur());
 				
 				if ((eCase.estVide()==false) && (selectionPiece==false)){ // si case occupée et pas de pièce retenue
 					CaseSelectionnee = eCase ; // la case est retenue
@@ -269,17 +291,23 @@ public class InterfacePersoEchiquier {
 					actualiserImage(eCase);
 					selectionPiece = false;
 				}
+				
 				else if ((eCase.estVide()==true) && (selectionPiece==true)){ // si case vide et pièce retenue
+					
 					try {
 						nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee);
+						System.out.println(eCase.getImg());
 					} catch (FullCaseException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+					
 					// on place la pièce
+					// eCase.setImg("Images/Pieces/pasAuto/111.png"); // test
 					actualiserImage(eCase);
 					selectionPiece = false;
 				}
+				
 				else if (selectionCase == true){ // si case retenue
 					try {
 						nouvelleVariante.ajouterPiece(eCase, CaseSelectionnee.getPiece()) ;
@@ -302,7 +330,9 @@ public class InterfacePersoEchiquier {
 					actualiserImage(eCase) ;
 					selectionCase = false ;
 				}
+				
 			}
+			
 			else{
 				if (e.getSource()==PionBlanc){
 					PieceSelectionnee = new Pion("blanc");
@@ -341,11 +371,22 @@ public class InterfacePersoEchiquier {
 					PieceSelectionnee = new Reine("noir");
 				}
 				selectionPiece = true ;
-				selectionCase=false ;
+				selectionCase = false ;
 			}
 		}
 	}
 	
+	
+	
+	public class EcouteurFocus implements FocusListener{		
+		public void focusGained(FocusEvent e){			
+			((JButton) e.getSource()).setBorderPainted(true);
+			((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(Color.red));
+		}
+		public void focusLost(FocusEvent e){
+			((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(Color.gray));
+		}
+	}
 
 
 
