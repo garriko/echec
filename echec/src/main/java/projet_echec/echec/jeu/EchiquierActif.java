@@ -387,19 +387,19 @@ public class EchiquierActif extends Echiquier {
 		}
 	}
 
-	
-	
+
+
 	public String getNotationAlgebrique(Case caseDepart, Case caseArrivee){
 		String nota = new String();
 		nota = nota.concat(String.valueOf(caseDepart.getPosition().getHauteur())+String.valueOf(caseDepart.getPosition().getLargeur()));
-		
+
 		if(caseArrivee.estVide())
 			nota= nota.concat("-");
 		else
 			nota= nota.concat("x");
-		
+
 		nota = nota.concat(String.valueOf(caseArrivee.getPosition().getHauteur())+String.valueOf(caseArrivee.getPosition().getLargeur()));
-		
+
 		return nota;
 	}
 
@@ -486,6 +486,20 @@ public class EchiquierActif extends Echiquier {
 				}
 		}
 		return listepiece;		
+	}
+
+	public Position pionBoutEchiquier(){
+
+		Position IlYAUnPion = null;
+		for (int i=1;i<9;i++)
+		{			
+			if (chercherCase(new Position(1,i)).getPiece().equals(new Pion("noir")))
+				IlYAUnPion= new Position(1,i);//si l'égalité est vérifié (il y a un pion en haut de l'échiquier) alors on renvoit la case de se pion
+			if (chercherCase(new Position(8,i)).getPiece().equals(new Pion("blanc")))
+				IlYAUnPion= new Position(8,i);//si l'égalité est vérifié (il y a un pion en haut de l'échiquier) alors on renvoit la case de se pion
+		}
+
+		return IlYAUnPion;//on retourne la case du pion.(=null si pas de pion)
 	}
 
 
