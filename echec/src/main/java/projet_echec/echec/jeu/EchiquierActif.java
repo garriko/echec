@@ -334,7 +334,7 @@ public class EchiquierActif extends Echiquier {
 
 
 		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Pion"))){
-			plop= filtrerpresenceAdversaireDiagonale(caseDepart,plop);
+			filtrerpresenceAdversaireDiagonale(caseDepart,plop);
 		}
 		System.out.println("liste des deplcement possible 2f: "+plop.size());
 		for(int i=0; i< plop.size();i++){
@@ -371,10 +371,19 @@ public class EchiquierActif extends Echiquier {
 	 * @param res : le getdeplacement de la piece
 	 */
 
-	private ArrayList<Case> filtrerpresenceAdversaireDiagonale(Case caseActuelle,ArrayList<Case> res){
-
-		//TODO: a finir
-		return res;
+	private void filtrerpresenceAdversaireDiagonale(Case caseActuelle,ArrayList<Case> casePossible){
+		
+		for(int i=0; i < casePossible.size();i++){
+			Case c = casePossible.get(i);
+			if(c.getPosition().getLargeur()==caseActuelle.getPosition().getLargeur()+1 || c.getPosition().getLargeur()==caseActuelle.getPosition().getLargeur()-1)
+			{
+				if(c.estVide())
+					casePossible.remove(c);
+				else if(c.getPiece().getCamp().equals(caseActuelle.getPiece().getCamp()))
+					casePossible.remove(c);
+					
+			}
+		}
 
 	}
 
