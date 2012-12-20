@@ -25,32 +25,49 @@ public class Fou extends Piece{
 	 */
 	public ArrayList<Case> getDeplacementPossible(Case pos) {
 		ArrayList<Case> lp = new ArrayList<Case>();
-		
+
 		for (int i=0;i<8;i++)
 		{
 			Case hg = new Case(new Position(pos.getPosition().getHauteur(),pos.getPosition().getLargeur()));
 			Case hd = new Case(new Position(pos.getPosition().getHauteur(),pos.getPosition().getLargeur()));
 			Case bg = new Case(new Position(pos.getPosition().getHauteur(),pos.getPosition().getLargeur()));
 			Case bd = new Case(new Position(pos.getPosition().getHauteur(),pos.getPosition().getLargeur()));
-			
+
+			boolean hgt=true;
+			boolean hdt=true;
+			boolean bgt=true;
+			boolean bdt=true;
+
 			hd.setPosition(new Position(hd.getPosition().getHauteur()+1+i,hd.getPosition().getLargeur()+1+i));
 			hg.setPosition(new Position(hg.getPosition().getHauteur()+1+i,hg.getPosition().getLargeur()-1-i));
 			bd.setPosition(new Position(bd.getPosition().getHauteur()-1-i,bd.getPosition().getLargeur()+1+i));
 			bg.setPosition(new Position(bg.getPosition().getHauteur()-1-i,bg.getPosition().getLargeur()-1-i));
-			
-			if(isDeplacementOk(hd)){
+
+			if(isDeplacementOk(hd)||hgt){
 				lp.add(hd);}
-				
-			if(isDeplacementOk(hg)){
+			else{
+				hgt=false;
+			}
+
+			if(isDeplacementOk(hg)||hdt){
 				lp.add(hg);}
-			
-			if(isDeplacementOk(bd)){
+			else{
+				hdt=false;
+			}
+
+			if(isDeplacementOk(bd)||bgt){
 				lp.add(bd);}
-			
-			if(isDeplacementOk(bg)){
+			else{
+				bgt=false;
+			}
+
+			if(isDeplacementOk(bg)||bdt){
 				lp.add(bg);}
+			else{
+				bdt=false;
+			}
 		}
 		return lp;
-		}
 	}
+}
 
