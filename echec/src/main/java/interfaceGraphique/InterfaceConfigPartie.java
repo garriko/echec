@@ -5,6 +5,13 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
@@ -60,6 +67,9 @@ public class InterfaceConfigPartie {
 	JLabel variante;
 	
 	GestionJeu cerveley;
+	Options lesOptions;
+	
+	DataInputStream dis;
 	
 	
 	/**
@@ -104,6 +114,23 @@ public class InterfaceConfigPartie {
 		
 		variante.setBounds(200, 550, 200, 100);
 		variante.setVisible(true);
+		
+		
+		
+		// Récupération options pas défaut
+		boolean modeAide;
+		int dureeTour;
+		
+		dis = new DataInputStream(new BufferedIntputStream(new FileIntputStream(new File("OptionsDefaut.vega"))));
+		
+		dis.read(dureeTour);
+		dis.read(modeAide);
+
+		dis.close();
+		
+		
+		
+		
 		
 		Ecouteur listen=new Ecouteur();
 		Bouton1.addActionListener(listen);

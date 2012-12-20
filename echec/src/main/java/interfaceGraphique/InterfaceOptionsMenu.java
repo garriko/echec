@@ -43,7 +43,7 @@ public class InterfaceOptionsMenu {
 	JSpinner dureeTour;
 	
 	DataOutputStream dos;
-	DataInputStream dis;
+	//DataInputStream dis;
 
 	/**
 	 * Constructeur de la classe
@@ -94,20 +94,14 @@ public class InterfaceOptionsMenu {
 			if (e.getSource() == BoutonAppliquer){
 
 				try {
-					dos = new DataOutputStream(
-					new BufferedOutputStream(
-					new FileOutputStream(
-					new File("OptionsDefaut.vega"))));
+					dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File("OptionsDefaut.vega"))));
 	
 					dos.writeInt(((Integer)dureeTour.getValue()).intValue());
 					dos.writeBoolean(modeAide.isSelected());
 	
 					dos.close();
 	
-					dis = new DataInputStream(
-					new BufferedInputStream(
-					new FileInputStream(
-					new File("OptionsDefaut.vega"))));
+					//dis = new DataInputStream(new BufferedInputStream(new FileInputStream(new File("OptionsDefaut.vega"))));
 	
 					//System.out.println(dis.readInt());
 					//System.out.println(dis.readBoolean());

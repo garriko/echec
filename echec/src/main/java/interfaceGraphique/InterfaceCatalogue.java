@@ -40,6 +40,7 @@ public class InterfaceCatalogue {
 	String choix;
 	
 	JList listeVariantes;
+	Vector<String> liste;
 	
 	JButton boutonRetour;
 	JButton boutonCharger;
@@ -94,13 +95,11 @@ public class InterfaceCatalogue {
 		
 		imageFond.setLayout(null);	
 		
-		//boutonsChoix.add(bouton1);   
-		/*
-		boutonsChoix.add(Bouton2);
-		boutonsChoix.add(Bouton3);   
-		boutonsChoix.add(Bouton4);
-		boutonsChoix.add(Bouton5);   
-		*/
+		imageFond.add(boutonRetour);   		
+		imageFond.add(boutonCharger);
+		imageFond.add(boutonSupprimerPartie);   
+		imageFond.add(boutonSupprimerListe);
+		
 		
 		imageFond.add(listeVariantes);
 		
@@ -110,7 +109,6 @@ public class InterfaceCatalogue {
 		scroll.setBounds(149, 297, 465, 337);
 		
 		Gestion catalogue;
-		Vector<String> liste;
 		if (choix=="revoir"){
 			catalogue = new GestionCatalogueRevoir();
 			catalogue.chargerListe();
@@ -126,7 +124,7 @@ public class InterfaceCatalogue {
 			listeVariantes.setListData(liste);
 		}
 		listeVariantes.setSelectedIndex(0);
-		
+
 		
 		
 		imageFond.setOpaque(false);
@@ -140,21 +138,35 @@ public class InterfaceCatalogue {
 		
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
-			if (choix=="revoir"){
-				new InterfaceRevoirPartie((String) listeVariantes.getSelectedValue());
-			}
-			else {
-				Wrapper w = null;
-				try {
-					w = SaveGame.charger((String) listeVariantes.getSelectedValue());
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+			if (e.getSource()==boutonCharger){
+				if (choix=="revoir"){
+					new InterfaceRevoirPartie((String) listeVariantes.getSelectedValue());
 				}
-				new InterfaceJeu(w.getP(), w.getE());
+				else {
+					Wrapper w = null;
+					try {
+						w = SaveGame.charger((String) listeVariantes.getSelectedValue());
+					} catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					new InterfaceJeu(w.getP(), w.getE());
+				}
+			}
+			if (e.getSource()==boutonSupprimerPartie){
+				liste.removeElement((String) listeVariantes.getSelectedValue());
+				listeVariantes.setListData(liste);
+			}
+			if (e.getSource()==boutonSupprimerListe){
+				listeVariantes.revalidate();
+				// !!
+			}
+			if (e.getSource()==boutonRetour){
+				fenetre.setVisible(false);
+				new InterfaceMenu(new GestionJeu());
 			}
 		}
 	}
