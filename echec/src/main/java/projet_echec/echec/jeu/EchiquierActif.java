@@ -242,6 +242,7 @@ public class EchiquierActif extends Echiquier {
 	 * @throws DeplacementException 
 	 */
 	public String selectionnerCase(Case caseSelectionne) throws DeplacementException{
+		System.out.println(caseSelectionne.getPosition().getHauteur()+","+caseSelectionne.getPosition().getLargeur());
 		if(this.caseSelectionne==null)
 		{
 			if(!caseSelectionne.estVide())
@@ -249,6 +250,7 @@ public class EchiquierActif extends Echiquier {
 				if(caseSelectionne.getPiece().getCamp()==campActif)
 				{
 					this.caseSelectionne=caseSelectionne;
+					//System.out.println(this.caseSelectionne.getPiece());
 					return "rien";
 				}
 				else

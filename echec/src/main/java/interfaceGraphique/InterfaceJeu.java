@@ -31,6 +31,7 @@ import javax.swing.Timer;
 
 import projet_echec.echec.exception.DeplacementException;
 import projet_echec.echec.gestion.GestionJeu;
+import projet_echec.echec.gestion.Options;
 import projet_echec.echec.gestion.Partie;
 import projet_echec.echec.jeu.Case;
 import projet_echec.echec.jeu.Echiquier;
@@ -82,6 +83,9 @@ public class InterfaceJeu {
 	Vector<String> casesPrisesJ2;
 	
 	int tour = 1;
+	
+	JLabel affichageAideJ1;
+	JLabel affichageAideJ2;
 	
 	
 	/*
@@ -242,6 +246,13 @@ public class InterfaceJeu {
 		boutonAide = new JMenuItem("Aide");
 		boutonAProposDe = new JMenuItem("A propos de");
 		
+		affichageAideJ1 = new JLabel("aide1");
+		affichageAideJ1.setBounds(255, 90, 100, 40);
+		affichageAideJ1.setVisible(partie.getjBlanc().isModeAide());	
+		affichageAideJ2 = new JLabel("aide2");
+		affichageAideJ2.setBounds(255, 355, 100, 40);
+		affichageAideJ2.setVisible(partie.getjNoir().isModeAide());
+		
 		CaseSelectionnee = new Case(new Position(5,2));
 		selectionCase = false;
 
@@ -315,7 +326,7 @@ public class InterfaceJeu {
 		plateau.setLayout(new GridLayout(8,8));
 		
 		imageFond.setLayout(null);
-		plateau.setBounds(465,110,448,448);		
+		plateau.setBounds(430,100,448,448);		
 		
 		
 		for (int i=0; i<64 ; i++){
@@ -344,6 +355,8 @@ public class InterfaceJeu {
 		}
 		
 		imageFond.add(plateau);
+		imageFond.add(affichageAideJ1);
+		imageFond.add(affichageAideJ2);
 		
 		tmp.add(imageFond);
 		fenetre.setSize(1030,700); 
@@ -376,6 +389,27 @@ public class InterfaceJeu {
 	
 	
 	
+	
+	/**
+	 * Methode permettant de mettre a jour les options et l'affichage du mode aide ou non pour chaque joueur, 
+	 * lorsque les options ont ete changees dans InterfacePopupOptions
+	 * 
+	 * @param aideJ1 booleen indiquant si le joueur 1 est en mode aide ou non
+	 * @param aideJ2 booleen indiquant si le joueur 2 est en mode aide ou non
+	 */
+	public void actualiserOptions(boolean aideJ1, boolean aideJ2){
+		game.getjBlanc().setModeAide(aideJ1);
+		game.getjNoir().setModeAide(aideJ2);
+		affichageAideJ1.setVisible(game.getjBlanc().isModeAide());
+		affichageAideJ2.setVisible(game.getjNoir().isModeAide());
+	}
+	
+	
+	
+	
+	
+	
+	
 	public void aPerduUnePiece(int tour){
 		if (tour==1){
 			
@@ -383,9 +417,7 @@ public class InterfaceJeu {
 	}
 	
 	
-	
-	
-	
+
 	
 	
 	/**
@@ -529,7 +561,7 @@ public class InterfaceJeu {
 				new InterfacePopupSauvegarder(game, plateauJeu);
 			}
 			if (e.getSource()==boutonOptions){
-				new InterfacePopupOptions(game.getListeOptions());
+				new InterfacePopupOptions(InterfaceJeu.this);
 			}
 			if (e.getSource()==boutonNouvellePartie){
 				new InterfaceConfigPartie(new GestionJeu());
