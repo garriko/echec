@@ -78,6 +78,7 @@ public class Case implements java.io.Serializable {
 	}
 
 	public void setPiece(Piece piece) {
+		
 		this.piece = piece;
 		if(piece==null){
 			if((position.getHauteur()+position.getLargeur()) % 2 == 0)
@@ -89,7 +90,7 @@ public class Case implements java.io.Serializable {
 		{
 			if(piece.getClass().getSimpleName().equals(new String("Pion")))
 			{
-				if(piece.getCamp()=="blanc")
+				if(piece.getCamp().equals("blanc"))
 					if((position.getHauteur()+position.getLargeur()) % 2 == 0)
 						setImg("images/Pieces/pasAuto/121.png");
 					else
@@ -104,7 +105,7 @@ public class Case implements java.io.Serializable {
 			if (piece.getClass().getSimpleName().equals(new String("Tour")))
 			{
 
-				if(piece.getCamp()=="blanc")
+				if(piece.getCamp().equals("blanc"))
 					if((position.getHauteur()+position.getLargeur()) % 2 == 0)
 						setImg("images/Pieces/pasAuto/122.png");
 					else
@@ -118,7 +119,7 @@ public class Case implements java.io.Serializable {
 
 			if(piece.getClass().getSimpleName().equals(new String("Fou")))
 			{
-				if(piece.getCamp()=="blanc")
+				if(piece.getCamp().equals("blanc"))
 					if((position.getHauteur()+position.getLargeur() )% 2 == 0)
 						setImg("images/Pieces/pasAuto/124.png");
 					else
@@ -132,7 +133,7 @@ public class Case implements java.io.Serializable {
 
 			if(piece.getClass().getSimpleName().equals(new String("Cavalier")))
 			{
-				if(piece.getCamp()=="blanc")
+				if(piece.getCamp().equals("blanc"))
 					if((position.getHauteur()+position.getLargeur()) % 2 == 0)
 						setImg("images/Pieces/pasAuto/123.png");
 					else
@@ -146,7 +147,7 @@ public class Case implements java.io.Serializable {
 
 			if(piece.getClass().getSimpleName().equals(new String("Reine")))
 			{
-				if(piece.getCamp()=="blanc")
+				if(piece.getCamp().equals("blanc"))
 					if((position.getHauteur()+position.getLargeur()) % 2 == 0)
 						setImg("images/Pieces/pasAuto/126.png");
 					else
@@ -160,7 +161,7 @@ public class Case implements java.io.Serializable {
 
 			if(piece.getClass().getSimpleName().equals(new String("Roi")))
 			{
-				if(piece.getCamp()=="blanc")
+				if(piece.getCamp().equals("blanc"))
 					if((position.getHauteur()+position.getLargeur()) % 2 == 0)
 						setImg("images/Pieces/pasAuto/125.png");
 					else
