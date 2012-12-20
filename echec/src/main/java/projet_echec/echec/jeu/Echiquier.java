@@ -85,6 +85,7 @@ public abstract class Echiquier {
 		this.listePieceEnJeu.remove(e);	
 	}
 	public void changerCase(Case depart, Case arrive){
+		System.out.println(depart.getPiece().getCamp());
 		arrive.setPiece(depart.getPiece());
 		depart.setPiece(null);
 	}
