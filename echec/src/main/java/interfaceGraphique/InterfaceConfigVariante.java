@@ -2,6 +2,7 @@ package interfaceGraphique;
 
 import interfaceGraphique.InterfaceMenu.Ecouteur;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -32,9 +33,9 @@ import projet_echec.echec.jeu.Variantes;
 
 public class InterfaceConfigVariante {
 
-	JFrame fenetre=new JFrame("Popup");
+	JFrame fenetre;
 	
-	Container tmp = fenetre.getContentPane();
+	Container tmp;
 	
 	JButton boutonCreer;
 	JButton boutonModifier;
@@ -44,20 +45,27 @@ public class InterfaceConfigVariante {
 	JLabel infos;
 
 	
-	JList listeVariantes = new JList();
+	JList listeVariantes;
 	
 	GestionCatalogueVariante catalogue; 
 	Vector<String> liste;
+	
+	InterfaceConfigPartie mere;
 	
 	
 	/**
 	 * Constructeur de la classe
 	 */
-	public InterfaceConfigVariante() {
+	public InterfaceConfigVariante(InterfaceConfigPartie maman) {
+		fenetre=new JFrame("Popup");
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		tmp = fenetre.getContentPane();
 		catalogue = new GestionCatalogueVariante();
-		catalogue.chargerListe();
+		catalogue.chargerListe();		
 		liste = catalogue.getListePartie();
+		listeVariantes = new JList();
+		
+		mere=maman;
 		
 		infos = new JLabel();
 		infos.setBounds(800, 300, 209, 152);
@@ -99,6 +107,7 @@ public class InterfaceConfigVariante {
 		for (int i=0; i<liste.size(); i++){
 			listeVariantes.setListData(liste);
 		}
+		listeVariantes.setSelectedIndex(0);
 		
 		
 		
@@ -110,10 +119,22 @@ public class InterfaceConfigVariante {
 		fenetre.setVisible(true);
 	}
 	
+	
+	/**
+	 * Methode permettant d'ajouter a la liste de variantes la variante creee dans InterfacePersoEchiquier
+	 * 
+	 * @param v le nom de la variante a ajouter
+	 */
+	public void ajouterVariante(String v){
+		liste.add(v);
+		listeVariantes.setListData(liste);
+	}
+	
+	
 		
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
-			try {				
+			/*try {				
 				infos.setText(Variantes.recupererDescription((String) listeVariantes.getSelectedValue()));
 			} catch (ClassNotFoundException e1) {
 				// TODO Auto-generated catch block
@@ -122,16 +143,17 @@ public class InterfaceConfigVariante {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-				
+			*/	
 				
 			if (e.getSource()==boutonCreer){
-				new InterfacePersoEchiquier();
+				new InterfacePersoEchiquier(InterfaceConfigVariante.this);
 			}
 			if (e.getSource()==boutonModifier){
-				new InterfacePersoEchiquier((String) listeVariantes.getSelectedValue());			
+				new InterfacePersoEchiquier((String) listeVariantes.getSelectedValue(), InterfaceConfigVariante.this);			
 			}
 			if (e.getSource()==boutonAppliquer){
-				
+				((InterfaceConfigPartie) mere).appliquerVariante((String) listeVariantes.getSelectedValue());
+				fenetre.setVisible(false);
 			}
 			if (e.getSource()==boutonRetour){
 				
@@ -140,7 +162,7 @@ public class InterfaceConfigVariante {
 	}
 	
 	public static void main(String[] args){		
-		new InterfaceConfigVariante();
+		//new InterfaceConfigVariante();
 	}
 
 	

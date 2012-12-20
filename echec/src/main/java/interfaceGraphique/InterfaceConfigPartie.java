@@ -38,9 +38,8 @@ import projet_echec.echec.wrapper.Wrapper;
 
 public class InterfaceConfigPartie {
 
-	//JFrame fenetre=new JFrame("Jeu d'échecs");
-	Container tmp;
 	JFrame fenetre;
+	Container tmp;
 	Image bouton1 = new ImageIcon("images/boutonModifier.png").getImage().getScaledInstance(156, 40, Image.SCALE_DEFAULT);
 	JButton Bouton1 = new JButton(new ImageIcon(bouton1));
 	Image bouton2 = new ImageIcon("images/boutonValider.png").getImage().getScaledInstance(125, 45, Image.SCALE_DEFAULT);
@@ -48,17 +47,17 @@ public class InterfaceConfigPartie {
 	Image bouton3 = new ImageIcon("images/boutonAnnuler.png").getImage().getScaledInstance(125, 45, Image.SCALE_DEFAULT);
 	JButton Bouton3 = new JButton(new ImageIcon(bouton3));
 
-	JTextField nomJ1 = new JTextField("Joueur 1");
-	JTextField nomJ2 = new JTextField("Joueur 2");
+	JTextField nomJ1;
+	JTextField nomJ2;
 	
 	JSpinner dureeJ1; 
 	JSpinner dureeJ2;
 	
-	JCheckBox aideJ1 = new JCheckBox();
-	JCheckBox aideJ2 = new JCheckBox();
-	JCheckBox rotation = new JCheckBox();
+	JCheckBox aideJ1;
+	JCheckBox aideJ2;
+	JCheckBox rotation;
 	
-	JLabel variante = new JLabel("classique");
+	JLabel variante;
 	
 	GestionJeu cerveley;
 	
@@ -66,11 +65,20 @@ public class InterfaceConfigPartie {
 	/**
 	 * Constructeur de la classe
 	 */
-	public InterfaceConfigPartie(GestionJeu cerveau) {
+	public InterfaceConfigPartie(GestionJeu cerveau) {	
 		fenetre=new JFrame("Configuration de la partie");
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		tmp = fenetre.getContentPane();
 		
 		cerveley = cerveau;
+		
+		variante = new JLabel("classique");
+		
+		nomJ1 = new JTextField("Joueur 1");
+		nomJ2 = new JTextField("Joueur 2");
+		aideJ1 = new JCheckBox();
+		aideJ2 = new JCheckBox();
+		rotation = new JCheckBox();
 		
 		Bouton1.setBounds(487, 516, 156, 40); //position x, position y, largeur, hauteur
 		Bouton2.setBounds(598, 606, 125, 45); 
@@ -129,11 +137,22 @@ public class InterfaceConfigPartie {
 		fenetre.setVisible(true);
 	}
 	
+	
+	/**
+	 * <p> Methode permettant l'application du changement de variante depuis la fenetre InterfaceConfigVariante
+	 * 
+	 * @param v le nom de la variante retenue
+	 */
+	public void appliquerVariante(String v){
+		this.variante.setText(v);
+	}
+	
+	
 		
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
 			if (e.getSource()==Bouton1){ //modifier
-				new InterfaceConfigVariante();
+				new InterfaceConfigVariante(InterfaceConfigPartie.this);
 			}
 			if (e.getSource()==Bouton2){ //valider
 				Joueur J1 = new Joueur(nomJ1.getText(), aideJ1.isSelected());
@@ -157,6 +176,7 @@ public class InterfaceConfigPartie {
 				Partie partie = w.getP();
 				Echiquier echiquier = w.getE();
 				
+				fenetre.setVisible(false);
 				new InterfaceJeu(partie, echiquier);
 				
 			}

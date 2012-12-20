@@ -3,11 +3,18 @@ package interfaceGraphique;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import projet_echec.echec.gestion.Partie;
+import projet_echec.echec.gestion.SaveGame;
+import projet_echec.echec.jeu.Echiquier;
+import projet_echec.echec.jeu.EchiquierActif;
 
 /**
  * 
@@ -19,30 +26,42 @@ import javax.swing.JTextField;
 
 public class InterfacePopupSauvegarder {
 	
-	JFrame fenetre=new JFrame("Popup");
-	Container tmp = fenetre.getContentPane();
-	JButton Bouton1 = new JButton(new ImageIcon("images/okSauvegarde.png"));
-	JButton Bouton2 = new JButton(new ImageIcon("images/annulerSauvegarde.png"));
-	JTextField texte = new JTextField("sauvegarde");
+	JFrame fenetre;
+	Container tmp;
+	JButton boutonOK;
+	JButton boutonAnnuler;
+	JTextField nomSauvegarde;
+	Partie p;
+	EchiquierActif plateau;
 	
 	/**
 	 * Constructeur de la classe
 	 */
-	public InterfacePopupSauvegarder() {
+	public InterfacePopupSauvegarder(Partie partie, Echiquier echiquier) {
+		fenetre=new JFrame("Popup");
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		Bouton1.setBounds(105, 195, 103, 50); //position x, position y, largeur, hauteur
-		Bouton2.setBounds(275, 195, 150, 50); 
-		texte.setBounds(22, 78, 375, 40);
+		p = partie;
+		plateau = (EchiquierActif) echiquier;
+		
+		tmp = fenetre.getContentPane();
+		boutonOK = new JButton(new ImageIcon("images/okSauvegarde.png"));
+		boutonAnnuler = new JButton(new ImageIcon("images/annulerSauvegarde.png"));
+		nomSauvegarde = new JTextField("sauvegarde");
+		
+		boutonOK.setBounds(105, 195, 103, 50); //position x, position y, largeur, hauteur
+		boutonAnnuler.setBounds(275, 195, 150, 50); 
+		nomSauvegarde.setBounds(22, 78, 375, 40);
 		
 		Ecouteur listen=new Ecouteur();
-		Bouton1.addActionListener(listen);
-		Bouton2.addActionListener(listen);
+		boutonOK.addActionListener(listen);
+		boutonAnnuler.addActionListener(listen);
 	
 		JPanel boutonsChoix = new TestImagePanel(new ImageIcon("images/sauvegarde.png").getImage());
 		boutonsChoix.setLayout(null);	 
-		boutonsChoix.add(Bouton1);   
-		boutonsChoix.add(Bouton2);
-		boutonsChoix.add(texte);
+		boutonsChoix.add(boutonOK);   
+		boutonsChoix.add(boutonAnnuler);
+		boutonsChoix.add(nomSauvegarde);
 		boutonsChoix.setOpaque(false);
 		tmp.add(boutonsChoix);
     
@@ -54,10 +73,22 @@ public class InterfacePopupSauvegarder {
 		
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
+			if (e.getSource()==boutonOK){
+				try {
+					SaveGame.sauvegarder(nomSauvegarde.getText(), p, plateau);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				fenetre.setVisible(false);
+			}
+			if (e.getSource()==boutonAnnuler){
+				fenetre.setVisible(false);
+			}
 		}
 	}
 	
 	public static void main(String[] args){
-		new InterfacePopupSauvegarder();
+		//new InterfacePopupSauvegarder();
 	}
 }

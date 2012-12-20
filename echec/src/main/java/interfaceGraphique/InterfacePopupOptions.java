@@ -12,6 +12,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import projet_echec.echec.gestion.Options;
+
 /**
  * 
  * @author Anne-Sophie
@@ -22,22 +24,33 @@ import javax.swing.JPanel;
 
 public class InterfacePopupOptions {
 
-	JFrame fenetre=new JFrame("Options");
-	Container tmp = fenetre.getContentPane();
-	JButton Bouton1 = new JButton(new ImageIcon("images/boutonAppliquer.png"));
-	JButton Bouton2 = new JButton(new ImageIcon("images/boutonAnnulerOptions.png"));
-	JCheckBox aideJ1 = new JCheckBox();
-	JCheckBox aideJ2 = new JCheckBox();
+	JFrame fenetre;
+	Container tmp;
+	JButton boutonAppliquer;
+	JButton boutonAnnuler;
+	JCheckBox aideJ1;
+	JCheckBox aideJ2;
+	Options OptionsJeu;
 	
 	
 	
 	/**
 	 * Constructeur de la classe
 	 */
-	public InterfacePopupOptions() {
+	public InterfacePopupOptions(Options lesOptions) {
+		fenetre=new JFrame("Options");
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		Bouton1.setBounds(112, 282, 158, 72); //position x, position y, largeur, hauteur
-		Bouton2.setBounds(292, 282, 158, 72); 
+		tmp = fenetre.getContentPane();
+		boutonAppliquer = new JButton(new ImageIcon("images/boutonAppliquer.png"));
+		boutonAnnuler = new JButton(new ImageIcon("images/boutonAnnulerOptions.png"));
+		aideJ1 = new JCheckBox();
+		aideJ2 = new JCheckBox();
+		
+		OptionsJeu = lesOptions;
+		
+		boutonAppliquer.setBounds(112, 282, 158, 72); //position x, position y, largeur, hauteur
+		boutonAnnuler.setBounds(292, 282, 158, 72); 
 		aideJ1.setBounds(252,123, 30, 30);
 		aideJ2.setBounds(252,187, 30, 30);
 		aideJ1.setOpaque(false);
@@ -46,14 +59,14 @@ public class InterfacePopupOptions {
 		aideJ2.setVisible(true);
 		
 		Ecouteur listen=new Ecouteur();
-		Bouton1.addActionListener(listen);
-		Bouton2.addActionListener(listen);
+		boutonAppliquer.addActionListener(listen);
+		boutonAnnuler.addActionListener(listen);
 				
 	
 		JPanel boutonsChoix = new TestImagePanel(new ImageIcon("images/popupOptions.png").getImage());
 		boutonsChoix.setLayout(null);	 
-		boutonsChoix.add(Bouton1);   
-		boutonsChoix.add(Bouton2);
+		boutonsChoix.add(boutonAppliquer);   
+		boutonsChoix.add(boutonAnnuler);
 		boutonsChoix.add(aideJ1);   
 		boutonsChoix.add(aideJ2);
 		boutonsChoix.setOpaque(false);
@@ -67,10 +80,17 @@ public class InterfacePopupOptions {
 		
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
+			if (e.getSource()==boutonAppliquer){
+				OptionsJeu.setAideJ1(aideJ1.isSelected());
+				OptionsJeu.setAideJ1(aideJ2.isSelected());				
+			}
+			if (e.getSource()==boutonAnnuler){
+				fenetre.setVisible(false);
+			}
 		}
 	}
 	
 	public static void main(String[] args){
-		new InterfacePopupOptions();
+		
 	}
 }

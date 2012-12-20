@@ -19,23 +19,26 @@ import javax.swing.JPanel;
 
 public class InterfacePopupErreur4 {
 	
-	JFrame fenetre=new JFrame("Popup");
-	Container tmp = fenetre.getContentPane();
-	JButton Bouton1 = new JButton(new ImageIcon("images/ok.png"));
+	JFrame fenetre;
+	Container tmp;
+	JButton boutonOK;
 
 	/**
 	 * Constructeur de la classe
 	 */
 	public InterfacePopupErreur4() {
-		
-		Bouton1.setBounds(150, 215, 160, 76); //position x, position y, largeur, hauteur
+		fenetre=new JFrame("Popup");
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		tmp = fenetre.getContentPane();
+		boutonOK = new JButton(new ImageIcon("images/ok.png"));
+		boutonOK.setBounds(150, 215, 160, 76); //position x, position y, largeur, hauteur
 		
 		Ecouteur listen=new Ecouteur();
-		Bouton1.addActionListener(listen);
+		boutonOK.addActionListener(listen);
 	
 		JPanel boutonsChoix = new TestImagePanel(new ImageIcon("images/erreur.png").getImage());
 		boutonsChoix.setLayout(null);	 
-		boutonsChoix.add(Bouton1);   
+		boutonsChoix.add(boutonOK);   
 		boutonsChoix.setOpaque(false);
 		tmp.add(boutonsChoix);
     
@@ -47,6 +50,9 @@ public class InterfacePopupErreur4 {
 		
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
+			if (e.getSource()==boutonOK){
+				fenetre.setVisible(false);
+			}
 		}
 	}
 	

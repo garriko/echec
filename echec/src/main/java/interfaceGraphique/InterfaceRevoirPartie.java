@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.ImageIcon;
@@ -21,6 +22,10 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerListModel;
 import javax.swing.SpinnerNumberModel;
 
+import projet_echec.echec.gestion.Partie;
+import projet_echec.echec.gestion.SaveGame;
+import projet_echec.echec.wrapper.Wrapper;
+
 
 /**
  * 
@@ -32,8 +37,8 @@ import javax.swing.SpinnerNumberModel;
 
 public class InterfaceRevoirPartie {
 
-	JFrame fenetre=new JFrame("Replay");
-	Container tmp = fenetre.getContentPane();
+	JFrame fenetre;
+	Container tmp;
 	Image boutonLect;
 	JButton BoutonLect;
 	Image boutonPause;
@@ -41,7 +46,7 @@ public class InterfaceRevoirPartie {
 	
 	int cad;
 	JSpinner cadence ;
-	JComboBox modelecture;
+	JComboBox modeLecture;
 	
 	JLabel mode;
 	
@@ -49,28 +54,39 @@ public class InterfaceRevoirPartie {
 	/**
 	 * Constructeur de la classe
 	 */
-	public InterfaceRevoirPartie() {
+	public InterfaceRevoirPartie(String nomPartie) {
+		fenetre=new JFrame("Replay");
+		tmp = fenetre.getContentPane();
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		JFrame fenetre=new JFrame("Replay");
-		Container tmp = fenetre.getContentPane();
+		try {
+			Wrapper w = SaveGame.charger(nomPartie);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		Image boutonLect = new ImageIcon("images/interface_revoirpartieBoutonLecture.png").getImage().getScaledInstance(92, 64, Image.SCALE_DEFAULT);
-		JButton BoutonLect = new JButton(new ImageIcon(boutonLect));
-		Image boutonPause = new ImageIcon("images/interface_revoirpartieBoutonPause.png").getImage().getScaledInstance(92, 65, Image.SCALE_DEFAULT);
-		JButton BoutonPause = new JButton(new ImageIcon(boutonPause));
 		
-		int cad = 1;
-		JSpinner cadence = new JSpinner(new SpinnerNumberModel(cad, cad - 0, cad + 50,1));
-		JComboBox modelecture = new JComboBox();
+		boutonLect = new ImageIcon("images/interface_revoirpartieBoutonLecture.png").getImage().getScaledInstance(92, 64, Image.SCALE_DEFAULT);
+		BoutonLect = new JButton(new ImageIcon(boutonLect));
+		boutonPause = new ImageIcon("images/interface_revoirpartieBoutonPause.png").getImage().getScaledInstance(92, 65, Image.SCALE_DEFAULT);
+		BoutonPause = new JButton(new ImageIcon(boutonPause));
 		
-		JLabel mode = new JLabel();
+		cad = 1;
+		cadence = new JSpinner(new SpinnerNumberModel(cad, cad - 0, cad + 50,1));
+		modeLecture = new JComboBox();
+		
+		mode = new JLabel();
 		
 		BoutonLect.setBounds(85, 590, 92, 64); //position x, position y, largeur, hauteur
 		BoutonPause.setBounds(180, 590, 92, 65); 
-		modelecture.setBounds(430,597,140,41);
+		modeLecture.setBounds(430,597,140,41);
 		cadence.setBounds(760, 597, 69, 41);
 		cadence.setVisible(true);
-		modelecture.setVisible(true);
+		modeLecture.setVisible(true);
 		
 		Ecouteur listen=new Ecouteur();
 		BoutonLect.addActionListener(listen);
@@ -84,10 +100,10 @@ public class InterfaceRevoirPartie {
 		boutonsChoix.add(BoutonPause);
 		boutonsChoix.add(mode);
 		boutonsChoix.add(cadence);
-		boutonsChoix.add(modelecture);
+		boutonsChoix.add(modeLecture);
 		
-		modelecture.addItem("Continue");
-	    modelecture.addItem("Pas à pas");
+		modeLecture.addItem("Continue");
+	    modeLecture.addItem("Pas à pas");
 
 		
 		
@@ -106,7 +122,7 @@ public class InterfaceRevoirPartie {
 	}
 	
 	public static void main(String[] args){
-		new InterfaceRevoirPartie();
+		//new InterfaceRevoirPartie();
 	}
 
 	
