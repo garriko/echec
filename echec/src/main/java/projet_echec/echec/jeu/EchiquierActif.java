@@ -242,7 +242,11 @@ public class EchiquierActif extends Echiquier {
 	 * @throws DeplacementException 
 	 */
 	public String selectionnerCase(Case caseSelectionne) throws DeplacementException{
+
+		System.out.println(caseSelectionne.getPosition().getHauteur()+","+caseSelectionne.getPosition().getLargeur());
+
 		System.out.println("0");
+
 		if(this.caseSelectionne==null)
 		{
 			System.out.println("1");
@@ -253,6 +257,7 @@ public class EchiquierActif extends Echiquier {
 				{
 					System.out.println("111");
 					this.caseSelectionne=caseSelectionne;
+					//System.out.println(this.caseSelectionne.getPiece());
 					return "rien";
 				}
 				else{
@@ -382,6 +387,21 @@ public class EchiquierActif extends Echiquier {
 		}
 	}
 
+	
+	
+	public String getNotationAlgebrique(Case caseDepart, Case caseArrivee){
+		String nota = new String();
+		nota = nota.concat(String.valueOf(caseDepart.getPosition().getHauteur())+String.valueOf(caseDepart.getPosition().getLargeur()));
+		
+		if(caseArrivee.estVide())
+			nota= nota.concat("-");
+		else
+			nota= nota.concat("x");
+		
+		nota = nota.concat(String.valueOf(caseArrivee.getPosition().getHauteur())+String.valueOf(caseArrivee.getPosition().getLargeur()));
+		
+		return nota;
+	}
 
 
 	/**

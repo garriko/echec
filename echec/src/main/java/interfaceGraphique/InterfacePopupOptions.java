@@ -32,14 +32,18 @@ public class InterfacePopupOptions {
 	JCheckBox aideJ2;
 	Options OptionsJeu;
 	
+	InterfaceJeu mere;
+	
 	
 	
 	/**
 	 * Constructeur de la classe
 	 */
-	public InterfacePopupOptions(Options lesOptions) {
+	public InterfacePopupOptions(InterfaceJeu maman) {
 		fenetre=new JFrame("Options");
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		mere = maman;
 		
 		tmp = fenetre.getContentPane();
 		boutonAppliquer = new JButton(new ImageIcon("images/boutonAppliquer.png"));
@@ -47,7 +51,6 @@ public class InterfacePopupOptions {
 		aideJ1 = new JCheckBox();
 		aideJ2 = new JCheckBox();
 		
-		OptionsJeu = lesOptions;
 		
 		boutonAppliquer.setBounds(112, 282, 158, 72); //position x, position y, largeur, hauteur
 		boutonAnnuler.setBounds(292, 282, 158, 72); 
@@ -81,8 +84,8 @@ public class InterfacePopupOptions {
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
 			if (e.getSource()==boutonAppliquer){
-				OptionsJeu.setAideJ1(aideJ1.isSelected());
-				OptionsJeu.setAideJ1(aideJ2.isSelected());				
+				mere.actualiserOptions(aideJ1.isSelected(), aideJ2.isSelected());
+				fenetre.setVisible(false);
 			}
 			if (e.getSource()==boutonAnnuler){
 				fenetre.setVisible(false);
