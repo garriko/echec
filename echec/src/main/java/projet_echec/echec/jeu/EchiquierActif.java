@@ -420,6 +420,8 @@ public class EchiquierActif extends Echiquier {
 					if(caseDepart.getPiece().getCamp().equals("blanc"))
 						this.caseRoiBlanc.setPosition(caseArrivee.getPosition());
 				}
+				if(!caseDepart.getPiece().isDejaBouge())
+					caseDepart.getPiece().setDejaBouge(true);
 				changerCase(caseDepart, caseArrivee);
 				depEffectue=true;
 			}
@@ -454,22 +456,39 @@ public class EchiquierActif extends Echiquier {
 
 	private void filtrerpresenceAdversaireDiagonale(Case caseActuelle,ArrayList<Case> casePossible){
 
-		for(int i=0; i < casePossible.size();i++){
+		for(int i=0; i < casePossible.size();i++)
+		{
+			
 			Case c = casePossible.get(i);
-			if(c.getPosition().getLargeur()==caseActuelle.getPosition().getLargeur()+1 || c.getPosition().getLargeur()==caseActuelle.getPosition().getLargeur()-1)
+			Case caseEchiquier=chercherCase(c.getPosition());
+			System.out.println(c.getPosition().getHauteur()+","+c.getPosition().getLargeur());
+			if(caseEchiquier.getPosition().getLargeur()==caseActuelle.getPosition().getLargeur()+1 || caseEchiquier.getPosition().getLargeur()==caseActuelle.getPosition().getLargeur()-1)
 			{
-				if(c.estVide())
+				if(caseEchiquier.estVide())
 				{
 					casePossible.remove(c);
 					i--;
+					System.out.println("removed 1");
 				}
-				else if(c.getPiece().getCamp().equals(caseActuelle.getPiece().getCamp()))
+				else if(caseEchiquier.getPiece().getCamp().equals(caseActuelle.getPiece().getCamp()))
 				{
 					casePossible.remove(c);
 					i--;
+					System.out.println("removed 2");
 				}
 
 			}
+			else
+			{
+				if(!caseEchiquier.estVide())
+				{
+					casePossible.remove(c);
+					i--;
+					System.out.println("removed 3");
+				}	
+		
+			}
+					
 		}
 
 	}

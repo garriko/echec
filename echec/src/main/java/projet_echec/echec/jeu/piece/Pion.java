@@ -21,7 +21,7 @@ public class Pion extends Piece implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -7909555113524307989L;
-	private boolean dejaBouge;
+	
 
 	public Pion(String camp) {
 		super(camp);
@@ -74,7 +74,7 @@ public class Pion extends Piece implements java.io.Serializable {
 				if(isDeplacementOk(diagg))
 					lp.add(diagg);
 			}
-			this.dejaBouge = true;
+			
 		}
 		else
 		{
@@ -111,18 +111,5 @@ public class Pion extends Piece implements java.io.Serializable {
 		return lp;
 	}
 
-	/**
-	 * @return dejaBouge
-	 */
-	public boolean isDejaBouge() {
-		return dejaBouge;
-	}
-
-	/**
-	 * @param dejaBouge dejaBouge to set
-	 */
-	public void setDejaBouge(boolean dejaBouge) {
-		this.dejaBouge = dejaBouge;
-	}
 
 }
