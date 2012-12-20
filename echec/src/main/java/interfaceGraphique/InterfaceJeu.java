@@ -575,6 +575,7 @@ public class InterfaceJeu {
 				Position p = new Position(8-numCase/8,numCase%8 +1);
 				Case eCase = plateauJeu.chercherCase(p);
 			
+			
 				//System.out.println(eCase.getPosition().getLargeur());
 				//System.out.println(eCase.getPosition().getHauteur());
 				
@@ -613,6 +614,7 @@ public class InterfaceJeu {
 				
 				String dep = "rien";
 				try {
+					
 					dep = plateauJeu.selectionnerCase(eCase);
 				} catch (DeplacementException e1) {
 					// TODO Auto-generated catch block

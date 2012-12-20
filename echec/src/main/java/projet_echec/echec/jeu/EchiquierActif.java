@@ -242,46 +242,46 @@ public class EchiquierActif extends Echiquier {
 	 * @throws DeplacementException 
 	 */
 	public String selectionnerCase(Case caseSelectionne) throws DeplacementException{
-
-		System.out.println(caseSelectionne.getPosition().getHauteur()+","+caseSelectionne.getPosition().getLargeur());
+		
+		//System.out.println(caseSelectionne.getPosition().getHauteur()+","+caseSelectionne.getPosition().getLargeur());
 
 		if(this.caseSelectionne==null)
 		{
-			System.out.println("1");
+			//System.out.println("1");
 			if(!caseSelectionne.estVide())
 			{			
-				System.out.println("11");
+				//System.out.println("11");
 				if(caseSelectionne.getPiece().getCamp().equals(campActif))
 				{
-					System.out.println("111");
+					//System.out.println("111");
 					this.caseSelectionne=caseSelectionne;
 					//System.out.println(this.caseSelectionne.getPiece());
 					return "rien";
 				}
 				else{
-					System.out.println("112");
+					//System.out.println("112");
 					return "rien";
 				}
 			}
 			else
 			{
-				System.out.println("12");
+				//System.out.println("12");
 				return "rien";
 			}
 
 		}
 		else
 		{
-			System.out.println("2");
+			//System.out.println("2");
 			if(this.caseSelectionne.equals(caseSelectionne))
 			{
-				System.out.println("21");
+				//System.out.println("21");
 				this.caseSelectionne=null;
 				return "rien";
 			}
 			else
 			{
-				System.out.println("22");
+				//System.out.println("22");
 				String dep;
 				dep = deplacer(this.caseSelectionne,caseSelectionne);
 				this.caseSelectionne=null;
@@ -305,44 +305,53 @@ public class EchiquierActif extends Echiquier {
 	 */
 	public String deplacer(Case caseDepart, Case caseArrivee) throws DeplacementException
 	{
+		
 		String res=getNotationAlgebrique(caseDepart, caseArrivee);;
 		Case sauvegardecasearrive = caseArrivee;
-		deplacersanscondition(caseDepart,caseArrivee);
-		if(campActif=="noir")
+		if(deplacersanscondition(caseDepart,caseArrivee))
 		{
-			if(echec()!=11 && echec()!=21){
-				mangerPiece(caseArrivee);//pas echec donc le deplacement se fait
-				return res;
+			if(campActif.equals("noir"))
+			{
+				if(echec()!=11 && echec()!=21){
+					mangerPiece(caseArrivee);//pas echec donc le deplacement se fait
+					return res;
+
+				}
+				else
+				{	
+					deplacersanscondition(caseArrivee,caseDepart);
+					caseArrivee=sauvegardecasearrive;
+					//attention: il n'y as pas de deplacement effectif
+
+					return "rien";
+				}
+
+
 			}
 			else
-			{	
-				deplacersanscondition(caseArrivee,caseDepart);
-				caseArrivee=sauvegardecasearrive;
-				//attention: il n'y as pas de deplacement effectif
-				return "rien";
-			}
+			{
+				if(echec()!=12 && echec()!=22){ //Si le deplacement ne provoque pas de mise en danger du roi
+					mangerPiece(caseArrivee);
 
-		
+					return res;
+				}
+				else{
+					deplacersanscondition(caseArrivee,caseDepart);	
+					caseArrivee=sauvegardecasearrive;
+
+					return "rien";
+				}
+
+			}
 		}
 		else
-		{
-		if(echec()!=12 && echec()!=22){ //Si le deplacement ne provoque pas de mise en danger du roi
-				mangerPiece(caseArrivee);
-				return res;
-			}
-			else{
-				deplacersanscondition(caseArrivee,caseDepart);	
-				caseArrivee=sauvegardecasearrive;
-				return "rien";
-			}
-			
-		}
+			return "rien";
 			
 		
 		
 	}
 
-	public void mangerPiece(Case caseArrivee )
+	public void mangerPiece(Case caseArrivee)
 	{
 		if(!caseArrivee.estVide())//si il y a une case a l'arrivee
 		{
@@ -360,18 +369,20 @@ public class EchiquierActif extends Echiquier {
 	 * @param caseDepart
 	 * @param caseArrivee
 	 */
-	public void deplacersanscondition(Case caseDepart, Case caseArrivee){
+	public boolean deplacersanscondition(Case caseDepart, Case caseArrivee){
 		ArrayList<Case> plop = new ArrayList<Case>();
-
+		boolean depEffectue = false;
+		
 		plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
-
+		System.out.println(plop.get(0).getPosition().getHauteur()+","+plop.get(0).getPosition().getLargeur());
 		plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
 
 
 		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Pion"))){
+			
 			filtrerpresenceAdversaireDiagonale(caseDepart,plop);
 		}
-
+		
 		for(int i=0; i< plop.size();i++){
 
 			if(plop.get(i).getPosition().equals(caseArrivee.getPosition())){
@@ -383,8 +394,10 @@ public class EchiquierActif extends Echiquier {
 						this.caseRoiBlanc.setPosition(caseArrivee.getPosition());
 				}
 				changerCase(caseDepart, caseArrivee);
+				depEffectue=true;
 			}
 		}
+		return depEffectue;
 	}
 
 	
@@ -445,13 +458,12 @@ public class EchiquierActif extends Echiquier {
 	private ArrayList<Case> filtrerDeplacementPossible(String camp,ArrayList<Case> casePossible)
 	{
 		Case caseplateau;
-		for(int i=0;i<(casePossible.size());i++){
+		for(int i=0;i<(casePossible.size());i++)
+		{
+			
 			caseplateau=chercherCase(casePossible.get(i).getPosition());
-			System.out.println(caseplateau);
 
 			if((!caseplateau.estVide())){
-				System.out.println(caseplateau.getPosition().getHauteur()+","+caseplateau.getPosition().getLargeur());
-				System.out.println(caseplateau.getPiece().getCamp());
 				if(caseplateau.getPiece().getCamp().equals(camp))
 				{
 					casePossible.remove(casePossible.get(i));
