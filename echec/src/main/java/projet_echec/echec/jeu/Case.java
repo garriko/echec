@@ -49,7 +49,7 @@ public class Case implements java.io.Serializable {
 	 */
 	public boolean estVide(){
 		boolean a= false;
-		if (this.getPiece()==null);
+		if (this.getPiece()==null)
 			a=true;
 		return a;		
 	}

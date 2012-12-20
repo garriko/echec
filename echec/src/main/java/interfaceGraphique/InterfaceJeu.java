@@ -81,6 +81,8 @@ public class InterfaceJeu {
 	Vector<String> casesPrisesJ1;
 	Vector<String> casesPrisesJ2;
 	
+	int tour = 1;
+	
 	
 	/*
 	
@@ -372,6 +374,20 @@ public class InterfaceJeu {
 	}
 	
 	
+	
+	
+	public void aPerduUnePiece(int tour){
+		if (tour==1){
+			
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * Methode permettant d'actualiser l'affichage des pieces prises
 	 * 
@@ -495,7 +511,14 @@ public class InterfaceJeu {
 				if (dep!="rien"){
 					game.ajoutDeplacement(dep);
 					for (int i=0; i<plateauJeu.getPlateau().size(); i++){						
-						actualiserImage(plateauJeu.getPlateau().get(i));
+						actualiserImage(plateauJeu.getPlateau().get(i));						
+						if (tour==1){
+							tour=2;
+						}
+						else {
+							tour=1;
+						}	
+						aPerduUnePiece(tour);
 					}				
 				}
 				
