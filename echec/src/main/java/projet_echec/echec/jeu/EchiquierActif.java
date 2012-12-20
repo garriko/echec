@@ -306,7 +306,7 @@ public class EchiquierActif extends Echiquier {
 	public String deplacer(Case caseDepart, Case caseArrivee) throws DeplacementException
 	{
 		
-		String res=getNotationAlgebrique(caseDepart, caseArrivee);;
+		String res=getNotationAlgebrique(caseDepart, caseArrivee);
 		Case sauvegardecasearrive = caseArrivee;
 		if(deplacersanscondition(caseDepart,caseArrivee))
 		{
