@@ -12,6 +12,13 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import projet_echec.echec.jeu.Case;
+import projet_echec.echec.jeu.Piece;
+import projet_echec.echec.jeu.piece.Cavalier;
+import projet_echec.echec.jeu.piece.Fou;
+import projet_echec.echec.jeu.piece.Reine;
+import projet_echec.echec.jeu.piece.Tour;
+
 /**
  * 
  * @author Vincent
@@ -27,13 +34,20 @@ public class InterfacePopupPionBout {
 	Container tmp;
 	JButton BoutonOK;
 	JComboBox ChoixPieces;
+	
+	Case laCase;
+	
+	
+	
 
 	/**
 	 * Constructeur de la classe
 	 */
-	public InterfacePopupPionBout() {
+	public InterfacePopupPionBout(Case casePion) {
 		fenetre=new JFrame("Popup");
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		laCase = casePion;
 		
 		tmp = fenetre.getContentPane();
 		BoutonOK = new JButton(new ImageIcon("images/okSauvegarde.png"));
@@ -70,15 +84,23 @@ public class InterfacePopupPionBout {
 		
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
-			
-			if (ChoixPieces.getSelectedItem()=="Fou"){
-				
-			}
-	    				
-			else if (ChoixPieces.getSelectedItem()=="Cavalier"){
-				
-			}	    		
-		
+			if (e.getSource()==BoutonOK){
+				Piece nouvellePiece;
+				String couleur = laCase.getPiece().getCamp();
+				if (ChoixPieces.getSelectedItem()=="Cavalier"){
+					nouvellePiece = new Cavalier(couleur);
+				}
+				else if (ChoixPieces.getSelectedItem()=="Tour"){
+					nouvellePiece = new Tour(couleur);
+				}
+				else if (ChoixPieces.getSelectedItem()=="Fou"){
+					nouvellePiece = new Fou(couleur);
+				}
+				else{
+					nouvellePiece = new Reine(couleur);
+				}
+				laCase.setPiece(nouvellePiece);
+			}		
 	}
 	
 	class ItemAction implements ActionListener{
@@ -88,6 +110,6 @@ public class InterfacePopupPionBout {
 	  }
 	
 	public static void main(String[] args){
-		new InterfacePopupPionBout();
+		//new InterfacePopupPionBout();
 	}
 }

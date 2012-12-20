@@ -245,8 +245,6 @@ public class EchiquierActif extends Echiquier {
 
 		System.out.println(caseSelectionne.getPosition().getHauteur()+","+caseSelectionne.getPosition().getLargeur());
 
-		System.out.println("0");
-
 		if(this.caseSelectionne==null)
 		{
 			System.out.println("1");

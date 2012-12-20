@@ -365,7 +365,6 @@ public class InterfaceJeu {
 		barreMenu.setVisible(true);
 		fenetre.setVisible(true);
 	
-				
 	}
 	
 	
@@ -479,9 +478,26 @@ public class InterfaceJeu {
 				JLabel labelPiecePrise = new JLabel(new ImageIcon(img));
 				//labelPiecePrise.setBounds());
 				labelPiecePrise.setVisible(true);
-				imageFond.add(labelPiecePrise);				
+				imageFond.add(labelPiecePrise);		
 			}
 		}
+	}
+	
+	
+	
+	/**
+	 * Methode getters permettant d'acceder a la fenetre depuis une autre fenetre 
+	 * (popup sauvegarder avant de quitter)
+	 * 
+	 * @return fenetre la fenetre de jeu
+	 */
+	public JFrame getFrame(){
+		return fenetre;
+	}
+	
+	
+	public void finPartie(){
+		GestionJeu.finPartie(game);
 	}
 	
 	
@@ -564,16 +580,16 @@ public class InterfaceJeu {
 				new InterfacePopupOptions(InterfaceJeu.this);
 			}
 			if (e.getSource()==boutonNouvellePartie){
-				new InterfaceConfigPartie(new GestionJeu());
+				new InterfaceConfigPartie();
 			}
 			if (e.getSource()==boutonChargerPartie){
-				new InterfaceCatalogue("reprendre", new GestionJeu());
+				new InterfaceCatalogue("reprendre");
 			}
 			if (e.getSource()==boutonRevenirMenu){
-				new InterfacePopupSauvegarderQuitter("Menu", game, plateauJeu);
+				new InterfacePopupSauvegarderQuitter("Menu", game, plateauJeu, InterfaceJeu.this);
 			}
 			if (e.getSource()==boutonQuitter){
-				new InterfacePopupSauvegarderQuitter("Quitter", game, plateauJeu);
+				new InterfacePopupSauvegarderQuitter("Quitter", game, plateauJeu, InterfaceJeu.this);
 			}
 			if (e.getSource()==boutonAide){
 				//new InterfaceAide();
