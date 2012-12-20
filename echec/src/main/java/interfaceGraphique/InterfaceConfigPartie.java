@@ -137,11 +137,22 @@ public class InterfaceConfigPartie {
 		fenetre.setVisible(true);
 	}
 	
+	
+	/**
+	 * <p> Methode permettant l'application du changement de variante depuis la fenetre InterfaceConfigVariante
+	 * 
+	 * @param v le nom de la variante retenue
+	 */
+	public void appliquerVariante(String v){
+		this.variante.setText(v);
+	}
+	
+	
 		
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
 			if (e.getSource()==Bouton1){ //modifier
-				new InterfaceConfigVariante();
+				new InterfaceConfigVariante(InterfaceConfigPartie.this);
 			}
 			if (e.getSource()==Bouton2){ //valider
 				Joueur J1 = new Joueur(nomJ1.getText(), aideJ1.isSelected());

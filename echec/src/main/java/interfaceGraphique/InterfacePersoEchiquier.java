@@ -81,25 +81,28 @@ public class InterfacePersoEchiquier {
 	boolean selectionPiece;
 	boolean selectionCase;
 	
+	InterfaceConfigVariante mere;
+	
 	
 	
 	
 	/**
 	 * Constructeur sans parametre pour créer une nouvelle variante
 	 */
-	public InterfacePersoEchiquier() {
+	public InterfacePersoEchiquier(InterfaceConfigVariante maman) {
 		
+		fenetre = new JFrame("Jeu d'échecs");
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		mere = maman;
 		
 		nouvelleVariante = new Variantes();
 		
 		selectionPiece = false;
 		selectionCase = false;
 		PieceSelectionnee = new Pion("blanc");
-		CaseSelectionnee = new Case(null);
+		CaseSelectionnee = new Case(new Position(5,2));
 		
-		nouvelleVariante = new Variantes();
-		fenetre = new JFrame("Jeu d'échecs");
-		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		tmp = fenetre.getContentPane();
 		
 		tab_cases = new Vector<JButton>();
@@ -288,8 +291,11 @@ public class InterfacePersoEchiquier {
 	 * @param nomV le nom de la variante a modifier
 	 * 
 	 */
-	public InterfacePersoEchiquier(String nomV) {
+	public InterfacePersoEchiquier(String nomV, InterfaceConfigVariante maman) {
+		fenetre = new JFrame("Jeu d'échecs");
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		mere = maman;
 		
 		try {
 			nouvelleVariante = new Variantes(nomV);
@@ -308,7 +314,6 @@ public class InterfacePersoEchiquier {
 		PieceSelectionnee = new Pion("blanc");
 		CaseSelectionnee = new Case(new Position(2,5));
 		
-		fenetre = new JFrame("Jeu d'échecs");
 		tmp = fenetre.getContentPane();
 		
 		tab_cases = new Vector<JButton>();
@@ -404,8 +409,6 @@ public class InterfacePersoEchiquier {
 		//Récupération des données depuis la variante 
 		Vector<Case> plateauCases = nouvelleVariante.getPlateau();
 		
-		if(plateauCases==null)
-			System.out.println("Pas youpi");
 		for (int i=0; i<64; i++){
 			System.out.println(plateauCases.get(i).getImg());
 			int numCase = plateauCases.get(i).getPosition().getLargeur() + 8*(plateauCases.get(i).getPosition().getHauteur()-1)-1;			
@@ -520,19 +523,21 @@ public class InterfacePersoEchiquier {
 		public void actionPerformed(ActionEvent e){
 			if (e.getSource()==boutonOK){
 				try {
-					try {
-						nouvelleVariante.saveVariante(nomVariante.getText());
-					} catch (RoiManquantException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				} catch (IOException e1) {
+					nouvelleVariante.saveVariante(nomVariante.getText());
+				} 
+				catch (RoiManquantException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+				catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				mere.ajouterVariante(nomVariante.getText());
+				fenetre.setVisible(false);
 			}
 			else if (e.getSource()==boutonAnnuler){
-				
+				fenetre.setVisible(false);
 			}
 			else if (e.getSource()==Poubelle){
 				if ((selectionCase==true) && (CaseSelectionnee.estVide()==false)){ // si une case avait été sélectionnée
@@ -753,7 +758,7 @@ public class InterfacePersoEchiquier {
 	
 	
 	public static void main(String[] args){
-		new InterfacePersoEchiquier("classique");
+		//new InterfacePersoEchiquier("classique");
 	}
 }
 

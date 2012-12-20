@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,6 +19,8 @@ import projet_echec.echec.gestion.Gestion;
 import projet_echec.echec.gestion.GestionCatalogueCharger;
 import projet_echec.echec.gestion.GestionCatalogueRevoir;
 import projet_echec.echec.gestion.GestionJeu;
+import projet_echec.echec.gestion.SaveGame;
+import projet_echec.echec.wrapper.Wrapper;
 
 /**
  * 
@@ -34,8 +37,14 @@ public class InterfaceCatalogue {
 	JFrame fenetre;
 	Container tmp; 
 
+	String choix;
 	
 	JList listeVariantes;
+	
+	JButton boutonRetour;
+	JButton boutonCharger;
+	JButton boutonSupprimerPartie;
+	JButton boutonSupprimerListe;
 	
 	
 	/**
@@ -54,23 +63,27 @@ public class InterfaceCatalogue {
 		tmp= fenetre.getContentPane();
 		listeVariantes = new JList();
 		
+		choix = mode;
 		
-		/*Bouton1.setBounds(260, 180, 500, 52); //position x, position y, largeur, hauteur
-		Bouton2.setBounds(260, 290, 500, 52); 
-		Bouton3.setBounds(260, 390, 500, 52);
-		Bouton4.setBounds(260, 490, 500, 52);
-		Bouton5.setBounds(260, 580, 500, 52);
-		*/
+		boutonRetour = new JButton("Retour");
+		boutonCharger = new JButton("Charger la partie");
+		boutonSupprimerPartie = new JButton("Supprimer partie");
+		boutonSupprimerListe = new JButton("Supprimer liste");
 		
-		//bouton1.setBounds(400, 800, 100, 100);
-		/*
+		
+		boutonRetour.setBounds(260, 180, 200, 52); //position x, position y, largeur, hauteur
+		boutonCharger.setBounds(260, 290, 200, 52); 
+		boutonSupprimerPartie.setBounds(260, 390, 300, 52);
+		boutonSupprimerListe.setBounds(260, 490, 300, 52);
+		
+		
 		Ecouteur listen=new Ecouteur();
-		Bouton1.addActionListener(listen);
-		Bouton2.addActionListener(listen);
-		Bouton3.addActionListener(listen);
-		Bouton4.addActionListener(listen);
-		Bouton5.addActionListener(listen);
-	*/
+		boutonRetour.addActionListener(listen);
+		boutonCharger.addActionListener(listen);
+		boutonSupprimerPartie.addActionListener(listen);
+		boutonSupprimerListe.addActionListener(listen);
+
+	
 		JPanel imageFond;
 		if (mode=="revoir"){
 			imageFond = new TestImagePanel(new ImageIcon("images/revoirPartie.png").getImage().getScaledInstance(1000, 700, Image.SCALE_DEFAULT));
@@ -98,7 +111,7 @@ public class InterfaceCatalogue {
 		
 		Gestion catalogue;
 		Vector<String> liste;
-		if (mode=="revoir"){
+		if (choix=="revoir"){
 			catalogue = new GestionCatalogueRevoir();
 			catalogue.chargerListe();
 			liste = catalogue.getListePartie();
@@ -112,6 +125,7 @@ public class InterfaceCatalogue {
 		for (int i=0; i<liste.size(); i++){
 			listeVariantes.setListData(liste);
 		}
+		listeVariantes.setSelectedIndex(0);
 		
 		
 		
@@ -126,6 +140,22 @@ public class InterfaceCatalogue {
 		
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
+			if (choix=="revoir"){
+				new InterfaceRevoirPartie((String) listeVariantes.getSelectedValue());
+			}
+			else {
+				Wrapper w = null;
+				try {
+					w = SaveGame.charger((String) listeVariantes.getSelectedValue());
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				new InterfaceJeu(w.getP(), w.getE());
+			}
 		}
 	}
 	
