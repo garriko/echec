@@ -328,12 +328,12 @@ public class EchiquierActif extends Echiquier {
 			ArrayList<Case> plop = new ArrayList<Case>();
 	
 			plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
-			System.out.println("liste des deplcement possible 0f: "+plop.size());
+			System.out.println("liste des deplacement possible 0f: "+plop.size());
 			plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
-			System.out.println("liste des deplcement possible 1f: "+plop.size());
-			Piece testpionn= new Pion("noir");
-			Piece testpionb= new Pion("blanc");
-			if(caseDepart.getPiece().equals(testpionb)||caseDepart.getPiece().equals(testpionn)){
+			System.out.println("liste des deplacement possible 1f: "+plop.size());
+
+			
+			if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Pion"))){
 				plop= filtrerpresenceAdversaireDiagonale(caseDepart, caseDepart.getPiece().getDeplacementPossible(caseDepart));
 			}
 			System.out.println("liste des deplcement possible 2f: "+plop.size());
