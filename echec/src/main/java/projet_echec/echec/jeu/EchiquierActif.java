@@ -230,10 +230,26 @@ public class EchiquierActif extends Echiquier {
 	 * @return true si l'un des joueurs est en pat
 	 */
 	public boolean pat(){
-		boolean a;
-		a=true;
+		boolean a = true;
+		if(!this.estMenace("noir", this.caseRoiBlanc))
+		{
+			for(int i=0;i<getListePieceEnJeu().size();i++){
+				if(listerPiecesBlanches(getListePieceEnJeu()).get(i).getPiece().getDeplacementPossible(listerPiecesBlanches(getListePieceEnJeu()).get(i)).size()!=0)
+				{
+					a=false;
+				}
+			}
+		}
+		if(!this.estMenace("blanc", this.caseRoiNoir))
+		{
+			for(int i=0;i<getListePieceEnJeu().size();i++){
+				if(listerPiecesNoires(getListePieceEnJeu()).get(i).getPiece().getDeplacementPossible(listerPiecesNoires(getListePieceEnJeu()).get(i)).size()!=0)
+				{
+					a=false;
+				}
+			}
+		}
 		return a;
-		//TODO : pat
 	}
 	/**
 	 * recupere la case selectionne envoye par l'interface graphique
@@ -412,12 +428,9 @@ public class EchiquierActif extends Echiquier {
 	 */
 
 	private void filtrerpresenceAdversaireDiagonale(Case caseActuelle,ArrayList<Case> casePossible){
-		//System.out.println(casePossible.size());
+
 		for(int i=0; i < casePossible.size();i++){
-			//System.out.println(i);
 			Case c = casePossible.get(i);
-			//System.out.println(c.getPosition().getHauteur()+","+c.getPosition().getLargeur());
-			//System.out.println(caseActuelle.getPosition().getLargeur());
 			if(c.getPosition().getLargeur()==caseActuelle.getPosition().getLargeur()+1 || c.getPosition().getLargeur()==caseActuelle.getPosition().getLargeur()-1)
 			{
 				if(c.estVide())
