@@ -325,7 +325,7 @@ public class EchiquierActif extends Echiquier {
 		Case sauvegardecasearrive = caseArrivee;
 		if(deplacersanscondition(caseDepart,caseArrivee))
 		{
-			if(campActif=="noir")
+			if(campActif.equals("noir"))
 			{
 				if(echec()!=11 && echec()!=21){
 					mangerPiece(caseArrivee);//pas echec donc le deplacement se fait
