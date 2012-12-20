@@ -105,7 +105,7 @@ public class InterfaceConfigPartie {
 		rotation.setVisible(true);
 		
 		variante.setBounds(250, 485, 200, 100);
-		variante.setFont(new Font("Times New Roman", 0, 40));
+		//variante.setFont(new Font("Times New Roman", 0, 40));
 		variante.setForeground(Color.white);
 		variante.setVisible(true);
 		

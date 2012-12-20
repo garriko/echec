@@ -91,7 +91,7 @@ public class InterfaceJeu {
 	
 	JLabel chronoJ1; //Le label qui contient le temps restant du joueur 1
 	Timer countdownJ1; //Le compteur du joueur 1
-	int timeRemaining= 25; //A charger à partir des options
+	int timeRemaining = 25; //A charger à partir des options
 	JLabel chronoJ2; //Le label qui contient le temps restant du joueur 1
 	Timer countdownJ2; //Le compteur du joueur 1
 	
@@ -375,13 +375,15 @@ public class InterfaceJeu {
 		// Timer
 		countdownJ1 = new Timer(1000, new CountdownTimerListener()); // On créé le timer du J1
 		chronoJ1 = new JLabel(String.valueOf(timeRemaining), JLabel.CENTER); //On affiche ce label
-		chronoJ1.setBounds(115,190,50,50);
+		chronoJ1.setBounds(130,180,50,50);
+		chronoJ1.setForeground(Color.white);
 		countdownJ1.start();//Démarrer le compteur, a voir comment implanter à chaque tour
 		
 		countdownJ2 = new Timer(1000, new CountdownTimerListener()); // On créé le timer du J1
 		chronoJ2 = new JLabel(String.valueOf(timeRemaining), JLabel.CENTER); //On affiche ce label
 		chronoJ2.setBounds(115,500,50,50);
-		countdownJ2.start();//Démarrer le compteur, a voir comment implanter à chaque tour
+		chronoJ2.setForeground(Color.white);
+		//countdownJ2.start();//Démarrer le compteur, a voir comment implanter à chaque tour
 		
 		imageFond.add(chronoJ1);
 		imageFond.add(chronoJ2);
@@ -451,11 +453,17 @@ public class InterfaceJeu {
 			setTour(2);
 			joueur1.setVisible(false);
 			joueur2.setVisible(true);
+			countdownJ1.stop();
+			countdownJ1.setInitialDelay(timeRemaining);
+			countdownJ2.start();
 		}
 		else {
 			setTour(1);
 			joueur2.setVisible(false);
 			joueur1.setVisible(true);
+			countdownJ2.stop();
+			countdownJ2.setInitialDelay(timeRemaining);
+			countdownJ1.start();
 		}	
 	}
 	
@@ -671,23 +679,23 @@ public class InterfaceJeu {
 	
 	class CountdownTimerListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (--timeRemaining > 0) {
+			if (--timeRemaining >= 0) {
 				if (getTour()==1){
+					countdownJ1.start();
 					chronoJ1.setText(String.valueOf(timeRemaining));
 				}
 				else {
+					countdownJ2.start();
 					chronoJ2.setText(String.valueOf(timeRemaining));
 				}
 			} 
 			else {
 				if (getTour()==1){
-					countdownJ1.stop();
+					//lancer popup joueur 1 tu as perdu
 				}
 				else {
-					countdownJ2.stop();
-				}				
-				actualiserTour(tour);
-				
+					//lancer popup joueur 2 tu as perdu
+				}							
 			}
 		}
 	}
