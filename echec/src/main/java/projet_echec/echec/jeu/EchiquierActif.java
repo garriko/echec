@@ -182,14 +182,14 @@ public class EchiquierActif extends Echiquier {
 				listePieceMenacante = estMenacePar("blanc",this.caseRoiNoir);//on a ici la liste de cases (contenant les pieces) menacant le Roi
 				listePieceDefendent= listerPiecesNoires(this.listePieceEnJeu);;//on a ici la liste de cases qui peuvent potentiellement defendre le Roi
 			}
-			for (int i=0;i<listePieceMenacante.size()+1;i++){//pour toutes les cases de pieces qui menacent
+			for (int i=0;i<listePieceMenacante.size();i++){//pour toutes les cases de pieces qui menacent
 					
 					listeCaseDeplacementMenacant.add(listePieceMenacante.get(i));
 				}
-			for (int j=0;j<listePieceDefendent.size()+1;j++){//pour toutes les cases de pieces qui defendent
+			for (int j=0;j<listePieceDefendent.size();j++){//pour toutes les cases de pieces qui defendent
 					listeCaseDeplacementDefendent=listePieceDefendent.get(j).getPiece().getDeplacementPossible(listePieceDefendent.get(j));;
 				}
-			for (int j=0;j<listeCaseDeplacementMenacant.size()+1;j++){
+			for (int j=0;j<listeCaseDeplacementMenacant.size();j++){
 				if(listeCaseDeplacementDefendent.contains(listeCaseDeplacementMenacant.get(j))){
 					estenechecetmat=false;
 				}
@@ -198,7 +198,7 @@ public class EchiquierActif extends Echiquier {
 			}
 		else{
 			ArrayList<Case> casePossible = filtrerDeplacementPossible(camp,this.caseRoiBlanc.getPiece().getDeplacementPossible(this.caseRoiBlanc));
-			for (int i=0;i<casePossible.size()+1;i++)
+			for (int i=0;i<casePossible.size();i++)
 			{
 				if(estMenace("noir",casePossible.get(i))){
 					compteurCaseMenacee++;
@@ -208,14 +208,14 @@ public class EchiquierActif extends Echiquier {
 				listePieceMenacante = estMenacePar("noir",this.caseRoiBlanc);//on a ici la liste de cases (contenant les pieces) menacant le Roi
 				listePieceDefendent= listerPiecesBlanches(this.listePieceEnJeu);;//on a ici la liste de cases qui peuvent potentiellement defendre le Roi
 			}
-			for (int i=0;i<listePieceMenacante.size()+1;i++){//pour toutes les cases de pieces qui menacent
+			for (int i=0;i<listePieceMenacante.size();i++){//pour toutes les cases de pieces qui menacent
 					listeCaseDeplacementMenacant=listePieceMenacante.get(i).getPiece().getDeplacementPossible(listePieceMenacante.get(i));
 					listeCaseDeplacementMenacant.add(listePieceMenacante.get(i));
 				}
-			for (int j=0;j<listePieceDefendent.size()+1;j++){//pour toutes les cases de pieces qui defendent
+			for (int j=0;j<listePieceDefendent.size();j++){//pour toutes les cases de pieces qui defendent
 					listeCaseDeplacementDefendent=listePieceDefendent.get(j).getPiece().getDeplacementPossible(listePieceDefendent.get(j));;
 				}
-			for (int j=0;j<listeCaseDeplacementMenacant.size()+1;j++){
+			for (int j=0;j<listeCaseDeplacementMenacant.size();j++){
 				if(listeCaseDeplacementDefendent.contains(listeCaseDeplacementMenacant.get(j))){
 					estenechecetmat=false;
 				}
