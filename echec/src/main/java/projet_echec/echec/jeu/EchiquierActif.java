@@ -311,17 +311,18 @@ public class EchiquierActif extends Echiquier {
 			Case sauvegardecasearrive = caseArrivee;
 			deplacersanscondition(caseDepart,caseArrivee);
 			if(echec()!=11 && echec()!=21){
+				mangerPiece(caseArrivee);
 			}
-			else{
-				deplacersanscondition(caseArrivee,caseDepart);	
+			else{	
+				deplacersanscondition(caseArrivee,caseDepart);
 				caseArrivee=sauvegardecasearrive;
-				//TODO : Warning retirer dans pieces prises !!!!!
 			}
 			break;
 		case 12:
 			Case sauvegardecasearrive1 = caseArrivee;
 			deplacersanscondition(caseDepart,caseArrivee);
 			if(echec()!=12 && echec()!=22){
+				mangerPiece(caseArrivee);
 			}
 			else{
 				deplacersanscondition(caseArrivee,caseDepart);	
@@ -329,11 +330,26 @@ public class EchiquierActif extends Echiquier {
 			}
 			break;
 		default:
+			mangerPiece(caseArrivee);
 			deplacersanscondition(caseDepart,caseArrivee);
 			break;
 		}
 		return "rien"; //TODO : renvoyer le deplacement en notation algebrique ou "rien"
 	}
+
+	public void mangerPiece(Case caseArrivee )
+	{
+		if(!caseArrivee.estVide())//si il y a une case a l'arrivee
+		{
+			this.listePiecePrises.add(caseArrivee.getPiece());//on ajoute la piece dans la liste des pieces prises
+
+			for(int j=0; j< listePieceEnJeu.size();j++)//pour toutes les pieces en jeu
+				if(this.listePieceEnJeu.get(j).equals(caseArrivee))//si il y a une case egale a la case d'arrivee
+					this.listePieceEnJeu.remove(j);//on la supprime
+		}
+	}
+
+
 	/**
 	 * fait un deplacement sans test d'echec
 	 * @param caseDepart
@@ -345,12 +361,12 @@ public class EchiquierActif extends Echiquier {
 		plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
 
 		plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
-		
+
 
 		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Pion"))){
 			filtrerpresenceAdversaireDiagonale(caseDepart,plop);
 		}
-		
+
 		for(int i=0; i< plop.size();i++){
 
 			if(plop.get(i).getPosition().equals(caseArrivee.getPosition())){
@@ -361,19 +377,11 @@ public class EchiquierActif extends Echiquier {
 					if(caseDepart.getPiece().getCamp().equals("blanc"))
 						this.caseRoiBlanc.setPosition(caseArrivee.getPosition());
 				}
-				if(!caseArrivee.estVide())//si il y a une case a l'arrivee
-				{
-					this.listePiecePrises.add(caseArrivee.getPiece());//on ajoute la piece dans la liste des pieces prises
-
-					for(int j=0; j< listePieceEnJeu.size();j++)//pour toutes les pieces en jeu
-						if(listePieceEnJeu.get(j).equals(caseArrivee))//si il y a une case egale a la case d'arrivee
-							listePieceEnJeu.remove(j);//on la supprime
-					changerCase(caseDepart, caseArrivee);
-				}
-
+				changerCase(caseDepart, caseArrivee);
 			}
 		}
 	}
+
 
 
 	/**
@@ -400,9 +408,9 @@ public class EchiquierActif extends Echiquier {
 				else if(c.getPiece().getCamp().equals(caseActuelle.getPiece().getCamp()))
 				{
 					casePossible.remove(c);
-				i--;
+					i--;
 				}
-					
+
 			}
 		}
 
@@ -441,7 +449,7 @@ public class EchiquierActif extends Echiquier {
 			if(!liste.get(i).estVide())
 				if (liste.get(i).getPiece().getCamp()=="blanc"){//si dans la liste la piece est blanche
 					listepiece.add(liste.get(i));//ajoute dans la liste des pieces adverses les pieces noires
-			}
+				}
 		}
 		return listepiece;		
 	}
@@ -455,7 +463,7 @@ public class EchiquierActif extends Echiquier {
 			if(!liste.get(i).estVide())
 				if (liste.get(i).getPiece().getCamp()=="noir"){//si dans la liste la piece est noires
 					listepiece.add(liste.get(i));//ajoute dans la liste des pieces adverses les pieces noires
-			}
+				}
 		}
 		return listepiece;		
 	}
