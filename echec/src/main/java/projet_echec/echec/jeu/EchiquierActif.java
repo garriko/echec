@@ -334,7 +334,7 @@ public class EchiquierActif extends Echiquier {
 
 			
 			if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Pion"))){
-				plop= filtrerpresenceAdversaireDiagonale(caseDepart, caseDepart.getPiece().getDeplacementPossible(caseDepart));
+				plop= filtrerpresenceAdversaireDiagonale(caseDepart,plop);
 			}
 			System.out.println("liste des deplcement possible 2f: "+plop.size());
 			for(int i=0; i< plop.size();i++){
