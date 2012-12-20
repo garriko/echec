@@ -454,7 +454,7 @@ public class InterfaceJeu {
 			joueur1.setVisible(false);
 			joueur2.setVisible(true);
 			countdownJ1.stop();
-			countdownJ1.setInitialDelay(timeRemaining);
+			//countdownJ1.setInitialDelay(25);
 			countdownJ2.start();
 		}
 		else {
@@ -462,7 +462,7 @@ public class InterfaceJeu {
 			joueur2.setVisible(false);
 			joueur1.setVisible(true);
 			countdownJ2.stop();
-			countdownJ2.setInitialDelay(timeRemaining);
+			//countdownJ2.setInitialDelay(25);
 			countdownJ1.start();
 		}	
 	}
@@ -569,48 +569,9 @@ public class InterfaceJeu {
 			
 			if (tab_cases.contains(e.getSource())){
 				int numCase = ((Vector<JButton>) tab_cases).indexOf(e.getSource());
-				//int largeur = numCase%8 +1;
-				//int hauteur = numCase/8 +1;
-				//Case eCase = plateauJeu.chercherCase(new Position(hauteur, largeur));
+
 				Position p = new Position(8-numCase/8,numCase%8 +1);
-				Case eCase = plateauJeu.chercherCase(p);
-			
-			
-				//System.out.println(eCase.getPosition().getLargeur());
-				//System.out.println(eCase.getPosition().getHauteur());
-				
-				/*
-				if ((eCase.estVide()==true) && (selectionCase==true)){
-					CaseSelectionnee = eCase;
-					selectionCase = true;
-				}
-				else if ((eCase.estVide()==true) && (selectionCase==true)){
-					try {
-						plateauJeu.selectionnerCase(eCase);
-					} catch (DeplacementException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					actualiserImage(CaseSelectionnee);
-					actualiserImage(eCase);
-					selectionCase = false;
-				}
-				else if ((eCase.estVide()==false) && (selectionCase==true)){
-					if (eCase.getPiece().getCamp()==CaseSelectionnee.getPiece().getCamp()){
-						CaseSelectionnee = eCase;
-					}
-					else {
-						casesPrisesJ1.add(eCase.getPiece().getClass().getSimpleName());
-						// ou casesPrisesJ2.add(eCase.getPiece().getClass().getSimpleName());
-						// prendre la pièce
-						actualiserImage(CaseSelectionnee);
-						actualiserImage(eCase);
-						selectionCase = false;
-						actualiserPiecesPrises(1);
-						// ou actualiserPiecesPrises(2);
-					}
-				}
-				*/
+				Case eCase = plateauJeu.chercherCase(p);			
 				
 				String dep = "rien";
 				try {
@@ -625,10 +586,10 @@ public class InterfaceJeu {
 					game.ajoutDeplacement(dep);
 					for (int i=0; i<plateauJeu.getPlateau().size(); i++){						
 						actualiserImage(plateauJeu.getPlateau().get(i));
+					}
 						actualiserTour(getTour());
 						
-						//aPerduUnePiece(tour);
-					}				
+						//aPerduUnePiece(tour);			
 				}
 				
 				
