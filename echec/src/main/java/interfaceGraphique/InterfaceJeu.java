@@ -30,6 +30,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import projet_echec.echec.exception.DeplacementException;
+import projet_echec.echec.gestion.GestionJeu;
 import projet_echec.echec.gestion.Partie;
 import projet_echec.echec.jeu.Case;
 import projet_echec.echec.jeu.Echiquier;
@@ -489,10 +490,10 @@ public class InterfaceJeu {
 				new InterfacePopupOptions(game.getListeOptions());
 			}
 			if (e.getSource()==boutonNouvellePartie){
-				//new InterfaceConfigPartie();
+				new InterfaceConfigPartie(new GestionJeu());
 			}
 			if (e.getSource()==boutonChargerPartie){
-				//new InterfaceCatalogue("reprendre");
+				new InterfaceCatalogue("reprendre", new GestionJeu());
 			}
 			if (e.getSource()==boutonRevenirMenu){
 				new InterfacePopupSauvegarderQuitter("Menu", game, plateauJeu);

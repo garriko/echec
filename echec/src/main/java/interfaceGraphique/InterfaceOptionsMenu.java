@@ -50,15 +50,15 @@ public class InterfaceOptionsMenu {
 	 */
 	public InterfaceOptionsMenu() {
 	
-		JFrame fenetre=new JFrame("Menu Principal - Options");
+		fenetre=new JFrame("Menu Principal - Options");
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		Container tmp = fenetre.getContentPane();
+		tmp = fenetre.getContentPane();
 		
-		JButton BoutonAppliquer = new JButton(new ImageIcon("images/boutonAppliquer.png"));
-		JButton BoutonAnnuler = new JButton(new ImageIcon("images/boutonAnnulerOptions.png"));
-		JCheckBox modeAide = new JCheckBox();
+		BoutonAppliquer = new JButton(new ImageIcon("images/boutonAppliquer.png"));
+		BoutonAnnuler = new JButton(new ImageIcon("images/boutonAnnulerOptions.png"));
+		modeAide = new JCheckBox();
 		int duree = 10;
-		JSpinner dureeTour = new JSpinner(new SpinnerNumberModel(duree, duree - 5, duree + 100,5));
+		dureeTour = new JSpinner(new SpinnerNumberModel(duree, duree - 5, duree + 100,5));
 		
 		BoutonAppliquer.setBounds(500, 550, 158, 72); //position x, position y, largeur, hauteur
 		BoutonAnnuler.setBounds(670, 550, 158, 72);
@@ -78,7 +78,7 @@ public class InterfaceOptionsMenu {
 		boutonsChoix.add(BoutonAnnuler);
 		boutonsChoix.add(modeAide);
 		boutonsChoix.add(dureeTour);
-		modeAide.addActionListener(new StateListener());
+		//modeAide.addActionListener(new StateListener());
 		
 		boutonsChoix.setOpaque(false);
 		tmp.add(boutonsChoix);
@@ -94,48 +94,50 @@ public class InterfaceOptionsMenu {
 			if (e.getSource() == BoutonAppliquer){
 
 				try {
-				dos = new DataOutputStream(
-				new BufferedOutputStream(
-				new FileOutputStream(
-				new File("OptionsDefaut.vega"))));
-
-				dos.writeInt(((Integer)dureeTour.getValue()).intValue());
-				dos.writeBoolean(modeAide.isSelected());
-
-				dos.close();
-
-				dis = new DataInputStream(
-				new BufferedInputStream(
-				new FileInputStream(
-				new File("OptionsDefaut.vega"))));
-
-				//System.out.println(dis.readInt());
-				//System.out.println(dis.readBoolean());
-
-
-
-				}catch (FileNotFoundException f) {
-				f.printStackTrace();
-				} catch (IOException f) {
-				f.printStackTrace();
+					dos = new DataOutputStream(
+					new BufferedOutputStream(
+					new FileOutputStream(
+					new File("OptionsDefaut.vega"))));
+	
+					dos.writeInt(((Integer)dureeTour.getValue()).intValue());
+					dos.writeBoolean(modeAide.isSelected());
+	
+					dos.close();
+	
+					dis = new DataInputStream(
+					new BufferedInputStream(
+					new FileInputStream(
+					new File("OptionsDefaut.vega"))));
+	
+					//System.out.println(dis.readInt());
+					//System.out.println(dis.readBoolean());
+	
 				}
-
+				catch (FileNotFoundException f) {
+					f.printStackTrace();
+				} 
+				catch (IOException f) {
+					f.printStackTrace();
+				}
+	
 				//System.out.println( ((Integer)dureeTour.getValue()).intValue() );
 				//System.out.println("source : "+ modeAide.isSelected() );
+				
+				fenetre.setVisible(false);
 
-				}
+			}
 			else if (e.getSource() == BoutonAnnuler){
-
+				fenetre.setVisible(false);
 			}
 		}
 	}
-	
+	/*
 	class StateListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 
 		}
-		}
-	
+	}
+	*/
 	public static void main(String[] args){
 		new InterfaceOptionsMenu();
 	}

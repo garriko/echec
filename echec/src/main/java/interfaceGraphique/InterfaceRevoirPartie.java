@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.ImageIcon;
@@ -20,6 +21,10 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerListModel;
 import javax.swing.SpinnerNumberModel;
+
+import projet_echec.echec.gestion.Partie;
+import projet_echec.echec.gestion.SaveGame;
+import projet_echec.echec.wrapper.Wrapper;
 
 
 /**
@@ -49,10 +54,20 @@ public class InterfaceRevoirPartie {
 	/**
 	 * Constructeur de la classe
 	 */
-	public InterfaceRevoirPartie() {
+	public InterfaceRevoirPartie(String nomPartie) {
 		fenetre=new JFrame("Replay");
 		tmp = fenetre.getContentPane();
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		try {
+			Wrapper w = SaveGame.charger(nomPartie);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		boutonLect = new ImageIcon("images/interface_revoirpartieBoutonLecture.png").getImage().getScaledInstance(92, 64, Image.SCALE_DEFAULT);
@@ -107,7 +122,7 @@ public class InterfaceRevoirPartie {
 	}
 	
 	public static void main(String[] args){
-		new InterfaceRevoirPartie();
+		//new InterfaceRevoirPartie();
 	}
 
 	
