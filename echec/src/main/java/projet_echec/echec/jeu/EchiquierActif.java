@@ -2,7 +2,6 @@ package projet_echec.echec.jeu;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Timer;
 import java.util.Vector;
 
 import projet_echec.echec.exception.DeplacementException;
@@ -40,6 +39,7 @@ public class EchiquierActif extends Echiquier {
 	public EchiquierActif() throws ClassNotFoundException, IOException{
 		super();
 		campActif = new String("blanc");
+		findKings();
 	}
 	
 	/**
@@ -48,6 +48,21 @@ public class EchiquierActif extends Echiquier {
 	 */
 	public EchiquierActif(Variantes V){
 		super(V);
+		campActif = new String("blanc");
+		findKings();
+	}
+	/**
+	 * Cherche les rois sur l'echiquier
+	 * @return
+	 */
+	public void findKings(){
+		for(int i=0;i<plateau.size();i++){
+			if(plateau.get(i).getPiece().getClass().getSimpleName().equals(new String("Roi")))
+				if(plateau.get(i).getPiece().getCamp()=="noir")
+					caseRoiNoir=plateau.get(i);
+				else
+					caseRoiBlanc=plateau.get(i);
+		}
 	}
 	
 	/**

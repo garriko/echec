@@ -37,12 +37,10 @@ public abstract class Gestion {
 	
 	/**
 	 * Supprime de la liste (et du disque dur) la partie correspondant a nomPartie
-	 * @param nomPartie Nom de la partie a supprimer (doit forcément faire partie de listePartie
+	 * @param nomPartie Nom de la partie a supprimer (doit forcément faire partie de listePartie)
+	 * @throws Exception 
 	 */
-	public void supprimerPartie(String nomPartie){
-		listePartie.remove(nomPartie);
-	}
-	
+	public abstract void supprimerPartie(String nomPartie) throws Exception;
 	public Vector<String> getListePartie(){return listePartie;}
 	
 	/**
