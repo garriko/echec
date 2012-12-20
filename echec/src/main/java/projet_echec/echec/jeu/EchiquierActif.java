@@ -22,11 +22,11 @@ public class EchiquierActif extends Echiquier {
 	/**
 	 * case ou se situe le roi blanc
 	 */
-	private Case caseRoiBlanc;
+	private Case caseRoiBlanc=new Case(new Position(12,12));;
 	/**
 	 * case ou se situe le roi noir
 	 */
-	private Case caseRoiNoir;
+	private Case caseRoiNoir=new Case(new Position(12,12));
 
 	private String campActif;
 
@@ -60,9 +60,9 @@ public class EchiquierActif extends Echiquier {
 			if(!plateau.get(i).estVide())
 				if(plateau.get(i).getPiece().getClass().getSimpleName().equals(new String("Roi")))
 					if(plateau.get(i).getPiece().getCamp()=="noir")
-						caseRoiNoir=plateau.get(i);
+						caseRoiNoir.setPosition(plateau.get(i).getPosition());
 					else
-						caseRoiBlanc=plateau.get(i);
+						caseRoiBlanc.setPosition(plateau.get(i).getPosition());
 		}
 	}
 
@@ -257,7 +257,7 @@ public class EchiquierActif extends Echiquier {
 	 * @throws DeplacementException 
 	 */
 	public String selectionnerCase(Case caseSelectionne) throws DeplacementException{
-		System.out.println(caseSelectionne.estVide());
+		System.out.println("1");
 		//System.out.println(caseSelectionne.getPosition().getHauteur()+","+caseSelectionne.getPosition().getLargeur());
 
 		if(this.caseSelectionne==null)
@@ -268,19 +268,24 @@ public class EchiquierActif extends Echiquier {
 				//System.out.println("11");
 				if(caseSelectionne.getPiece().getCamp().equals(campActif))
 				{
+					System.out.println("2");
 					//System.out.println("111");
 					this.caseSelectionne=caseSelectionne;
 					//System.out.println(this.caseSelectionne.getPiece());
+					System.out.println(caseSelectionne);
 					return "rien";
 				}
 				else{
 					//System.out.println("112");
+					System.out.println("3");
+					System.out.println(caseSelectionne);
 					return "rien";
 				}
 			}
 			else
 			{
 				//System.out.println("12");
+				System.out.println(caseSelectionne);
 				return "rien";
 			}
 
@@ -290,14 +295,17 @@ public class EchiquierActif extends Echiquier {
 			//System.out.println("2");
 			if(this.caseSelectionne.equals(caseSelectionne))
 			{
+				System.out.println("4");
 				//System.out.println("21");
 				this.caseSelectionne=null;
+				System.out.println(caseSelectionne);
 				return "rien";
 			}
 			else
 			{
 				//System.out.println("22");
 				String dep;
+				System.out.println("5");
 				dep = deplacer(this.caseSelectionne,caseSelectionne);
 				this.caseSelectionne=null;
 				if(!dep.equals("rien"))
@@ -305,11 +313,13 @@ public class EchiquierActif extends Echiquier {
 						campActif = new String("noir");
 					else
 						campActif = new String("blanc");
+				System.out.println(caseSelectionne);
 				return dep;
 			}
 
 		}
 
+		
 
 	}
 	/**
@@ -322,21 +332,24 @@ public class EchiquierActif extends Echiquier {
 	{
 
 		String res=getNotationAlgebrique(caseDepart, caseArrivee);
-		Case sauvegardecasearrive = caseArrivee;
+		Case sauvegardeArrivee = caseArrivee;
 		if(deplacersanscondition(caseDepart,caseArrivee))
 		{
+			System.out.println(6);
 			if(campActif.equals("noir"))
 			{
 				if(echec()!=11 && echec()!=21)
 				{
-					mangerPiece(caseArrivee);//pas echec donc le deplacement se fait
+					System.out.println(7);
+					validerDeplacement(caseArrivee,sauvegardeArrivee);//pas echec donc le deplacement se fait
 					return res;
 
 				}
 				else
 				{	
+					System.out.println(8);
 					deplacersanscondition(caseArrivee,caseDepart);
-					caseArrivee=sauvegardecasearrive;
+					caseArrivee=sauvegardeArrivee;
 					//attention: il n'y as pas de deplacement effectif
 
 					return "rien";
@@ -348,15 +361,15 @@ public class EchiquierActif extends Echiquier {
 			{
 				if(echec()!=12 && echec()!=22)
 				{ //Si le deplacement ne provoque pas de mise en danger du roi
-					mangerPiece(caseArrivee);
-
+					validerDeplacement(caseArrivee,sauvegardeArrivee);
+					System.out.println(9);
 					return res;
 				}
 				else
 				{
 					deplacersanscondition(caseArrivee,caseDepart);	
-					caseArrivee=sauvegardecasearrive;
-
+					caseArrivee=sauvegardeArrivee;
+					System.out.println(10);
 					return "rien";
 				}
 
@@ -377,16 +390,34 @@ public class EchiquierActif extends Echiquier {
 
 	}
 
-	public void mangerPiece(Case caseArrivee)
+	public void validerDeplacement(Case caseDepart, Case caseArrivee)
 	{
-		if(!caseArrivee.estVide())//si il y a une case a l'arrivee
+		System.out.println(caseDepart.getPiece().getClass().getSimpleName());
+		if(!caseArrivee.estVide())//si il y a une piece a l'arrivee
 		{
+			System.out.println("-1");
 			this.listePiecePrises.add(caseArrivee.getPiece());//on ajoute la piece dans la liste des pieces prises
 
 			for(int j=0; j< listePieceEnJeu.size();j++)//pour toutes les pieces en jeu
 				if(this.listePieceEnJeu.get(j).equals(caseArrivee))//si il y a une case egale a la case d'arrivee
 					this.listePieceEnJeu.remove(j);//on la supprime
 		}
+		if(caseDepart.getPiece().getClass().getSimpleName().equals("Roi"))
+		{
+			System.out.println("-1");
+			if(caseDepart.getPiece().getCamp().equals("noir"))
+			{
+				System.out.println("-2");
+				this.caseRoiNoir.setPosition(caseArrivee.getPosition());
+			}
+			else
+			{
+				System.out.println("-3");
+				this.caseRoiBlanc.setPosition(caseArrivee.getPosition());
+			}
+		}
+		if(!caseDepart.getPiece().isDejaBouge())
+			caseDepart.getPiece().setDejaBouge(true);
 	}
 
 	/**
@@ -401,34 +432,27 @@ public class EchiquierActif extends Echiquier {
 		
 		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Fou"))||caseDepart.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
 			filtrePourFou(caseDepart, plop);
+			System.out.println("pas bon 1");
 		}
 		
 		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Tour"))||caseDepart.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
 			filtrePourTour(caseDepart, plop);
+			System.out.println("pas bon 2");
 		}
 		
 		plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
 
 		
-		
+		System.out.println("filtre 1");
 		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Pion"))){
-			
 			filtrerpresenceAdversaireDiagonale(caseDepart,plop);
-			System.out.println("on ne peut pas bouger le pion");
+			System.out.println("pas bon 3");
 		}
 		
 		for(int i=0; i< plop.size();i++){
 
 			if(plop.get(i).getPosition().equals(caseArrivee.getPosition())){
-				if(caseDepart.getPiece().getClass().getSimpleName().equals("Roi"))
-				{
-					if(caseDepart.getPiece().getCamp().equals("noir"))
-						this.caseRoiNoir.setPosition(caseArrivee.getPosition());
-					if(caseDepart.getPiece().getCamp().equals("blanc"))
-						this.caseRoiBlanc.setPosition(caseArrivee.getPosition());
-				}
-				if(!caseDepart.getPiece().isDejaBouge())
-					caseDepart.getPiece().setDejaBouge(true);
+				System.out.println("1000");
 				changerCase(caseDepart, caseArrivee);
 				depEffectue=true;
 			}
@@ -475,13 +499,11 @@ public class EchiquierActif extends Echiquier {
 				{
 					casePossible.remove(c);
 					i--;
-					System.out.println("removed 1");
 				}
 				else if(caseEchiquier.getPiece().getCamp().equals(caseActuelle.getPiece().getCamp()))
 				{
 					casePossible.remove(c);
 					i--;
-					System.out.println("removed 2");
 				}
 
 			}
@@ -491,7 +513,6 @@ public class EchiquierActif extends Echiquier {
 				{
 					casePossible.remove(c);
 					i--;
-					System.out.println("removed 3");
 				}	
 		
 			}

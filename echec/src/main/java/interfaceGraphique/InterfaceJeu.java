@@ -401,7 +401,11 @@ public class InterfaceJeu {
 		fenetre.setJMenuBar(barreMenu);
 		barreMenu.setVisible(true);
 		fenetre.setVisible(true);
-	
+		
+		/*
+		System.out.println(plateauCases.get(60).getPiece().getClass().getSimpleName());
+		System.out.println(plateauCases.get(60).getPiece().getCamp());
+		*/
 	}
 	
 	
@@ -568,6 +572,7 @@ public class InterfaceJeu {
 		public void actionPerformed(ActionEvent e){
 			
 			if (tab_cases.contains(e.getSource())){
+				
 				int numCase = ((Vector<JButton>) tab_cases).indexOf(e.getSource());
 
 				Position p = new Position(8-numCase/8,numCase%8 +1);
