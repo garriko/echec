@@ -40,5 +40,22 @@ public class GestionCatalogueRevoir extends Gestion {
 		
 	}
 
+	@Override
+	public void supprimerPartie(String nomPartie) throws Exception {
+		listePartie.remove(nomPartie);
+        File file = new File("partie terminees/"+nomPartie+".gech");
+
+        if (!file.exists()) {
+            throw new Exception("le fichier est introuvable !");
+        }
+        //Tester les propriétés et les droits sur le fichier
+        if (!file.canWrite()) {
+            throw new Exception("Droit insuffisant pour accéder au fichier");
+        }
+
+       file.delete();
+		
+	}
+
 
 }
