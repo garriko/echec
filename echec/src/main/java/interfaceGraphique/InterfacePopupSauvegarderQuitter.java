@@ -55,13 +55,13 @@ public class InterfacePopupSauvegarderQuitter {
 		tmp = fenetre.getContentPane();
 		boutonOUI = new JButton(new ImageIcon("images/oui.png"));
 		boutonNON = new JButton(new ImageIcon("images/non.png"));
-		boutonAnnuler = new JButton(new ImageIcon("images/boutonAnnuler.png"));
+		boutonAnnuler = new JButton("Annuler");
 
 		nomSauvegarde = new JTextField("sauvegarde");
 		
 		boutonOUI.setBounds(25, 257, 105, 52); //position x, position y, largeur, hauteur
 		boutonNON.setBounds(150, 257, 105, 52); 
-		boutonNON.setBounds(275, 257, 105, 100); 
+		boutonAnnuler.setBounds(275, 257, 105, 52); 
 		nomSauvegarde.setBounds(22, 145, 375, 40);
 		
 		choix = menuOuQuitter;

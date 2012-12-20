@@ -1,6 +1,6 @@
 package interfaceGraphique;
 
-import interfaceGraphique.InterfaceMenu.Ecouteur;
+
 
 import java.awt.Color;
 import java.awt.Container;
@@ -41,6 +41,7 @@ public class InterfaceConfigVariante {
 	JButton boutonModifier;
 	JButton boutonAppliquer;
 	JButton boutonRetour;
+	JButton boutonSupprimer;
 	
 	JLabel infos;
 
@@ -75,11 +76,13 @@ public class InterfaceConfigVariante {
 		boutonModifier = new JButton(new ImageIcon("Images/InterfaceConfigVariantesBoutonModifier.png"));
 		boutonAppliquer = new JButton(new ImageIcon("Images/InterfaceConfigVariantesBoutonAppliquer.png"));
 		boutonRetour = new JButton(new ImageIcon("Images/InterfaceConfigVariantesBoutonRetour.png"));
+		boutonSupprimer = new JButton("Supprimer");
 		
 		boutonCreer.setBounds(452, 462, 115, 49); //position x, position y, largeur, hauteur
 		boutonModifier.setBounds(318, 462, 134, 49); 
 		boutonAppliquer.setBounds(593, 593, 179, 62);
 		boutonRetour.setBounds(770, 593, 147, 52);
+		boutonSupprimer.setBounds(100, 462, 134, 49);
 		
 		
 		Ecouteur listen=new Ecouteur();
@@ -87,6 +90,7 @@ public class InterfaceConfigVariante {
 		boutonModifier.addActionListener(listen);
 		boutonAppliquer.addActionListener(listen);
 		boutonRetour.addActionListener(listen);
+		boutonSupprimer.addActionListener(listen);
 		
 	
 		JPanel imageFond = new TestImagePanel(new ImageIcon("images/InterfaceConfigVariantes.png").getImage());
@@ -96,6 +100,7 @@ public class InterfaceConfigVariante {
 		imageFond.add(boutonModifier);
 		imageFond.add(boutonAppliquer);   
 		imageFond.add(boutonRetour);  
+		imageFond.add(boutonSupprimer);
 		imageFond.add(infos);
 		imageFond.add(listeVariantes);
 		
@@ -144,7 +149,19 @@ public class InterfaceConfigVariante {
 				e1.printStackTrace();
 			}
 			*/	
-				
+			
+			if(e.getSource()==boutonSupprimer){
+				try {
+					catalogue.supprimerPartie((String) listeVariantes.getSelectedValue());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				liste.removeAllElements();
+				catalogue.chargerListe();
+				liste = catalogue.getListePartie();
+				listeVariantes.setListData(liste);
+			}			
 			if (e.getSource()==boutonCreer){
 				new InterfacePersoEchiquier(InterfaceConfigVariante.this);
 			}
@@ -156,7 +173,7 @@ public class InterfaceConfigVariante {
 				fenetre.setVisible(false);
 			}
 			if (e.getSource()==boutonRetour){
-				
+				fenetre.setVisible(false);
 			}
 		}
 	}
