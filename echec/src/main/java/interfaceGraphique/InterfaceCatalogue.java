@@ -31,8 +31,6 @@ import projet_echec.echec.wrapper.Wrapper;
  */
 
 public class InterfaceCatalogue {
-
-	GestionJeu cerveley;
 	
 	JFrame fenetre;
 	Container tmp; 
@@ -56,9 +54,7 @@ public class InterfaceCatalogue {
 	 * parties à revoir ou à rejouées
 	 * 
 	 */
-	public InterfaceCatalogue(String mode, GestionJeu cerveau) {
-		
-		cerveley = cerveau;
+	public InterfaceCatalogue(String mode) {
 		
 		fenetre=new JFrame("Catalogue");
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -185,14 +181,14 @@ public class InterfaceCatalogue {
 			}
 			else if (e.getSource()==boutonRetour){
 				fenetre.setVisible(false);
-				new InterfaceMenu(new GestionJeu());
+				new InterfaceMenu();
 			}
 		}
 	}
 	
 	public static void main(String[] args){
 		
-		new InterfaceCatalogue(new String("revoir"), new GestionJeu());
+		new InterfaceCatalogue(new String("revoir"));
 	}
 
 	

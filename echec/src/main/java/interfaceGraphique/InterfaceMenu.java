@@ -24,7 +24,6 @@ import projet_echec.echec.gestion.GestionJeu;
  */
 
 public class InterfaceMenu {
-	GestionJeu cerveley;
 	JFrame fenetre;
 	Container tmp;
 	Image bouton1;
@@ -41,12 +40,11 @@ public class InterfaceMenu {
 	/**
 	 * Constructeur de la classe
 	 */
-	public InterfaceMenu(GestionJeu cerveau) {
+	public InterfaceMenu() {
 		
 		fenetre= new JFrame();
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		tmp = fenetre.getContentPane();
-		cerveley=cerveau;
 		bouton1 = new ImageIcon("images/boutonCommencer.png").getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT);
 		Bouton1 = new JButton(new ImageIcon(bouton1));
 		bouton2 = new ImageIcon("images/boutonReprendre.png").getImage().getScaledInstance(500, 100, Image.SCALE_DEFAULT);
@@ -99,11 +97,11 @@ public class InterfaceMenu {
 			}
 			if (e.getSource()==Bouton2){ // Continuer partie
 				fenetre.setVisible(false);
-				new InterfaceCatalogue("reprendre", cerveley);	
+				new InterfaceCatalogue("reprendre");	
 			}
 			if (e.getSource()==Bouton3){ // Revoir partie
 				fenetre.setVisible(false);
-				new InterfaceCatalogue("revoir", cerveley);
+				new InterfaceCatalogue("revoir");
 			}
 			if (e.getSource()==Bouton4){ // Options partie
 				new InterfaceOptionsMenu();

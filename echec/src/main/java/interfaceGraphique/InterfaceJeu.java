@@ -497,7 +497,7 @@ public class InterfaceJeu {
 	
 	
 	public void finPartie(){
-		//GestionJeu().finPartie(game);
+		GestionJeu.finPartie(game);
 	}
 	
 	
@@ -580,10 +580,10 @@ public class InterfaceJeu {
 				new InterfacePopupOptions(InterfaceJeu.this);
 			}
 			if (e.getSource()==boutonNouvellePartie){
-				new InterfaceConfigPartie(new GestionJeu());
+				new InterfaceConfigPartie();
 			}
 			if (e.getSource()==boutonChargerPartie){
-				new InterfaceCatalogue("reprendre", new GestionJeu());
+				new InterfaceCatalogue("reprendre");
 			}
 			if (e.getSource()==boutonRevenirMenu){
 				new InterfacePopupSauvegarderQuitter("Menu", game, plateauJeu, InterfaceJeu.this);

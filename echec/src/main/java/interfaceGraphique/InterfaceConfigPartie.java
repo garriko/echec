@@ -235,14 +235,14 @@ public class InterfaceConfigPartie {
 			}
 			if (e.getSource()==Bouton3){ //annuler
 				fenetre.setVisible(false);
-				InterfaceMenu pop = new InterfaceMenu(cerveley);
+				InterfaceMenu pop = new InterfaceMenu();
 				fenetre.dispose();
 			}
 		}
 	}
 	
 	public static void main(String[] args){
-		new InterfaceConfigPartie(new GestionJeu());
+		new InterfaceConfigPartie();
 	}
 
 	

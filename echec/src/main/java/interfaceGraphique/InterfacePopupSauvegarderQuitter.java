@@ -99,7 +99,7 @@ public class InterfacePopupSauvegarderQuitter {
 				if (choix=="Menu"){
 					fenetre.setVisible(false);
 					mere.getFrame().setVisible(false);
-					new InterfaceMenu(new GestionJeu());
+					new InterfaceMenu();
 				}
 				else if (choix=="Quitter"){
 					System.exit(0);
@@ -109,7 +109,7 @@ public class InterfacePopupSauvegarderQuitter {
 				if (choix=="Menu"){
 					fenetre.setVisible(false);
 					mere.getFrame().setVisible(false);
-					new InterfaceMenu(new GestionJeu());
+					new InterfaceMenu();
 				}
 				else if (choix=="Quitter"){
 					System.exit(0);

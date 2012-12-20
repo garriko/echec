@@ -15,6 +15,6 @@ public class App
     public static void main( String[] args )
     {
       GestionJeu cerveau = new GestionJeu();
-       InterfaceMenu menu = new InterfaceMenu(cerveau);
+       InterfaceMenu menu = new InterfaceMenu();
     }
 }
