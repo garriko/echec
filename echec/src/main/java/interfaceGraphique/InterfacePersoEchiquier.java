@@ -588,6 +588,7 @@ public class InterfacePersoEchiquier {
 				else if ((eCase.estVide()==false) && (selectionPiece==true)){ // si case occupée et pièce retenue
 					try {					
 						nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee) ;
+						miseAJour(e);
 					} 
 					catch (PresenceKingException e1) {
 						// TODO Auto-generated catch block
@@ -607,6 +608,7 @@ public class InterfacePersoEchiquier {
 					try {
 						try {
 							nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee);
+							miseAJour(e);
 						} catch (PresenceKingException e1) {
 							// TODO Auto-generated catch block
 							e1.toString();
@@ -632,6 +634,7 @@ public class InterfacePersoEchiquier {
 					try {
 						try {
 							nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee) ;
+							miseAJour(e);
 						} catch (PresenceKingException e1) {
 							// TODO Auto-generated catch block
 							e1.toString();
@@ -668,6 +671,7 @@ public class InterfacePersoEchiquier {
 					}
 					try {
 						nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee) ;
+						miseAJour(e);
 					} catch (PresenceKingException e1) {
 						// TODO Auto-generated catch block
 						e1.toString();
@@ -695,44 +699,8 @@ public class InterfacePersoEchiquier {
 			}
 			
 			else{
-				if (e.getSource()==PionBlanc){
-					PieceSelectionnee = new Pion("blanc");
-				}
-				if (e.getSource()==TourBlanc){
-					PieceSelectionnee = new Tour("blanc");
-				}
-				if (e.getSource()==CavalierBlanc){
-					PieceSelectionnee = new Cavalier("blanc");
-				}
-				if (e.getSource()==FouBlanc){
-					PieceSelectionnee = new Fou("blanc");
-				}
-				if (e.getSource()==RoiBlanc){
-					PieceSelectionnee = new Roi("blanc");
-				}
-				if (e.getSource()==ReineBlanc){
-					PieceSelectionnee = new Reine("blanc");
-				}
-				if (e.getSource()==PionNoir){
-					PieceSelectionnee = new Pion("noir");
-				}
-				if (e.getSource()==TourNoir){
-					PieceSelectionnee = new Tour("noir");
-				}
-				if (e.getSource()==CavalierNoir){
-					PieceSelectionnee = new Cavalier("noir");
-				}
-				if (e.getSource()==FouNoir){
-					PieceSelectionnee = new Fou("noir");
-				}
-				if (e.getSource()==RoiNoir){
-					PieceSelectionnee = new Roi("noir");
-				}
-				if (e.getSource()==ReineNoir){
-					PieceSelectionnee = new Reine("noir");
-				}
-				selectionPiece = true ;
-				selectionCase = false ;
+
+				miseAJour(e);
 			}
 		}
 	}
@@ -754,12 +722,50 @@ public class InterfacePersoEchiquier {
 		}
 	}
 
-
-
-	
-	
-	public static void main(String[] args){
-		//new InterfacePersoEchiquier("classique");
+	public void miseAJour(ActionEvent e){
+	{
+		if (e.getSource()==PionBlanc){
+			PieceSelectionnee = new Pion("blanc");
+		}
+		if (e.getSource()==TourBlanc){
+			PieceSelectionnee = new Tour("blanc");
+		}
+		if (e.getSource()==CavalierBlanc){
+			PieceSelectionnee = new Cavalier("blanc");
+		}
+		if (e.getSource()==FouBlanc){
+			PieceSelectionnee = new Fou("blanc");
+		}
+		if (e.getSource()==RoiBlanc){
+			PieceSelectionnee = new Roi("blanc");
+		}
+		if (e.getSource()==ReineBlanc){
+			PieceSelectionnee = new Reine("blanc");
+		}
+		if (e.getSource()==PionNoir){
+			PieceSelectionnee = new Pion("noir");
+		}
+		if (e.getSource()==TourNoir){
+			PieceSelectionnee = new Tour("noir");
+		}
+		if (e.getSource()==CavalierNoir){
+			PieceSelectionnee = new Cavalier("noir");
+		}
+		if (e.getSource()==FouNoir){
+			PieceSelectionnee = new Fou("noir");
+		}
+		if (e.getSource()==RoiNoir){
+			PieceSelectionnee = new Roi("noir");
+		}
+		if (e.getSource()==ReineNoir){
+			PieceSelectionnee = new Reine("noir");
+		}
+		selectionPiece = true ;
+		selectionCase = false ;
 	}
+
+	
+	
 }
+}	
 
