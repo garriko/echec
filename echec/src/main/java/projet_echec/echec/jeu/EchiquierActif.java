@@ -397,6 +397,7 @@ public class EchiquierActif extends Echiquier {
 				depEffectue=true;
 			}
 		}
+		
 		return depEffectue;
 	}
 

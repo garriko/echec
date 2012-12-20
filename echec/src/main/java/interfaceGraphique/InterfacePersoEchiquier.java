@@ -723,7 +723,7 @@ public class InterfacePersoEchiquier {
 	}
 	public void miseAJour(){
 		if (PieceSelectionnee.getClass().getSimpleName().equals("Pion")){
-			if(PieceSelectionnee.getCamp().equals("blanc"))
+			if(PieceSelectionnee.getCamp().equals(new String("blanc")))
 				PieceSelectionnee = new Pion("blanc");
 			else
 				PieceSelectionnee = new Pion("noir");
