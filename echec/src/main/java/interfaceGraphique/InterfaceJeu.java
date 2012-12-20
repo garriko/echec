@@ -376,13 +376,10 @@ public class InterfaceJeu {
 	 */
 	
 	public void actualiserImage(Case NewCase){
-		NewCase.setPosition(new Position(8-NewCase.getPosition().getHauteur()+1, NewCase.getPosition().getLargeur()));
-		int numCase = NewCase.getPosition().getLargeur() + 8*(NewCase.getPosition().getHauteur()-1)-1;			
+		Position p = new Position(8-NewCase.getPosition().getHauteur()+1, NewCase.getPosition().getLargeur());
+		int numCase = p.getLargeur() + 8*(p.getHauteur()-1)-1;		
 		((Vector<JButton>) tab_cases).get(numCase).setIcon(new ImageIcon(NewCase.getImg()));
-		System.out.println(NewCase.getPosition().getLargeur());
-		System.out.println(numCase%8 +1);
-		System.out.println(NewCase.getPosition().getLargeur());
-		System.out.println(numCase/8 +1);
+
 	}
 	
 	
@@ -510,8 +507,9 @@ public class InterfaceJeu {
 				//int largeur = numCase%8 +1;
 				//int hauteur = numCase/8 +1;
 				//Case eCase = plateauJeu.chercherCase(new Position(hauteur, largeur));
-				Case eCase = plateauJeu.getPlateau().get(numCase);
-				eCase.setPosition(new Position(8-eCase.getPosition().getHauteur()+1, eCase.getPosition().getLargeur()));
+				Position p = new Position(8-numCase/8,numCase%8 +1);
+				Case eCase = plateauJeu.chercherCase(p);
+			
 				//System.out.println(eCase.getPosition().getLargeur());
 				//System.out.println(eCase.getPosition().getHauteur());
 				

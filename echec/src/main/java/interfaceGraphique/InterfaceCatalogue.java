@@ -168,6 +168,7 @@ public class InterfaceCatalogue {
 				for (int i=0; i<liste.size(); i++){
 					try {
 						catalogue.supprimerPartie(liste.get(i));
+						i--;
 					} 
 					catch (Exception e1) {
 						// TODO Auto-generated catch block
