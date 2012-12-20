@@ -1,7 +1,9 @@
 package interfaceGraphique;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -102,7 +104,9 @@ public class InterfaceConfigPartie {
 		rotation.setOpaque(false);
 		rotation.setVisible(true);
 		
-		variante.setBounds(200, 550, 200, 100);
+		variante.setBounds(250, 485, 200, 100);
+		variante.setFont(new Font("Times New Roman", 0, 40));
+		variante.setForeground(Color.white);
 		variante.setVisible(true);
 		
 		
@@ -163,27 +167,27 @@ public class InterfaceConfigPartie {
 		Bouton2.addActionListener(listen);
 		Bouton3.addActionListener(listen);
 	
-		JPanel boutonsChoix = new TestImagePanel(new ImageIcon("images/configPartie.png").getImage().getScaledInstance(1000, 700, Image.SCALE_DEFAULT));
-		boutonsChoix.setLayout(null);
+		JPanel imageFond = new TestImagePanel(new ImageIcon("images/configPartie.png").getImage().getScaledInstance(1000, 700, Image.SCALE_DEFAULT));
+		imageFond.setLayout(null);
 		
-		boutonsChoix.add(Bouton1);   		
-		boutonsChoix.add(Bouton2);
-		boutonsChoix.add(Bouton3);
-		
-		
-		boutonsChoix.add(nomJ1);	
-		boutonsChoix.add(nomJ2);
-		
-		boutonsChoix.add(aideJ1);
-		boutonsChoix.add(aideJ2);
-		boutonsChoix.add(rotation);
-		boutonsChoix.add(variante);
-		boutonsChoix.add(dureeJ1);
-		boutonsChoix.add(dureeJ2);
+		imageFond.add(Bouton1);   		
+		imageFond.add(Bouton2);
+		imageFond.add(Bouton3);
 		
 		
-		boutonsChoix.setOpaque(false);
-		tmp.add(boutonsChoix);
+		imageFond.add(nomJ1);	
+		imageFond.add(nomJ2);
+		
+		imageFond.add(aideJ1);
+		imageFond.add(aideJ2);
+		imageFond.add(rotation);
+		imageFond.add(variante);
+		imageFond.add(dureeJ1);
+		imageFond.add(dureeJ2);
+		
+		
+		imageFond.setOpaque(false);
+		tmp.add(imageFond);
 		
 		fenetre.setSize(1000,720); // taille de l'image de fond
 		fenetre.setResizable(false);

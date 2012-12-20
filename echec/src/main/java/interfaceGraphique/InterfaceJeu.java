@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -77,15 +78,23 @@ public class InterfaceJeu {
 	EchiquierActif plateauJeu;
 	
 	
-	Timer chrono;
-	
 	Vector<String> casesPrisesJ1;
 	Vector<String> casesPrisesJ2;
 	
-	int tour = 1;
+	private int tour;
 	
 	JLabel affichageAideJ1;
 	JLabel affichageAideJ2;
+	JLabel joueur1;
+	JLabel joueur2;
+	
+	
+	JLabel chronoJ1; //Le label qui contient le temps restant du joueur 1
+	Timer countdownJ1; //Le compteur du joueur 1
+	int timeRemaining= 25; //A charger à partir des options
+	JLabel chronoJ2; //Le label qui contient le temps restant du joueur 1
+	Timer countdownJ2; //Le compteur du joueur 1
+	
 	
 	
 	/*
@@ -253,6 +262,15 @@ public class InterfaceJeu {
 		affichageAideJ2.setBounds(255, 355, 100, 40);
 		affichageAideJ2.setVisible(partie.getjNoir().isModeAide());
 		
+		joueur1 = new JLabel("joueur1");
+		joueur2 = new JLabel("joueur2");
+		joueur1.setBounds(137, 99, 100, 25);
+		joueur2.setBounds(137, 352, 100, 25);
+		joueur1.setVisible(true);
+		joueur2.setVisible(true);
+		
+		this.tour = 1;
+		
 		CaseSelectionnee = new Case(new Position(5,2));
 		selectionCase = false;
 
@@ -262,9 +280,7 @@ public class InterfaceJeu {
 		game = partie;
 		plateauJeu = (EchiquierActif) echiquier;
 		
-		//chrono = new Timer(speed, this);
-		//chrono.setInitialDelay(pause);
-		//chrono.start();
+
 		
 		// fond d'écran
 		imageFond = new TestImagePanel(new ImageIcon("images/interface_jeu.png").getImage());
@@ -354,9 +370,28 @@ public class InterfaceJeu {
 			((Vector<JButton>) tab_cases).get(i).addFocusListener(listenFocus);					
 		}
 		
+		
+		
+		// Timer
+		countdownJ1 = new Timer(1000, new CountdownTimerListener()); // On créé le timer du J1
+		chronoJ1 = new JLabel(String.valueOf(timeRemaining), JLabel.CENTER); //On affiche ce label
+		chronoJ1.setBounds(115,190,50,50);
+		countdownJ1.start();//Démarrer le compteur, a voir comment implanter à chaque tour
+		
+		countdownJ2 = new Timer(1000, new CountdownTimerListener()); // On créé le timer du J1
+		chronoJ2 = new JLabel(String.valueOf(timeRemaining), JLabel.CENTER); //On affiche ce label
+		chronoJ2.setBounds(115,500,50,50);
+		countdownJ2.start();//Démarrer le compteur, a voir comment implanter à chaque tour
+		
+		imageFond.add(chronoJ1);
+		imageFond.add(chronoJ2);
+		
+		
 		imageFond.add(plateau);
 		imageFond.add(affichageAideJ1);
 		imageFond.add(affichageAideJ2);
+		imageFond.add(joueur1);
+		imageFond.add(joueur2);
 		
 		tmp.add(imageFond);
 		fenetre.setSize(1030,700); 
@@ -402,16 +437,38 @@ public class InterfaceJeu {
 	
 	
 	
+	public int getTour(){
+		return this.tour;
+	}
+	
+	public void setTour(int newTour){
+		this.tour = newTour;
+	}
+	
+	
+	public void actualiserTour(int tour){
+		if (getTour()==1){	
+			setTour(2);
+			joueur1.setVisible(false);
+			joueur2.setVisible(true);
+		}
+		else {
+			setTour(1);
+			joueur2.setVisible(false);
+			joueur1.setVisible(true);
+		}	
+	}
 	
 	
 	
 	
+	/*
 	public void aPerduUnePiece(int tour){
 		if (tour==1){
 			
 		}
 	}
-	
+	*/
 	
 
 	
@@ -557,14 +614,10 @@ public class InterfaceJeu {
 				if (dep!="rien"){
 					game.ajoutDeplacement(dep);
 					for (int i=0; i<plateauJeu.getPlateau().size(); i++){						
-						actualiserImage(plateauJeu.getPlateau().get(i));						
-						if (tour==1){
-							tour=2;
-						}
-						else {
-							tour=1;
-						}	
-						aPerduUnePiece(tour);
+						actualiserImage(plateauJeu.getPlateau().get(i));
+						actualiserTour(getTour());
+						
+						//aPerduUnePiece(tour);
 					}				
 				}
 				
@@ -615,6 +668,30 @@ public class InterfaceJeu {
 	}
 	
 
+	
+	class CountdownTimerListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (--timeRemaining > 0) {
+				if (getTour()==1){
+					chronoJ1.setText(String.valueOf(timeRemaining));
+				}
+				else {
+					chronoJ2.setText(String.valueOf(timeRemaining));
+				}
+			} 
+			else {
+				if (getTour()==1){
+					countdownJ1.stop();
+				}
+				else {
+					countdownJ2.stop();
+				}				
+				actualiserTour(tour);
+				
+			}
+		}
+	}
+	
 	
 	
 	public static void main(String[] args){
