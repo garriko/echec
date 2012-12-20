@@ -44,21 +44,24 @@ public class PionTest extends TestCase {
 		
 		
 		Position p= new Position(4,4);
-		Piece c= new Pion("blanc");
+		Piece c= new Tour("blanc");
 		Case c1  = E.chercherCase(p);
 		c1.setPiece(c);
 
 
 		
-		Position ar= new Position(5,5);
+		Position ar= new Position(4,6);
 		Case t2=E.chercherCase(ar);
 		
-		//Piece d= new Tour("noir");
-		//t2.setPiece(d);
+		Position ar1= new Position(4,5);
+		Case t3=E.chercherCase(ar1);
+		Piece d= new Tour("noir");
+		t3.setPiece(d);
+		
 		//System.out.println(E.chercherCase(p).getPosition().getHauteur()+","+c1.getPosition().getLargeur());
 		//System.out.println(c1.getPiece());
 		//System.out.println(c1.getPiece().getDeplacementPossible(c1));
-		
+		/*
 		for(int i=0;i<64;i++)
 		{
 			System.out.println("-----------------------------------------------------------------------------------");
@@ -71,7 +74,7 @@ public class PionTest extends TestCase {
 			
 			System.out.println("-----------------------------------------------------------------------------------");
 		}
-		
+		*/
 	
 
 	

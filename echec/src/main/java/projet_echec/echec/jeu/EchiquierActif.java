@@ -392,6 +392,7 @@ public class EchiquierActif extends Echiquier {
 
 
 			if((!caseplateau.estVide())){
+				System.out.println("prout");
 				System.out.println(caseplateau.getPosition().getHauteur()+","+caseplateau.getPosition().getLargeur());
 				System.out.println(caseplateau.getPiece().getCamp());
 				if(caseplateau.getPiece().getCamp().equals(camp))
