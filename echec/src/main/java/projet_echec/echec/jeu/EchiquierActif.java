@@ -6,7 +6,6 @@ import java.util.Vector;
 
 import projet_echec.echec.exception.DeplacementException;
 import projet_echec.echec.jeu.piece.Pion;
-import projet_echec.echec.jeu.piece.Roi;
 
 /**
  * 

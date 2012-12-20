@@ -50,7 +50,7 @@ public class PionTest extends TestCase {
 
 
 		
-		Position ar= new Position(4,5);
+		Position ar= new Position(3,5);
 		Case t2=E.chercherCase(ar);
 		
 		/*
