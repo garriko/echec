@@ -588,7 +588,7 @@ public class InterfacePersoEchiquier {
 				else if ((eCase.estVide()==false) && (selectionPiece==true)){ // si case occupée et pièce retenue
 					try {					
 						nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee) ;
-						miseAJour(e);
+						miseAJour();
 					} 
 					catch (PresenceKingException e1) {
 						// TODO Auto-generated catch block
@@ -608,7 +608,7 @@ public class InterfacePersoEchiquier {
 					try {
 						try {
 							nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee);
-							miseAJour(e);
+							miseAJour();
 						} catch (PresenceKingException e1) {
 							// TODO Auto-generated catch block
 							e1.toString();
@@ -629,12 +629,12 @@ public class InterfacePersoEchiquier {
 					selectionPiece = true;
 					selectionCase = true;
 				}
-				
+
 				else if ((selectionCase == true) && (eCase.estVide() == true)) { // si case retenue
 					try {
 						try {
 							nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee) ;
-							miseAJour(e);
+							miseAJour();
 						} catch (PresenceKingException e1) {
 							// TODO Auto-generated catch block
 							e1.toString();
@@ -671,7 +671,7 @@ public class InterfacePersoEchiquier {
 					}
 					try {
 						nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee) ;
-						miseAJour(e);
+						miseAJour();
 					} catch (PresenceKingException e1) {
 						// TODO Auto-generated catch block
 						e1.toString();
@@ -721,9 +721,49 @@ public class InterfacePersoEchiquier {
 			}		
 		}
 	}
-
+	public void miseAJour(){
+		if (PieceSelectionnee.getClass().getSimpleName().equals("Pion")){
+			if(PieceSelectionnee.getCamp().equals("blanc"))
+				PieceSelectionnee = new Pion("blanc");
+			else
+				PieceSelectionnee = new Pion("noir");
+		}
+		
+		if (PieceSelectionnee.getClass().getSimpleName().equals("Tour")){
+			if(PieceSelectionnee.getCamp().equals("blanc"))
+				PieceSelectionnee = new Tour("blanc");
+			else
+				PieceSelectionnee = new Tour("noir");
+		}
+		
+		if (PieceSelectionnee.getClass().getSimpleName().equals("Cavalier")){
+			if(PieceSelectionnee.getCamp().equals("blanc"))
+				PieceSelectionnee = new Cavalier("blanc");
+			else
+				PieceSelectionnee = new Cavalier("noir");
+		}
+		if (PieceSelectionnee.getClass().getSimpleName().equals("Fou")){
+			if(PieceSelectionnee.getCamp().equals("blanc"))
+				PieceSelectionnee = new Fou("blanc");
+			else
+				PieceSelectionnee = new Fou("noir");
+		}
+		if (PieceSelectionnee.getClass().getSimpleName().equals("Reine")){
+			if(PieceSelectionnee.getCamp().equals("blanc"))
+				PieceSelectionnee = new Reine("blanc");
+			else
+				PieceSelectionnee = new Reine("noir");
+		}
+		if (PieceSelectionnee.getClass().getSimpleName().equals("Roi")){
+			if(PieceSelectionnee.getCamp().equals("blanc"))
+				PieceSelectionnee = new Roi("blanc");
+			else
+				PieceSelectionnee = new Roi("noir");
+		}
+	}
 	public void miseAJour(ActionEvent e){
 	{
+		
 		if (e.getSource()==PionBlanc){
 			PieceSelectionnee = new Pion("blanc");
 		}
@@ -762,6 +802,7 @@ public class InterfacePersoEchiquier {
 		}
 		selectionPiece = true ;
 		selectionCase = false ;
+		
 	}
 
 	

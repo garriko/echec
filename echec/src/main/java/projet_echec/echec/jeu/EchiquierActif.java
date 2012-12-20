@@ -320,6 +320,10 @@ public class EchiquierActif extends Echiquier {
 	 */
 	public String deplacer(Case caseDepart, Case caseArrivee) throws DeplacementException
 	{
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 830525d5d953e84e7db2a80070bf2a05814d2b88
 		String res=getNotationAlgebrique(caseDepart, caseArrivee);
 		Case sauvegardecasearrive = caseArrivee;
 		if(deplacersanscondition(caseDepart,caseArrivee))
