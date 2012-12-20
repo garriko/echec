@@ -389,18 +389,18 @@ public class InterfacePersoEchiquier {
 				if (j%2==0){
 					
 					if (i%2==0){
-						tab_cases.add(new JButton(new ImageIcon("images/caseblanche.png")));
+						tab_cases.add(new JButton(new ImageIcon("images/casegrise.png")));
 					}
 					else {
-						tab_cases.add(new JButton(new ImageIcon("images/casegrise.png")));
+						tab_cases.add(new JButton(new ImageIcon("images/caseblanche.png")));
 					}
 				}
 				else {
 					if (i%2==1){
-						tab_cases.add(new JButton(new ImageIcon("images/caseblanche.png")));
+						tab_cases.add(new JButton(new ImageIcon("images/casegrise.png")));
 					}
 					else {
-						tab_cases.add(new JButton(new ImageIcon("images/casegrise.png")));
+						tab_cases.add(new JButton(new ImageIcon("images/caseblanche.png")));
 					}			
 				}
 				((Vector<JButton>) tab_cases).get(i).setPreferredSize(new Dimension(44,44));
@@ -409,9 +409,8 @@ public class InterfacePersoEchiquier {
 		//Récupération des données depuis la variante 
 		Vector<Case> plateauCases = nouvelleVariante.getPlateau();
 		
-		for (int i=0; i<64; i++){
-			System.out.println(plateauCases.get(i).getImg());
-			int numCase = plateauCases.get(i).getPosition().getLargeur() + 8*(plateauCases.get(i).getPosition().getHauteur()-1)-1;			
+		for (int i=0; i<64; i++){			
+			int numCase = plateauCases.get(i).getPosition().getLargeur() + 8*(8-plateauCases.get(i).getPosition().getHauteur())-1;			
 			((Vector<JButton>) tab_cases).get(numCase).setIcon(new ImageIcon(new String(plateauCases.get(i).getImg())));
 		}
 
@@ -510,8 +509,8 @@ public class InterfacePersoEchiquier {
 	 */
 	
 	public void actualiserImage(Case NewCase){
-		NewCase.setPosition(new Position(8-NewCase.getPosition().getHauteur()+1, NewCase.getPosition().getLargeur()));
-		int numCase = NewCase.getPosition().getLargeur() + 8*(NewCase.getPosition().getHauteur()-1)-1;	
+		Position p = new Position(8-NewCase.getPosition().getHauteur()+1, NewCase.getPosition().getLargeur());
+		int numCase = p.getLargeur() + 8*(p.getHauteur()-1)-1;	
 		((Vector<JButton>) tab_cases).get(numCase).setIcon(new ImageIcon(NewCase.getImg()));
 	}
 		
@@ -527,12 +526,11 @@ public class InterfacePersoEchiquier {
 				} 
 				catch (RoiManquantException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					e1.toString();
 				} 
 				catch (IOException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+					}
 				mere.ajouterVariante(nomVariante.getText());
 				fenetre.setVisible(false);
 			}
@@ -542,13 +540,13 @@ public class InterfacePersoEchiquier {
 			else if (e.getSource()==Poubelle){
 				if ((selectionCase==true) && (CaseSelectionnee.estVide()==false)){ // si une case avait été sélectionnée
 					try {
-						nouvelleVariante.retirerPiece(CaseSelectionnee) ;
+						nouvelleVariante.retirerPiece(CaseSelectionnee);
 					} catch (EmptyCaseException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e1.toString();
 					} catch (CaseErrorException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e1.toString();
 					}
 					// la case est vidée
 					actualiserImage(CaseSelectionnee) ; // image rechargée
@@ -558,27 +556,30 @@ public class InterfacePersoEchiquier {
 				selectionPiece = false ;
 			}
 			else if (e.getSource()==Reset){
-				/*
+				
 				for (int i=0; i<nouvelleVariante.getPlateau().size(); i++){
 					try {
 						nouvelleVariante.retirerPiece(nouvelleVariante.getPlateau().get(i));
 					} catch (EmptyCaseException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e1.toString();
 					} catch (CaseErrorException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e1.toString();
 					}
 					actualiserImage(nouvelleVariante.getPlateau().get(i));
 				}
-				*/
+				
 			}
 			else if (tab_cases.contains(e.getSource())){
 				int numCase = ((Vector<JButton>) tab_cases).indexOf(e.getSource());
 				//int largeur = numCase%8 +1;
 				//int hauteur = numCase/8 +1;
-				Case eCase = nouvelleVariante.getPlateau().get(numCase);
-				eCase.setPosition(new Position(8-eCase.getPosition().getHauteur()+1, eCase.getPosition().getLargeur()));
+				
+				//8-eCase.getPosition().getHauteur()+1, eCase.getPosition().getLargeur()
+				Position p = new Position(8-numCase/8,numCase%8 +1);
+				Case eCase = nouvelleVariante.chercherCase(p);
+			
 				
 				if ((eCase.estVide()==false) && (selectionPiece==false)){ // si case occupée et pas de pièce retenue
 					CaseSelectionnee = eCase ; // la case est retenue
@@ -590,11 +591,11 @@ public class InterfacePersoEchiquier {
 					} 
 					catch (PresenceKingException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e1.toString();
 					} 
 					catch (FullCaseException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e1.toString();
 					}
 					// on change la pièce
 					actualiserImage(eCase);
@@ -608,12 +609,12 @@ public class InterfacePersoEchiquier {
 							nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee);
 						} catch (PresenceKingException e1) {
 							// TODO Auto-generated catch block
-							e1.printStackTrace();
+							e1.toString();
 						}
 						System.out.println(eCase.getImg());
 					} catch (FullCaseException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e1.toString();
 					}
 					
 					// on place la pièce
@@ -633,21 +634,21 @@ public class InterfacePersoEchiquier {
 							nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee) ;
 						} catch (PresenceKingException e1) {
 							// TODO Auto-generated catch block
-							e1.printStackTrace();
+							e1.toString();
 						}
 					} catch (FullCaseException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e1.toString();
 					}
 					// on change la pièce
 					try {
 						nouvelleVariante.retirerPiece(CaseSelectionnee) ;
 					} catch (EmptyCaseException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e1.toString();
 					} catch (CaseErrorException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e1.toString();
 					}
 					// On la retire de la première case
 					actualiserImage(CaseSelectionnee) ;
@@ -660,30 +661,30 @@ public class InterfacePersoEchiquier {
 						nouvelleVariante.retirerPiece(eCase) ;
 					} catch (EmptyCaseException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e1.toString();
 					} catch (CaseErrorException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e1.toString();
 					}
 					try {
 						nouvelleVariante.ajouterPiece(eCase, PieceSelectionnee) ;
 					} catch (PresenceKingException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e1.toString();
 					} 
 					catch (FullCaseException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e1.toString();
 					}
 					// on change la pièce
 					try {
 						nouvelleVariante.retirerPiece(CaseSelectionnee) ;
 					} catch (EmptyCaseException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e1.toString();
 					} catch (CaseErrorException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e1.toString();
 					}
 					// On la retire de la première case
 					actualiserImage(CaseSelectionnee) ;
