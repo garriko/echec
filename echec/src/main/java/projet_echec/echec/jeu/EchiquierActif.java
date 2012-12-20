@@ -257,7 +257,7 @@ public class EchiquierActif extends Echiquier {
 	 * @throws DeplacementException 
 	 */
 	public String selectionnerCase(Case caseSelectionne) throws DeplacementException{
-		
+		System.out.println(caseSelectionne.estVide());
 		//System.out.println(caseSelectionne.getPosition().getHauteur()+","+caseSelectionne.getPosition().getLargeur());
 
 		if(this.caseSelectionne==null)
@@ -398,11 +398,18 @@ public class EchiquierActif extends Echiquier {
 		ArrayList<Case> plop = new ArrayList<Case>();
 		boolean depEffectue = false;
 		plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
-		plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
-
+		
 		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Fou"))||caseDepart.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
 			filtrePourFou(caseDepart, plop);
 		}
+		
+		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Tour"))||caseDepart.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
+			filtrePourTour(caseDepart, plop);
+		}
+		
+		plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
+
+		
 		
 		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Pion"))){
 			
@@ -493,80 +500,101 @@ public class EchiquierActif extends Echiquier {
 
 	}
 	private void filtrePourFou(Case caseActuelle,ArrayList<Case> casePossible){
-		System.out.println("on rentre dans le filtre pour Fou");
+		
 		ArrayList<Case> diagBasGauche= new ArrayList<Case>();
 		ArrayList<Case> diagBasDroit= new ArrayList<Case>();
 		ArrayList<Case> diagHautGauche= new ArrayList<Case>();
 		ArrayList<Case> diagHautDroite= new ArrayList<Case>();
-		System.out.println(casePossible);
-		
+
 		for(int i=0; i < casePossible.size();i++){
-			Case c = casePossible.get(i);
-			System.out.println("on separe les listes");
+			Case c = casePossible.get(i);			
 			if(caseActuelle.getPosition().getHauteur()>c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()>c.getPosition().getLargeur())
-				{diagBasGauche.add(c);	}
+			{
+				diagBasGauche.add(c);
+			}
+
 			if(caseActuelle.getPosition().getHauteur()>c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()<c.getPosition().getLargeur())
+			{
 				diagBasDroit.add(c);
-			if(caseActuelle.getPosition().getHauteur()>c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()<c.getPosition().getLargeur())
-				{diagHautGauche.add(c);
-				System.out.println("on fais la séparation");}
+			}
+			if(caseActuelle.getPosition().getHauteur()<c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()>c.getPosition().getLargeur())
+			{
+				diagHautGauche.add(c);				
+			}
 			if(caseActuelle.getPosition().getHauteur()<c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()<c.getPosition().getLargeur())
+			{
 				diagHautDroite.add(c);
+			}
 		}
-		System.out.println(diagBasDroit);
-		System.out.println(diagBasGauche);
-		System.out.println(diagHautDroite);
-		System.out.println(diagHautGauche);
+
 		for(int i=0; i < diagBasGauche.size();i++){
-			if(!diagBasGauche.get(i).estVide()){
+			Case caseEchi = chercherCase(diagBasGauche.get(i).getPosition());
+			if(!caseEchi.estVide())
+				for(int j=0; j < diagBasGauche.size();j++){
+					if(diagBasGauche.get(i).getPosition().getLargeur()>diagBasGauche.get(j).getPosition().getLargeur())
+					{
+						diagBasGauche.remove(diagBasGauche.get(j));
+						j--;
+
+					}
+					/*if(!diagBasGauche.get(i).estVide()){
 				System.out.println("attention");
 				for(int j=0; j < diagBasGauche.size()-1;j++){
 					if(diagBasGauche.get(i).getPosition().getLargeur()>diagBasGauche.get(j).getPosition().getLargeur())
 					{
 						diagBasGauche.remove(diagBasGauche.get(j));
 						j--;
-						
+
 					}
 				}}
-			diagBasGauche.remove(diagBasGauche.get(i));
+			diagBasGauche.remove(diagBasGauche.get(i));*/
+				}
 		}
 
 		for(int i=0; i < diagBasDroit.size();i++){
-			if(!diagBasDroit.get(i).estVide()){
-				for(int j=0; j < diagBasDroit.size()-1;j++){
+			Case caseEchi = chercherCase(diagBasDroit.get(i).getPosition());
+			if(!caseEchi.estVide())
+				for(int j=0; j < diagBasDroit.size();j++){
 					if(diagBasDroit.get(i).getPosition().getLargeur()<diagBasDroit.get(j).getPosition().getLargeur())
 					{
 						diagBasDroit.remove(diagBasDroit.get(j));
 						j--;
+
 					}
-				}}
-			diagBasDroit.remove(diagBasDroit.get(i));
+				}
 		}
 
 		for(int i=0; i < diagHautGauche.size();i++){
-			if(!diagHautGauche.get(i).estVide()){
-				for(int j=0; j < diagHautGauche.size()-1;j++){
+			Case caseEchi = chercherCase(diagHautGauche.get(i).getPosition());
+			if(!caseEchi.estVide())
+			{
+				System.out.println("i'm in");
+				for(int j=0; j < diagHautGauche.size();j++){
 					if(diagHautGauche.get(i).getPosition().getLargeur()>diagHautGauche.get(j).getPosition().getLargeur())
 					{
 						diagHautGauche.remove(diagHautGauche.get(j));
 						j--;
+
 					}
-				}}
-			diagHautGauche.remove(diagHautGauche.get(i));
+				}
+			}
 		}
 
 		for(int i=0; i < diagHautDroite.size();i++){
-			if(!diagHautDroite.get(i).estVide()){
-				for(int j=0; j < diagHautDroite.size()-1;j++){
+			Case caseEchi = chercherCase(diagHautDroite.get(i).getPosition());
+			if(!caseEchi.estVide())
+				for(int j=0; j < diagHautDroite.size();j++){
 					if(diagHautDroite.get(i).getPosition().getLargeur()<diagHautDroite.get(j).getPosition().getLargeur())
 					{
 						diagHautDroite.remove(diagHautDroite.get(j));
 						j--;
-					}
-				}}
-			diagHautDroite.remove(diagHautDroite.get(i));
-		}
 
+					}
+				}
+		}
+		
+		
+		casePossible.clear();
 		casePossible.addAll(diagBasGauche);
 		casePossible.addAll(diagBasDroit);
 		casePossible.addAll(diagHautGauche);
@@ -575,6 +603,110 @@ public class EchiquierActif extends Echiquier {
 
 
 
+private void filtrePourTour(Case caseActuelle,ArrayList<Case> casePossible){
+		
+		ArrayList<Case> caseGauche= new ArrayList<Case>();
+		ArrayList<Case> caseDroite= new ArrayList<Case>();
+		ArrayList<Case> caseHaut= new ArrayList<Case>();
+		ArrayList<Case> caseBas= new ArrayList<Case>();
+
+		for(int i=0; i < casePossible.size();i++){
+			Case c = casePossible.get(i);			
+			if(caseActuelle.getPosition().getHauteur()==c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()>c.getPosition().getLargeur())
+			{
+				caseGauche.add(c);
+			}
+
+			if(caseActuelle.getPosition().getHauteur()==c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()<c.getPosition().getLargeur())
+			{
+				caseDroite.add(c);
+			}
+			if(caseActuelle.getPosition().getHauteur()<c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()==c.getPosition().getLargeur())
+			{
+				caseHaut.add(c);				
+			}
+			if(caseActuelle.getPosition().getHauteur()>c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()==c.getPosition().getLargeur())
+			{
+				caseBas.add(c);
+			}
+		}
+
+		for(int i=0; i < caseGauche.size();i++){
+			Case caseEchi = chercherCase(caseGauche.get(i).getPosition());
+			if(!caseEchi.estVide())
+				for(int j=0; j < caseGauche.size();j++){
+					if(caseGauche.get(i).getPosition().getLargeur()>caseGauche.get(j).getPosition().getLargeur())
+					{
+						caseGauche.remove(caseGauche.get(j));
+						j--;
+
+					}
+					/*if(!diagBasGauche.get(i).estVide()){
+				System.out.println("attention");
+				for(int j=0; j < diagBasGauche.size()-1;j++){
+					if(diagBasGauche.get(i).getPosition().getLargeur()>diagBasGauche.get(j).getPosition().getLargeur())
+					{
+						diagBasGauche.remove(diagBasGauche.get(j));
+						j--;
+
+					}
+				}}
+			diagBasGauche.remove(diagBasGauche.get(i));*/
+				}
+		}
+
+		for(int i=0; i < caseDroite.size();i++){
+			Case caseEchi = chercherCase(caseDroite.get(i).getPosition());
+			if(!caseEchi.estVide())
+				for(int j=0; j < caseDroite.size();j++){
+					if(caseDroite.get(i).getPosition().getLargeur()<caseDroite.get(j).getPosition().getLargeur())
+					{
+						caseDroite.remove(caseDroite.get(j));
+						j--;
+
+					}
+				}
+		}
+
+		for(int i=0; i < caseHaut.size();i++){
+			
+			Case caseEchi = chercherCase(caseHaut.get(i).getPosition());
+			if(!caseEchi.estVide())
+			{
+				System.out.println("i'm in");
+				for(int j=0; j < caseHaut.size();j++){
+					if(caseHaut.get(i).getPosition().getHauteur()<caseHaut.get(j).getPosition().getHauteur())
+					{
+						
+						caseHaut.remove(caseHaut.get(j));
+						j--;
+
+					}
+				}
+			}
+		}
+
+		for(int i=0; i < caseBas.size();i++){
+			Case caseEchi = chercherCase(caseBas.get(i).getPosition());
+			if(!caseEchi.estVide())
+				for(int j=0; j < caseBas.size();j++){
+					if(caseBas.get(i).getPosition().getHauteur()>caseBas.get(j).getPosition().getHauteur())
+					{
+						caseBas.remove(caseBas.get(j));
+						j--;
+
+					}
+				}
+		}
+		
+
+		
+		casePossible.clear();
+		casePossible.addAll(caseGauche);
+		casePossible.addAll(caseDroite);
+		casePossible.addAll(caseHaut);
+		casePossible.addAll(caseBas);
+	}
 
 	/**
 	 * Filtre la liste selon la presence d'une pièce du meme camp
