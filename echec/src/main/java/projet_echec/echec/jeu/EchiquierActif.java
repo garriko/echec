@@ -375,6 +375,21 @@ public class EchiquierActif extends Echiquier {
 		}
 	}
 
+	
+	
+	public String getNotationAlgebrique(Case caseDepart, Case caseArrivee){
+		String nota = new String();
+		nota = nota.concat(String.valueOf(caseDepart.getPosition().getHauteur())+String.valueOf(caseDepart.getPosition().getLargeur()));
+		
+		if(caseArrivee.estVide())
+			nota= nota.concat("-");
+		else
+			nota= nota.concat("x");
+		
+		nota = nota.concat(String.valueOf(caseArrivee.getPosition().getHauteur())+String.valueOf(caseArrivee.getPosition().getLargeur()));
+		
+		return nota;
+	}
 
 	/**
 	 * Methode utile pour la classe Pion. modifie le fetdeplacementPossible selon la presence d'une piece adverse en diagonale par rapport a la
