@@ -374,11 +374,12 @@ public class EchiquierActif extends Echiquier {
 		boolean depEffectue = false;
 		
 		plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
-
+		System.out.println(plop.get(0).getPosition().getHauteur()+","+plop.get(0).getPosition().getLargeur());
 		plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
 
 
 		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Pion"))){
+			
 			filtrerpresenceAdversaireDiagonale(caseDepart,plop);
 		}
 		

@@ -38,7 +38,7 @@ public class Pion extends Piece implements java.io.Serializable {
 		
 		if(this.dejaBouge == false)
 		{
-			if(pos.getPiece().getCamp()=="blanc")
+			if(pos.getPiece().getCamp().equals("blanc"))
 			{
 				Case c0 = new Case(new Position(pos.getPosition().getHauteur()+1,pos.getPosition().getLargeur()+0));
 				if(isDeplacementOk(c0))
@@ -78,7 +78,7 @@ public class Pion extends Piece implements java.io.Serializable {
 		}
 		else
 		{
-			if(pos.getPiece().getCamp()=="blanc")
+			if(pos.getPiece().getCamp().equals("blanc"))
 			{
 			Case c0 = new Case(new Position(pos.getPosition().getHauteur()+1,pos.getPosition().getLargeur()+0));
 			if(isDeplacementOk(c0))
