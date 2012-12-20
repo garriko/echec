@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -77,15 +78,23 @@ public class InterfaceJeu {
 	EchiquierActif plateauJeu;
 	
 	
-	Timer chrono;
-	
 	Vector<String> casesPrisesJ1;
 	Vector<String> casesPrisesJ2;
 	
-	int tour = 1;
+	private int tour;
 	
 	JLabel affichageAideJ1;
 	JLabel affichageAideJ2;
+	JLabel joueur1;
+	JLabel joueur2;
+	
+	
+	JLabel chronoJ1; //Le label qui contient le temps restant du joueur 1
+	Timer countdownJ1; //Le compteur du joueur 1
+	int timeRemaining = 25; //A charger à partir des options
+	JLabel chronoJ2; //Le label qui contient le temps restant du joueur 1
+	Timer countdownJ2; //Le compteur du joueur 1
+	
 	
 	
 	/*
@@ -253,6 +262,15 @@ public class InterfaceJeu {
 		affichageAideJ2.setBounds(255, 355, 100, 40);
 		affichageAideJ2.setVisible(partie.getjNoir().isModeAide());
 		
+		joueur1 = new JLabel("joueur1");
+		joueur2 = new JLabel("joueur2");
+		joueur1.setBounds(137, 99, 100, 25);
+		joueur2.setBounds(137, 352, 100, 25);
+		joueur1.setVisible(true);
+		joueur2.setVisible(true);
+		
+		this.tour = 1;
+		
 		CaseSelectionnee = new Case(new Position(5,2));
 		selectionCase = false;
 
@@ -262,9 +280,7 @@ public class InterfaceJeu {
 		game = partie;
 		plateauJeu = (EchiquierActif) echiquier;
 		
-		//chrono = new Timer(speed, this);
-		//chrono.setInitialDelay(pause);
-		//chrono.start();
+
 		
 		// fond d'écran
 		imageFond = new TestImagePanel(new ImageIcon("images/interface_jeu.png").getImage());
@@ -354,9 +370,30 @@ public class InterfaceJeu {
 			((Vector<JButton>) tab_cases).get(i).addFocusListener(listenFocus);					
 		}
 		
+		
+		
+		// Timer
+		countdownJ1 = new Timer(1000, new CountdownTimerListener()); // On créé le timer du J1
+		chronoJ1 = new JLabel(String.valueOf(timeRemaining), JLabel.CENTER); //On affiche ce label
+		chronoJ1.setBounds(130,180,50,50);
+		chronoJ1.setForeground(Color.white);
+		countdownJ1.start();//Démarrer le compteur, a voir comment implanter à chaque tour
+		
+		countdownJ2 = new Timer(1000, new CountdownTimerListener()); // On créé le timer du J1
+		chronoJ2 = new JLabel(String.valueOf(timeRemaining), JLabel.CENTER); //On affiche ce label
+		chronoJ2.setBounds(115,500,50,50);
+		chronoJ2.setForeground(Color.white);
+		//countdownJ2.start();//Démarrer le compteur, a voir comment implanter à chaque tour
+		
+		imageFond.add(chronoJ1);
+		imageFond.add(chronoJ2);
+		
+		
 		imageFond.add(plateau);
 		imageFond.add(affichageAideJ1);
 		imageFond.add(affichageAideJ2);
+		imageFond.add(joueur1);
+		imageFond.add(joueur2);
 		
 		tmp.add(imageFond);
 		fenetre.setSize(1030,700); 
@@ -402,16 +439,44 @@ public class InterfaceJeu {
 	
 	
 	
+	public int getTour(){
+		return this.tour;
+	}
+	
+	public void setTour(int newTour){
+		this.tour = newTour;
+	}
+	
+	
+	public void actualiserTour(int tour){
+		if (getTour()==1){	
+			setTour(2);
+			joueur1.setVisible(false);
+			joueur2.setVisible(true);
+			countdownJ1.stop();
+			//countdownJ1.setInitialDelay(25);
+			countdownJ2.start();
+		}
+		else {
+			setTour(1);
+			joueur2.setVisible(false);
+			joueur1.setVisible(true);
+			countdownJ2.stop();
+			//countdownJ2.setInitialDelay(25);
+			countdownJ1.start();
+		}	
+	}
 	
 	
 	
 	
+	/*
 	public void aPerduUnePiece(int tour){
 		if (tour==1){
 			
 		}
 	}
-	
+	*/
 	
 
 	
@@ -504,48 +569,9 @@ public class InterfaceJeu {
 			
 			if (tab_cases.contains(e.getSource())){
 				int numCase = ((Vector<JButton>) tab_cases).indexOf(e.getSource());
-				//int largeur = numCase%8 +1;
-				//int hauteur = numCase/8 +1;
-				//Case eCase = plateauJeu.chercherCase(new Position(hauteur, largeur));
+
 				Position p = new Position(8-numCase/8,numCase%8 +1);
-				Case eCase = plateauJeu.chercherCase(p);
-			
-			
-				//System.out.println(eCase.getPosition().getLargeur());
-				//System.out.println(eCase.getPosition().getHauteur());
-				
-				/*
-				if ((eCase.estVide()==true) && (selectionCase==true)){
-					CaseSelectionnee = eCase;
-					selectionCase = true;
-				}
-				else if ((eCase.estVide()==true) && (selectionCase==true)){
-					try {
-						plateauJeu.selectionnerCase(eCase);
-					} catch (DeplacementException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					actualiserImage(CaseSelectionnee);
-					actualiserImage(eCase);
-					selectionCase = false;
-				}
-				else if ((eCase.estVide()==false) && (selectionCase==true)){
-					if (eCase.getPiece().getCamp()==CaseSelectionnee.getPiece().getCamp()){
-						CaseSelectionnee = eCase;
-					}
-					else {
-						casesPrisesJ1.add(eCase.getPiece().getClass().getSimpleName());
-						// ou casesPrisesJ2.add(eCase.getPiece().getClass().getSimpleName());
-						// prendre la pièce
-						actualiserImage(CaseSelectionnee);
-						actualiserImage(eCase);
-						selectionCase = false;
-						actualiserPiecesPrises(1);
-						// ou actualiserPiecesPrises(2);
-					}
-				}
-				*/
+				Case eCase = plateauJeu.chercherCase(p);			
 				
 				String dep = "rien";
 				try {
@@ -559,15 +585,11 @@ public class InterfaceJeu {
 				if (dep!="rien"){
 					game.ajoutDeplacement(dep);
 					for (int i=0; i<plateauJeu.getPlateau().size(); i++){						
-						actualiserImage(plateauJeu.getPlateau().get(i));						
-						if (tour==1){
-							tour=2;
-						}
-						else {
-							tour=1;
-						}	
-						aPerduUnePiece(tour);
-					}				
+						actualiserImage(plateauJeu.getPlateau().get(i));
+					}
+						actualiserTour(getTour());
+						
+						//aPerduUnePiece(tour);			
 				}
 				
 				
@@ -617,6 +639,30 @@ public class InterfaceJeu {
 	}
 	
 
+	
+	class CountdownTimerListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (--timeRemaining >= 0) {
+				if (getTour()==1){
+					countdownJ1.start();
+					chronoJ1.setText(String.valueOf(timeRemaining));
+				}
+				else {
+					countdownJ2.start();
+					chronoJ2.setText(String.valueOf(timeRemaining));
+				}
+			} 
+			else {
+				if (getTour()==1){
+					//lancer popup joueur 1 tu as perdu
+				}
+				else {
+					//lancer popup joueur 2 tu as perdu
+				}							
+			}
+		}
+	}
+	
 	
 	
 	public static void main(String[] args){

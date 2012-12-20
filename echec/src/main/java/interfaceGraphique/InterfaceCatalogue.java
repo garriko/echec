@@ -63,16 +63,16 @@ public class InterfaceCatalogue {
 		
 		choix = mode;
 		
-		boutonRetour = new JButton("Retour");
-		boutonCharger = new JButton("Charger la partie");
-		boutonSupprimerPartie = new JButton("Supprimer partie");
-		boutonSupprimerListe = new JButton("Supprimer liste");
+		boutonRetour = new JButton(new ImageIcon("images/catalogue/boutonRetour.png"));
+		boutonCharger = new JButton(new ImageIcon("images/catalogue/boutonChargerPartie.png"));
+		boutonSupprimerPartie = new JButton(new ImageIcon("images/catalogue/boutonSupprimerPartie.png"));
+		boutonSupprimerListe = new JButton(new ImageIcon("images/catalogue/boutonSupprimerListe.png"));
 		
 		
-		boutonRetour.setBounds(260, 180, 200, 52); //position x, position y, largeur, hauteur
-		boutonCharger.setBounds(260, 290, 200, 52); 
-		boutonSupprimerPartie.setBounds(260, 390, 300, 52);
-		boutonSupprimerListe.setBounds(260, 490, 300, 52);
+		boutonRetour.setBounds(780, 595, 148, 63); //position x, position y, largeur, hauteur
+		boutonCharger.setBounds(676, 307, 238, 69); 
+		boutonSupprimerPartie.setBounds(676, 375, 238, 69);
+		boutonSupprimerListe.setBounds(676, 442, 238, 69);
 		
 		
 		Ecouteur listen=new Ecouteur();
@@ -84,10 +84,10 @@ public class InterfaceCatalogue {
 	
 		JPanel imageFond;
 		if (mode=="revoir"){
-			imageFond = new TestImagePanel(new ImageIcon("images/revoirPartie.png").getImage().getScaledInstance(1000, 700, Image.SCALE_DEFAULT));
+			imageFond = new TestImagePanel(new ImageIcon("images/catalogue/revoirPartie.png").getImage());
 		}
 		else{
-			imageFond = new TestImagePanel(new ImageIcon("images/chargerPartie.png").getImage().getScaledInstance(1000, 700, Image.SCALE_DEFAULT));
+			imageFond = new TestImagePanel(new ImageIcon("images/catalogue/reprendrePartie.png").getImage());
 		}
 		
 		imageFond.setLayout(null);	
@@ -126,7 +126,7 @@ public class InterfaceCatalogue {
 		imageFond.setOpaque(false);
 		tmp.add(imageFond);
     
-		fenetre.setSize(1000,720); // taille de l'image de fond
+		fenetre.setSize(1035,700); // taille de l'image de fond
 		fenetre.setResizable(false);
 		fenetre.setVisible(true);
 	}
