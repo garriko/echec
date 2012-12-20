@@ -337,11 +337,11 @@ public class EchiquierActif extends Echiquier {
 				return "rien";
 			}
 
-		
+
 		}
 		else
 		{
-		if(echec()!=12 && echec()!=22){ //Si le deplacement ne provoque pas de mise en danger du roi
+			if(echec()!=12 && echec()!=22){ //Si le deplacement ne provoque pas de mise en danger du roi
 				mangerPiece(caseArrivee);
 				return res;
 			}
@@ -350,11 +350,11 @@ public class EchiquierActif extends Echiquier {
 				caseArrivee=sauvegardecasearrive;
 				return "rien";
 			}
-			
+
 		}
-			
-		
-		
+
+
+
 	}
 
 	public void mangerPiece(Case caseArrivee )
@@ -383,6 +383,10 @@ public class EchiquierActif extends Echiquier {
 		plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
 
 
+		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Fou"))||caseDepart.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
+			filtrePourFou(caseDepart, plop);
+		}
+		
 		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Pion"))){
 			filtrerpresenceAdversaireDiagonale(caseDepart,plop);
 		}
@@ -447,6 +451,82 @@ public class EchiquierActif extends Echiquier {
 		}
 
 	}
+	private void filtrePourFou(Case caseActuelle,ArrayList<Case> casePossible){
+
+		ArrayList<Case> diagBasGauche= new ArrayList<Case>();
+		ArrayList<Case> diagBasDroit= new ArrayList<Case>();
+		ArrayList<Case> diagHautGauche= new ArrayList<Case>();
+		ArrayList<Case> diagHautDroite= new ArrayList<Case>();
+		
+		for(int i=0; i < casePossible.size();i++){
+			Case c = casePossible.get(i);
+
+			if(caseActuelle.getPosition().getHauteur()>c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()>c.getPosition().getLargeur())
+				diagBasGauche.add(c);
+			if(caseActuelle.getPosition().getHauteur()>c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()<c.getPosition().getLargeur())
+				diagBasDroit.add(c);
+			if(caseActuelle.getPosition().getHauteur()>c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()<c.getPosition().getLargeur())
+				diagHautGauche.add(c);
+			if(caseActuelle.getPosition().getHauteur()<c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()<c.getPosition().getLargeur())
+				diagHautDroite.add(c);
+		}
+
+		for(int i=0; i < diagBasGauche.size();i++){
+			if(!diagBasGauche.get(i).estVide()){
+				for(int j=0; j < diagBasGauche.size()-1;j++){
+					if(diagBasGauche.get(i).getPosition().getLargeur()>diagBasGauche.get(j).getPosition().getLargeur())
+					{
+						diagBasGauche.remove(diagBasGauche.get(j));
+						j--;
+					}
+				}}
+			diagBasGauche.remove(diagBasGauche.get(i));
+		}
+
+		for(int i=0; i < diagBasDroit.size();i++){
+			if(!diagBasDroit.get(i).estVide()){
+				for(int j=0; j < diagBasDroit.size()-1;j++){
+					if(diagBasDroit.get(i).getPosition().getLargeur()<diagBasDroit.get(j).getPosition().getLargeur())
+					{
+						diagBasDroit.remove(diagBasDroit.get(j));
+						j--;
+					}
+				}}
+			diagBasDroit.remove(diagBasDroit.get(i));
+		}
+
+		for(int i=0; i < diagHautGauche.size();i++){
+			if(!diagHautGauche.get(i).estVide()){
+				for(int j=0; j < diagHautGauche.size()-1;j++){
+					if(diagHautGauche.get(i).getPosition().getLargeur()>diagHautGauche.get(j).getPosition().getLargeur())
+					{
+						diagHautGauche.remove(diagHautGauche.get(j));
+						j--;
+					}
+				}}
+			diagHautGauche.remove(diagHautGauche.get(i));
+		}
+
+		for(int i=0; i < diagHautDroite.size();i++){
+			if(!diagHautDroite.get(i).estVide()){
+				for(int j=0; j < diagHautDroite.size()-1;j++){
+					if(diagHautDroite.get(i).getPosition().getLargeur()<diagHautDroite.get(j).getPosition().getLargeur())
+					{
+						diagHautDroite.remove(diagHautDroite.get(j));
+						j--;
+					}
+				}}
+			diagHautDroite.remove(diagHautDroite.get(i));
+		}
+
+		casePossible.addAll(diagBasGauche);
+		casePossible.addAll(diagBasDroit);
+		casePossible.addAll(diagHautGauche);
+		casePossible.addAll(diagHautDroite);
+	}
+
+
+
 
 	/**
 	 * Filtre la liste selon la presence d'une pièce du meme camp
