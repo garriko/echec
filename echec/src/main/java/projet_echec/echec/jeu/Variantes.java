@@ -201,27 +201,30 @@ public class Variantes {
 	 * @throws CaseErrorException 
 	 */
 	public void retirerPiece(Case c) throws EmptyCaseException, CaseErrorException{
-		
-		
-			Case currentCase = plateau.get((c.getPosition().getHauteur()-1)*8+c.getPosition().getLargeur() -1 );
-			
-				if(currentCase.estVide())
-					throw new EmptyCaseException();
-				else
-				{
-					if(currentCase.getPiece().getClass().getSimpleName().equals(new String("Roi")) && currentCase.getPiece().getCamp()=="blanc")
-					{
-						presenceRoiBlanc=false;
-					}
-					else if(currentCase.getPiece().getClass().getSimpleName().equals(new String("Roi")) && currentCase.getPiece().getCamp()=="noir")
-					{
-						presenceRoiNoir=false;
-					}
-					currentCase.setPiece(null);
-					for(int j=0;j<listePieces.size();j++)
-						if(listePieces.get(j).equals(currentCase))
-							listePieces.remove(j);
-				}
+
+
+		Case currentCase = plateau.get((c.getPosition().getHauteur()-1)*8+c.getPosition().getLargeur() -1 );
+
+		if(currentCase.estVide())
+			throw new EmptyCaseException();
+		else
+		{
+			if(currentCase.getPiece().getClass().getSimpleName().equals(new String("Roi")) && currentCase.getPiece().getCamp().equals("blanc"))
+			{
+				presenceRoiBlanc=false;
+			}
+			else if(currentCase.getPiece().getClass().getSimpleName().equals(new String("Roi")) && currentCase.getPiece().getCamp().equals("noir"))
+			{
+				presenceRoiNoir=false;
+			}
+			currentCase.setPiece(null);
+			c.setPiece(null);
+			for(int j=0;j<listePieces.size();j++)
+				if(listePieces.get(j).equals(currentCase))
+					listePieces.remove(j);
+		}
+		System.out.println(presenceRoiBlanc);
+		System.out.println(presenceRoiNoir);
 	}
 	
 	
@@ -267,6 +270,18 @@ public class Variantes {
 	}
 	
 	
+	public Case chercherCase(Position p){
+		Case res=null;
+		for(int i=0;i<plateau.size();i++)
+			if(plateau.get(i).getPosition().equals(p))
+				res = plateau.get(i);
+		return res;
+	}
+	
+	
+	
+	/*
+	
 
 	public static void main(String[] args) {
 		
@@ -284,7 +299,7 @@ public class Variantes {
 		}
 		
 		System.out.println(w.getPlateau().get(62).getPiece().getCamp());
-		*/
+		
 		
 		
 		try {
@@ -626,6 +641,7 @@ public class Variantes {
 		
 	
 	}
+	*/
 	
 	
 }

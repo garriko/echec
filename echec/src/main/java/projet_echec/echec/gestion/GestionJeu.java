@@ -25,7 +25,7 @@ public class GestionJeu {
 	/**
 	 * Liste des parties
 	 */
-	private ArrayList<Partie> games;
+	private static ArrayList<Partie> games;
 	/**
 	 * Nombre de parties en cours
 	 */
@@ -46,7 +46,7 @@ public class GestionJeu {
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
 	 */
-	public Wrapper creerNewGame(Joueur j1, Joueur j2, String nomV,Options optionsChoisies) throws GameException, ClassNotFoundException, IOException{
+	public static Wrapper creerNewGame(Joueur j1, Joueur j2, String nomV,Options optionsChoisies) throws GameException, ClassNotFoundException, IOException{
 		Wrapper w;
 		if(nbPartie==4)
 			throw new GameException();
@@ -72,7 +72,7 @@ public class GestionJeu {
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
 	 */
-	public Wrapper creerNewGame(String fichierCharge) throws GameException, ClassNotFoundException, IOException
+	public static Wrapper creerNewGame(String fichierCharge) throws GameException, ClassNotFoundException, IOException
 	{
 		Wrapper w;
 		if(nbPartie==4)
@@ -89,7 +89,7 @@ public class GestionJeu {
 	 * Supprime la partie choisie
 	 * @param p partie a supprimer
 	 */
-	public void finPartie(Partie p){
+	public static void finPartie(Partie p){
 		games.remove(p);
 		nbPartie--;
 	}

@@ -260,8 +260,6 @@ public class EchiquierActif extends Echiquier {
 
 		System.out.println(caseSelectionne.getPosition().getHauteur()+","+caseSelectionne.getPosition().getLargeur());
 
-		System.out.println("0");
-
 		if(this.caseSelectionne==null)
 		{
 			System.out.println("1");
@@ -322,39 +320,41 @@ public class EchiquierActif extends Echiquier {
 	 */
 	public String deplacer(Case caseDepart, Case caseArrivee) throws DeplacementException
 	{
-		switch(echec()){
-		case 21:
-			return "echec et mat";
-		case 22:
-			return "echec et mat";
-		case 11:
-			Case sauvegardecasearrive = caseArrivee;
-			deplacersanscondition(caseDepart,caseArrivee);
+		String res=getNotationAlgebrique(caseDepart, caseArrivee);;
+		Case sauvegardecasearrive = caseArrivee;
+		deplacersanscondition(caseDepart,caseArrivee);
+		if(campActif=="noir")
+		{
 			if(echec()!=11 && echec()!=21){
-				mangerPiece(caseArrivee);
+				mangerPiece(caseArrivee);//pas echec donc le deplacement se fait
+				return res;
 			}
-			else{	
+			else
+			{	
 				deplacersanscondition(caseArrivee,caseDepart);
 				caseArrivee=sauvegardecasearrive;
+				//attention: il n'y as pas de deplacement effectif
+				return "rien";
 			}
-			break;
-		case 12:
-			Case sauvegardecasearrive1 = caseArrivee;
-			deplacersanscondition(caseDepart,caseArrivee);
-			if(echec()!=12 && echec()!=22){
+
+		
+		}
+		else
+		{
+		if(echec()!=12 && echec()!=22){ //Si le deplacement ne provoque pas de mise en danger du roi
 				mangerPiece(caseArrivee);
+				return res;
 			}
 			else{
 				deplacersanscondition(caseArrivee,caseDepart);	
-				caseArrivee=sauvegardecasearrive1;
+				caseArrivee=sauvegardecasearrive;
+				return "rien";
 			}
-			break;
-		default:
-			mangerPiece(caseArrivee);
-			deplacersanscondition(caseDepart,caseArrivee);
-			break;
+			
 		}
-		return "rien"; //TODO : renvoyer le deplacement en notation algebrique ou "rien"
+			
+		
+		
 	}
 
 	public void mangerPiece(Case caseArrivee )
