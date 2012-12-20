@@ -440,6 +440,7 @@ public class InterfaceJeu {
 	
 	public class EcouteurAction implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
+			
 			if (tab_cases.contains(e.getSource())){
 				int numCase = ((Vector<JButton>) tab_cases).indexOf(e.getSource());
 				//int largeur = numCase%8 +1;
@@ -450,6 +451,7 @@ public class InterfaceJeu {
 				//System.out.println(eCase.getPosition().getLargeur());
 				//System.out.println(eCase.getPosition().getHauteur());
 				
+				/*
 				if ((eCase.estVide()==true) && (selectionCase==true)){
 					CaseSelectionnee = eCase;
 					selectionCase = true;
@@ -480,6 +482,23 @@ public class InterfaceJeu {
 						// ou actualiserPiecesPrises(2);
 					}
 				}
+				*/
+				
+				String dep = "rien";
+				try {
+					dep = plateauJeu.selectionnerCase(eCase);
+				} catch (DeplacementException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				if (dep!="rien"){
+					game.ajoutDeplacement(dep);
+					for (int i=0; i<plateauJeu.getPlateau().size(); i++){						
+						actualiserImage(plateauJeu.getPlateau().get(i));
+					}				
+				}
+				
 				
 				
 			}

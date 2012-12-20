@@ -39,6 +39,7 @@ public class InterfaceCatalogue {
 
 	String choix;
 	
+	Gestion catalogue;
 	JList listeVariantes;
 	Vector<String> liste;
 	
@@ -108,7 +109,6 @@ public class InterfaceCatalogue {
 		imageFond.add(scroll);
 		scroll.setBounds(149, 297, 465, 337);
 		
-		Gestion catalogue;
 		if (choix=="revoir"){
 			catalogue = new GestionCatalogueRevoir();
 			catalogue.chargerListe();
@@ -156,15 +156,34 @@ public class InterfaceCatalogue {
 					new InterfaceJeu(w.getP(), w.getE());
 				}
 			}
-			if (e.getSource()==boutonSupprimerPartie){
-				liste.removeElement((String) listeVariantes.getSelectedValue());
+			else if (e.getSource()==boutonSupprimerPartie){
+				try {
+					catalogue.supprimerPartie((String) listeVariantes.getSelectedValue());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				liste.removeAllElements();
+				catalogue.chargerListe();
+				liste = catalogue.getListePartie();
 				listeVariantes.setListData(liste);
 			}
-			if (e.getSource()==boutonSupprimerListe){
-				listeVariantes.revalidate();
-				// !!
+			else if (e.getSource()==boutonSupprimerListe){
+				for (int i=0; i<liste.size(); i++){
+					try {
+						catalogue.supprimerPartie(liste.get(i));
+					} 
+					catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}					
+				}
+				//catalogue.chargerListe();
+				//liste = catalogue.getListePartie();
+				liste.removeAllElements();			
+				listeVariantes.setListData(liste);
 			}
-			if (e.getSource()==boutonRetour){
+			else if (e.getSource()==boutonRetour){
 				fenetre.setVisible(false);
 				new InterfaceMenu(new GestionJeu());
 			}

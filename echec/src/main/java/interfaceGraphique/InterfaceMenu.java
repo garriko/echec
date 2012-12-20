@@ -106,7 +106,6 @@ public class InterfaceMenu {
 				new InterfaceCatalogue("revoir", cerveley);
 			}
 			if (e.getSource()==Bouton4){ // Options partie
-				fenetre.setVisible(false);
 				new InterfaceOptionsMenu();
 			}
 			if (e.getSource()==Bouton5){ // Quitter partie

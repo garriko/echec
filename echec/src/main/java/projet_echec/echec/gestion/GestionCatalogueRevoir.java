@@ -43,7 +43,7 @@ public class GestionCatalogueRevoir extends Gestion {
 	@Override
 	public void supprimerPartie(String nomPartie) throws Exception {
 		listePartie.remove(nomPartie);
-        File file = new File("partie terminees/"+nomPartie+".gech");
+        File file = new File("parties terminees/"+nomPartie+".gech");
 
         if (!file.exists()) {
             throw new Exception("le fichier est introuvable !");

@@ -11,6 +11,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -101,35 +102,62 @@ public class InterfaceConfigPartie {
 		aideJ1.setOpaque(false);
 		aideJ2.setOpaque(false);
 		rotation.setOpaque(false);
-		aideJ1.setVisible(true);
-		aideJ2.setVisible(true);
 		rotation.setVisible(true);
-		int duree = 20;
-		dureeJ1 = new JSpinner(new SpinnerNumberModel(duree, duree - 5, duree + 100, 5));
-		dureeJ1.setBounds(538, 183, 69, 41);
-		dureeJ2 = new JSpinner(new SpinnerNumberModel(duree, duree - 5, duree + 100, 5));
-		dureeJ2.setBounds(537, 323, 70, 41);
-		dureeJ1.setVisible(true);
-		dureeJ2.setVisible(true);
 		
 		variante.setBounds(200, 550, 200, 100);
 		variante.setVisible(true);
 		
 		
 		
-		// Récupération options pas défaut
-		boolean modeAide;
-		int dureeTour;
 		
-		dis = new DataInputStream(new BufferedIntputStream(new FileIntputStream(new File("OptionsDefaut.vega"))));
 		
-		dis.read(dureeTour);
-		dis.read(modeAide);
+		// Récupération options pas défaut		
+		int dureeTour=0;
+		boolean modeAide=false;
+		
+		try {
+			dis = new DataInputStream(new BufferedInputStream(new FileInputStream("OptionsDefaut.vega")));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}	
+		
+		try {
+			dureeTour = dis.readInt();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			modeAide = dis.readBoolean();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		dis.close();
+		try {
+			dis.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		
+		
+		
+		dureeJ1 = new JSpinner(new SpinnerNumberModel(dureeTour, 0, 500, 10));
+		dureeJ1.setBounds(538, 183, 69, 41);
+		dureeJ2 = new JSpinner(new SpinnerNumberModel(dureeTour, 0, 500, 10));
+		dureeJ2.setBounds(537, 323, 70, 41);
+		dureeJ1.setVisible(true);
+		dureeJ2.setVisible(true);
+		
+		
+		aideJ1.setSelected(modeAide);
+		aideJ2.setSelected(modeAide);
+		aideJ1.setVisible(true);
+		aideJ2.setVisible(true);
 		
 		
 		Ecouteur listen=new Ecouteur();

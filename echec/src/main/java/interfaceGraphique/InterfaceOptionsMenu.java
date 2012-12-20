@@ -57,8 +57,8 @@ public class InterfaceOptionsMenu {
 		BoutonAppliquer = new JButton(new ImageIcon("images/boutonAppliquer.png"));
 		BoutonAnnuler = new JButton(new ImageIcon("images/boutonAnnulerOptions.png"));
 		modeAide = new JCheckBox();
-		int duree = 10;
-		dureeTour = new JSpinner(new SpinnerNumberModel(duree, duree - 5, duree + 100,5));
+		int duree = 25;
+		dureeTour = new JSpinner(new SpinnerNumberModel(duree, 0, 500, 10));
 		
 		BoutonAppliquer.setBounds(500, 550, 158, 72); //position x, position y, largeur, hauteur
 		BoutonAnnuler.setBounds(670, 550, 158, 72);
