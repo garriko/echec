@@ -58,11 +58,12 @@ public class EchiquierActif extends Echiquier {
 	 */
 	public void findKings(){
 		for(int i=0;i<plateau.size();i++){
-			if(plateau.get(i).getPiece().getClass().getSimpleName().equals(new String("Roi")))
-				if(plateau.get(i).getPiece().getCamp()=="noir")
-					caseRoiNoir=plateau.get(i);
-				else
-					caseRoiBlanc=plateau.get(i);
+			if(!plateau.get(i).estVide())
+				if(plateau.get(i).getPiece().getClass().getSimpleName().equals(new String("Roi")))
+					if(plateau.get(i).getPiece().getCamp()=="noir")
+						caseRoiNoir=plateau.get(i);
+					else
+						caseRoiBlanc=plateau.get(i);
 		}
 	}
 	
@@ -287,8 +288,10 @@ public class EchiquierActif extends Echiquier {
 	public String deplacer(Case caseDepart, Case caseArrivee) throws DeplacementException
 	{
 		switch(echec()){
-		case 21:break;
-		case 22:break;
+		case 21:
+			return "echec et mat";
+		case 22:
+			return "echec et mat";
 		case 11:
 			Case sauvegardecasearrive = caseArrivee;
 			deplacersanscondition(caseDepart,caseArrivee);
@@ -297,6 +300,7 @@ public class EchiquierActif extends Echiquier {
 			else{
 				deplacersanscondition(caseArrivee,caseDepart);	
 				caseArrivee=sauvegardecasearrive;
+				//TODO : Warning retirer dans pieces prises !!!!!
 			}
 			break;
 		case 12:
