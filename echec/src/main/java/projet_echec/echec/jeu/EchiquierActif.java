@@ -307,6 +307,7 @@ public class EchiquierActif extends Echiquier {
 	 */
 	public String deplacer(Case caseDepart, Case caseArrivee) throws DeplacementException
 	{
+		String res=getNotationAlgebrique(caseDepart, caseArrivee);;
 		switch(echec()){
 		case 21:
 			return "echec et mat";
@@ -314,32 +315,46 @@ public class EchiquierActif extends Echiquier {
 			return "echec et mat";
 		case 11:
 			Case sauvegardecasearrive = caseArrivee;
+		 
 			deplacersanscondition(caseDepart,caseArrivee);
 			if(echec()!=11 && echec()!=21){
-				mangerPiece(caseArrivee);
+				mangerPiece(caseArrivee);//plus echec donc le deplcement se fait
+				return res;
 			}
 			else{	
 				deplacersanscondition(caseArrivee,caseDepart);
 				caseArrivee=sauvegardecasearrive;
+				//attention: il n'y as pas de deplacement effectif
+				return "rien";
 			}
-			break;
 		case 12:
 			Case sauvegardecasearrive1 = caseArrivee;
 			deplacersanscondition(caseDepart,caseArrivee);
 			if(echec()!=12 && echec()!=22){
 				mangerPiece(caseArrivee);
+				return res;
 			}
 			else{
 				deplacersanscondition(caseArrivee,caseDepart);	
 				caseArrivee=sauvegardecasearrive1;
+				return "rien";
 			}
-			break;
+			
 		default:
-			mangerPiece(caseArrivee);
+			Case sauvegardecasearrive2 = caseArrivee;
 			deplacersanscondition(caseDepart,caseArrivee);
-			break;
+			if(echec()!=12 && echec()!=22){
+				mangerPiece(caseArrivee);
+				return res;
+			}
+			else{
+				deplacersanscondition(caseArrivee,caseDepart);	
+				caseArrivee=sauvegardecasearrive2;
+				return "rien";
+			}
+			
 		}
-		return "rien"; //TODO : renvoyer le deplacement en notation algebrique ou "rien"
+		
 	}
 
 	public void mangerPiece(Case caseArrivee )
