@@ -44,19 +44,36 @@ public class PionTest extends TestCase {
 		
 		
 		Position p= new Position(4,4);
-		Case c1= new Case(p);
-		Piece c= new Pion("noir");
+		Piece c= new Pion("blanc");
+		Case c1  = E.chercherCase(p);
 		c1.setPiece(c);
-		System.out.println(c1.estVide());
+
+
 		
-		Position ar= new Position(3,3);
-		Case t2= new Case(ar);
-		Piece d= new Tour("noir");
-		t2.setPiece(d);
+		Position ar= new Position(5,5);
+		Case t2=E.chercherCase(ar);
+		
+		//Piece d= new Tour("noir");
+		//t2.setPiece(d);
 		//System.out.println(E.chercherCase(p).getPosition().getHauteur()+","+c1.getPosition().getLargeur());
 		//System.out.println(c1.getPiece());
 		//System.out.println(c1.getPiece().getDeplacementPossible(c1));
 		
+		for(int i=0;i<64;i++)
+		{
+			System.out.println("-----------------------------------------------------------------------------------");
+			Case LaCase = E.getPlateau().get(i);
+			System.out.println("Position: "+LaCase.getPosition().getHauteur()+","+LaCase.getPosition().getLargeur());
+			System.out.println("piece presente: "+LaCase.getPiece());
+			if(LaCase.getPiece()!=null){
+				System.out.println("Camp: "+LaCase.getPiece().getCamp());
+			}
+			
+			System.out.println("-----------------------------------------------------------------------------------");
+		}
+		
+	
+
 	
 		try {
 			E.deplacer(c1,t2);
