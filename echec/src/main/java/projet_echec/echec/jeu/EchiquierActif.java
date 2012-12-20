@@ -308,40 +308,44 @@ public class EchiquierActif extends Echiquier {
 		
 		String res=getNotationAlgebrique(caseDepart, caseArrivee);;
 		Case sauvegardecasearrive = caseArrivee;
-		deplacersanscondition(caseDepart,caseArrivee);
-		if(campActif=="noir")
+		if(deplacersanscondition(caseDepart,caseArrivee))
 		{
-			if(echec()!=11 && echec()!=21){
-				mangerPiece(caseArrivee);//pas echec donc le deplacement se fait
-				return res;
-				
+			if(campActif=="noir")
+			{
+				if(echec()!=11 && echec()!=21){
+					mangerPiece(caseArrivee);//pas echec donc le deplacement se fait
+					return res;
+
+				}
+				else
+				{	
+					deplacersanscondition(caseArrivee,caseDepart);
+					caseArrivee=sauvegardecasearrive;
+					//attention: il n'y as pas de deplacement effectif
+
+					return "rien";
+				}
+
+
 			}
 			else
-			{	
-				deplacersanscondition(caseArrivee,caseDepart);
-				caseArrivee=sauvegardecasearrive;
-				//attention: il n'y as pas de deplacement effectif
-				
-				return "rien";
-			}
+			{
+				if(echec()!=12 && echec()!=22){ //Si le deplacement ne provoque pas de mise en danger du roi
+					mangerPiece(caseArrivee);
 
-		
+					return res;
+				}
+				else{
+					deplacersanscondition(caseArrivee,caseDepart);	
+					caseArrivee=sauvegardecasearrive;
+
+					return "rien";
+				}
+
+			}
 		}
 		else
-		{
-		if(echec()!=12 && echec()!=22){ //Si le deplacement ne provoque pas de mise en danger du roi
-				mangerPiece(caseArrivee);
-				
-				return res;
-			}
-			else{
-				deplacersanscondition(caseArrivee,caseDepart);	
-				caseArrivee=sauvegardecasearrive;
-				
-				return "rien";
-			}
-			
-		}
+			return "rien";
 			
 		
 		
@@ -365,8 +369,9 @@ public class EchiquierActif extends Echiquier {
 	 * @param caseDepart
 	 * @param caseArrivee
 	 */
-	public void deplacersanscondition(Case caseDepart, Case caseArrivee){
+	public boolean deplacersanscondition(Case caseDepart, Case caseArrivee){
 		ArrayList<Case> plop = new ArrayList<Case>();
+		boolean depEffectue = false;
 		
 		plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
 
@@ -388,8 +393,10 @@ public class EchiquierActif extends Echiquier {
 						this.caseRoiBlanc.setPosition(caseArrivee.getPosition());
 				}
 				changerCase(caseDepart, caseArrivee);
+				depEffectue=true;
 			}
 		}
+		return depEffectue;
 	}
 
 	
@@ -452,10 +459,8 @@ public class EchiquierActif extends Echiquier {
 		Case caseplateau;
 		for(int i=0;i<(casePossible.size());i++)
 		{
-			System.out.println(casePossible.get(i).getPosition().getHauteur()+","+casePossible.get(i).getPosition().getLargeur());
+			
 			caseplateau=chercherCase(casePossible.get(i).getPosition());
-			System.out.println("plop");
-			System.out.println(caseplateau.getPosition().getHauteur()+","+caseplateau.getPosition().getLargeur());
 
 			if((!caseplateau.estVide())){
 				if(caseplateau.getPiece().getCamp().equals(camp))
