@@ -242,36 +242,51 @@ public class EchiquierActif extends Echiquier {
 	 * @throws DeplacementException 
 	 */
 	public String selectionnerCase(Case caseSelectionne) throws DeplacementException{
+		System.out.println("0");
 		if(this.caseSelectionne==null)
 		{
+			System.out.println("1");
 			if(!caseSelectionne.estVide())
-			{				
-				if(caseSelectionne.getPiece().getCamp()==campActif)
+			{			
+				System.out.println("11");
+				if(caseSelectionne.getPiece().getCamp().equals(campActif))
 				{
+					System.out.println("111");
 					this.caseSelectionne=caseSelectionne;
 					return "rien";
 				}
-				else
+				else{
+					System.out.println("112");
 					return "rien";
+				}
 			}
 			else
+			{
+				System.out.println("12");
 				return "rien";
-
+			}
 
 		}
 		else
 		{
-
+			System.out.println("2");
 			if(this.caseSelectionne.equals(caseSelectionne))
 			{
+				System.out.println("21");
 				this.caseSelectionne=null;
 				return "rien";
 			}
 			else
 			{
+				System.out.println("22");
 				String dep;
 				dep = deplacer(this.caseSelectionne,caseSelectionne);
 				this.caseSelectionne=null;
+				if(!dep.equals("rien"))
+					if(campActif.equals("blanc"))
+						campActif = new String("noir");
+					else
+						campActif = new String("blanc");
 				return dep;
 			}
 
@@ -407,15 +422,15 @@ public class EchiquierActif extends Echiquier {
 		Case caseplateau;
 		for(int i=0;i<(casePossible.size());i++){
 			caseplateau=chercherCase(casePossible.get(i).getPosition());
-
+			System.out.println(caseplateau);
 
 			if((!caseplateau.estVide())){
-				System.out.println("prout");
 				System.out.println(caseplateau.getPosition().getHauteur()+","+caseplateau.getPosition().getLargeur());
 				System.out.println(caseplateau.getPiece().getCamp());
 				if(caseplateau.getPiece().getCamp().equals(camp))
 				{
 					casePossible.remove(casePossible.get(i));
+					i--;
 				}
 			}	
 		}
@@ -426,8 +441,9 @@ public class EchiquierActif extends Echiquier {
 
 		Vector<Case> listepiece= new Vector<Case>();
 		for(int i=0;i<liste.size();i++){// Pour toutes les pieces en jeu
-			if (liste.get(i).getPiece().getCamp()=="blanc"){//si dans la liste la piece est blanche
-				listepiece.add(liste.get(i));//ajoute dans la liste des pieces adverses les pieces noires
+			if(!liste.get(i).estVide())
+				if (liste.get(i).getPiece().getCamp()=="blanc"){//si dans la liste la piece est blanche
+					listepiece.add(liste.get(i));//ajoute dans la liste des pieces adverses les pieces noires
 			}
 		}
 		return listepiece;		
@@ -439,8 +455,9 @@ public class EchiquierActif extends Echiquier {
 
 		Vector<Case> listepiece= new Vector<Case>();
 		for(int i=0;i<liste.size();i++){// Pour toutes les pieces en jeu
-			if (liste.get(i).getPiece().getCamp()=="noir"){//si dans la liste la piece est noires
-				listepiece.add(liste.get(i));//ajoute dans la liste des pieces adverses les pieces noires
+			if(!liste.get(i).estVide())
+				if (liste.get(i).getPiece().getCamp()=="noir"){//si dans la liste la piece est noires
+					listepiece.add(liste.get(i));//ajoute dans la liste des pieces adverses les pieces noires
 			}
 		}
 		return listepiece;		
