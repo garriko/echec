@@ -1,6 +1,10 @@
 package interfaceGraphique;
 
+<<<<<<< HEAD
 //import interfaceGraphique.InterfaceMenu.Ecouteur;
+=======
+
+>>>>>>> fd1aea10c1e8ee122c3809c73cd80391cdb5923c
 
 import java.awt.Color;
 import java.awt.Container;
