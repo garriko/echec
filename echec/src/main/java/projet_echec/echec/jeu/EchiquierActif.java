@@ -6,6 +6,7 @@ import java.util.Timer;
 import java.util.Vector;
 
 import projet_echec.echec.exception.DeplacementException;
+import projet_echec.echec.jeu.piece.Pion;
 import projet_echec.echec.jeu.piece.Roi;
 
 /**
@@ -308,17 +309,15 @@ public class EchiquierActif extends Echiquier {
 			ArrayList<Case> plop = new ArrayList<Case>();
 	
 			plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
-			
+			System.out.println("liste des deplcement possible 0f: "+plop.size());
 			plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
-			/*
-			for(int j=0; j< plop.size();j++){
-				System.out.println("position de la piece :"+plop.get(j).getPosition().getHauteur()+","+plop.get(j).getPosition().getLargeur());
+			System.out.println("liste des deplcement possible 1f: "+plop.size());
+			Piece testpionn= new Pion("noir");
+			Piece testpionb= new Pion("blanc");
+			if(caseDepart.getPiece().equals(testpionb)||caseDepart.getPiece().equals(testpionn)){
+				plop= filtrerpresenceAdversaireDiagonale(caseDepart, caseDepart.getPiece().getDeplacementPossible(caseDepart));
 			}
-			System.out.println("on doit trouver");
-			System.out.println(caseArrivee.getPosition().getHauteur()+","+caseArrivee.getPosition().getLargeur());
-			System.out.println("suite");
-			*/
-
+			System.out.println("liste des deplcement possible 2f: "+plop.size());
 			for(int i=0; i< plop.size();i++){
 				
 				if(plop.get(i).getPosition().equals(caseArrivee.getPosition())){
@@ -347,37 +346,67 @@ public class EchiquierActif extends Echiquier {
 	
 	
 	/**
-	 * Methode utile pour la classe Pion. Renvoie 0,1 ou 2 cases selon la presence d'une piece adverse en diagonale par rapport a la
+	 * Methode utile pour la classe Pion. modifie le fetdeplacementPossible selon la presence d'une piece adverse en diagonale par rapport a la
 	 * direction d'avancee du pion
-	 * @param caseActuelle case du pion
-	 * @return 0,1 ou 2 cases
+	 * @param caseActuelle :case du pion
+	 * @param res : le getdeplacement de la piece
 	 */
 
-	public ArrayList<Case>[] presenceAdversaireDiagonale(Case caseActuelle){
-		ArrayList<Case> res=new ArrayList<Case>();
+	private ArrayList<Case> filtrerpresenceAdversaireDiagonale(Case caseActuelle,ArrayList<Case> res){
+		
+		
 		if(caseActuelle.getPiece().getCamp()=="blanc"){
 			Case c0 = chercherCase(new Position(caseActuelle.getPosition().getHauteur()+1,caseActuelle.getPosition().getLargeur()-1));
-			if(!c0.estVide())
-				if(c0.getPiece().getCamp()!="blanc")
-					res.add(c0);
+			
+			if(!c0.estVide()){
+				if(c0.getPiece().getCamp()=="blanc"){
+					for(int i=0;i<res.size();i++){
+						if(c0.getPosition().equals(res.get(i).getPosition()))
+							res.remove(res.get(i));
+					}}}
+			else{
+				for(int i=0;i<res.size();i++){
+					if(c0.getPosition().equals(res.get(i).getPosition()))
+						res.remove(res.get(i));
+				}
+				}
+				
+			
 			Case c1 = chercherCase(new Position(caseActuelle.getPosition().getHauteur()+1,caseActuelle.getPosition().getLargeur()+1));
 			if(!c1.estVide())
-				if(c1.getPiece().getCamp()!="blanc")
-					res.add(c1);
+				if(c1.getPiece().getCamp()=="blanc"){
+					for(int i=0;i<res.size();i++){
+						if(c1.getPosition().equals(res.get(i).getPosition()))
+							res.remove(res.get(i));
+					}
+					}
+
 		}
 		else
 		{
-			Case c0 = chercherCase(new Position(caseActuelle.getPosition().getHauteur()+1,caseActuelle.getPosition().getLargeur()-1));
-			if(!c0.estVide())
-				if(c0.getPiece().getCamp()=="blanc")
-					res.add(c0);
-			Case c1 = chercherCase(new Position(caseActuelle.getPosition().getHauteur()+1,caseActuelle.getPosition().getLargeur()+1));
+			Case c0 = chercherCase(new Position(caseActuelle.getPosition().getHauteur()-1,caseActuelle.getPosition().getLargeur()-1));
+			if(!c0.estVide()){
+				if(c0.getPiece().getCamp()!="blanc"){
+					for(int i=0;i<res.size();i++){
+						if(c0.getPosition().equals(res.get(i).getPosition()))
+							res.remove(res.get(i));
+					}}
+			Case c1 = chercherCase(new Position(caseActuelle.getPosition().getHauteur()-1,caseActuelle.getPosition().getLargeur()+1));
 			if(!c1.estVide())
-				if(c1.getPiece().getCamp()=="blanc")
-					res.add(c1);
+				if(c1.getPiece().getCamp()!="blanc"){
+					for(int i=0;i<res.size();i++){
+						if(c1.getPosition().equals(res.get(i).getPosition()))
+							res.remove(res.get(i));
+					}
+				}}
+			else
+				for(int i=0;i<res.size();i++){
+					if(c0.getPosition().equals(res.get(i).getPosition()))
+						res.remove(res.get(i));
+				}
 			
 		}
-		return null;
+		return res;
 	}
 	
 	/**
@@ -388,9 +417,18 @@ public class EchiquierActif extends Echiquier {
 	 */
 	private ArrayList<Case> filtrerDeplacementPossible(String camp,ArrayList<Case> casePossible)
 	{
+		Case caseplateau;
 		for(int i=0;i<(casePossible.size());i++){
-			if((casePossible.get(i).getPiece()!=null) && (casePossible.get(i).getPiece().getCamp()==camp)){
-				casePossible.remove(casePossible.get(i));
+			caseplateau=chercherCase(casePossible.get(i).getPosition());
+			
+			
+			if((!caseplateau.estVide())){
+				System.out.println(caseplateau.getPosition().getHauteur()+","+caseplateau.getPosition().getLargeur());
+				System.out.println(caseplateau.getPiece().getCamp());
+				if(caseplateau.getPiece().getCamp().equals(camp))
+				{
+					casePossible.remove(casePossible.get(i));
+				}
 			}	
 		}
 		return casePossible;

@@ -17,21 +17,25 @@ import projet_echec.echec.jeu.Position;
 
 public class Pion extends Piece implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7909555113524307989L;
 	private boolean dejaBouge;
 
 	public Pion(String camp) {
 		super(camp);
-		dejaBouge=false;
+		this.dejaBouge=false;
 	}
 	
 	
 	@Override
-	public ArrayList<Case> getDeplacementPossible(Case pos){return null;}
+	//public ArrayList<Case> getDeplacementPossible(Case pos){return null;}
 	
-	public ArrayList<Case> getDeplacementPossible(Case pos, ArrayList<Case> caseDiagonale) {
+	public ArrayList<Case> getDeplacementPossible(Case pos) {
 		
 		ArrayList<Case> lp = new ArrayList<Case>();
-		System.out.println("test");
+		
 		if(this.dejaBouge == false)
 		{
 			if(pos.getPiece().getCamp()=="blanc")
@@ -43,6 +47,14 @@ public class Pion extends Piece implements java.io.Serializable {
 				Case c1 = new Case(new Position(pos.getPosition().getHauteur()+2,pos.getPosition().getLargeur()+0));
 				if(isDeplacementOk(c1))
 					lp.add(c1);
+				
+				Case diagd = new Case(new Position(pos.getPosition().getHauteur()+1,pos.getPosition().getLargeur()+1));
+				if(isDeplacementOk(diagd))
+					lp.add(diagd);
+				
+				Case diagg = new Case(new Position(pos.getPosition().getHauteur()+1,pos.getPosition().getLargeur()-1));
+				if(isDeplacementOk(diagg))
+					lp.add(diagg);
 			}
 			else
 			{
@@ -53,6 +65,14 @@ public class Pion extends Piece implements java.io.Serializable {
 				Case c1 = new Case(new Position(pos.getPosition().getHauteur()-2,pos.getPosition().getLargeur()+0));
 				if(isDeplacementOk(c1))
 					lp.add(c1);
+				
+				Case diagd = new Case(new Position(pos.getPosition().getHauteur()-1,pos.getPosition().getLargeur()+1));
+				if(isDeplacementOk(diagd))
+					lp.add(diagd);
+				
+				Case diagg = new Case(new Position(pos.getPosition().getHauteur()-1,pos.getPosition().getLargeur()-1));
+				if(isDeplacementOk(diagg))
+					lp.add(diagg);
 			}
 			this.dejaBouge = true;
 		}
@@ -63,15 +83,31 @@ public class Pion extends Piece implements java.io.Serializable {
 			Case c0 = new Case(new Position(pos.getPosition().getHauteur()+1,pos.getPosition().getLargeur()+0));
 			if(isDeplacementOk(c0))
 				lp.add(c0);
+			
+			Case diagd = new Case(new Position(pos.getPosition().getHauteur()+1,pos.getPosition().getLargeur()+1));
+			if(isDeplacementOk(diagd))
+				lp.add(diagd);
+			
+			Case diagg = new Case(new Position(pos.getPosition().getHauteur()+1,pos.getPosition().getLargeur()-1));
+			if(isDeplacementOk(diagg))
+				lp.add(diagg);
 			}
 			else
 			{
 			Case c0 = new Case(new Position(pos.getPosition().getHauteur()-1,pos.getPosition().getLargeur()+0));
 			if(isDeplacementOk(c0))
 				lp.add(c0);
+			
+			Case diagd = new Case(new Position(pos.getPosition().getHauteur()-1,pos.getPosition().getLargeur()+1));
+			if(isDeplacementOk(diagd))
+				lp.add(diagd);
+			
+			Case diagg = new Case(new Position(pos.getPosition().getHauteur()-1,pos.getPosition().getLargeur()-1));
+			if(isDeplacementOk(diagg))
+				lp.add(diagg);
+			
 			}
 		}
-		lp.addAll(caseDiagonale);
 		return lp;
 	}
 
