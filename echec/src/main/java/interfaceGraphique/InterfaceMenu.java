@@ -94,7 +94,7 @@ public class InterfaceMenu {
 		public void actionPerformed(ActionEvent e){
 			if (e.getSource()==Bouton1){ // Commencer partie
 				fenetre.setVisible(false);
-				new InterfaceConfigPartie(cerveley);
+				new InterfaceConfigPartie();
 				
 			}
 			if (e.getSource()==Bouton2){ // Continuer partie

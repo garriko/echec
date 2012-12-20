@@ -67,7 +67,6 @@ public class InterfaceConfigPartie {
 	
 	JLabel variante;
 	
-	GestionJeu cerveley;
 	Options lesOptions;
 	
 	DataInputStream dis;
@@ -76,12 +75,11 @@ public class InterfaceConfigPartie {
 	/**
 	 * Constructeur de la classe
 	 */
-	public InterfaceConfigPartie(GestionJeu cerveau) {	
+	public InterfaceConfigPartie() {	
 		fenetre=new JFrame("Configuration de la partie");
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		tmp = fenetre.getContentPane();
 		
-		cerveley = cerveau;
 		
 		variante = new JLabel("classique");
 		
@@ -217,7 +215,7 @@ public class InterfaceConfigPartie {
 				String varianteChoisie = variante.getText();
 				Wrapper w = null;
 				try {
-					w = cerveley.creerNewGame(J1, J2, varianteChoisie, optionsPartie);
+					w = GestionJeu.creerNewGame(J1, J2, varianteChoisie, optionsPartie);
 				} catch (ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
