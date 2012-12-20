@@ -372,15 +372,24 @@ public class EchiquierActif extends Echiquier {
 	 */
 
 	private void filtrerpresenceAdversaireDiagonale(Case caseActuelle,ArrayList<Case> casePossible){
-		
+		//System.out.println(casePossible.size());
 		for(int i=0; i < casePossible.size();i++){
+			//System.out.println(i);
 			Case c = casePossible.get(i);
+			//System.out.println(c.getPosition().getHauteur()+","+c.getPosition().getLargeur());
+			//System.out.println(caseActuelle.getPosition().getLargeur());
 			if(c.getPosition().getLargeur()==caseActuelle.getPosition().getLargeur()+1 || c.getPosition().getLargeur()==caseActuelle.getPosition().getLargeur()-1)
 			{
 				if(c.estVide())
+				{
 					casePossible.remove(c);
+					i--;
+				}
 				else if(c.getPiece().getCamp().equals(caseActuelle.getPiece().getCamp()))
+				{
 					casePossible.remove(c);
+				i--;
+				}
 					
 			}
 		}
