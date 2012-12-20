@@ -245,6 +245,11 @@ public class EchiquierActif extends Echiquier {
 
 		System.out.println(caseSelectionne.getPosition().getHauteur()+","+caseSelectionne.getPosition().getLargeur());
 
+<<<<<<< HEAD
+=======
+		System.out.println("0");
+
+>>>>>>> 73d4790982bd907fbe2c7aa152fbfa1d5aca4af4
 		if(this.caseSelectionne==null)
 		{
 			System.out.println("1");
@@ -305,6 +310,7 @@ public class EchiquierActif extends Echiquier {
 	 */
 	public String deplacer(Case caseDepart, Case caseArrivee) throws DeplacementException
 	{
+		String res=getNotationAlgebrique(caseDepart, caseArrivee);;
 		switch(echec()){
 		case 21:
 			return "echec et mat";
@@ -312,31 +318,61 @@ public class EchiquierActif extends Echiquier {
 			return "echec et mat";
 		case 11:
 			Case sauvegardecasearrive = caseArrivee;
+		 
 			deplacersanscondition(caseDepart,caseArrivee);
 			if(echec()!=11 && echec()!=21){
+				mangerPiece(caseArrivee);//plus echec donc le deplcement se fait
+				return res;
 			}
-			else{
-				deplacersanscondition(caseArrivee,caseDepart);	
+			else{	
+				deplacersanscondition(caseArrivee,caseDepart);
 				caseArrivee=sauvegardecasearrive;
-				//TODO : Warning retirer dans pieces prises !!!!!
+				//attention: il n'y as pas de deplacement effectif
+				return "rien";
 			}
-			break;
 		case 12:
 			Case sauvegardecasearrive1 = caseArrivee;
 			deplacersanscondition(caseDepart,caseArrivee);
 			if(echec()!=12 && echec()!=22){
+				mangerPiece(caseArrivee);
+				return res;
 			}
 			else{
 				deplacersanscondition(caseArrivee,caseDepart);	
 				caseArrivee=sauvegardecasearrive1;
+				return "rien";
 			}
-			break;
+			
 		default:
+			Case sauvegardecasearrive2 = caseArrivee;
 			deplacersanscondition(caseDepart,caseArrivee);
-			break;
+			if(echec()!=12 && echec()!=22){
+				mangerPiece(caseArrivee);
+				return res;
+			}
+			else{
+				deplacersanscondition(caseArrivee,caseDepart);	
+				caseArrivee=sauvegardecasearrive2;
+				return "rien";
+			}
+			
 		}
-		return "rien"; //TODO : renvoyer le deplacement en notation algebrique ou "rien"
+		
 	}
+
+	public void mangerPiece(Case caseArrivee )
+	{
+		if(!caseArrivee.estVide())//si il y a une case a l'arrivee
+		{
+			this.listePiecePrises.add(caseArrivee.getPiece());//on ajoute la piece dans la liste des pieces prises
+
+			for(int j=0; j< listePieceEnJeu.size();j++)//pour toutes les pieces en jeu
+				if(this.listePieceEnJeu.get(j).equals(caseArrivee))//si il y a une case egale a la case d'arrivee
+					this.listePieceEnJeu.remove(j);//on la supprime
+		}
+	}
+
+
 	/**
 	 * fait un deplacement sans test d'echec
 	 * @param caseDepart
@@ -348,12 +384,12 @@ public class EchiquierActif extends Echiquier {
 		plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
 
 		plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
-		
+
 
 		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Pion"))){
 			filtrerpresenceAdversaireDiagonale(caseDepart,plop);
 		}
-		
+
 		for(int i=0; i< plop.size();i++){
 
 			if(plop.get(i).getPosition().equals(caseArrivee.getPosition())){
@@ -364,18 +400,25 @@ public class EchiquierActif extends Echiquier {
 					if(caseDepart.getPiece().getCamp().equals("blanc"))
 						this.caseRoiBlanc.setPosition(caseArrivee.getPosition());
 				}
-				if(!caseArrivee.estVide())//si il y a une case a l'arrivee
-				{
-					this.listePiecePrises.add(caseArrivee.getPiece());//on ajoute la piece dans la liste des pieces prises
-
-					for(int j=0; j< listePieceEnJeu.size();j++)//pour toutes les pieces en jeu
-						if(listePieceEnJeu.get(j).equals(caseArrivee))//si il y a une case egale a la case d'arrivee
-							listePieceEnJeu.remove(j);//on la supprime
-					changerCase(caseDepart, caseArrivee);
-				}
-
+				changerCase(caseDepart, caseArrivee);
 			}
 		}
+	}
+
+	
+	
+	public String getNotationAlgebrique(Case caseDepart, Case caseArrivee){
+		String nota = new String();
+		nota = nota.concat(String.valueOf(caseDepart.getPosition().getHauteur())+String.valueOf(caseDepart.getPosition().getLargeur()));
+		
+		if(caseArrivee.estVide())
+			nota= nota.concat("-");
+		else
+			nota= nota.concat("x");
+		
+		nota = nota.concat(String.valueOf(caseArrivee.getPosition().getHauteur())+String.valueOf(caseArrivee.getPosition().getLargeur()));
+		
+		return nota;
 	}
 
 
@@ -403,9 +446,9 @@ public class EchiquierActif extends Echiquier {
 				else if(c.getPiece().getCamp().equals(caseActuelle.getPiece().getCamp()))
 				{
 					casePossible.remove(c);
-				i--;
+					i--;
 				}
-					
+
 			}
 		}
 
@@ -444,7 +487,7 @@ public class EchiquierActif extends Echiquier {
 			if(!liste.get(i).estVide())
 				if (liste.get(i).getPiece().getCamp()=="blanc"){//si dans la liste la piece est blanche
 					listepiece.add(liste.get(i));//ajoute dans la liste des pieces adverses les pieces noires
-			}
+				}
 		}
 		return listepiece;		
 	}
@@ -458,7 +501,7 @@ public class EchiquierActif extends Echiquier {
 			if(!liste.get(i).estVide())
 				if (liste.get(i).getPiece().getCamp()=="noir"){//si dans la liste la piece est noires
 					listepiece.add(liste.get(i));//ajoute dans la liste des pieces adverses les pieces noires
-			}
+				}
 		}
 		return listepiece;		
 	}
