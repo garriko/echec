@@ -137,11 +137,11 @@ public class InterfacePersoEchiquier {
 		ReineNoir = new JButton(new ImageIcon("images/Pieces/perso/ReineN.png"));
 		ReineNoir.setBorderPainted(false);
 		
-		Poubelle = new JButton("Poubelle");
-		Reset = new JButton("Reset");
+		Poubelle = new JButton(new ImageIcon("images/PersoEchiquier/BoutonPoubelle.png"));
+		Reset = new JButton(new ImageIcon("images/PersoEchiquier/BoutonReset.png"));
 		
 		// fond d'écran
-		JPanel imageFond = new TestImagePanel(new ImageIcon("images/persoEchiquier.png").getImage());
+		JPanel imageFond = new TestImagePanel(new ImageIcon("images/PersoEchiquier/InterfacePersoEchiquier.png").getImage());
 	
 		
 		boutonOK.setBounds(675, 550, 124, 65);
@@ -160,8 +160,8 @@ public class InterfacePersoEchiquier {
 		RoiNoir.setBounds(220, 420, 55,55);
 		ReineNoir.setBounds(220, 480, 55,55);
 		
-		Poubelle.setBounds(100, 600, 100, 40);
-		Reset.setBounds(200, 600, 70, 40);
+		Poubelle.setBounds(415, 540, 88, 37);
+		Reset.setBounds(507, 540, 88, 37);
 		
 	
 		

@@ -110,10 +110,10 @@ public class InterfaceRevoirPartie {
 		modeLecture = new JComboBox();
 		
 		
-		BoutonLect.setBounds(85, 590, 92, 64); //position x, position y, largeur, hauteur
-		BoutonPause.setBounds(180, 590, 92, 65); 
-		modeLecture.setBounds(430,597,140,41);
-		cadence.setBounds(760, 597, 69, 41);
+		BoutonLect.setBounds(85, 547, 92, 64); //position x, position y, largeur, hauteur
+		BoutonPause.setBounds(180, 547, 92, 65); 
+		modeLecture.setBounds(430,547,140,41);
+		cadence.setBounds(760, 547, 69, 41);
 		cadence.setVisible(true);
 		modeLecture.setVisible(true);
 		
@@ -145,7 +145,7 @@ public class InterfaceRevoirPartie {
 						tab_cases.add(new JLabel(new ImageIcon("images/casegrise.png")));
 					}			
 				}
-				((Vector<JLabel>) tab_cases).get(i).setPreferredSize(new Dimension(50,50));
+				((Vector<JLabel>) tab_cases).get(i).setPreferredSize(new Dimension(56,56));
 			}
 		}
 		
@@ -161,7 +161,7 @@ public class InterfaceRevoirPartie {
 		JPanel plateau = new JPanel();
 		plateau.setLayout(new GridLayout(8,8));
 	
-		plateau.setBounds(506,92,400,400);		
+		plateau.setBounds(464,63,448,448);		
 		
 		
 		for (int i=0; i<64 ; i++){
@@ -171,7 +171,7 @@ public class InterfaceRevoirPartie {
 		
 		
 		
-		JPanel imageFond = new TestImagePanel(new ImageIcon("images/interfaceRevoirPartie.png").getImage().getScaledInstance(1035, 700, Image.SCALE_DEFAULT));
+		JPanel imageFond = new TestImagePanel(new ImageIcon("images/interfaceRevoirPartie.png").getImage());
 		imageFond.setLayout(null);
 		
 		imageFond.add(plateau);
@@ -196,7 +196,7 @@ public class InterfaceRevoirPartie {
 		plateauJeu.setCadence((Integer) cadence.getValue());
 		plateauJeu.setModeLecture((String) modeLecture.getSelectedItem());
     
-		fenetre.setSize(1035,720); // taille de l'image de fond
+		fenetre.setSize(1030,680); // taille de l'image de fond
 		fenetre.setResizable(false);
 		fenetre.setVisible(true);
 	}

@@ -148,9 +148,9 @@ public class InterfaceConfigPartie {
 		
 		
 		
-		dureeJ1 = new JSpinner(new SpinnerNumberModel(dureeTour, 0, 500, 10));
+		dureeJ1 = new JSpinner(new SpinnerNumberModel(dureeTour, 25, 500, 10));
 		dureeJ1.setBounds(538, 183, 69, 41);
-		dureeJ2 = new JSpinner(new SpinnerNumberModel(dureeTour, 0, 500, 10));
+		dureeJ2 = new JSpinner(new SpinnerNumberModel(dureeTour, 25, 500, 10));
 		dureeJ2.setBounds(537, 323, 70, 41);
 		dureeJ1.setVisible(true);
 		dureeJ2.setVisible(true);

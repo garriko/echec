@@ -1,0 +1,5 @@
+Poubelle = new JButton(new ImageIcon("images/PersoEchiquier/BoutonPoubelle.png"));
+Reset = new JButton(new ImageIcon("images/PersoEchiquier/BoutonReset.png"));
+
+Poubelle.setBounds(415, 540, 88, 37);
+Reset.setBounds(507, 540, 88, 37);

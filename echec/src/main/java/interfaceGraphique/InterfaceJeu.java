@@ -177,7 +177,7 @@ public class InterfaceJeu {
 
 		
 		// fond d'écran
-		imageFond = new TestImagePanel(new ImageIcon("images/interface_jeu.png").getImage());
+		imageFond = new TestImagePanel(new ImageIcon("images/InterfaceJeu.png").getImage());
 		
 		// Création de la JMenuBar
 		boutonPartie.add(boutonNouvellePartie);
@@ -526,6 +526,7 @@ public class InterfaceJeu {
 		else if (plateauJeu.echecEtMat("blanc")==true){
 			finPartie();
 			new InterfacePopupEchecEtMat(2, InterfaceJeu.this);
+			new InterfacePopupSauvegarder(game, plateauJeu, true);
 		}		
 	}
 	
@@ -588,10 +589,10 @@ public class InterfaceJeu {
 				new InterfacePopupSauvegarderQuitter("Quitter", game, plateauJeu, InterfaceJeu.this, fin);
 			}
 			if (e.getSource()==boutonAide){
-				//new InterfaceAide();
+				new InterfacePopupAide();
 			}
 			if (e.getSource()==boutonAProposDe){
-				//new InterfacePopupAProposDe();
+				new InterfaceAProposDe();
 			}
 		}
 	}
