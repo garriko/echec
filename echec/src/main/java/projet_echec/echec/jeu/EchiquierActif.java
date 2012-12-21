@@ -72,17 +72,17 @@ public class EchiquierActif extends Echiquier {
 	 * @param e
 	 * @return 
 	 */
-	public boolean estMenace(String c, Case e){
+	public boolean estMenace(String camp, Case e){
 		boolean estmenace= false;
 		Vector<Case> listePieceAdverse= new Vector<Case>();
-		if (c=="noir")
-		{
-			listePieceAdverse= listerPiecesNoires(this.listePieceEnJeu);
-
-		}
-		else if(c=="blanc")
+		if (camp.equals("noir"))
 		{
 			listePieceAdverse= listerPiecesBlanches(this.listePieceEnJeu);
+
+		}
+		else if(camp.equals("blanc"))
+		{
+			listePieceAdverse= listerPiecesNoires(this.listePieceEnJeu);
 		}
 		else 
 		{//TODO: creer une exception
@@ -794,7 +794,7 @@ public static Vector<Case> listerPiecesBlanches(Vector<Case> liste){
 	Vector<Case> listepiece= new Vector<Case>();
 	for(int i=0;i<liste.size();i++){// Pour toutes les pieces en jeu
 		if(!liste.get(i).estVide())
-			if (liste.get(i).getPiece().getCamp()=="blanc"){//si dans la liste la piece est blanche
+			if (liste.get(i).getPiece().getCamp().equals("blanc")){//si dans la liste la piece est blanche
 				listepiece.add(liste.get(i));//ajoute dans la liste des pieces adverses les pieces noires
 			}
 	}
@@ -808,7 +808,7 @@ public static Vector<Case> listerPiecesNoires(Vector<Case> liste){
 	Vector<Case> listepiece= new Vector<Case>();
 	for(int i=0;i<liste.size();i++){// Pour toutes les pieces en jeu
 		if(!liste.get(i).estVide())
-			if (liste.get(i).getPiece().getCamp()=="noir"){//si dans la liste la piece est noires
+			if (liste.get(i).getPiece().getCamp().equals("noir")){//si dans la liste la piece est noires
 				listepiece.add(liste.get(i));//ajoute dans la liste des pieces adverses les pieces noires
 			}
 	}
