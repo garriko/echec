@@ -84,9 +84,11 @@ public abstract class Echiquier implements java.io.Serializable{
 	public void supprimerPieceEnJeu(Case e){
 		this.listePieceEnJeu.remove(e);	
 	}
-	public void changerCase(Case depart, Case arrive){
+	public Piece changerCase(Case depart, Case arrive){
+		Piece p = arrive.getPiece();
 		arrive.setPiece(depart.getPiece());
 		depart.setPiece(null);
+		return p;
 	}
 	public Vector<Case> getPlateau() {
 		return plateau;

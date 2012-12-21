@@ -30,6 +30,7 @@ public abstract class Piece implements java.io.Serializable{
 	 * constructeur
 	 * @param camp
 	 */
+
 	
 	public Piece(String camp){
 		this.camp=camp;
