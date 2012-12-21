@@ -434,21 +434,9 @@ public class EchiquierActif extends Echiquier {
 	public boolean deplacersanscondition(Case caseDepart, Case caseArrivee){
 		ArrayList<Case> plop = new ArrayList<Case>();
 		boolean depEffectue = false;
-		plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
-
-		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Fou"))){
-			filtrePourFou(caseDepart, plop);
-			System.out.println("pas bon 1");
-		}
-
-		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Tour"))){
-			filtrePourTour(caseDepart, plop);
-			System.out.println("pas bon 2");
-		}
-
-		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
-			filtrePourReine(caseDepart, plop);
-		}
+		System.out.println(caseDepart);
+		
+		plop= filtreGeneral(caseDepart);
 		
 		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Roi"))){
 			if(caseDepart.getPiece().getCamp()=="blanc")
@@ -457,16 +445,7 @@ public class EchiquierActif extends Echiquier {
 				setCaseRoiNoir(caseArrivee);
 			System.out.println("deplace la case du roi");
 		}
-
-		plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
-
-
-		System.out.println("filtre 1");
-		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Pion"))){
-			filtrerpresenceAdversaireDiagonale(caseDepart,plop);
-			System.out.println("pas bon 3");
-		}
-
+		
 		for(int i=0; i< plop.size();i++){
 
 			if(plop.get(i).getPosition().equals(caseArrivee.getPosition())){
@@ -475,32 +454,15 @@ public class EchiquierActif extends Echiquier {
 				depEffectue=true;
 			}
 		}
-
+/*
 		System.out.println("---------------------------------");
 		System.out.println("aprés deplacement");
 		System.out.println(getCaseRoiBlanc().getPosition().getHauteur()+","+getCaseRoiBlanc().getPosition().getLargeur());
 		System.out.println(getCaseRoiNoir().getPosition().getHauteur()+","+getCaseRoiNoir().getPosition().getLargeur());
-		System.out.println("---------------------------------");
+		System.out.println("---------------------------------");*/
 		return depEffectue;
 	}
 
-	public ArrayList<Case> deplacementPossible(Case caseDepart){
-
-		ArrayList<Case> plop = new ArrayList<Case>();
-		plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
-
-		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Fou"))||caseDepart.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
-			filtrePourFou(caseDepart, plop);
-		}
-
-		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Tour"))||caseDepart.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
-			filtrePourTour(caseDepart, plop);
-		}
-
-
-		plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
-		return plop;
-	}
 
 public String getNotationAlgebrique(Case caseDepart, Case caseArrivee){
 	String nota = new String();
@@ -516,7 +478,35 @@ public String getNotationAlgebrique(Case caseDepart, Case caseArrivee){
 	return nota;
 }
 
+private ArrayList<Case> filtreGeneral(Case caseDepart){
+	ArrayList<Case> plop = new ArrayList<Case>();
+	plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
+	
+	if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Fou"))){
+		filtrePourFou(caseDepart, plop);
+		System.out.println("pas bon 1");
+	}
 
+	if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Tour"))){
+		filtrePourTour(caseDepart, plop);
+		System.out.println("pas bon 2");
+	}
+
+	if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
+		filtrePourReine(caseDepart, plop);
+	}
+	
+	plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
+
+
+	System.out.println("filtre 1");
+	if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Pion"))){
+		filtrerpresenceAdversaireDiagonale(caseDepart,plop);
+		System.out.println("pas bon 3");
+	}
+	return plop;
+
+}
 /**
  * Methode utile pour la classe Pion. modifie le fetdeplacementPossible selon la presence d'une piece adverse en diagonale par rapport a la
  * direction d'avancee du pion
