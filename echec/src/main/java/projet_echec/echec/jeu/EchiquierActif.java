@@ -436,16 +436,20 @@ public class EchiquierActif extends Echiquier {
 		boolean depEffectue = false;
 		plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
 
-		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Fou"))||caseDepart.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
+		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Fou"))){
 			filtrePourFou(caseDepart, plop);
 			System.out.println("pas bon 1");
 		}
 
-		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Tour"))||caseDepart.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
+		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Tour"))){
 			filtrePourTour(caseDepart, plop);
 			System.out.println("pas bon 2");
 		}
 
+		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
+			filtrePourReine(caseDepart, plop);
+		}
+		
 		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Roi"))){
 			if(caseDepart.getPiece().getCamp()=="blanc")
 				setCaseRoiBlanc(caseArrivee);
@@ -655,6 +659,24 @@ private void filtrePourFou(Case caseActuelle,ArrayList<Case> casePossible){
 	casePossible.addAll(diagBasDroit);
 	casePossible.addAll(diagHautGauche);
 	casePossible.addAll(diagHautDroite);
+}
+
+private void filtrePourReine(Case caseActuelle,ArrayList<Case> casePossible){
+	ArrayList<Case> diagonale= new ArrayList<Case>();
+	ArrayList<Case> droite= new ArrayList<Case>();
+	
+	for(int i=0; i < casePossible.size();i++){
+		Case c = casePossible.get(i);			
+		if(c.getPosition().getHauteur()==caseActuelle.getPosition().getHauteur() ||c.getPosition().getLargeur()==caseActuelle.getPosition().getLargeur())
+			droite.add(c);
+		else
+			diagonale.add(c);
+	}
+	filtrePourTour(caseActuelle, droite);
+	filtrePourFou(caseActuelle, diagonale);
+	casePossible.clear();
+	casePossible.addAll(droite);
+	casePossible.addAll(diagonale);
 }
 
 
