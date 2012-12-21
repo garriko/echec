@@ -99,6 +99,15 @@ public class InterfaceJeu {
 	JLabel tempsTotalJ1;
 	JLabel tempsTotalJ2;
 	
+	JLabel total1;
+	JLabel total2;
+	JLabel secondes1;
+	JLabel secondes2;
+	JLabel tour1;
+	JLabel tour2;
+	JLabel secondes3;
+	JLabel secondes4;
+	
 	
 	
 	/*
@@ -266,12 +275,12 @@ public class InterfaceJeu {
 		affichageAideJ2.setBounds(255, 355, 100, 40);
 		affichageAideJ2.setVisible(partie.getjNoir().isModeAide());
 		
-		joueur1 = new JLabel("joueur1");
-		joueur2 = new JLabel("joueur2");
-		joueur1.setBounds(137, 99, 100, 25);
-		joueur2.setBounds(137, 352, 100, 25);
+		joueur1 = new JLabel(new ImageIcon("images/InterfaceJeuJoueur1Actif.png"));
+		joueur2 = new JLabel(new ImageIcon("images/InterfaceJeuJoueur2Actif.png"));
+		joueur1.setBounds(137, 95, 100, 25);
+		joueur2.setBounds(139, 351, 100, 25);
 		joueur1.setVisible(true);
-		joueur2.setVisible(true);
+		joueur2.setVisible(false);
 		
 		this.tour = 1;
 		
@@ -376,13 +385,49 @@ public class InterfaceJeu {
 		
 		
 		
+		
+		total1 = new JLabel("total :");
+		total2 = new JLabel("total :");
+		secondes1 = new JLabel("sec");
+		secondes2 = new JLabel("sec");
+		tour1 = new JLabel("tour :");
+		tour2 = new JLabel("tour :");
+		secondes3 = new JLabel("sec");
+		secondes4 = new JLabel("sec");
+		total1.setForeground(Color.white);
+		total2.setForeground(Color.white);
+		secondes1.setForeground(Color.white);
+		secondes2.setForeground(Color.white);
+		tour1.setForeground(Color.white);
+		tour2.setForeground(Color.white);
+		secondes3.setForeground(Color.white);
+		secondes4.setForeground(Color.white);
+		total1.setBounds(160,120,50,50);
+		total2.setBounds(160, 370, 50, 50);
+		secondes1.setBounds(270,120, 50, 50);
+		secondes2.setBounds(270,370,50,50);
+		tour1.setBounds(160,160,50,50);
+		tour2.setBounds(160,410,50,50);
+		secondes3.setBounds(270,160,50,50);
+		secondes4.setBounds(270,410,50,50);
+		imageFond.add(total1);
+		imageFond.add(total2);
+		imageFond.add(tour1);
+		imageFond.add(tour2);
+		imageFond.add(secondes1);
+		imageFond.add(secondes2);
+		imageFond.add(secondes3);
+		imageFond.add(secondes4);
+		
+		
+		
 		// Timer
 		
 		
 		tempsTotalJ1 = new JLabel("0");
 		tempsTotalJ2 = new JLabel("0");
-		tempsTotalJ1.setBounds(180, 120, 50, 50);
-		tempsTotalJ2.setBounds(180, 370, 50, 50);
+		tempsTotalJ1.setBounds(210, 120, 50, 50);
+		tempsTotalJ2.setBounds(210, 370, 50, 50);
 		tempsTotalJ1.setForeground(Color.white);
 		tempsTotalJ2.setForeground(Color.white);
 		imageFond.add(tempsTotalJ1);
@@ -393,14 +438,14 @@ public class InterfaceJeu {
 		
 		countdownJ1 = new Timer(1000, new CountdownTimerListener()); // On créé le timer du J1
 		chronoJ1 = new JLabel(String.valueOf(timeRemaining1), JLabel.CENTER); //On affiche ce label
-		chronoJ1.setBounds(160,160,50,50);
+		chronoJ1.setBounds(192,160,50,50);
 		chronoJ1.setForeground(Color.white);
 		countdownJ1.start();//Démarrer le compteur
 		
 		timeRemaining2 = game.getListeOptions().getDureeTourJ2();
 		countdownJ2 = new Timer(1000, new CountdownTimerListener()); // On créé le timer du J2
 		chronoJ2 = new JLabel(String.valueOf(timeRemaining2), JLabel.CENTER); //On affiche ce label
-		chronoJ2.setBounds(160,410,50,50);
+		chronoJ2.setBounds(192,410,50,50);
 		chronoJ2.setForeground(Color.white);
 		
 		
