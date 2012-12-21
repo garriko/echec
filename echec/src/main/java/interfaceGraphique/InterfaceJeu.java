@@ -108,138 +108,7 @@ public class InterfaceJeu {
 	JLabel secondes3;
 	JLabel secondes4;
 	
-	
-	
-	/*
-	
-	
-	public InterfaceJeu(Partie partie, EchiquierActif echiquier) {
-		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		game = partie;
-		plateauJeu = echiquier;
-		
-		
-		// fond d'écran
-		JPanel imageFond = new TestImagePanel(new ImageIcon("images/interface_jeu.png").getImage());
-		
-		// Création de la JMenuBar
-		boutonPartie.add(boutonNouvellePartie);
-		boutonPartie.add(boutonSauvegarder);
-		boutonPartie.add(boutonChargerPartie);
-		boutonPartie.add(boutonOptions);
-		boutonPartie.add(boutonRevenirMenu);
-		boutonPartie.add(boutonQuitter);
-		
-		boutonQuestion.add(boutonAide);
-		boutonQuestion.add(boutonAProposDe);
-		
-		barreMenu.add(boutonPartie);
-		barreMenu.add(boutonQuestion);
-		
-		
-	
-		
-		// Initialisation de l'échiquier sans pièce
-		for (int i=0; i<8; i++){
-			for (int j=0; j<8; j++){
-				
-				if (j%2==0){
-					
-					if (i%2==0){
-						tab_cases.add(new JButton(new ImageIcon("images/casegrise.png")));
-					}
-					else {
-						tab_cases.add(new JButton(new ImageIcon("images/caseblanche.png")));
-					}
-				}
-				else {
-					if (i%2==1){
-						tab_cases.add(new JButton(new ImageIcon("images/casegrise.png")));
-					}
-					else {
-						tab_cases.add(new JButton(new ImageIcon("images/caseblanche.png")));
-					}			
-				}
-				((Vector<JButton>) tab_cases).get(i).setPreferredSize(new Dimension(56,56));
-			}
-		}
-			
-		// 2ème ligne : pions
-		for (int i=8; i<16; i++){			
-			if (i%2==0){
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/pions/1.png"));	
-			}
-			else {
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/pions/2.png"));	
-			}
-		}
-		
-		// 7ème ligne : pions
-		for (int i=48; i<56; i++){			
-			if (i%2==0){
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/pions/3.png"));	
-			}
-			else {
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/pions/4.png"));	
-			}
-		}
-		
-		// 1ère ligne
-		for (int i=0; i<8; i++){			
-			if (i%2==0){
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/auto/"+String.valueOf(i+1)+".png"));	
-			}
-			else {
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/auto/"+String.valueOf(i+1)+".png"));		
-			}
-		}
-		
-		// 8ème ligne
-		for (int i=56; i<64; i++){			
-			if (i%2==0){
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/auto/"+String.valueOf(i+1)+".png"));		
-			}
-			else {
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/auto/"+String.valueOf(i+1)+".png"));		
-			}
-		}
-		
-		JPanel plateau = new JPanel();
-		plateau.setLayout(new GridLayout(8,8));
-		
-		imageFond.setLayout(null);
-		plateau.setBounds(465,110,448,448);		
-		
-		
-		for (int i=0; i<64 ; i++){
-			plateau.add(((Vector<JButton>) tab_cases).get(i));
-			((Vector<JButton>) tab_cases).get(i).setBorder(BorderFactory.createLineBorder(Color.gray));
-		}
-		
-		imageFond.add(plateau);
-		
-		EcouteurAction listenAction=new EcouteurAction();
-		for (int i=0; i<64 ; i++){
-			((Vector<JButton>) tab_cases).get(i).addActionListener(listenAction);					
-		}
-		
-		EcouteurFocus listenFocus = new EcouteurFocus();
-		for (int i=0; i<64 ; i++){
-			((Vector<JButton>) tab_cases).get(i).addFocusListener(listenFocus);					
-		}
-		
-		
-		tmp.add(imageFond);
-		fenetre.setSize(1030,700); 
-		fenetre.setResizable(false);
-		fenetre.setJMenuBar(barreMenu);
-		barreMenu.setVisible(true);
-		fenetre.setVisible(true);
-		
-	}
-	
-	*/
-	
+	boolean fin;
 	
 	
 	
@@ -253,6 +122,8 @@ public class InterfaceJeu {
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		tmp = fenetre.getContentPane();
 		tab_cases = new Vector<JButton>();
+		
+		fin = false;
 		
 		barreMenu = new JMenuBar();
 		
@@ -635,7 +506,14 @@ public class InterfaceJeu {
 	
 	
 	public void finPartie(){
-		GestionJeu.finPartie(game);
+		if (plateauJeu.echecEtMat("noir")==true){
+			GestionJeu.finPartie(game);
+			new InterfacePopupEchecEtMat(1, InterfaceJeu.this);
+		}
+		else if (plateauJeu.echecEtMat("blanc")==true){
+			GestionJeu.finPartie(game);
+			new InterfacePopupEchecEtMat(2, InterfaceJeu.this);
+		}		
 	}
 	
 	
@@ -673,7 +551,7 @@ public class InterfaceJeu {
 				
 			}
 			if (e.getSource()==boutonSauvegarder){
-				new InterfacePopupSauvegarder(game, plateauJeu);
+				new InterfacePopupSauvegarder(game, plateauJeu, fin);
 			}
 			if (e.getSource()==boutonOptions){
 				new InterfacePopupOptions(InterfaceJeu.this);
@@ -685,10 +563,10 @@ public class InterfaceJeu {
 				new InterfaceCatalogue("reprendre");
 			}
 			if (e.getSource()==boutonRevenirMenu){
-				new InterfacePopupSauvegarderQuitter("Menu", game, plateauJeu, InterfaceJeu.this);
+				new InterfacePopupSauvegarderQuitter("Menu", game, plateauJeu, InterfaceJeu.this, fin);
 			}
 			if (e.getSource()==boutonQuitter){
-				new InterfacePopupSauvegarderQuitter("Quitter", game, plateauJeu, InterfaceJeu.this);
+				new InterfacePopupSauvegarderQuitter("Quitter", game, plateauJeu, InterfaceJeu.this, fin);
 			}
 			if (e.getSource()==boutonAide){
 				//new InterfaceAide();

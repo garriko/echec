@@ -141,7 +141,7 @@ public class InterfaceCatalogue {
 				else {
 					Wrapper w = null;
 					try {
-						w = SaveGame.charger((String) listeVariantes.getSelectedValue());
+						w = SaveGame.chargerEnCours((String) listeVariantes.getSelectedValue());
 					} catch (ClassNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

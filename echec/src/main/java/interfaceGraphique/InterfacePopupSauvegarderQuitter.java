@@ -37,17 +37,19 @@ public class InterfacePopupSauvegarderQuitter {
 	String choix;
 	Partie p;
 	EchiquierActif plateau;
+	boolean estFini;
 	
 	InterfaceJeu mere;
 	
 	/**
 	 * Constructeur de la classe
 	 */
-	public InterfacePopupSauvegarderQuitter(String menuOuQuitter, Partie partie, Echiquier echiquier, InterfaceJeu maman) {
+	public InterfacePopupSauvegarderQuitter(String menuOuQuitter, Partie partie, Echiquier echiquier, InterfaceJeu maman, boolean fin) {
 		fenetre=new JFrame("Popup");
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		mere = maman;
+		estFini = fin;
 		
 		p = partie;
 		plateau = (EchiquierActif) echiquier;
@@ -91,11 +93,21 @@ public class InterfacePopupSauvegarderQuitter {
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
 			if (e.getSource()==boutonOUI){
-				try {
-					SaveGame.sauvegarder(nomSauvegarde.getText(), p, plateau);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				if (estFini==true){
+					try {
+						SaveGame.sauvegarderTerminer(nomSauvegarde.getText(), p, plateau);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				else {
+					try {
+						SaveGame.sauvegarderEnCours(nomSauvegarde.getText(), p, plateau);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 				if (choix=="Menu"){
 					fenetre.setVisible(false);

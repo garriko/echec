@@ -77,16 +77,21 @@ public class InterfacePopupSauvegarder {
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
 			if (e.getSource()==boutonOK){
-				if (estfini==true){
+				if (estFini==true){
 					try {
-						SaveGame.sauvegarder(nomSauvegarde.getText(), p, plateau);
+						SaveGame.sauvegarderTerminer(nomSauvegarde.getText(), p, plateau);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
 				else {
-					
+					try {
+						SaveGame.sauvegarderEnCours(nomSauvegarde.getText(), p, plateau);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 				fenetre.setVisible(false);
 			}
