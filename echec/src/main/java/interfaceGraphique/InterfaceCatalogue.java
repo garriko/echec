@@ -15,6 +15,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import projet_echec.echec.exception.GameException;
 import projet_echec.echec.gestion.Gestion;
 import projet_echec.echec.gestion.GestionCatalogueCharger;
 import projet_echec.echec.gestion.GestionCatalogueRevoir;
@@ -139,17 +140,28 @@ public class InterfaceCatalogue {
 					new InterfaceRevoirPartie((String) listeVariantes.getSelectedValue());
 				}
 				else {
-					Wrapper w = null;
-					try {
-						w = SaveGame.charger((String) listeVariantes.getSelectedValue());
-					} catch (ClassNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+					if (GestionJeu.getNbParties()==4){
+						new InterfacePopupErreur4();
 					}
-					new InterfaceJeu(w.getP(), w.getE());
+					else {
+						Wrapper w = null;
+						try {
+							w = GestionJeu.chargerGame((String) listeVariantes.getSelectedValue());
+						} 
+						catch (GameException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} 
+						catch (ClassNotFoundException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} 
+						catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						new InterfaceJeu(w.getP(), w.getE());
+					}
 				}
 			}
 			else if (e.getSource()==boutonSupprimerPartie){

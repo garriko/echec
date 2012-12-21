@@ -108,138 +108,7 @@ public class InterfaceJeu {
 	JLabel secondes3;
 	JLabel secondes4;
 	
-	
-	
-	/*
-	
-	
-	public InterfaceJeu(Partie partie, EchiquierActif echiquier) {
-		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		game = partie;
-		plateauJeu = echiquier;
-		
-		
-		// fond d'écran
-		JPanel imageFond = new TestImagePanel(new ImageIcon("images/interface_jeu.png").getImage());
-		
-		// Création de la JMenuBar
-		boutonPartie.add(boutonNouvellePartie);
-		boutonPartie.add(boutonSauvegarder);
-		boutonPartie.add(boutonChargerPartie);
-		boutonPartie.add(boutonOptions);
-		boutonPartie.add(boutonRevenirMenu);
-		boutonPartie.add(boutonQuitter);
-		
-		boutonQuestion.add(boutonAide);
-		boutonQuestion.add(boutonAProposDe);
-		
-		barreMenu.add(boutonPartie);
-		barreMenu.add(boutonQuestion);
-		
-		
-	
-		
-		// Initialisation de l'échiquier sans pièce
-		for (int i=0; i<8; i++){
-			for (int j=0; j<8; j++){
-				
-				if (j%2==0){
-					
-					if (i%2==0){
-						tab_cases.add(new JButton(new ImageIcon("images/casegrise.png")));
-					}
-					else {
-						tab_cases.add(new JButton(new ImageIcon("images/caseblanche.png")));
-					}
-				}
-				else {
-					if (i%2==1){
-						tab_cases.add(new JButton(new ImageIcon("images/casegrise.png")));
-					}
-					else {
-						tab_cases.add(new JButton(new ImageIcon("images/caseblanche.png")));
-					}			
-				}
-				((Vector<JButton>) tab_cases).get(i).setPreferredSize(new Dimension(56,56));
-			}
-		}
-			
-		// 2ème ligne : pions
-		for (int i=8; i<16; i++){			
-			if (i%2==0){
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/pions/1.png"));	
-			}
-			else {
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/pions/2.png"));	
-			}
-		}
-		
-		// 7ème ligne : pions
-		for (int i=48; i<56; i++){			
-			if (i%2==0){
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/pions/3.png"));	
-			}
-			else {
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/pions/4.png"));	
-			}
-		}
-		
-		// 1ère ligne
-		for (int i=0; i<8; i++){			
-			if (i%2==0){
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/auto/"+String.valueOf(i+1)+".png"));	
-			}
-			else {
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/auto/"+String.valueOf(i+1)+".png"));		
-			}
-		}
-		
-		// 8ème ligne
-		for (int i=56; i<64; i++){			
-			if (i%2==0){
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/auto/"+String.valueOf(i+1)+".png"));		
-			}
-			else {
-				((Vector<JButton>) tab_cases).get(i).setIcon(new ImageIcon("images/Pieces/auto/"+String.valueOf(i+1)+".png"));		
-			}
-		}
-		
-		JPanel plateau = new JPanel();
-		plateau.setLayout(new GridLayout(8,8));
-		
-		imageFond.setLayout(null);
-		plateau.setBounds(465,110,448,448);		
-		
-		
-		for (int i=0; i<64 ; i++){
-			plateau.add(((Vector<JButton>) tab_cases).get(i));
-			((Vector<JButton>) tab_cases).get(i).setBorder(BorderFactory.createLineBorder(Color.gray));
-		}
-		
-		imageFond.add(plateau);
-		
-		EcouteurAction listenAction=new EcouteurAction();
-		for (int i=0; i<64 ; i++){
-			((Vector<JButton>) tab_cases).get(i).addActionListener(listenAction);					
-		}
-		
-		EcouteurFocus listenFocus = new EcouteurFocus();
-		for (int i=0; i<64 ; i++){
-			((Vector<JButton>) tab_cases).get(i).addFocusListener(listenFocus);					
-		}
-		
-		
-		tmp.add(imageFond);
-		fenetre.setSize(1030,700); 
-		fenetre.setResizable(false);
-		fenetre.setJMenuBar(barreMenu);
-		barreMenu.setVisible(true);
-		fenetre.setVisible(true);
-		
-	}
-	
-	*/
-	
+	boolean fin;
 	
 	
 	
@@ -253,6 +122,8 @@ public class InterfaceJeu {
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		tmp = fenetre.getContentPane();
 		tab_cases = new Vector<JButton>();
+		
+		fin = false;
 		
 		barreMenu = new JMenuBar();
 		
@@ -268,11 +139,13 @@ public class InterfaceJeu {
 		boutonAide = new JMenuItem("Aide");
 		boutonAProposDe = new JMenuItem("A propos de");
 		
-		affichageAideJ1 = new JLabel("aide1");
+		affichageAideJ1 = new JLabel("aide");
 		affichageAideJ1.setBounds(255, 90, 100, 40);
+		affichageAideJ1.setForeground(Color.white);
 		affichageAideJ1.setVisible(partie.getjBlanc().isModeAide());	
-		affichageAideJ2 = new JLabel("aide2");
+		affichageAideJ2 = new JLabel("aide");
 		affichageAideJ2.setBounds(255, 355, 100, 40);
+		affichageAideJ2.setForeground(Color.white);
 		affichageAideJ2.setVisible(partie.getjNoir().isModeAide());
 		
 		joueur1 = new JLabel(new ImageIcon("images/InterfaceJeuJoueur1Actif.png"));
@@ -282,7 +155,15 @@ public class InterfaceJeu {
 		joueur1.setVisible(true);
 		joueur2.setVisible(false);
 		
-		this.tour = 1;
+		this.tour=1;
+		/*
+		 * if (plateauJeu.getCampActif().equals(new String("blanc"))){
+			setTour(1);
+		}
+		else {
+			setTour(2);
+		}
+		*/
 		
 		CaseSelectionnee = new Case(new Position(5,2));
 		selectionCase = false;
@@ -636,6 +517,25 @@ public class InterfaceJeu {
 		GestionJeu.finPartie(game);
 	}
 	
+	public void echecEtMat(){
+		
+		if (plateauJeu.echecEtMat("noir")==true){
+			finPartie();
+			new InterfacePopupEchecEtMat(1, InterfaceJeu.this);
+			new InterfacePopupSauvegarder(game, plateauJeu, true);
+		}
+		else if (plateauJeu.echecEtMat("blanc")==true){
+			finPartie();
+			new InterfacePopupEchecEtMat(2, InterfaceJeu.this);
+		}		
+	}
+	
+	public void pionBout(){
+		if (plateauJeu.pionBoutEchiquiertest()){
+			new InterfacePopupPionBout(plateauJeu.chercherCase(plateauJeu.pionBoutEchiquier()));
+		}
+	}
+	
 	
 	
 	public class EcouteurAction implements ActionListener{		
@@ -663,15 +563,15 @@ public class InterfaceJeu {
 						actualiserImage(plateauJeu.getPlateau().get(i));
 					}
 						actualiserTour(getTour());
-						
-						//aPerduUnePiece(tour);			
+						pionBout();	
+						echecEtMat();							
 				}
 				
 				
 				
 			}
 			if (e.getSource()==boutonSauvegarder){
-				new InterfacePopupSauvegarder(game, plateauJeu);
+				new InterfacePopupSauvegarder(game, plateauJeu, fin);
 			}
 			if (e.getSource()==boutonOptions){
 				new InterfacePopupOptions(InterfaceJeu.this);
@@ -683,10 +583,10 @@ public class InterfaceJeu {
 				new InterfaceCatalogue("reprendre");
 			}
 			if (e.getSource()==boutonRevenirMenu){
-				new InterfacePopupSauvegarderQuitter("Menu", game, plateauJeu, InterfaceJeu.this);
+				new InterfacePopupSauvegarderQuitter("Menu", game, plateauJeu, InterfaceJeu.this, fin);
 			}
 			if (e.getSource()==boutonQuitter){
-				new InterfacePopupSauvegarderQuitter("Quitter", game, plateauJeu, InterfaceJeu.this);
+				new InterfacePopupSauvegarderQuitter("Quitter", game, plateauJeu, InterfaceJeu.this, fin);
 			}
 			if (e.getSource()==boutonAide){
 				//new InterfaceAide();
@@ -705,45 +605,93 @@ public class InterfaceJeu {
 				((JButton) e.getSource()).setBorderPainted(true);
 				((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(Color.red));
 				
+				int numCase = ((Vector<JButton>) tab_cases).indexOf(e.getSource());
+				Position p = new Position(8-numCase/8,numCase%8 +1);
+				Case eCase = plateauJeu.chercherCase(p);
+				
+				if (getTour()==1){
+					if (eCase.estVide()==false){
+						if (eCase.getPiece().getCamp().equals("blanc")){							
+							ArrayList<Case> plop = plateauJeu.filtreGeneral(eCase);
+							for (int i=0; i<plop.size(); i++){
+								Case laCase = plop.get(i);
+								Position po = new Position(8-laCase.getPosition().getHauteur()+1, laCase.getPosition().getLargeur());
+								int num = po.getLargeur() + 8*(po.getHauteur()-1)-1;		
+								((Vector<JButton>) tab_cases).get(num).setBorderPainted(true);
+								((Vector<JButton>) tab_cases).get(num).setBorder(BorderFactory.createLineBorder(Color.blue));
+							}
+						}
+					}
+				}
+				
+				else if (getTour()==2){
+					if (eCase.estVide()==false){
+						if (eCase.getPiece().getCamp().equals("noir")){
+							ArrayList<Case> plop = plateauJeu.filtreGeneral(eCase);					
+							for (int i=0; i<plop.size(); i++){
+								Case laCase = plop.get(i);
+								Position po = new Position(8-laCase.getPosition().getHauteur()+1, laCase.getPosition().getLargeur());
+								int num = po.getLargeur() + 8*(po.getHauteur()-1)-1;		
+								((Vector<JButton>) tab_cases).get(num).setBorderPainted(true);
+								((Vector<JButton>) tab_cases).get(num).setBorder(BorderFactory.createLineBorder(Color.blue));
+							}
+						}
+					}
+				}
 			}
 		}
 		public void focusLost(FocusEvent e){
 			//((JButton) e.getSource()).setBorderPainted(false);
 			((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(Color.gray));
-		}
+			
+			int numCase = ((Vector<JButton>) tab_cases).indexOf(e.getSource());
+			Position p = new Position(8-numCase/8,numCase%8 +1);
+			Case eCase = plateauJeu.chercherCase(p);
+			if (getTour()==1){
+				if (eCase.estVide()==false){
+					if (eCase.getPiece().getCamp().equals("blanc")){					
+							ArrayList<Case> plop = plateauJeu.filtreGeneral(eCase);
+							for (int i=0; i<plop.size(); i++){
+							Case laCase = plop.get(i);
+							Position po = new Position(8-laCase.getPosition().getHauteur()+1, laCase.getPosition().getLargeur());
+							int num = po.getLargeur() + 8*(po.getHauteur()-1)-1;		
+							((Vector<JButton>) tab_cases).get(num).setBorderPainted(true);
+							((Vector<JButton>) tab_cases).get(num).setBorder(BorderFactory.createLineBorder(Color.gray));
+						}
+					}
+				}
+			}
+			
+			else if (getTour()==2){
+				if (eCase.estVide()==false){
+					if (eCase.getPiece().getCamp().equals("noir")){
+						ArrayList<Case> plop = plateauJeu.filtreGeneral(eCase);			
+						for (int i=0; i<plop.size(); i++){
+							Case laCase = plop.get(i);
+							Position po = new Position(8-laCase.getPosition().getHauteur()+1, laCase.getPosition().getLargeur());
+							int num = po.getLargeur() + 8*(po.getHauteur()-1)-1;		
+							((Vector<JButton>) tab_cases).get(num).setBorderPainted(true);
+							((Vector<JButton>) tab_cases).get(num).setBorder(BorderFactory.createLineBorder(Color.gray));
+						}
+					}
+				}
+			}
+		}		
 	}
 	
 
 	
 	class CountdownTimerListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			/*
-			if (--timeRemaining >= 0) {
-				if (getTour()==1){
-					countdownJ1.start();
-					chronoJ1.setText(String.valueOf(timeRemaining));
-				}
-				else {
-					countdownJ2.start();
-					chronoJ2.setText(String.valueOf(timeRemaining));
-				}
-			} 
-			else {
-				if (getTour()==1){
-					//lancer popup joueur 1 tu as perdu
-				}
-				else {
-					//lancer popup joueur 2 tu as perdu
-				}							
-			}
-			*/
+			
 			if (getTour()==1){
 				if (--timeRemaining1 >= 0) {
 					countdownJ1.start();
 					chronoJ1.setText(String.valueOf(timeRemaining1));
 				}
 				else {
-					//lancer popup joueur 1 tu as perdu
+					countdownJ1.stop();
+					new InterfacePopupTempsEcoule(1, InterfaceJeu.this);
 				}
 			}
 			else {
@@ -752,7 +700,8 @@ public class InterfaceJeu {
 					chronoJ2.setText(String.valueOf(timeRemaining2));
 				}
 				else {
-					//lancer popup joueur 2 tu as perdu
+					countdownJ2.stop();
+					new InterfacePopupTempsEcoule(2, InterfaceJeu.this);
 				}
 			}
 		}

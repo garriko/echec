@@ -56,8 +56,6 @@ public class InterfacePersoEchiquier {
 	Image annuler;
 	JButton boutonAnnuler;
 	
-	JTextField nomVariante;
-	
 	JButton PionBlanc;
 	JButton TourBlanc;
 	JButton CavalierBlanc;
@@ -106,10 +104,6 @@ public class InterfacePersoEchiquier {
 		tmp = fenetre.getContentPane();
 		
 		tab_cases = new Vector<JButton>();
-		
-		nomVariante = new JTextField("maVariante");
-		nomVariante.setBounds(50, 100, 200, 50);
-		nomVariante.setVisible(true);
 		
 		ok = new ImageIcon("images/partiepersoBoutonOK.png").getImage();
 		boutonOK =new JButton(new ImageIcon(ok));
@@ -253,7 +247,6 @@ public class InterfacePersoEchiquier {
 		ReineNoir.addFocusListener(listenFocus);
 		
 		
-		imageFond.add(nomVariante);
 		imageFond.add(boutonOK);
 		imageFond.add(boutonAnnuler);
 		imageFond.add(PionBlanc);
@@ -317,10 +310,6 @@ public class InterfacePersoEchiquier {
 		tmp = fenetre.getContentPane();
 		
 		tab_cases = new Vector<JButton>();
-		
-		nomVariante = new JTextField(nomV);
-		nomVariante.setBounds(50, 100, 200, 50);
-		nomVariante.setVisible(true);
 		
 		ok = new ImageIcon("images/partiepersoBoutonOK.png").getImage();
 		boutonOK =new JButton(new ImageIcon(ok));
@@ -470,7 +459,6 @@ public class InterfacePersoEchiquier {
 		ReineNoir.addFocusListener(listenFocus);
 		
 		
-		imageFond.add(nomVariante);
 		imageFond.add(boutonOK);
 		imageFond.add(boutonAnnuler);
 		imageFond.add(PionBlanc);
@@ -515,24 +503,22 @@ public class InterfacePersoEchiquier {
 	}
 		
 	
+	/**
+	 * Methode getters permettant d'acceder a la fenetre depuis une autre fenetre 
+	 * (popup sauvegarder avant de quitter)
+	 * 
+	 * @return fenetre la fenetre de jeu
+	 */
+	public JFrame getFrame(){
+		return fenetre;
+	}
 	
 	
 	
 	public class EcouteurAction implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
 			if (e.getSource()==boutonOK){
-				try {
-					nouvelleVariante.saveVariante(nomVariante.getText());
-				} 
-				catch (RoiManquantException e1) {
-					// TODO Auto-generated catch block
-					e1.toString();
-				} 
-				catch (IOException e1) {
-					// TODO Auto-generated catch block
-					}
-				mere.ajouterVariante(nomVariante.getText());
-				fenetre.setVisible(false);
+				new InterfacePopupNomVar(mere, InterfacePersoEchiquier.this, nouvelleVariante);
 			}
 			else if (e.getSource()==boutonAnnuler){
 				fenetre.setVisible(false);
@@ -721,6 +707,7 @@ public class InterfacePersoEchiquier {
 			}		
 		}
 	}
+	
 	public void miseAJour(){
 		if (PieceSelectionnee.getClass().getSimpleName().equals("Pion")){
 			if(PieceSelectionnee.getCamp().equals(new String("blanc")))

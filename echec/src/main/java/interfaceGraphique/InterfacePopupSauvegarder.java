@@ -33,13 +33,16 @@ public class InterfacePopupSauvegarder {
 	JTextField nomSauvegarde;
 	Partie p;
 	EchiquierActif plateau;
+	boolean estFini;
 	
 	/**
 	 * Constructeur de la classe
 	 */
-	public InterfacePopupSauvegarder(Partie partie, Echiquier echiquier) {
+	public InterfacePopupSauvegarder(Partie partie, Echiquier echiquier, boolean fin) {
 		fenetre=new JFrame("Popup");
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		estFini = fin;
 		
 		p = partie;
 		plateau = (EchiquierActif) echiquier;
@@ -74,11 +77,21 @@ public class InterfacePopupSauvegarder {
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
 			if (e.getSource()==boutonOK){
-				try {
-					SaveGame.sauvegarder(nomSauvegarde.getText(), p, plateau);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				if (estFini==true){
+					try {
+						SaveGame.sauvegarderTerminer(nomSauvegarde.getText(), p, plateau);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				else {
+					try {
+						SaveGame.sauvegarderEnCours(nomSauvegarde.getText(), p, plateau);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 				fenetre.setVisible(false);
 			}

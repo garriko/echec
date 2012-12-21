@@ -72,14 +72,14 @@ public class GestionJeu {
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
 	 */
-	public static Wrapper creerNewGame(String fichierCharge) throws GameException, ClassNotFoundException, IOException
+	public static Wrapper chargerGame(String fichierCharge) throws GameException, ClassNotFoundException, IOException
 	{
 		Wrapper w;
 		if(nbPartie==4)
 			throw new GameException();
 		else
 		{
-			w = SaveGame.charger(fichierCharge);
+			w = SaveGame.chargerEnCours(fichierCharge);
 			games.add(w.getP());
 			nbPartie++;
 			return w;
@@ -94,5 +94,8 @@ public class GestionJeu {
 		nbPartie--;
 	}
 
+	public static int getNbParties(){
+		return nbPartie;
+	}
 
 }

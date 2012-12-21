@@ -118,7 +118,7 @@ public class EchiquierActif extends Echiquier {
 	public Vector<Case> estMenacePar(String camp, Case e){
 		Vector<Case> listePieceAdverse= new Vector<Case>();
 		Vector<Case> listePieceMenacante= new Vector<Case>();
-		System.out.println(e.getPiece());
+		
 		if (camp.equals("noir"))
 		{
 			listePieceAdverse= listerPiecesNoires(this.listePieceEnJeu);
@@ -185,6 +185,7 @@ public class EchiquierActif extends Echiquier {
 		ArrayList<Case>  listeCaseDeplacementMenacant= new ArrayList<Case>();
 		ArrayList<Case> listeCaseDeplacementDefendent= new ArrayList<Case>();
 		 */
+		
 		boolean estEnEchecMat=true;
 		//test si le roi peut se deplacer
 
@@ -196,24 +197,23 @@ public class EchiquierActif extends Echiquier {
 
 				for(int i=0; i < pieceDispo.size(); i++)
 				{
-					System.out.println(1);
+					System.out.println(getListePieceEnJeu().size());
 					ArrayList<Case> deplacementPossiblePiece = filtreGeneral(pieceDispo.get(i));
 					for(int j=0;j<deplacementPossiblePiece.size();j++){
 						Piece p = deplacementPossiblePiece.get(j).getPiece();
-						System.out.println(p);
-						//TODO : Peut buguer
+	
+						
 						if(!deplacerReussi(pieceDispo.get(i),deplacementPossiblePiece.get(j)))
 						{
-							System.out.println(p);
-							deplacerReussi(deplacementPossiblePiece.get(j),pieceDispo.get(i));
-							deplacementPossiblePiece.get(j).setPiece(p);
-							System.out.println(p);
+
 							estEnEchecMat=false;
 
 						}
 						else{
 							deplacerReussi(deplacementPossiblePiece.get(j),pieceDispo.get(i));
 							deplacementPossiblePiece.get(j).setPiece(p);
+							System.out.println(pieceDispo.get(i).getPiece());
+							System.out.println(deplacementPossiblePiece.get(j).getPiece());
 						}
 					}
 
@@ -232,14 +232,14 @@ public class EchiquierActif extends Echiquier {
 
 				for(int i=0; i < pieceDispo.size(); i++)
 				{
+					System.out.println(getListePieceEnJeu().size());
 					ArrayList<Case> deplacementPossiblePiece = filtreGeneral(pieceDispo.get(i));
 					for(int j=0;j<deplacementPossiblePiece.size();j++){
 						Piece p = deplacementPossiblePiece.get(j).getPiece();
 						//TODO : Peut buguer
 						if(!deplacerReussi(pieceDispo.get(i),deplacementPossiblePiece.get(j)))
 						{
-							deplacerReussi(deplacementPossiblePiece.get(j),pieceDispo.get(i));
-							deplacementPossiblePiece.get(j).setPiece(p);
+
 							estEnEchecMat=false;
 
 						}
@@ -300,19 +300,18 @@ public class EchiquierActif extends Echiquier {
 		System.out.println(getCaseRoiNoir().getPosition().getHauteur()+","+getCaseRoiNoir().getPosition().getLargeur());
 		System.out.println("---------------------------------");
 */
-		System.out.println("blanc en echec et mat " +echecEtMat("blanc"));
-		System.out.println("noir en echec et mat " +echecEtMat("noir"));
+		
 		if(this.caseSelectionne==null)
 		{
-			//System.out.println("1");
+			
 			if(!caseSelectionne.estVide())
 			{			
-				//System.out.println("11");
+				
 				if(caseSelectionne.getPiece().getCamp().equals(campActif))
 				{
-					//System.out.println("111");
+					
 					this.caseSelectionne=caseSelectionne;
-					//System.out.println(this.caseSelectionne.getPiece());
+					
 					
 					return "rien";
 				}
@@ -332,11 +331,11 @@ public class EchiquierActif extends Echiquier {
 		}
 		else
 		{
-			//System.out.println("2");
+			
 			if(this.caseSelectionne.equals(caseSelectionne))
 			{
 				
-				//System.out.println("21");
+				
 				this.caseSelectionne=null;
 				
 				return "rien";
@@ -529,6 +528,7 @@ public String getNotationAlgebrique(Case caseDepart, Case caseArrivee){
 
 public ArrayList<Case> filtreGeneral(Case caseDepart){
 	ArrayList<Case> plop = new ArrayList<Case>();
+	
 	
 	plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
 	
@@ -905,10 +905,12 @@ public boolean pionBoutEchiquiertest(){
 	boolean IlYAUnPion = false;
 	for (int i=1;i<9;i++)
 	{			
-		if (chercherCase(new Position(1,i)).getPiece().equals(new Pion("noir")))
-			IlYAUnPion= true;
-		if (chercherCase(new Position(8,i)).getPiece().equals(new Pion("blanc")))
-			IlYAUnPion= true;
+		if (!chercherCase(new Position(1,i)).estVide())
+				if(chercherCase(new Position(1,i)).getPiece().equals(new Pion("noir")))
+					IlYAUnPion= true;
+		if (!chercherCase(new Position(8,i)).estVide())
+				if(chercherCase(new Position(8,i)).getPiece().equals(new Pion("blanc")))
+					IlYAUnPion= true;
 			}
 
 	return IlYAUnPion;//on retourne la case du pion.(=null si pas de pion)
@@ -942,6 +944,8 @@ public void setCaseRoiNoir(Case caseRoiNoir) {
 	
 }
 
-
+public String getCampActif(){
+	return campActif;
+}
 
 }

@@ -8,7 +8,7 @@ package projet_echec.echec.gestion;
  *
  */
 
-public class Partie {
+public class Partie implements java.io.Serializable {
 	/**
 	 * Joueur 1
 	 */

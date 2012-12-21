@@ -10,7 +10,7 @@ package projet_echec.echec.gestion;
  *
  */
 
-public class Options {
+public class Options implements java.io.Serializable{
 	private int dureeTourJ1;
 	private int dureeTourJ2;
 	private boolean aideJ2;
