@@ -1,14 +1,10 @@
 package interfaceGraphique;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-//import interfaceGraphique.InterfaceMenu.Ecouteur;
-=======
 
->>>>>>> fd1aea10c1e8ee122c3809c73cd80391cdb5923c
-=======
 //import interfaceGraphique.InterfaceMenu.Ecouteur;
->>>>>>> 53696799453088392be7ced82f4f00417749b567
+
+//import interfaceGraphique.InterfaceMenu.Ecouteur;
+
 
 import java.awt.Color;
 import java.awt.Container;
@@ -80,17 +76,17 @@ public class InterfaceConfigVariante {
 		infos.setBounds(800, 300, 209, 152);
 		infos.setVisible(true);
 		
-		boutonCreer = new JButton(new ImageIcon("Images/InterfaceConfigVariantesBoutonCreer.png"));
-		boutonModifier = new JButton(new ImageIcon("Images/InterfaceConfigVariantesBoutonModifier.png"));
-		boutonAppliquer = new JButton(new ImageIcon("Images/InterfaceConfigVariantesBoutonAppliquer.png"));
-		boutonRetour = new JButton(new ImageIcon("Images/InterfaceConfigVariantesBoutonRetour.png"));
-		boutonSupprimer = new JButton("Supprimer");
+		boutonCreer = new JButton(new ImageIcon("Images/CatalogueConfigVar/boutonCreer.png"));
+		boutonModifier = new JButton(new ImageIcon("Images/CatalogueConfigVar/boutonModifier.png"));
+		boutonAppliquer = new JButton(new ImageIcon("Images/CatalogueConfigVar/boutonAppliquer.png"));
+		boutonRetour = new JButton(new ImageIcon("Images/CatalogueConfigVar/boutonRetour.png"));
+		boutonSupprimer = new JButton(new ImageIcon("Images/CatalogueConfigVar/boutonSupprimer.png"));
 		
-		boutonCreer.setBounds(452, 462, 115, 49); //position x, position y, largeur, hauteur
-		boutonModifier.setBounds(318, 462, 134, 49); 
-		boutonAppliquer.setBounds(593, 593, 179, 62);
-		boutonRetour.setBounds(770, 593, 147, 52);
-		boutonSupprimer.setBounds(100, 462, 134, 49);
+		boutonCreer.setBounds(452, 462, 109, 45); //position x, position y, largeur, hauteur
+		boutonModifier.setBounds(318, 462, 130, 45); 
+		boutonAppliquer.setBounds(602, 593, 158, 63);
+		boutonRetour.setBounds(770, 593, 143, 63);
+		boutonSupprimer.setBounds(159, 462, 155, 45);
 		
 		
 		Ecouteur listen=new Ecouteur();
@@ -101,7 +97,7 @@ public class InterfaceConfigVariante {
 		boutonSupprimer.addActionListener(listen);
 		
 	
-		JPanel imageFond = new TestImagePanel(new ImageIcon("images/InterfaceConfigVariantes.png").getImage());
+		JPanel imageFond = new TestImagePanel(new ImageIcon("images/CatalogueConfigVar/configVariantes.png").getImage());
 		imageFond.setLayout(null);
 		
 		imageFond.add(boutonCreer);   

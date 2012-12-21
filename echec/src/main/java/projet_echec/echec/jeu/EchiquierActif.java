@@ -22,11 +22,11 @@ public class EchiquierActif extends Echiquier {
 	/**
 	 * case ou se situe le roi blanc
 	 */
-	private Case caseRoiBlanc;
+	private Case caseRoiBlanc=new Case(new Position(12,12));;
 	/**
 	 * case ou se situe le roi noir
 	 */
-	private Case caseRoiNoir;
+	private Case caseRoiNoir=new Case(new Position(12,12));
 
 	private String campActif;
 
@@ -60,9 +60,9 @@ public class EchiquierActif extends Echiquier {
 			if(!plateau.get(i).estVide())
 				if(plateau.get(i).getPiece().getClass().getSimpleName().equals(new String("Roi")))
 					if(plateau.get(i).getPiece().getCamp()=="noir")
-						caseRoiNoir=plateau.get(i);
+						caseRoiNoir.setPosition(plateau.get(i).getPosition());
 					else
-						caseRoiBlanc=plateau.get(i);
+						caseRoiBlanc.setPosition(plateau.get(i).getPosition());
 		}
 	}
 
@@ -257,7 +257,7 @@ public class EchiquierActif extends Echiquier {
 	 * @throws DeplacementException 
 	 */
 	public String selectionnerCase(Case caseSelectionne) throws DeplacementException{
-		
+		System.out.println("1");
 		//System.out.println(caseSelectionne.getPosition().getHauteur()+","+caseSelectionne.getPosition().getLargeur());
 
 		if(this.caseSelectionne==null)
@@ -268,19 +268,24 @@ public class EchiquierActif extends Echiquier {
 				//System.out.println("11");
 				if(caseSelectionne.getPiece().getCamp().equals(campActif))
 				{
+					System.out.println("2");
 					//System.out.println("111");
 					this.caseSelectionne=caseSelectionne;
 					//System.out.println(this.caseSelectionne.getPiece());
+					System.out.println(caseSelectionne);
 					return "rien";
 				}
 				else{
 					//System.out.println("112");
+					System.out.println("3");
+					System.out.println(caseSelectionne);
 					return "rien";
 				}
 			}
 			else
 			{
 				//System.out.println("12");
+				System.out.println(caseSelectionne);
 				return "rien";
 			}
 
@@ -290,14 +295,17 @@ public class EchiquierActif extends Echiquier {
 			//System.out.println("2");
 			if(this.caseSelectionne.equals(caseSelectionne))
 			{
+				System.out.println("4");
 				//System.out.println("21");
 				this.caseSelectionne=null;
+				System.out.println(caseSelectionne);
 				return "rien";
 			}
 			else
 			{
 				//System.out.println("22");
 				String dep;
+				System.out.println("5");
 				dep = deplacer(this.caseSelectionne,caseSelectionne);
 				this.caseSelectionne=null;
 				if(!dep.equals("rien"))
@@ -305,10 +313,12 @@ public class EchiquierActif extends Echiquier {
 						campActif = new String("noir");
 					else
 						campActif = new String("blanc");
+				System.out.println(caseSelectionne);
 				return dep;
 			}
 
 		}
+
 
 
 	}
@@ -322,21 +332,30 @@ public class EchiquierActif extends Echiquier {
 	{
 
 		String res=getNotationAlgebrique(caseDepart, caseArrivee);
-		Case sauvegardecasearrive = caseArrivee;
+		Case sauvegardeArrivee = caseArrivee;
+
+		System.out.println("---------------------------------");
+		System.out.println("aprés deplacement");
+		System.out.println(getCaseRoiBlanc().getPosition().getHauteur()+","+getCaseRoiBlanc().getPosition().getLargeur());
+		System.out.println(getCaseRoiNoir().getPosition().getHauteur()+","+getCaseRoiNoir().getPosition().getLargeur());
+		System.out.println("---------------------------------");
 		if(deplacersanscondition(caseDepart,caseArrivee))
 		{
+			System.out.println(6);
 			if(campActif.equals("noir"))
 			{
 				if(echec()!=11 && echec()!=21)
 				{
-					mangerPiece(caseArrivee);//pas echec donc le deplacement se fait
+					System.out.println(7);
+					validerDeplacement(caseArrivee,sauvegardeArrivee);//pas echec donc le deplacement se fait
 					return res;
 
 				}
 				else
 				{	
+					System.out.println(8);
 					deplacersanscondition(caseArrivee,caseDepart);
-					caseArrivee=sauvegardecasearrive;
+					caseArrivee=sauvegardeArrivee;
 					//attention: il n'y as pas de deplacement effectif
 
 					return "rien";
@@ -348,15 +367,17 @@ public class EchiquierActif extends Echiquier {
 			{
 				if(echec()!=12 && echec()!=22)
 				{ //Si le deplacement ne provoque pas de mise en danger du roi
-					mangerPiece(caseArrivee);
-
+					validerDeplacement(caseArrivee,sauvegardeArrivee);
+					System.out.println(9);
 					return res;
 				}
 				else
 				{
-					deplacersanscondition(caseArrivee,caseDepart);	
-					caseArrivee=sauvegardecasearrive;
 
+					deplacersanscondition(caseArrivee,caseDepart);	
+
+					caseArrivee=sauvegardeArrivee;
+					System.out.println(10);
 					return "rien";
 				}
 
@@ -373,20 +394,36 @@ public class EchiquierActif extends Echiquier {
 			return "rien";
 
 
-
-
 	}
 
-	public void mangerPiece(Case caseArrivee)
+	public void validerDeplacement(Case caseDepart, Case caseArrivee)
 	{
-		if(!caseArrivee.estVide())//si il y a une case a l'arrivee
+		System.out.println(caseDepart.getPiece().getClass().getSimpleName());
+		if(!caseArrivee.estVide())//si il y a une piece a l'arrivee
 		{
+			System.out.println("-1");
 			this.listePiecePrises.add(caseArrivee.getPiece());//on ajoute la piece dans la liste des pieces prises
 
 			for(int j=0; j< listePieceEnJeu.size();j++)//pour toutes les pieces en jeu
 				if(this.listePieceEnJeu.get(j).equals(caseArrivee))//si il y a une case egale a la case d'arrivee
 					this.listePieceEnJeu.remove(j);//on la supprime
 		}
+		if(caseDepart.getPiece().getClass().getSimpleName().equals("Roi"))
+		{
+			System.out.println("-1");
+			if(caseDepart.getPiece().getCamp().equals("noir"))
+			{
+				System.out.println("-2");
+				this.caseRoiNoir.setPosition(caseArrivee.getPosition());
+			}
+			else
+			{
+				System.out.println("-3");
+				this.caseRoiBlanc.setPosition(caseArrivee.getPosition());
+			}
+		}
+		if(!caseDepart.getPiece().isDejaBouge())
+			caseDepart.getPiece().setDejaBouge(true);
 	}
 
 	/**
@@ -398,255 +435,428 @@ public class EchiquierActif extends Echiquier {
 		ArrayList<Case> plop = new ArrayList<Case>();
 		boolean depEffectue = false;
 		plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
-		plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
 
 		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Fou"))||caseDepart.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
 			filtrePourFou(caseDepart, plop);
+			System.out.println("pas bon 1");
 		}
-		
+
+		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Tour"))||caseDepart.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
+			filtrePourTour(caseDepart, plop);
+			System.out.println("pas bon 2");
+		}
+
+		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Roi"))){
+			if(caseDepart.getPiece().getCamp()=="blanc")
+				setCaseRoiBlanc(caseArrivee);
+			if(caseDepart.getPiece().getCamp()=="noir")
+				setCaseRoiNoir(caseArrivee);
+			System.out.println("deplace la case du roi");
+		}
+
+		plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
+
+
+		System.out.println("filtre 1");
 		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Pion"))){
-			
 			filtrerpresenceAdversaireDiagonale(caseDepart,plop);
-			System.out.println("on ne peut pas bouger le pion");
+			System.out.println("pas bon 3");
 		}
-		
+
 		for(int i=0; i< plop.size();i++){
 
 			if(plop.get(i).getPosition().equals(caseArrivee.getPosition())){
-				if(caseDepart.getPiece().getClass().getSimpleName().equals("Roi"))
-				{
-					if(caseDepart.getPiece().getCamp().equals("noir"))
-						this.caseRoiNoir.setPosition(caseArrivee.getPosition());
-					if(caseDepart.getPiece().getCamp().equals("blanc"))
-						this.caseRoiBlanc.setPosition(caseArrivee.getPosition());
-				}
+				System.out.println("1000");
 				changerCase(caseDepart, caseArrivee);
 				depEffectue=true;
 			}
 		}
+
+		System.out.println("---------------------------------");
+		System.out.println("aprés deplacement");
+		System.out.println(getCaseRoiBlanc().getPosition().getHauteur()+","+getCaseRoiBlanc().getPosition().getLargeur());
+		System.out.println(getCaseRoiNoir().getPosition().getHauteur()+","+getCaseRoiNoir().getPosition().getLargeur());
+		System.out.println("---------------------------------");
 		return depEffectue;
 	}
 
+	public ArrayList<Case> deplacementPossible(Case caseDepart){
+
+		ArrayList<Case> plop = new ArrayList<Case>();
+		plop = caseDepart.getPiece().getDeplacementPossible(caseDepart);//donne les déplacements possible de la piece présent sur la case depart
+
+		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Fou"))||caseDepart.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
+			filtrePourFou(caseDepart, plop);
+		}
+
+		if(caseDepart.getPiece().getClass().getSimpleName().equals(new String("Tour"))||caseDepart.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
+			filtrePourTour(caseDepart, plop);
+		}
 
 
-	public String getNotationAlgebrique(Case caseDepart, Case caseArrivee){
-		String nota = new String();
-		nota = nota.concat(String.valueOf(caseDepart.getPosition().getHauteur())+String.valueOf(caseDepart.getPosition().getLargeur()));
-
-		if(caseArrivee.estVide())
-			nota= nota.concat("-");
-		else
-			nota= nota.concat("x");
-
-		nota = nota.concat(String.valueOf(caseArrivee.getPosition().getHauteur())+String.valueOf(caseArrivee.getPosition().getLargeur()));
-
-		return nota;
+		plop = filtrerDeplacementPossible(caseDepart.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
+		return plop;
 	}
 
+public String getNotationAlgebrique(Case caseDepart, Case caseArrivee){
+	String nota = new String();
+	nota = nota.concat(String.valueOf(caseDepart.getPosition().getHauteur())+String.valueOf(caseDepart.getPosition().getLargeur()));
 
-	/**
-	 * Methode utile pour la classe Pion. modifie le fetdeplacementPossible selon la presence d'une piece adverse en diagonale par rapport a la
-	 * direction d'avancee du pion
-	 * @param caseActuelle :case du pion
-	 * @param res : le getdeplacement de la piece
-	 */
+	if(caseArrivee.estVide())
+		nota= nota.concat("-");
+	else
+		nota= nota.concat("x");
 
-	private void filtrerpresenceAdversaireDiagonale(Case caseActuelle,ArrayList<Case> casePossible){
+	nota = nota.concat(String.valueOf(caseArrivee.getPosition().getHauteur())+String.valueOf(caseArrivee.getPosition().getLargeur()));
 
-		for(int i=0; i < casePossible.size();i++){
-			Case c = casePossible.get(i);
-			if(c.getPosition().getLargeur()==caseActuelle.getPosition().getLargeur()+1 || c.getPosition().getLargeur()==caseActuelle.getPosition().getLargeur()-1)
+	return nota;
+}
+
+
+/**
+ * Methode utile pour la classe Pion. modifie le fetdeplacementPossible selon la presence d'une piece adverse en diagonale par rapport a la
+ * direction d'avancee du pion
+ * @param caseActuelle :case du pion
+ * @param res : le getdeplacement de la piece
+ */
+
+private void filtrerpresenceAdversaireDiagonale(Case caseActuelle,ArrayList<Case> casePossible){
+
+	for(int i=0; i < casePossible.size();i++)
+	{
+
+		Case c = casePossible.get(i);
+		Case caseEchiquier=chercherCase(c.getPosition());
+		System.out.println(c.getPosition().getHauteur()+","+c.getPosition().getLargeur());
+		if(caseEchiquier.getPosition().getLargeur()==caseActuelle.getPosition().getLargeur()+1 || caseEchiquier.getPosition().getLargeur()==caseActuelle.getPosition().getLargeur()-1)
+		{
+			if(caseEchiquier.estVide())
 			{
-				if(c.estVide())
-				{
-					casePossible.remove(c);
-					i--;
-				}
-				else if(c.getPiece().getCamp().equals(caseActuelle.getPiece().getCamp()))
-				{
-					casePossible.remove(c);
-					i--;
-				}
-
+				casePossible.remove(c);
+				i--;
 			}
+			else if(caseEchiquier.getPiece().getCamp().equals(caseActuelle.getPiece().getCamp()))
+			{
+				casePossible.remove(c);
+				i--;
+			}
+
+		}
+		else
+		{
+			if(!caseEchiquier.estVide())
+			{
+				casePossible.remove(c);
+				i--;
+			}	
+
 		}
 
 	}
-	private void filtrePourFou(Case caseActuelle,ArrayList<Case> casePossible){
-		System.out.println("on rentre dans le filtre pour Fou");
-		ArrayList<Case> diagBasGauche= new ArrayList<Case>();
-		ArrayList<Case> diagBasDroit= new ArrayList<Case>();
-		ArrayList<Case> diagHautGauche= new ArrayList<Case>();
-		ArrayList<Case> diagHautDroite= new ArrayList<Case>();
-		System.out.println(casePossible);
-		
-		for(int i=0; i < casePossible.size();i++){
-			Case c = casePossible.get(i);
-			System.out.println("on separe les listes");
-			if(caseActuelle.getPosition().getHauteur()>c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()>c.getPosition().getLargeur())
-				{diagBasGauche.add(c);	}
-			if(caseActuelle.getPosition().getHauteur()>c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()<c.getPosition().getLargeur())
-				diagBasDroit.add(c);
-			if(caseActuelle.getPosition().getHauteur()>c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()<c.getPosition().getLargeur())
-				{diagHautGauche.add(c);
-				System.out.println("on fais la séparation");}
-			if(caseActuelle.getPosition().getHauteur()<c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()<c.getPosition().getLargeur())
-				diagHautDroite.add(c);
+
+}
+private void filtrePourFou(Case caseActuelle,ArrayList<Case> casePossible){
+
+	ArrayList<Case> diagBasGauche= new ArrayList<Case>();
+	ArrayList<Case> diagBasDroit= new ArrayList<Case>();
+	ArrayList<Case> diagHautGauche= new ArrayList<Case>();
+	ArrayList<Case> diagHautDroite= new ArrayList<Case>();
+
+	for(int i=0; i < casePossible.size();i++){
+		Case c = casePossible.get(i);			
+		if(caseActuelle.getPosition().getHauteur()>c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()>c.getPosition().getLargeur())
+		{
+			diagBasGauche.add(c);
 		}
-		System.out.println(diagBasDroit);
-		System.out.println(diagBasGauche);
-		System.out.println(diagHautDroite);
-		System.out.println(diagHautGauche);
-		for(int i=0; i < diagBasGauche.size();i++){
-			if(!diagBasGauche.get(i).estVide()){
+
+		if(caseActuelle.getPosition().getHauteur()>c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()<c.getPosition().getLargeur())
+		{
+			diagBasDroit.add(c);
+		}
+		if(caseActuelle.getPosition().getHauteur()<c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()>c.getPosition().getLargeur())
+		{
+			diagHautGauche.add(c);				
+		}
+		if(caseActuelle.getPosition().getHauteur()<c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()<c.getPosition().getLargeur())
+		{
+			diagHautDroite.add(c);
+		}
+	}
+
+	for(int i=0; i < diagBasGauche.size();i++){
+		Case caseEchi = chercherCase(diagBasGauche.get(i).getPosition());
+		if(!caseEchi.estVide())
+			for(int j=0; j < diagBasGauche.size();j++){
+				if(diagBasGauche.get(i).getPosition().getLargeur()>diagBasGauche.get(j).getPosition().getLargeur())
+				{
+					diagBasGauche.remove(diagBasGauche.get(j));
+					j--;
+
+				}
+				/*if(!diagBasGauche.get(i).estVide()){
 				System.out.println("attention");
 				for(int j=0; j < diagBasGauche.size()-1;j++){
 					if(diagBasGauche.get(i).getPosition().getLargeur()>diagBasGauche.get(j).getPosition().getLargeur())
 					{
 						diagBasGauche.remove(diagBasGauche.get(j));
 						j--;
-						
+
 					}
 				}}
-			diagBasGauche.remove(diagBasGauche.get(i));
-		}
-
-		for(int i=0; i < diagBasDroit.size();i++){
-			if(!diagBasDroit.get(i).estVide()){
-				for(int j=0; j < diagBasDroit.size()-1;j++){
-					if(diagBasDroit.get(i).getPosition().getLargeur()<diagBasDroit.get(j).getPosition().getLargeur())
-					{
-						diagBasDroit.remove(diagBasDroit.get(j));
-						j--;
-					}
-				}}
-			diagBasDroit.remove(diagBasDroit.get(i));
-		}
-
-		for(int i=0; i < diagHautGauche.size();i++){
-			if(!diagHautGauche.get(i).estVide()){
-				for(int j=0; j < diagHautGauche.size()-1;j++){
-					if(diagHautGauche.get(i).getPosition().getLargeur()>diagHautGauche.get(j).getPosition().getLargeur())
-					{
-						diagHautGauche.remove(diagHautGauche.get(j));
-						j--;
-					}
-				}}
-			diagHautGauche.remove(diagHautGauche.get(i));
-		}
-
-		for(int i=0; i < diagHautDroite.size();i++){
-			if(!diagHautDroite.get(i).estVide()){
-				for(int j=0; j < diagHautDroite.size()-1;j++){
-					if(diagHautDroite.get(i).getPosition().getLargeur()<diagHautDroite.get(j).getPosition().getLargeur())
-					{
-						diagHautDroite.remove(diagHautDroite.get(j));
-						j--;
-					}
-				}}
-			diagHautDroite.remove(diagHautDroite.get(i));
-		}
-
-		casePossible.addAll(diagBasGauche);
-		casePossible.addAll(diagBasDroit);
-		casePossible.addAll(diagHautGauche);
-		casePossible.addAll(diagHautDroite);
+			diagBasGauche.remove(diagBasGauche.get(i));*/
+			}
 	}
 
-
-
-
-	/**
-	 * Filtre la liste selon la presence d'une pièce du meme camp
-	 * @param camp camp de la piece de la case de depart
-	 * @param casePossible Liste des cases possibles, a filtrer
-	 * @return Liste filtree
-	 */
-	private ArrayList<Case> filtrerDeplacementPossible(String camp,ArrayList<Case> casePossible)
-	{
-		Case caseplateau;
-		for(int i=0;i<(casePossible.size());i++)
-		{
-			
-			caseplateau=chercherCase(casePossible.get(i).getPosition());
-
-			if((!caseplateau.estVide())){
-				if(caseplateau.getPiece().getCamp().equals(camp))
+	for(int i=0; i < diagBasDroit.size();i++){
+		Case caseEchi = chercherCase(diagBasDroit.get(i).getPosition());
+		if(!caseEchi.estVide())
+			for(int j=0; j < diagBasDroit.size();j++){
+				if(diagBasDroit.get(i).getPosition().getLargeur()<diagBasDroit.get(j).getPosition().getLargeur())
 				{
-					casePossible.remove(casePossible.get(i));
-					i--;
+					diagBasDroit.remove(diagBasDroit.get(j));
+					j--;
+
 				}
-			}	
-		}
-		return casePossible;
+			}
 	}
 
-	public static Vector<Case> listerPiecesBlanches(Vector<Case> liste){
+	for(int i=0; i < diagHautGauche.size();i++){
+		Case caseEchi = chercherCase(diagHautGauche.get(i).getPosition());
+		if(!caseEchi.estVide())
+		{
+			System.out.println("i'm in");
+			for(int j=0; j < diagHautGauche.size();j++){
+				if(diagHautGauche.get(i).getPosition().getLargeur()>diagHautGauche.get(j).getPosition().getLargeur())
+				{
+					diagHautGauche.remove(diagHautGauche.get(j));
+					j--;
 
-		Vector<Case> listepiece= new Vector<Case>();
-		for(int i=0;i<liste.size();i++){// Pour toutes les pieces en jeu
-			if(!liste.get(i).estVide())
-				if (liste.get(i).getPiece().getCamp()=="blanc"){//si dans la liste la piece est blanche
-					listepiece.add(liste.get(i));//ajoute dans la liste des pieces adverses les pieces noires
 				}
+			}
 		}
-		return listepiece;		
 	}
-	/**
-	 * renvoi la liste des pieces noir
-	 */
-	public static Vector<Case> listerPiecesNoires(Vector<Case> liste){
 
-		Vector<Case> listepiece= new Vector<Case>();
-		for(int i=0;i<liste.size();i++){// Pour toutes les pieces en jeu
-			if(!liste.get(i).estVide())
-				if (liste.get(i).getPiece().getCamp()=="noir"){//si dans la liste la piece est noires
-					listepiece.add(liste.get(i));//ajoute dans la liste des pieces adverses les pieces noires
+	for(int i=0; i < diagHautDroite.size();i++){
+		Case caseEchi = chercherCase(diagHautDroite.get(i).getPosition());
+		if(!caseEchi.estVide())
+			for(int j=0; j < diagHautDroite.size();j++){
+				if(diagHautDroite.get(i).getPosition().getLargeur()<diagHautDroite.get(j).getPosition().getLargeur())
+				{
+					diagHautDroite.remove(diagHautDroite.get(j));
+					j--;
+
 				}
+			}
+	}
+
+
+	casePossible.clear();
+	casePossible.addAll(diagBasGauche);
+	casePossible.addAll(diagBasDroit);
+	casePossible.addAll(diagHautGauche);
+	casePossible.addAll(diagHautDroite);
+}
+
+
+
+private void filtrePourTour(Case caseActuelle,ArrayList<Case> casePossible){
+
+	ArrayList<Case> caseGauche= new ArrayList<Case>();
+	ArrayList<Case> caseDroite= new ArrayList<Case>();
+	ArrayList<Case> caseHaut= new ArrayList<Case>();
+	ArrayList<Case> caseBas= new ArrayList<Case>();
+
+	for(int i=0; i < casePossible.size();i++){
+		Case c = casePossible.get(i);			
+		if(caseActuelle.getPosition().getHauteur()==c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()>c.getPosition().getLargeur())
+		{
+			caseGauche.add(c);
 		}
-		return listepiece;		
-	}
 
-	public Position pionBoutEchiquier(){
-
-		Position IlYAUnPion = null;
-		for (int i=1;i<9;i++)
-		{			
-			if (chercherCase(new Position(1,i)).getPiece().equals(new Pion("noir")))
-				IlYAUnPion= new Position(1,i);//si l'égalité est vérifié (il y a un pion en haut de l'échiquier) alors on renvoit la case de se pion
-			if (chercherCase(new Position(8,i)).getPiece().equals(new Pion("blanc")))
-				IlYAUnPion= new Position(8,i);//si l'égalité est vérifié (il y a un pion en haut de l'échiquier) alors on renvoit la case de se pion
+		if(caseActuelle.getPosition().getHauteur()==c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()<c.getPosition().getLargeur())
+		{
+			caseDroite.add(c);
 		}
+		if(caseActuelle.getPosition().getHauteur()<c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()==c.getPosition().getLargeur())
+		{
+			caseHaut.add(c);				
+		}
+		if(caseActuelle.getPosition().getHauteur()>c.getPosition().getHauteur() && caseActuelle.getPosition().getLargeur()==c.getPosition().getLargeur())
+		{
+			caseBas.add(c);
+		}
+	}
 
-		return IlYAUnPion;//on retourne la case du pion.(=null si pas de pion)
+	for(int i=0; i < caseGauche.size();i++){
+		Case caseEchi = chercherCase(caseGauche.get(i).getPosition());
+		if(!caseEchi.estVide())
+			for(int j=0; j < caseGauche.size();j++){
+				if(caseGauche.get(i).getPosition().getLargeur()>caseGauche.get(j).getPosition().getLargeur())
+				{
+					caseGauche.remove(caseGauche.get(j));
+					j--;
+
+				}
+				/*if(!diagBasGauche.get(i).estVide()){
+				System.out.println("attention");
+				for(int j=0; j < diagBasGauche.size()-1;j++){
+					if(diagBasGauche.get(i).getPosition().getLargeur()>diagBasGauche.get(j).getPosition().getLargeur())
+					{
+						diagBasGauche.remove(diagBasGauche.get(j));
+						j--;
+
+					}
+				}}
+			diagBasGauche.remove(diagBasGauche.get(i));*/
+			}
+	}
+
+	for(int i=0; i < caseDroite.size();i++){
+		Case caseEchi = chercherCase(caseDroite.get(i).getPosition());
+		if(!caseEchi.estVide())
+			for(int j=0; j < caseDroite.size();j++){
+				if(caseDroite.get(i).getPosition().getLargeur()<caseDroite.get(j).getPosition().getLargeur())
+				{
+					caseDroite.remove(caseDroite.get(j));
+					j--;
+
+				}
+			}
+	}
+
+	for(int i=0; i < caseHaut.size();i++){
+
+		Case caseEchi = chercherCase(caseHaut.get(i).getPosition());
+		if(!caseEchi.estVide())
+		{
+			System.out.println("i'm in");
+			for(int j=0; j < caseHaut.size();j++){
+				if(caseHaut.get(i).getPosition().getHauteur()<caseHaut.get(j).getPosition().getHauteur())
+				{
+
+					caseHaut.remove(caseHaut.get(j));
+					j--;
+
+				}
+			}
+		}
+	}
+
+	for(int i=0; i < caseBas.size();i++){
+		Case caseEchi = chercherCase(caseBas.get(i).getPosition());
+		if(!caseEchi.estVide())
+			for(int j=0; j < caseBas.size();j++){
+				if(caseBas.get(i).getPosition().getHauteur()>caseBas.get(j).getPosition().getHauteur())
+				{
+					caseBas.remove(caseBas.get(j));
+					j--;
+
+				}
+			}
 	}
 
 
-	/**
-	 * getter/setter
-	 */
 
+	casePossible.clear();
+	casePossible.addAll(caseGauche);
+	casePossible.addAll(caseDroite);
+	casePossible.addAll(caseHaut);
+	casePossible.addAll(caseBas);
+}
 
-	public Case getCaseSelectionne() {
-		return caseSelectionne;
+/**
+ * Filtre la liste selon la presence d'une pièce du meme camp
+ * @param camp camp de la piece de la case de depart
+ * @param casePossible Liste des cases possibles, a filtrer
+ * @return Liste filtree
+ */
+private ArrayList<Case> filtrerDeplacementPossible(String camp,ArrayList<Case> casePossible)
+{
+	Case caseplateau;
+	for(int i=0;i<(casePossible.size());i++)
+	{
+
+		caseplateau=chercherCase(casePossible.get(i).getPosition());
+
+		if((!caseplateau.estVide())){
+			if(caseplateau.getPiece().getCamp().equals(camp))
+			{
+				casePossible.remove(casePossible.get(i));
+				i--;
+			}
+		}	
+	}
+	return casePossible;
+}
+
+public static Vector<Case> listerPiecesBlanches(Vector<Case> liste){
+
+	Vector<Case> listepiece= new Vector<Case>();
+	for(int i=0;i<liste.size();i++){// Pour toutes les pieces en jeu
+		if(!liste.get(i).estVide())
+			if (liste.get(i).getPiece().getCamp()=="blanc"){//si dans la liste la piece est blanche
+				listepiece.add(liste.get(i));//ajoute dans la liste des pieces adverses les pieces noires
+			}
+	}
+	return listepiece;		
+}
+/**
+ * renvoi la liste des pieces noir
+ */
+public static Vector<Case> listerPiecesNoires(Vector<Case> liste){
+
+	Vector<Case> listepiece= new Vector<Case>();
+	for(int i=0;i<liste.size();i++){// Pour toutes les pieces en jeu
+		if(!liste.get(i).estVide())
+			if (liste.get(i).getPiece().getCamp()=="noir"){//si dans la liste la piece est noires
+				listepiece.add(liste.get(i));//ajoute dans la liste des pieces adverses les pieces noires
+			}
+	}
+	return listepiece;		
+}
+
+public Position pionBoutEchiquier(){
+
+	Position IlYAUnPion = null;
+	for (int i=1;i<9;i++)
+	{			
+		if (chercherCase(new Position(1,i)).getPiece().equals(new Pion("noir")))
+			IlYAUnPion= new Position(1,i);//si l'égalité est vérifié (il y a un pion en haut de l'échiquier) alors on renvoit la case de se pion
+		if (chercherCase(new Position(8,i)).getPiece().equals(new Pion("blanc")))
+			IlYAUnPion= new Position(8,i);//si l'égalité est vérifié (il y a un pion en haut de l'échiquier) alors on renvoit la case de se pion
 	}
 
+	return IlYAUnPion;//on retourne la case du pion.(=null si pas de pion)
+}
 
-	public Case getCaseRoiBlanc() {
-		return caseRoiBlanc;
-	}
 
-	public void setCaseRoiBlanc(Case caseRoiBlanc) {
-		this.caseRoiBlanc = caseRoiBlanc;
-	}
+/**
+ * getter/setter
+ */
 
-	public Case getCaseRoiNoir() {
-		return caseRoiNoir;
-	}
 
-	public void setCaseRoiNoir(Case caseRoiNoir) {
-		this.caseRoiNoir = caseRoiNoir;
-	}
+public Case getCaseSelectionne() {
+	return caseSelectionne;
+}
+
+
+public Case getCaseRoiBlanc() {
+	return caseRoiBlanc;
+}
+
+public void setCaseRoiBlanc(Case caseRoiBlanc) {
+	this.caseRoiBlanc = caseRoiBlanc;
+	System.out.println("change bien la case du roi blanc");
+}
+
+public Case getCaseRoiNoir() {
+	return caseRoiNoir;
+}
+
+public void setCaseRoiNoir(Case caseRoiNoir) {
+	this.caseRoiNoir = caseRoiNoir;
+	System.out.println("change bien la case du roi noir");
+}
 
 
 
