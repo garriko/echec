@@ -147,7 +147,9 @@ public class Variantes {
 				if(currentCase.estVide())
 				{
 					currentCase.setPiece(p);
-					listePieces.add(currentCase);
+					Case casePiece = new Case(new Position(currentCase.getPosition().getHauteur(),currentCase.getPosition().getLargeur()));
+					casePiece.setPiece(p);
+					listePieces.add(casePiece);
 					c.setPiece(p);
 					presenceRoiBlanc=true;
 				}
@@ -158,6 +160,7 @@ public class Variantes {
 			{
 				throw new PresenceKingException();
 			}
+		
 		else if(nomPiece.equals(new String("Roi")) && p.getCamp()=="noir")
 		{
 			if(!presenceRoiNoir)
@@ -166,7 +169,9 @@ public class Variantes {
 				if(currentCase.estVide())
 				{
 					currentCase.setPiece(p);
-					listePieces.add(currentCase);
+					Case casePiece = new Case(new Position(currentCase.getPosition().getHauteur(),currentCase.getPosition().getLargeur()));
+					casePiece.setPiece(p);
+					listePieces.add(casePiece);
 					c.setPiece(p);
 					presenceRoiNoir=true;
 				}
@@ -184,7 +189,9 @@ public class Variantes {
 			if(currentCase.estVide())
 			{
 				currentCase.setPiece(p);
-				listePieces.add(currentCase);
+				Case casePiece = new Case(new Position(currentCase.getPosition().getHauteur(),currentCase.getPosition().getLargeur()));
+				casePiece.setPiece(p);
+				listePieces.add(casePiece);
 				c.setPiece(p);
 			}
 			else
