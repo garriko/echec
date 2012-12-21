@@ -9,7 +9,7 @@ package projet_echec.echec.gestion;
  * @see Partie
  */
 
-public class Joueur {
+public class Joueur implements java.io.Serializable{
 	private String nom;
 	private boolean modeAide;
 	

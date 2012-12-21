@@ -15,6 +15,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import projet_echec.echec.exception.GameException;
 import projet_echec.echec.gestion.Gestion;
 import projet_echec.echec.gestion.GestionCatalogueCharger;
 import projet_echec.echec.gestion.GestionCatalogueRevoir;
@@ -141,7 +142,12 @@ public class InterfaceCatalogue {
 				else {
 					Wrapper w = null;
 					try {
-						w = SaveGame.chargerEnCours((String) listeVariantes.getSelectedValue());
+						try {
+							w = GestionJeu.chargerGame((String) listeVariantes.getSelectedValue());
+						} catch (GameException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					} catch (ClassNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

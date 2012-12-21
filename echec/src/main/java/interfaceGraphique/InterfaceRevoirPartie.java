@@ -33,6 +33,7 @@ import projet_echec.echec.gestion.Partie;
 import projet_echec.echec.gestion.SaveGame;
 import projet_echec.echec.jeu.Case;
 import projet_echec.echec.jeu.EchiquierActif;
+import projet_echec.echec.jeu.EchiquierPassif;
 import projet_echec.echec.jeu.Position;
 import projet_echec.echec.wrapper.Wrapper;
 
@@ -62,7 +63,7 @@ public class InterfaceRevoirPartie {
 	
 	Wrapper w;
 	Partie p;
-	EchiquierActif plateauJeu;
+	EchiquierPassif plateauJeu;
 	
 	Timer countdown; 
 	int timeRemaining;
@@ -75,7 +76,7 @@ public class InterfaceRevoirPartie {
 		fenetre=new JFrame("Replay");
 		tmp = fenetre.getContentPane();
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
+		/*
 		try {
 			w = SaveGame.charger(nomPartie);
 		} catch (ClassNotFoundException e) {
@@ -86,7 +87,17 @@ public class InterfaceRevoirPartie {
 			e.printStackTrace();
 		}
 		p = w.getP();
-		plateauJeu = (EchiquierActif) w.getE();
+		*/
+		
+		try {
+			plateauJeu = new EchiquierPassif(nomPartie);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		boutonLect = new ImageIcon("images/interface_revoirpartieBoutonLecture.png").getImage().getScaledInstance(92, 64, Image.SCALE_DEFAULT);
@@ -139,6 +150,12 @@ public class InterfaceRevoirPartie {
 		}
 		
 		
+		Vector<Case> plateauCases = plateauJeu.getPlateau();
+		for (int i=0; i<64; i++){
+			int numCase = plateauCases.get(i).getPosition().getLargeur() + 8*(8-plateauCases.get(i).getPosition().getHauteur())-1;			
+			((Vector<JLabel>) tab_cases).get(numCase).setIcon(new ImageIcon(plateauCases.get(i).getImg()));
+		}
+		
 		
 		
 		JPanel plateau = new JPanel();
@@ -172,11 +189,12 @@ public class InterfaceRevoirPartie {
 		
 		modeLecture.addItem("Continue");
 	    modeLecture.addItem("Pas à pas");
-
-		
 		
 		imageFond.setOpaque(false);
 		tmp.add(imageFond);
+		
+		plateauJeu.setCadence((Integer) cadence.getValue());
+		plateauJeu.setModeLecture((String) modeLecture.getSelectedItem());
     
 		fenetre.setSize(1035,720); // taille de l'image de fond
 		fenetre.setResizable(false);
@@ -200,23 +218,29 @@ public class InterfaceRevoirPartie {
 	
 	public void deplacementSuivant(){
 		String dep = p.lireDeplacement();
-		Case caseDepart = plateauJeu.chercherCase(new Position(Integer.parseInt(String.valueOf(dep.charAt(0))), Integer.parseInt(String.valueOf(dep.charAt(1)))));
-		Case caseArrivee = plateauJeu.chercherCase(new Position(Integer.parseInt(String.valueOf(dep.charAt(3))), Integer.parseInt(String.valueOf(dep.charAt(4)))));
-		try {
-			plateauJeu.selectionnerCase(caseDepart);
-		} catch (DeplacementException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		int caseDepartH = Integer.parseInt(String.valueOf(dep.charAt(0)));
+		int caseDepartL = Integer.parseInt(String.valueOf(dep.charAt(1)));
+		int caseDepartNum = caseDepartH + 8*(caseDepartL-1)-1;
+		String couleurCaseDepart;
+		if ((caseDepartH + caseDepartL)%2==0){
+			couleurCaseDepart = "blanc";
 		}
-		try {
-			plateauJeu.selectionnerCase(caseArrivee);
-		} catch (DeplacementException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		else {
+			couleurCaseDepart = "noir";
+		}	
+		
+		
+		
+		int caseArriveeH = Integer.parseInt(String.valueOf(dep.charAt(3)));
+		int caseArriveeL = Integer.parseInt(String.valueOf(dep.charAt(4)));
+		int caseArriveeNum = caseArriveeH + 8*(caseArriveeL-1)-1;
+		String couleurCaseArrivee;
+		if ((caseArriveeH + caseArriveeL)%2==0){
+			couleurCaseArrivee = "blanc";
 		}
-		for (int i=0; i<plateauJeu.getPlateau().size(); i++){						
-			actualiserImage(plateauJeu.getPlateau().get(i));
-		}		
+		else {
+			couleurCaseArrivee = "noir";
+		}
 	}
 	
 	public void play(){

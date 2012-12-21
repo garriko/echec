@@ -892,6 +892,8 @@ public void setCaseRoiNoir(Case caseRoiNoir) {
 	System.out.println("change bien la case du roi noir");
 }
 
-
+public String getCampActif(){
+	return campActif;
+}
 
 }

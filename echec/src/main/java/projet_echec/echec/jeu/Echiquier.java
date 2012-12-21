@@ -12,7 +12,7 @@ import java.util.Vector;
  * 
  */
 
-public abstract class Echiquier {
+public abstract class Echiquier implements java.io.Serializable{
 	/**
 	 * Plateau de jeu
 	 */

@@ -155,7 +155,15 @@ public class InterfaceJeu {
 		joueur1.setVisible(true);
 		joueur2.setVisible(false);
 		
-		this.tour = 1;
+		this.tour=1;
+		/*
+		 * if (plateauJeu.getCampActif().equals(new String("blanc"))){
+			setTour(1);
+		}
+		else {
+			setTour(2);
+		}
+		*/
 		
 		CaseSelectionnee = new Case(new Position(5,2));
 		selectionCase = false;
@@ -506,12 +514,17 @@ public class InterfaceJeu {
 	
 	
 	public void finPartie(){
+		GestionJeu.finPartie(game);
+	}
+	
+	public void echecEtMat(){
 		if (plateauJeu.echecEtMat("noir")==true){
-			GestionJeu.finPartie(game);
+			finPartie();
 			new InterfacePopupEchecEtMat(1, InterfaceJeu.this);
+			new InterfacePopupSauvegarder(game, plateauJeu, true);
 		}
 		else if (plateauJeu.echecEtMat("blanc")==true){
-			GestionJeu.finPartie(game);
+			finPartie();
 			new InterfacePopupEchecEtMat(2, InterfaceJeu.this);
 		}		
 	}
@@ -543,7 +556,7 @@ public class InterfaceJeu {
 						actualiserImage(plateauJeu.getPlateau().get(i));
 					}
 						actualiserTour(getTour());
-						
+						echecEtMat();
 						//aPerduUnePiece(tour);			
 				}
 				
@@ -592,7 +605,7 @@ public class InterfaceJeu {
 				if (getTour()==1){
 					if (eCase.estVide()==false){
 						if (eCase.getPiece().getCamp().equals("blanc")){							
-							ArrayList<Case> plop = plateauJeu.deplacementPossible(eCase);	
+							ArrayList<Case> plop = plateauJeu.filtreGeneral(eCase);
 							for (int i=0; i<plop.size(); i++){
 								Case laCase = plop.get(i);
 								Position po = new Position(8-laCase.getPosition().getHauteur()+1, laCase.getPosition().getLargeur());
@@ -607,7 +620,7 @@ public class InterfaceJeu {
 				else if (getTour()==2){
 					if (eCase.estVide()==false){
 						if (eCase.getPiece().getCamp().equals("noir")){
-							ArrayList<Case> plop = plateauJeu.deplacementPossible(eCase);					
+							ArrayList<Case> plop = plateauJeu.filtreGeneral(eCase);					
 							for (int i=0; i<plop.size(); i++){
 								Case laCase = plop.get(i);
 								Position po = new Position(8-laCase.getPosition().getHauteur()+1, laCase.getPosition().getLargeur());
@@ -630,7 +643,7 @@ public class InterfaceJeu {
 			if (getTour()==1){
 				if (eCase.estVide()==false){
 					if (eCase.getPiece().getCamp().equals("blanc")){					
-							ArrayList<Case> plop = plateauJeu.deplacementPossible(eCase);
+							ArrayList<Case> plop = plateauJeu.filtreGeneral(eCase);
 							for (int i=0; i<plop.size(); i++){
 							Case laCase = plop.get(i);
 							Position po = new Position(8-laCase.getPosition().getHauteur()+1, laCase.getPosition().getLargeur());
@@ -645,7 +658,7 @@ public class InterfaceJeu {
 			else if (getTour()==2){
 				if (eCase.estVide()==false){
 					if (eCase.getPiece().getCamp().equals("noir")){
-						ArrayList<Case> plop = plateauJeu.deplacementPossible(eCase);			
+						ArrayList<Case> plop = plateauJeu.filtreGeneral(eCase);			
 						for (int i=0; i<plop.size(); i++){
 							Case laCase = plop.get(i);
 							Position po = new Position(8-laCase.getPosition().getHauteur()+1, laCase.getPosition().getLargeur());
@@ -663,26 +676,7 @@ public class InterfaceJeu {
 	
 	class CountdownTimerListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			/*
-			if (--timeRemaining >= 0) {
-				if (getTour()==1){
-					countdownJ1.start();
-					chronoJ1.setText(String.valueOf(timeRemaining));
-				}
-				else {
-					countdownJ2.start();
-					chronoJ2.setText(String.valueOf(timeRemaining));
-				}
-			} 
-			else {
-				if (getTour()==1){
-					//lancer popup joueur 1 tu as perdu
-				}
-				else {
-					//lancer popup joueur 2 tu as perdu
-				}							
-			}
-			*/
+			
 			if (getTour()==1){
 				if (--timeRemaining1 >= 0) {
 					countdownJ1.start();

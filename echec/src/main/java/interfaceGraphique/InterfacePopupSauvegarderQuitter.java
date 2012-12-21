@@ -112,6 +112,7 @@ public class InterfacePopupSauvegarderQuitter {
 				if (choix=="Menu"){
 					fenetre.setVisible(false);
 					mere.getFrame().setVisible(false);
+					mere.finPartie();
 					new InterfaceMenu();
 				}
 				else if (choix=="Quitter"){
@@ -122,6 +123,7 @@ public class InterfacePopupSauvegarderQuitter {
 				if (choix=="Menu"){
 					fenetre.setVisible(false);
 					mere.getFrame().setVisible(false);
+					mere.finPartie();
 					new InterfaceMenu();
 				}
 				else if (choix=="Quitter"){
