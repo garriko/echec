@@ -145,7 +145,7 @@ public class InterfaceRevoirPartie {
 						tab_cases.add(new JLabel(new ImageIcon("images/casegrise.png")));
 					}			
 				}
-				((Vector<JLabel>) tab_cases).get(i).setPreferredSize(new Dimension(45,45));
+				((Vector<JLabel>) tab_cases).get(i).setPreferredSize(new Dimension(50,50));
 			}
 		}
 		
@@ -161,7 +161,7 @@ public class InterfaceRevoirPartie {
 		JPanel plateau = new JPanel();
 		plateau.setLayout(new GridLayout(8,8));
 	
-		plateau.setBounds(505,90,360,360);		
+		plateau.setBounds(506,92,400,400);		
 		
 		
 		for (int i=0; i<64 ; i++){
@@ -217,17 +217,116 @@ public class InterfaceRevoirPartie {
 	
 	
 	public void deplacementSuivant(){
+		System.out.println("marche");
 		String dep = p.lireDeplacement();
 		int caseDepartH = Integer.parseInt(String.valueOf(dep.charAt(0)));
 		int caseDepartL = Integer.parseInt(String.valueOf(dep.charAt(1)));
 		int caseDepartNum = caseDepartH + 8*(caseDepartL-1)-1;
-		String couleurCaseDepart;
+		//String couleurCaseDepart;
+		String pieceCaseDepart;
 		if ((caseDepartH + caseDepartL)%2==0){
-			couleurCaseDepart = "blanc";
+			//couleurCaseDepart = "blanc";
+			if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getClass().getSimpleName().equals("Pion")){
+				if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getCamp().equals("blanc")) {
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/111.png"));
+				}
+				else {
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/211.png"));
+				}
+			}
+			if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getClass().getSimpleName().equals("Tour")){
+				if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getCamp().equals("blanc")){
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/112.png"));
+				}
+				else {
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/212.png"));
+				}
+			}
+			if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getClass().getSimpleName().equals("Cavalier")){
+				if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getCamp().equals("blanc")) {
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/113.png"));
+				}
+				else {
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/213.png"));
+				}
+			}
+			if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getClass().getSimpleName().equals("Fou")){
+				if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getCamp().equals("blanc")){
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/114.png"));
+				}
+				else {
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/214.png"));
+				}
+			}
+			if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getClass().getSimpleName().equals("Roi")){
+				if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getCamp().equals("blanc")) {
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/115.png"));
+				}
+				else {
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/215.png"));
+				}
+			}
+			if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getClass().getSimpleName().equals("Reine")){
+				if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getCamp().equals("blanc")){
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/116.png"));
+				}
+				else {
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/216.png"));
+				}
+			}
 		}
 		else {
-			couleurCaseDepart = "noir";
+			//couleurCaseDepart = "noir";
+			if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getClass().getSimpleName().equals("Pion")){
+				if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getCamp().equals("blanc")) {
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/121.png"));
+				}
+				else {
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/221.png"));
+				}
+			}
+			if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getClass().getSimpleName().equals("Tour")){
+				if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getCamp().equals("blanc")){
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/122.png"));
+				}
+				else {
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/222.png"));
+				}
+			}
+			if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getClass().getSimpleName().equals("Cavalier")){
+				if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getCamp().equals("blanc")) {
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/123.png"));
+				}
+				else {
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/223.png"));
+				}
+			}
+			if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getClass().getSimpleName().equals("Fou")){
+				if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getCamp().equals("blanc")){
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/124.png"));
+				}
+				else {
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/224.png"));
+				}
+			}
+			if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getClass().getSimpleName().equals("Roi")){
+				if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getCamp().equals("blanc")) {
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/125.png"));
+				}
+				else {
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/225.png"));
+				}
+			}
+			if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getClass().getSimpleName().equals("Reine")){
+				if (plateauJeu.getPlateau().get(caseDepartNum).getPiece().getCamp().equals("blanc")){
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/126.png"));
+				}
+				else {
+					((Vector<JLabel>) tab_cases).get(caseDepartNum).setIcon(new ImageIcon("images/Pieces/pasAuto/226.png"));
+				}
+			}
 		}	
+		
 		
 		
 		

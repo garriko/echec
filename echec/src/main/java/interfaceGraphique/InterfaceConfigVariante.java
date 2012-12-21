@@ -159,6 +159,7 @@ public class InterfaceConfigVariante {
 			}
 			*/	
 			
+			
 			if(e.getSource()==boutonSupprimer){
 				try {
 					catalogue.supprimerPartie((String) listeVariantes.getSelectedValue());

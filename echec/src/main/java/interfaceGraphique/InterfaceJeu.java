@@ -529,6 +529,12 @@ public class InterfaceJeu {
 		}		
 	}
 	
+	public void pionBout(){
+		if (plateauJeu.pionBoutEchiquiertest()){
+			new InterfacePopupPionBout(plateauJeu.chercherCase(plateauJeu.pionBoutEchiquier()));
+		}
+	}
+	
 	
 	
 	public class EcouteurAction implements ActionListener{		
@@ -556,8 +562,8 @@ public class InterfaceJeu {
 						actualiserImage(plateauJeu.getPlateau().get(i));
 					}
 						actualiserTour(getTour());
-						echecEtMat();
-						//aPerduUnePiece(tour);			
+						pionBout();	
+						echecEtMat();							
 				}
 				
 				
