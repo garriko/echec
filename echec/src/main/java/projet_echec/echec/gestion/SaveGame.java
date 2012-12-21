@@ -27,12 +27,28 @@ public class SaveGame {
 	 * @param nomFichier Enregistre dans nomFichier.gech
 	 * @throws IOException 
 	 */
-	public static void sauvegarder(String nomFichier, Partie p, Echiquier e) throws IOException
+	public static void sauvegarderEnCours(String nomFichier, Partie p, Echiquier e) throws IOException
 	{
 		Wrapper w = new Wrapper(p,e);
 	      try
 	      {
 	         FileOutputStream fileOut = new FileOutputStream(new String("partie en cours/"+nomFichier+".gech"));
+	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	         out.writeObject(w);
+	         out.close();
+	         fileOut.close();
+	      }catch(IOException i) //Si le fichier n'est pas trouvé
+	      {
+	         throw i;
+	      }
+	}
+	
+	public static void sauvegarderTerminer(String nomFichier, Partie p, Echiquier e) throws IOException
+	{
+		Wrapper w = new Wrapper(p,e);
+	      try
+	      {
+	         FileOutputStream fileOut = new FileOutputStream(new String("parties terminees/"+nomFichier+".gech"));
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(w);
 	         out.close();
@@ -50,12 +66,33 @@ public class SaveGame {
 	 * @throws ClassNotFoundException 
 	 * @return un Wrapper contenant une Partie et un Echiquier
 	 */
-	public static Wrapper charger(String nomFichier) throws IOException, ClassNotFoundException
+	public static Wrapper chargerEnCours(String nomFichier) throws IOException, ClassNotFoundException
 	{
 		Wrapper w;
 		 try
          {
             FileInputStream fileIn = new FileInputStream(new String("partie en cours/"+nomFichier+".gech"));
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            w = (Wrapper) in.readObject();
+            in.close();
+            fileIn.close();
+        }
+		 catch(IOException i) //Si le fichier n'est pas trouvé
+        {
+            throw i;
+        }
+		 catch(ClassNotFoundException c) //Si le contenu du fichier est incorrect
+        {
+            throw c;
+        }
+		 return w;
+	}
+	public static Wrapper chargerTerminer(String nomFichier) throws IOException, ClassNotFoundException
+	{
+		Wrapper w;
+		 try
+         {
+            FileInputStream fileIn = new FileInputStream(new String("parties terminees/"+nomFichier+".gech"));
             ObjectInputStream in = new ObjectInputStream(fileIn);
             w = (Wrapper) in.readObject();
             in.close();
