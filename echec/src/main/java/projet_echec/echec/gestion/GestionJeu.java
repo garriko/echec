@@ -94,5 +94,8 @@ public class GestionJeu {
 		nbPartie--;
 	}
 
+	public static int getNbParties(){
+		return nbPartie;
+	}
 
 }

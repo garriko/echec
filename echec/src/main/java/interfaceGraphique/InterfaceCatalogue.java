@@ -140,22 +140,28 @@ public class InterfaceCatalogue {
 					new InterfaceRevoirPartie((String) listeVariantes.getSelectedValue());
 				}
 				else {
-					Wrapper w = null;
-					try {
+					if (GestionJeu.getNbParties()==4){
+						new InterfacePopupErreur4();
+					}
+					else {
+						Wrapper w = null;
 						try {
 							w = GestionJeu.chargerGame((String) listeVariantes.getSelectedValue());
-						} catch (GameException e1) {
+						} 
+						catch (GameException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} 
+						catch (ClassNotFoundException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} 
+						catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-					} catch (ClassNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						new InterfaceJeu(w.getP(), w.getE());
 					}
-					new InterfaceJeu(w.getP(), w.getE());
 				}
 			}
 			else if (e.getSource()==boutonSupprimerPartie){

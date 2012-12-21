@@ -212,30 +212,34 @@ public class InterfaceConfigPartie {
 				new InterfaceConfigVariante(InterfaceConfigPartie.this);
 			}
 			if (e.getSource()==Bouton2){ //valider
-				Joueur J1 = new Joueur(nomJ1.getText(), aideJ1.isSelected());
-				Joueur J2 = new Joueur(nomJ2.getText(), aideJ2.isSelected());
-				Options optionsPartie = new Options((Integer) dureeJ1.getValue(), (Integer) dureeJ2.getValue(), aideJ2.isSelected(),
-						aideJ1.isSelected(), rotation.isSelected());
-				String varianteChoisie = variante.getText();
-				Wrapper w = null;
-				try {
-					w = GestionJeu.creerNewGame(J1, J2, varianteChoisie, optionsPartie);
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (GameException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				if (GestionJeu.getNbParties()==4){
+					new InterfacePopupErreur4();
 				}
-				Partie partie = w.getP();
-				Echiquier echiquier = w.getE();
-				
-				fenetre.setVisible(false);
-				new InterfaceJeu(partie, echiquier);
-				
+				else {
+					Joueur J1 = new Joueur(nomJ1.getText(), aideJ1.isSelected());
+					Joueur J2 = new Joueur(nomJ2.getText(), aideJ2.isSelected());
+					Options optionsPartie = new Options((Integer) dureeJ1.getValue(), (Integer) dureeJ2.getValue(), aideJ2.isSelected(),
+							aideJ1.isSelected(), rotation.isSelected());
+					String varianteChoisie = variante.getText();
+					Wrapper w = null;
+					try {
+						w = GestionJeu.creerNewGame(J1, J2, varianteChoisie, optionsPartie);
+					} catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (GameException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					Partie partie = w.getP();
+					Echiquier echiquier = w.getE();
+					
+					fenetre.setVisible(false);
+					new InterfaceJeu(partie, echiquier);
+				}			
 			}
 			if (e.getSource()==Bouton3){ //annuler
 				fenetre.setVisible(false);

@@ -140,6 +140,11 @@ public class InterfaceConfigVariante {
 	}
 	
 	
+	public void ajouterDescription(Variantes v, String des){		
+		v.setDescription(des);
+	}
+	
+	
 		
 	public class Ecouteur implements ActionListener{		
 		public void actionPerformed(ActionEvent e){
