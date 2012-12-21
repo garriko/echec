@@ -24,7 +24,7 @@ public abstract class Piece implements java.io.Serializable{
 	 * Image correspondant à la pièce et au camp (chemin d'accès
 	 */
 	private  String img;
-	
+	protected boolean dejaBouge;
 	
 	/**
 	 * constructeur
@@ -74,5 +74,18 @@ public abstract class Piece implements java.io.Serializable{
 	public void setImg(String img) {
 		this.img = img;
 	}
-	
+	/**
+	 * @return dejaBouge
+	 */
+	public boolean isDejaBouge() {
+		return dejaBouge;
+	}
+
+	/**
+	 * @param dejaBouge dejaBouge to set
+	 */
+	public void setDejaBouge(boolean dejaBouge) {
+		this.dejaBouge = dejaBouge;
+	}
+
 }

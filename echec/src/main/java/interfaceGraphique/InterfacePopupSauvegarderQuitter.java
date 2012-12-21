@@ -53,16 +53,17 @@ public class InterfacePopupSauvegarderQuitter {
 		plateau = (EchiquierActif) echiquier;
 		
 		tmp = fenetre.getContentPane();
-		boutonOUI = new JButton(new ImageIcon("images/oui.png"));
-		boutonNON = new JButton(new ImageIcon("images/non.png"));
-		boutonAnnuler = new JButton("Annuler");
-
-		nomSauvegarde = new JTextField("sauvegarde");
+		boutonOUI = new JButton(new ImageIcon("images/PopupRevenirMenuP/PopupRevenirMenuPrincipalBoutonOui.png"));
+		boutonNON = new JButton(new ImageIcon("images/PopupRevenirMenuP/PopupRevenirMenuPrincipalBoutonNon.png"));
+		boutonAnnuler = new JButton(new ImageIcon("images/PopupRevenirMenuP/PopupRevenirMenuPrincipalBoutonAnnuler.png"));
+				
+		boutonOUI.setBounds(53, 263, 100, 48); //position x, position y, largeur, hauteur
+		boutonNON.setBounds(181, 263, 100, 48); 
+		boutonAnnuler.setBounds(312, 263, 130, 48); 
 		
-		boutonOUI.setBounds(25, 257, 105, 52); //position x, position y, largeur, hauteur
-		boutonNON.setBounds(150, 257, 105, 52); 
-		boutonAnnuler.setBounds(275, 257, 105, 52); 
+		nomSauvegarde = new JTextField("sauvegarde");
 		nomSauvegarde.setBounds(22, 145, 375, 40);
+
 		
 		choix = menuOuQuitter;
 		
@@ -72,7 +73,7 @@ public class InterfacePopupSauvegarderQuitter {
 		boutonAnnuler.addActionListener(listen);
 		boutonAnnuler.addActionListener(listen);
 	
-		JPanel imageFond = new TestImagePanel(new ImageIcon("images/sauvegarderQuitter.png").getImage());
+		JPanel imageFond = new TestImagePanel(new ImageIcon("images/PopupRevenirMenuP/PopupRevenirMenuPrincipal.png").getImage());
 		imageFond.setLayout(null);	 
 		imageFond.add(boutonOUI);   
 		imageFond.add(boutonNON);
