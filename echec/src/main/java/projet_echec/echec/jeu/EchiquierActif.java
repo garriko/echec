@@ -436,25 +436,26 @@ public class EchiquierActif extends Echiquier {
 	
 	public void validerDeplacement(Position depart,Case caseDepart,Case caseSauvegardeArrivee)
 	{
-	/*	if(!caseSauvegardeArrivee.estVide())//si il y a une piece a l'arrivee
+		if(!caseSauvegardeArrivee.estVide())//si il y avait une piece a l'arrivee
 		{
 			System.out.println(caseSauvegardeArrivee.getPiece());
 			this.listePiecePrises.add(caseSauvegardeArrivee.getPiece());//on ajoute la piece dans la liste des pieces prises
 
 			for(int j=0; j< listePieceEnJeu.size();j++)//pour toutes les pieces en jeu
-				if(this.listePieceEnJeu.get(j).getPosition().equals(caseSauvegardeArrivee.getPosition()))//si il y a une case egale a la case d'arrivee
+				if(this.listePieceEnJeu.get(j).getPiece().equals(caseSauvegardeArrivee.getPiece()))//si il y a une case egale a la case d'arrivee
 					this.listePieceEnJeu.remove(j);//on la supprime
-		}*/
+					
+		}
 		
-		if(!caseSauvegardeArrivee.estVide())//si il y a une piece a l'arrivee
+	/*	if(!caseSauvegardeArrivee.estVide())//si il y a une piece a l'arrivee
 		{
 			
 			this.listePiecePrises.add(caseSauvegardeArrivee.getPiece());//on ajoute la piece dans la liste des pieces prises
 
 			for(int j=0; j< listePieceEnJeu.size();j++)//pour toutes les pieces en jeu
-				if(this.listePieceEnJeu.get(j).getPosition().equals(caseSauvegardeArrivee.getPosition()))//si il y a une case egale a la case d'arrivee
+				if(this.listePieceEnJeu.get(j).getPiece().equals(caseSauvegardeArrivee.getPosition()))//si il y a une case egale a la case d'arrivee
 					this.listePieceEnJeu.remove(j);//on la supprime
-		}
+		}*/
 		if(caseDepart.getPiece().getClass().getSimpleName().equals("Roi"))
 		{
 			
@@ -489,10 +490,10 @@ public class EchiquierActif extends Echiquier {
 
 			if(plop.get(i).getPosition().equals(caseArrivee.getPosition())){
 				Case sauvegardeArrivee = new Case(new Position(caseArrivee.getPosition().getHauteur(),caseArrivee.getPosition().getLargeur()));
+				System.out.println(caseArrivee.getPiece());
 				Piece p = changerCase(caseDepart, caseArrivee);
 				sauvegardeArrivee.setPiece(p);
 				System.out.println(sauvegardeArrivee.getPiece());
-				System.out.println(caseDepart.getPiece());
 				for(int j=0; j< listePieceEnJeu.size();j++)//pour toutes les pieces en jeu
 					if(this.listePieceEnJeu.get(j).getPosition().equals(caseDepart.getPosition()))
 					{
@@ -512,7 +513,6 @@ public class EchiquierActif extends Echiquier {
 						this.caseRoiBlanc.setPosition(sauvegardeArrivee.getPosition());
 					}
 				}
-				System.out.println(caseArrivee.getPiece().getCamp());
 				int res = echec();
 				if(res==11 && campActif.equals("noir")){
 					System.out.println("mise en echec a cause du deplacement");
