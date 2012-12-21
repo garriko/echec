@@ -55,7 +55,11 @@ public class Partie {
 		this.deplacement=newDepl;
 	}
 	
-	
+	public String lireDeplacement(){
+		String depActuel = this.deplacement.substring(0, 5);
+		this.deplacement = this.deplacement.substring(6, this.deplacement.length());
+		return depActuel;
+	}
 	
 	//Getters et setters
 	public Joueur getjBlanc() {
