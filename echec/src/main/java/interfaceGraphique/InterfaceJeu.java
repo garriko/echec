@@ -518,6 +518,7 @@ public class InterfaceJeu {
 	}
 	
 	public void echecEtMat(){
+		
 		if (plateauJeu.echecEtMat("noir")==true){
 			finPartie();
 			new InterfacePopupEchecEtMat(1, InterfaceJeu.this);
