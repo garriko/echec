@@ -705,11 +705,178 @@ public class InterfaceJeu {
 				((JButton) e.getSource()).setBorderPainted(true);
 				((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(Color.red));
 				
+				int numCase = ((Vector<JButton>) tab_cases).indexOf(e.getSource());
+				Position p = new Position(8-numCase/8,numCase%8 +1);
+				Case eCase = plateauJeu.chercherCase(p);
+				
+				if (getTour()==1){
+					if (eCase.estVide()==false){
+						if (eCase.getPiece().getCamp().equals("blanc")){
+							
+							
+							ArrayList<Case> plop = new ArrayList<Case>();
+							boolean depEffectue = false;
+							plop = eCase.getPiece().getDeplacementPossible(eCase);//donne les déplacements possible de la piece présent sur la case depart
+							
+							if(eCase.getPiece().getClass().getSimpleName().equals(new String("Fou"))||eCase.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
+								plateauJeu.filtrePourFou(eCase, plop);
+								System.out.println("pas bon 1");
+							}
+							
+							if(eCase.getPiece().getClass().getSimpleName().equals(new String("Tour"))||eCase.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
+								plateauJeu.filtrePourTour(eCase, plop);
+								System.out.println("pas bon 2");
+							}
+							
+							plop = plateauJeu.filtrerDeplacementPossible(eCase.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
+
+							
+							System.out.println("filtre 1");
+							if(eCase.getPiece().getClass().getSimpleName().equals(new String("Pion"))){
+								plateauJeu.filtrerpresenceAdversaireDiagonale(eCase,plop);
+								System.out.println("pas bon 3");
+							}
+							
+							
+											
+							for (int i=0; i<plop.size(); i++){
+								Case laCase = plop.get(i);
+								Position po = new Position(8-laCase.getPosition().getHauteur()+1, laCase.getPosition().getLargeur());
+								int num = po.getLargeur() + 8*(po.getHauteur()-1)-1;		
+								((Vector<JButton>) tab_cases).get(num).setBorderPainted(true);
+								((Vector<JButton>) tab_cases).get(num).setBorder(BorderFactory.createLineBorder(Color.blue));
+							}
+						}
+					}
+				}
+				
+				else if (getTour()==2){
+					if (eCase.estVide()==false){
+						if (eCase.getPiece().getCamp().equals("noir")){
+							ArrayList<Case> plop = new ArrayList<Case>();
+							boolean depEffectue = false;
+							plop = eCase.getPiece().getDeplacementPossible(eCase);//donne les déplacements possible de la piece présent sur la case depart
+							
+							if(eCase.getPiece().getClass().getSimpleName().equals(new String("Fou"))||eCase.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
+								plateauJeu.filtrePourFou(eCase, plop);
+								System.out.println("pas bon 1");
+							}
+							
+							if(eCase.getPiece().getClass().getSimpleName().equals(new String("Tour"))||eCase.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
+								plateauJeu.filtrePourTour(eCase, plop);
+								System.out.println("pas bon 2");
+							}
+							
+							plop = plateauJeu.filtrerDeplacementPossible(eCase.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
+
+							
+							System.out.println("filtre 1");
+							if(eCase.getPiece().getClass().getSimpleName().equals(new String("Pion"))){
+								plateauJeu.filtrerpresenceAdversaireDiagonale(eCase,plop);
+								System.out.println("pas bon 3");
+							}
+							
+														
+							
+							for (int i=0; i<plop.size(); i++){
+								Case laCase = plop.get(i);
+								Position po = new Position(8-laCase.getPosition().getHauteur()+1, laCase.getPosition().getLargeur());
+								int num = po.getLargeur() + 8*(po.getHauteur()-1)-1;		
+								((Vector<JButton>) tab_cases).get(num).setBorderPainted(true);
+								((Vector<JButton>) tab_cases).get(num).setBorder(BorderFactory.createLineBorder(Color.blue));
+							}
+						}
+					}
+				}
 			}
 		}
 		public void focusLost(FocusEvent e){
 			//((JButton) e.getSource()).setBorderPainted(false);
 			((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(Color.gray));
+			
+			int numCase = ((Vector<JButton>) tab_cases).indexOf(e.getSource());
+			Position p = new Position(8-numCase/8,numCase%8 +1);
+			Case eCase = plateauJeu.chercherCase(p);
+			if (getTour()==1){
+				if (eCase.estVide()==false){
+					if (eCase.getPiece().getCamp().equals("blanc")){
+						
+						
+						ArrayList<Case> plop = new ArrayList<Case>();
+						boolean depEffectue = false;
+						plop = eCase.getPiece().getDeplacementPossible(eCase);//donne les déplacements possible de la piece présent sur la case depart
+						
+						if(eCase.getPiece().getClass().getSimpleName().equals(new String("Fou"))||eCase.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
+							plateauJeu.filtrePourFou(eCase, plop);
+							System.out.println("pas bon 1");
+						}
+						
+						if(eCase.getPiece().getClass().getSimpleName().equals(new String("Tour"))||eCase.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
+							plateauJeu.filtrePourTour(eCase, plop);
+							System.out.println("pas bon 2");
+						}
+						
+						plop = plateauJeu.filtrerDeplacementPossible(eCase.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
+
+						
+						System.out.println("filtre 1");
+						if(eCase.getPiece().getClass().getSimpleName().equals(new String("Pion"))){
+							plateauJeu.filtrerpresenceAdversaireDiagonale(eCase,plop);
+							System.out.println("pas bon 3");
+						}
+						
+						
+										
+						for (int i=0; i<plop.size(); i++){
+							Case laCase = plop.get(i);
+							Position po = new Position(8-laCase.getPosition().getHauteur()+1, laCase.getPosition().getLargeur());
+							int num = po.getLargeur() + 8*(po.getHauteur()-1)-1;		
+							((Vector<JButton>) tab_cases).get(num).setBorderPainted(true);
+							((Vector<JButton>) tab_cases).get(num).setBorder(BorderFactory.createLineBorder(Color.blue));
+						}
+					}
+				}
+			}
+			
+			else if (getTour()==2){
+				if (eCase.estVide()==false){
+					if (eCase.getPiece().getCamp().equals("noir")){
+						ArrayList<Case> plop = new ArrayList<Case>();
+						boolean depEffectue = false;
+						plop = eCase.getPiece().getDeplacementPossible(eCase);//donne les déplacements possible de la piece présent sur la case depart
+						
+						if(eCase.getPiece().getClass().getSimpleName().equals(new String("Fou"))||eCase.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
+							plateauJeu.filtrePourFou(eCase, plop);
+							System.out.println("pas bon 1");
+						}
+						
+						if(eCase.getPiece().getClass().getSimpleName().equals(new String("Tour"))||eCase.getPiece().getClass().getSimpleName().equals(new String("Reine"))){
+							plateauJeu.filtrePourTour(eCase, plop);
+							System.out.println("pas bon 2");
+						}
+						
+						plop = plateauJeu.filtrerDeplacementPossible(eCase.getPiece().getCamp(), plop);//filtre si il n'y pas de pieces
+
+						
+						System.out.println("filtre 1");
+						if(eCase.getPiece().getClass().getSimpleName().equals(new String("Pion"))){
+							plateauJeu.filtrerpresenceAdversaireDiagonale(eCase,plop);
+							System.out.println("pas bon 3");
+						}
+						
+													
+						
+						for (int i=0; i<plop.size(); i++){
+							Case laCase = plop.get(i);
+							Position po = new Position(8-laCase.getPosition().getHauteur()+1, laCase.getPosition().getLargeur());
+							int num = po.getLargeur() + 8*(po.getHauteur()-1)-1;		
+							((Vector<JButton>) tab_cases).get(num).setBorderPainted(true);
+							((Vector<JButton>) tab_cases).get(num).setBorder(BorderFactory.createLineBorder(Color.blue));
+						}
+					}
+				}
+			}
+		}
 		}
 	}
 	
