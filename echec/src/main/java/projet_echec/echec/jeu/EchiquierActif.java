@@ -59,9 +59,9 @@ public class EchiquierActif extends Echiquier {
 		for(int i=0;i<plateau.size();i++){
 			if(!plateau.get(i).estVide())
 				if(plateau.get(i).getPiece().getClass().getSimpleName().equals(new String("Roi")))
-					if(plateau.get(i).getPiece().getCamp()=="noir")
+					if(plateau.get(i).getPiece().getCamp().equals("noir"))
 						caseRoiNoir.setPosition(plateau.get(i).getPosition());
-					else
+					else if(plateau.get(i).getPiece().getCamp().equals("blanc"))
 						caseRoiBlanc.setPosition(plateau.get(i).getPosition());
 		}
 	}
@@ -77,18 +77,19 @@ public class EchiquierActif extends Echiquier {
 		Vector<Case> listePieceAdverse= new Vector<Case>();
 		if (camp.equals("noir"))
 		{
+			System.out.println("noir");
 			listePieceAdverse= listerPiecesBlanches(this.listePieceEnJeu);
 
 		}
 		else if(camp.equals("blanc"))
 		{
+			System.out.println("blanc");
 			listePieceAdverse= listerPiecesNoires(this.listePieceEnJeu);
 		}
 		else 
 		{//TODO: creer une exception
 		}
 		for(int i=0;i<listePieceAdverse.size();i++){//pour toutes les pieces adverses
-
 			for (int j=0;j<listePieceAdverse.get(i).getPiece().getDeplacementPossible(listePieceAdverse.get(i)).size();i++){//pour tous les deplacements de chaque piece
 				if (listePieceAdverse.get(i).getPiece().getDeplacementPossible(listePieceAdverse.get(i)).get(j).equals(e)){//la case e est égale a la case que l'on veut tester
 					estmenace=true;
@@ -802,14 +803,19 @@ private ArrayList<Case> filtrerDeplacementPossible(String camp,ArrayList<Case> c
 }
 
 public static Vector<Case> listerPiecesBlanches(Vector<Case> liste){
-
+	
 	Vector<Case> listepiece= new Vector<Case>();
 	for(int i=0;i<liste.size();i++){// Pour toutes les pieces en jeu
-		if(!liste.get(i).estVide())
+		if(!liste.get(i).estVide()){
+			
 			if (liste.get(i).getPiece().getCamp().equals("blanc")){//si dans la liste la piece est blanche
+			
 				listepiece.add(liste.get(i));//ajoute dans la liste des pieces adverses les pieces noires
 			}
+		}
 	}
+	
+	
 	return listepiece;		
 }
 /**
