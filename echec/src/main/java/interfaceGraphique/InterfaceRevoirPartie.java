@@ -28,6 +28,7 @@ import javax.swing.SpinnerListModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.Timer;
 
+import projet_echec.echec.exception.DeplacementException;
 import projet_echec.echec.gestion.Partie;
 import projet_echec.echec.gestion.SaveGame;
 import projet_echec.echec.jeu.Case;
@@ -198,17 +199,32 @@ public class InterfaceRevoirPartie {
 	
 	
 	public void deplacementSuivant(){
-		//case départ
-		//case arrivee
-		//actualiserImage
+		String dep = p.lireDeplacement();
+		Case caseDepart = plateauJeu.chercherCase(new Position(Integer.parseInt(String.valueOf(dep.charAt(0))), Integer.parseInt(String.valueOf(dep.charAt(1)))));
+		Case caseArrivee = plateauJeu.chercherCase(new Position(Integer.parseInt(String.valueOf(dep.charAt(3))), Integer.parseInt(String.valueOf(dep.charAt(4)))));
+		try {
+			plateauJeu.selectionnerCase(caseDepart);
+		} catch (DeplacementException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			plateauJeu.selectionnerCase(caseArrivee);
+		} catch (DeplacementException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i=0; i<plateauJeu.getPlateau().size(); i++){						
+			actualiserImage(plateauJeu.getPlateau().get(i));
+		}		
 	}
 	
 	public void play(){
-		
+		countdown.restart();
 	}
 	
 	public void pause(){
-		
+		countdown.stop();
 	}
 	
 		

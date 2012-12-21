@@ -268,11 +268,13 @@ public class InterfaceJeu {
 		boutonAide = new JMenuItem("Aide");
 		boutonAProposDe = new JMenuItem("A propos de");
 		
-		affichageAideJ1 = new JLabel("aide1");
+		affichageAideJ1 = new JLabel("aide");
 		affichageAideJ1.setBounds(255, 90, 100, 40);
+		affichageAideJ1.setForeground(Color.white);
 		affichageAideJ1.setVisible(partie.getjBlanc().isModeAide());	
-		affichageAideJ2 = new JLabel("aide2");
+		affichageAideJ2 = new JLabel("aide");
 		affichageAideJ2.setBounds(255, 355, 100, 40);
+		affichageAideJ2.setForeground(Color.white);
 		affichageAideJ2.setVisible(partie.getjNoir().isModeAide());
 		
 		joueur1 = new JLabel(new ImageIcon("images/InterfaceJeuJoueur1Actif.png"));
@@ -809,7 +811,8 @@ public class InterfaceJeu {
 					chronoJ1.setText(String.valueOf(timeRemaining1));
 				}
 				else {
-					//lancer popup joueur 1 tu as perdu
+					countdownJ1.stop();
+					new InterfacePopupTempsEcoule(1, InterfaceJeu.this);
 				}
 			}
 			else {
@@ -818,7 +821,8 @@ public class InterfaceJeu {
 					chronoJ2.setText(String.valueOf(timeRemaining2));
 				}
 				else {
-					//lancer popup joueur 2 tu as perdu
+					countdownJ2.stop();
+					new InterfacePopupTempsEcoule(2, InterfaceJeu.this);
 				}
 			}
 		}
